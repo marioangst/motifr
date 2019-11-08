@@ -1,0 +1,57 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# integrater
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of integrater is to ...
+
+You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
+
+## Installation
+
+Not at this stage yet.
+
+## Example
+
+Recoding:
+
+```{r example}
+library(integrater)
+## basic example code
+```
+
+
+```{r}
+animal_codebook <- data.frame(
+  animal = c("elephant", "pig", "lizard"),
+  family = c("mammal","mammal","reptile"))
+vec <- sample(c("elephant", "pig", "lizard"), 50, TRUE)
+vec
+```
+
+
+Let's recode this:
+
+```{r}
+rename_based_on_codebook(input = vec,
+                         codebook = animal_codebook,
+                         rawvar = "animal",
+                         codevar = "family")
+```
+
+

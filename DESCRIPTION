@@ -1,0 +1,18 @@
+Package: integrater
+Title: Analyze and visualize integrated networks
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Mario",
+           family = "Angst",
+           role = c("aut", "cre"),
+           email = "first.last@example.com",
+           comment = c(ORCID = "0000-0002-8297-9827"))
+Description: Analyze and visualize integrated networks models. Tt the moment specifically tailored to the Wetlands project.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Suggests: 
+    testthat (>= 2.1.0)
+Imports: 
+    DiagrammeR
