@@ -22,4 +22,5 @@ Imports:
     utils,
     DOT,
     glue,
-    multinets
+    multinets,
+    graphics
