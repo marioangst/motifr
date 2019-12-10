@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
 
 Thanks for this: https://r-pkgs.org/
 
+Must make a hex sticker at some point: https://cran.r-project.org/web/packages/hexSticker/readme/README.html
+
 <!-- badges: start -->
 <!-- badges: end -->
 
