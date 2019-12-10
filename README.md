@@ -1,13 +1,22 @@
+integrateR
+================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# integrater
+Thanks for this: <https://r-pkgs.org/>
 
 <!-- badges: start -->
 
 <!-- badges: end -->
 
-The goal of integrater is to …
+Provides tools for integrated network analysis.
+
+  - Visualize: Causal loop diagrams (CLD), Multi-level networks
+  - Aggregate: Find dependencies between components of causal loop
+    diagrams based on common effects on the rest of the CLD
+  - Analyze: Count motifs, identify gaps, simulate baseline networks,
+    identify virtuous and vicious circles
+  - Visualize results: visualize loops, suggest ties, visualize gaps
 
 You’ll still need to render `README.Rmd` regularly, to keep `README.md`
 up-to-date.
@@ -16,53 +25,47 @@ up-to-date.
 
 Not at this stage yet.
 
-## Example
-
-Recoding:
+## Examples
 
 ``` r
-library(integrater)
-## basic example code
+library(integrateR)
+library(DiagrammeR)
 ```
 
-``` r
-animal_codebook <- data.frame(
-  animal = c("elephant", "pig", "lizard"),
-  family = c("mammal","mammal","reptile"))
-vec <- sample(c("elephant", "pig", "lizard"), 50, TRUE)
-vec
-#>  [1] "elephant" "pig"      "pig"      "elephant" "elephant" "pig"     
-#>  [7] "lizard"   "pig"      "pig"      "lizard"   "pig"      "lizard"  
-#> [13] "elephant" "pig"      "lizard"   "elephant" "lizard"   "lizard"  
-#> [19] "lizard"   "pig"      "elephant" "elephant" "elephant" "lizard"  
-#> [25] "pig"      "elephant" "pig"      "pig"      "pig"      "pig"     
-#> [31] "elephant" "lizard"   "pig"      "elephant" "pig"      "elephant"
-#> [37] "elephant" "lizard"   "lizard"   "elephant" "pig"      "elephant"
-#> [43] "lizard"   "lizard"   "elephant" "lizard"   "elephant" "pig"     
-#> [49] "pig"      "elephant"
-```
+<!-- Recoding: -->
 
-Let’s recode this:
+<!-- ```{r example} -->
 
-``` r
-rename_based_on_codebook(input = vec,
-                         codebook = animal_codebook,
-                         rawvar = "animal",
-                         codevar = "family")
-#>  elephant       pig       pig  elephant  elephant       pig    lizard 
-#>  "mammal"  "mammal"  "mammal"  "mammal"  "mammal"  "mammal" "reptile" 
-#>       pig       pig    lizard       pig    lizard  elephant       pig 
-#>  "mammal"  "mammal" "reptile"  "mammal" "reptile"  "mammal"  "mammal" 
-#>    lizard  elephant    lizard    lizard    lizard       pig  elephant 
-#> "reptile"  "mammal" "reptile" "reptile" "reptile"  "mammal"  "mammal" 
-#>  elephant  elephant    lizard       pig  elephant       pig       pig 
-#>  "mammal"  "mammal" "reptile"  "mammal"  "mammal"  "mammal"  "mammal" 
-#>       pig       pig  elephant    lizard       pig  elephant       pig 
-#>  "mammal"  "mammal"  "mammal" "reptile"  "mammal"  "mammal"  "mammal" 
-#>  elephant  elephant    lizard    lizard  elephant       pig  elephant 
-#>  "mammal"  "mammal" "reptile" "reptile"  "mammal"  "mammal"  "mammal" 
-#>    lizard    lizard  elephant    lizard  elephant       pig       pig 
-#> "reptile" "reptile"  "mammal" "reptile"  "mammal"  "mammal"  "mammal" 
-#>  elephant 
-#>  "mammal"
-```
+<!-- library(integrater) -->
+
+<!-- ## basic example code -->
+
+<!-- ``` -->
+
+<!-- ```{r} -->
+
+<!-- animal_codebook <- data.frame( -->
+
+<!--   animal = c("elephant", "pig", "lizard"), -->
+
+<!--   family = c("mammal","mammal","reptile")) -->
+
+<!-- vec <- sample(c("elephant", "pig", "lizard"), 50, TRUE) -->
+
+<!-- vec -->
+
+<!-- ``` -->
+
+<!-- Let's recode this: -->
+
+<!-- ```{r} -->
+
+<!-- rename_based_on_codebook(input = vec, -->
+
+<!--                          codebook = animal_codebook, -->
+
+<!--                          rawvar = "animal", -->
+
+<!--                          codevar = "family") -->
+
+<!-- ``` -->
