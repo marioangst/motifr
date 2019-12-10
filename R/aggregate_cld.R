@@ -17,7 +17,7 @@
 #' @param order_to_consider Integer setting the order of the neighborhood to consider in aggregation
 #' @param max_path_length Integer setting the maximum path length to consider in aggregation
 #'
-#' @return
+#' @return An valued adjacency matrix specifying relations between all pairs of concepts
 #' @export
 #'
 #' @examples
@@ -135,12 +135,15 @@ get_shortest_inv_distance <- function(input_graph,max_path, agg_target_vec){
   #                                               mode = "undirected")
 }
 
-# aggregate_cld(cld_concepts = cld_concepts, cld_el = cld_el,
-#               agg_method = "w_sum", type_col = "type",
-#               id_col = "concept",
-#               agg_target_type = "Indirect Threat",
-#               types_to_use_in_agg = "Indirect Threat",
-#               max_path_length = 2,order_to_consider = 2)
+# quick tests:
+
+load(file = "data/reussebene_mlnet.RData")
+aggregate_cld(cld_concepts = cld_concepts, cld_el = cld_el,
+              agg_method = "w_sum", type_col = "type",
+              id_col = "concept",
+              agg_target_type = "Indirect Threat",
+              types_to_use_in_agg = "Indirect Threat",
+              max_path_length = 2,order_to_consider = 2)
 
 
-# load(file = "data/reussebene_mlnet.RData")
+

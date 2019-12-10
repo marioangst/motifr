@@ -4,18 +4,18 @@
 \name{actors}
 \alias{actors}
 \title{Actor dataframe}
-\format{A data frame with n rows and n variables:
+\format{A data frame with 80 rows and 1 variable:
 \describe{
-  \item{actor}{tbd}
+  \item{actor}{Actor names}
   ...
 }}
 \source{
-survey
+Reussebene survey
 }
 \usage{
 actors
 }
 \description{
-A dataset
+A dataset specifying the list of unique actors
 }
 \keyword{datasets}

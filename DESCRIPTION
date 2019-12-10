@@ -1,4 +1,4 @@
-Package: integrater
+Package: integrateR
 Title: Analyze and visualize integrated networks
 Version: 0.0.0.9000
 Authors@R: 
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "first.last@example.com",
            comment = c(ORCID = "0000-0002-8297-9827"))
-Description: Analyze and visualize integrated networks models. Tt the moment specifically tailored to the Wetlands project.
+Description: Analyze and visualize integrated networks models.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -19,4 +19,6 @@ Imports:
     igraph,
     data.table,
     pbapply,
-    utils
+    utils,
+    DOT,
+    glue

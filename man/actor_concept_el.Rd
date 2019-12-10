@@ -4,19 +4,20 @@
 \name{actor_concept_el}
 \alias{actor_concept_el}
 \title{Actor-concept edgelist}
-\format{A data frame with n rows and n variables:
+\format{A data frame with 140 rows and 2 variables
 \describe{
-  \item{sender}{tbd}
-  \item{receiver}{tbd}
+  \item{sender}{Actors}
+  \item{receiver}{Activities}
   ...
 }}
 \source{
-survey
+Reussebene survey
 }
 \usage{
 actor_concept_el
 }
 \description{
-A dataset
+A dataset, specifying actor-activity ties. Thus,
+every row specifies that an actor (sender) partakes in a specific activity (receiver)
 }
 \keyword{datasets}

@@ -4,11 +4,11 @@
 \name{cld_concepts}
 \alias{cld_concepts}
 \title{CLD concepts dataframe}
-\format{A data frame with n rows and n variables:
+\format{A data frame with 52 rows and 3 variables:
 \describe{
-  \item{concept}{tbd}
-  \item{type}{tbd}
-  \item{english}{tbd}
+  \item{concept}{Short name of the concept}
+  \item{type}{Type of concept based on Open Standards methodology}
+  \item{english}{Full english name of concept, used for labeling}
   ...
 }}
 \source{
@@ -18,6 +18,6 @@ survey
 cld_concepts
 }
 \description{
-A dataset
+A dataset providing information on all concepts (nodes) in a causal loop diagram elaborated for the Reussebene
 }
 \keyword{datasets}

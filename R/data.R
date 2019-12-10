@@ -1,36 +1,37 @@
 #' Actor-concept edgelist
 #'
-#' A dataset
+#' A dataset, specifying actor-activity ties. Thus,
+#' every row specifies that an actor (sender) partakes in a specific activity (receiver)
 #'
-#' @format A data frame with n rows and n variables:
+#' @format A data frame with 140 rows and 2 variables
 #' \describe{
-#'   \item{sender}{tbd}
-#'   \item{receiver}{tbd}
+#'   \item{sender}{Actors}
+#'   \item{receiver}{Activities}
 #'   ...
 #' }
-#' @source survey
+#' @source Reussebene survey
 "actor_concept_el"
 
 #' Actor dataframe
 #'
-#' A dataset
+#' A dataset specifying the list of unique actors
 #'
-#' @format A data frame with n rows and n variables:
+#' @format A data frame with 80 rows and 1 variable:
 #' \describe{
-#'   \item{actor}{tbd}
+#'   \item{actor}{Actor names}
 #'   ...
 #' }
-#' @source survey
+#' @source Reussebene survey
 "actors"
 
 #' Actor edgelist
 #'
-#' A dataset
+#' A dataset specifying collaboration links between actors. Every record indicates a tie between actors.
 #'
 #' @format A data frame with n rows and n variables:
 #' \describe{
-#'   \item{sender}{tbd}
-#'   \item{receiver}{tbd}
+#'   \item{sender}{Actors who indicated collaboration}
+#'   \item{receiver}{Target actor of collaboration indicated by sender}
 #'   ...
 #' }
 #' @source survey
@@ -38,13 +39,13 @@
 
 #' CLD concepts dataframe
 #'
-#' A dataset
+#' A dataset providing information on all concepts (nodes) in a causal loop diagram elaborated for the Reussebene
 #'
-#' @format A data frame with n rows and n variables:
+#' @format A data frame with 52 rows and 3 variables:
 #' \describe{
-#'   \item{concept}{tbd}
-#'   \item{type}{tbd}
-#'   \item{english}{tbd}
+#'   \item{concept}{Short name of the concept}
+#'   \item{type}{Type of concept based on Open Standards methodology}
+#'   \item{english}{Full english name of concept, used for labeling}
 #'   ...
 #' }
 #' @source survey
@@ -52,13 +53,13 @@
 
 #' CLD edgelist dataframe
 #'
-#' A dataset
+#' A dataset of links between causal loop diagraming concepts. Every record indicates a link
 #'
 #' @format A data frame with n rows and n variables:
 #' \describe{
-#'   \item{sender}{tbd}
-#'   \item{receiver}{tbd}
-#'   \item{sign}{tbd}
+#'   \item{sender}{Sender concept}
+#'   \item{receiver}{Target concept}
+#'   \item{sign}{Type of relation (negative/ positive)}
 #'   ...
 #' }
 #' @source survey

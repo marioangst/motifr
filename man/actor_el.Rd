@@ -6,8 +6,8 @@
 \title{Actor edgelist}
 \format{A data frame with n rows and n variables:
 \describe{
-  \item{sender}{tbd}
-  \item{receiver}{tbd}
+  \item{sender}{Actors who indicated collaboration}
+  \item{receiver}{Target actor of collaboration indicated by sender}
   ...
 }}
 \source{
@@ -17,6 +17,6 @@ survey
 actor_el
 }
 \description{
-A dataset
+A dataset specifying collaboration links between actors. Every record indicates a tie between actors.
 }
 \keyword{datasets}

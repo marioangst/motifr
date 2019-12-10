@@ -31,7 +31,7 @@ Not at this stage yet.
 Recoding:
 
 ```{r example}
-library(integrater)
+library(integrateR)
 ## basic example code
 ```
 

@@ -6,9 +6,9 @@
 \title{CLD edgelist dataframe}
 \format{A data frame with n rows and n variables:
 \describe{
-  \item{sender}{tbd}
-  \item{receiver}{tbd}
-  \item{sign}{tbd}
+  \item{sender}{Sender concept}
+  \item{receiver}{Target concept}
+  \item{sign}{Type of relation (negative/ positive)}
   ...
 }}
 \source{
@@ -18,6 +18,6 @@ survey
 cld_el
 }
 \description{
-A dataset
+A dataset of links between causal loop diagraming concepts. Every record indicates a link
 }
 \keyword{datasets}

@@ -34,6 +34,9 @@ types of concepts. aggregate_cld then subsets the diagram before computation
 
 \item{max_path_length}{Integer setting the maximum path length to consider in aggregation}
 }
+\value{
+An valued adjacency matrix specifying relations between all pairs of concepts
+}
 \description{
 Aggregate a causal loop diagram
 }
