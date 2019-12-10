@@ -37,7 +37,7 @@ aggregate_cld <- function(cld_concepts, cld_el, agg_method = c("dist","w_sum"),
   unique_agg_targets <- unique(cld_concepts[[as.character(id_col)]])
   unique_agg_targets <- unique_agg_targets[cld_concepts[[as.character(type_col)]] %in% agg_target_type]
 
-  unique_concepts_subset <- unique(unique_use_targets, unique_agg_targets)
+  unique_concepts_subset <- unique(c(unique_use_targets, unique_agg_targets))
   #create adjacency mat of subset to work with
   adj_mat <- matrix(0,nrow = length(unique_concepts_subset),
                     ncol = length(unique_concepts_subset),
@@ -137,13 +137,13 @@ get_shortest_inv_distance <- function(input_graph,max_path, agg_target_vec){
 
 # quick tests:
 
-load(file = "data/reussebene_mlnet.RData")
-aggregate_cld(cld_concepts = cld_concepts, cld_el = cld_el,
-              agg_method = "w_sum", type_col = "type",
-              id_col = "concept",
-              agg_target_type = "Indirect Threat",
-              types_to_use_in_agg = "Indirect Threat",
-              max_path_length = 2,order_to_consider = 2)
+# load(file = "data/reussebene_mlnet.RData")
+# aggregate_cld(cld_concepts = cld_concepts, cld_el = cld_el,
+#               agg_method = "w_sum", type_col = "type",
+#               id_col = "concept",
+#               agg_target_type = "Indirect Threat",
+#               types_to_use_in_agg = "Indirect Threat",
+#               max_path_length = 2,order_to_consider = 2)
 
 
 
