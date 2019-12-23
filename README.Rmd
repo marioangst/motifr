@@ -19,6 +19,14 @@ Thanks for this: https://r-pkgs.org/
 
 Must make a hex sticker at some point: https://cran.r-project.org/web/packages/hexSticker/readme/README.html
 
+For packages that depend on python stuff, useful updates here:
+https://blog.rstudio.com/2019/12/20/reticulate-1-14/
+
+"To that end, we’ve made the following changes. If the user has not explicitly instructed reticulate to use a pre-existing Python environment, then:
+1) reticulate will prompt the user to download and install Miniconda;
+2) reticulate will prepare a default r-reticulate Conda environment, using (currently) Python 3.6 and NumPy;
+3) When Python is initialized, reticulate will query any loaded R packages for their Python dependencies, and install those dependencies into the aforementioned r-reticulate Conda environment."
+
 <!-- badges: start -->
 <!-- badges: end -->
 
