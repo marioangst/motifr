@@ -1,0 +1,53 @@
+concept,type,english
+CorUpkeeI,Threat,knowlegde correct upkeep
+FloodPressC,Chance,pressure to act due to flood risks
+LessMarketLittI,Threat,market for litter
+FishPassI,Threat,fish passes
+SpatPlanA,Activity,planing spatial developement
+RecValueT,Target,recreational value
+CompAgrD,Threat,competition for space with agriculture
+InvasSpecD,Threat,invasive species
+ShrAquHaD,Threat,space for river
+HabDegD,Threat,habitat quality
+BeaverAcD,Threat,damage to infrastructure by beaver activities
+PopGrowI,Threat,local population
+ProtSpecT,Target,species protection (primary rare)
+PolSuportI,Threat,political support
+ConsBogT,Target,bog conservation
+WWTPA,Activity,wwtp operation
+FisheryA,Activity,fishing
+RangerA,Activity,ranger service
+AwarePopI,Threat,awareness for nature protection issues in population
+OpHPPA,Activity,operation of hydropower plant
+FloodProtT,Target,flood protection
+UpgrGravA,Activity,ecological ugrading of gravel pits
+FarmingA,Activity,farming
+PlanMotorwayA,Activity,planning of motorway feed
+ExtLandT,Target,"improve, connect and extensify outside protected area"
+ClimChI,Threat,climate change
+DistFishD,Threat,fish migration
+CompAreasA,Activity,maintenance compensation areas
+LackCompArD,Threat,compensation areas
+DrinkWatA,Threat,drinking water wells
+NutrInpD,Threat,nutrient input
+LackRivDynD,Threat,river dynamics
+PlanCycleA,Activity,planning new cycle paths
+RevitFloodA,Activity,revitalisation of watercourse
+FloodImpD,Threat,impact of floods
+CoopMuniA,Activity,cooperation among municipalities
+MesFloPreA,Activity,flood protection measures (business as usual)
+BiodivProtA,Activity,biodiversity protection projects
+SignEntA,Threat,signalisation for entry
+BoarDeerD,Threat,damage by boars and deers
+IntCanCoopI,Threat,intercantonal coordination flood protection
+HerbPestD,Threat,herbicide and pesticide
+UpkCapD,Threat,resources for upkeep
+WaterQualD,Threat,water quality (wastewater)
+IncrInterestC,Chance,interested individuals
+WaterWithdD,Threat,water withdrawal
+IncrExtensC,Chance,extensified agriculture
+PopularI,Threat,popularity
+BeavManagA,Activity,beaver management
+VisiPresD,Threat,visitor pressure
+BoarManagA,Activity,boar and deer managment
+EnvEducA,Activity,environmental education (zieglerhaus)
