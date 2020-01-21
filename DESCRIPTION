@@ -23,4 +23,15 @@ Imports:
     DOT,
     glue,
     multinets,
-    graphics
+    graphics,
+    reticulate
+Config/reticulate:
+  list(
+    packages = list(
+      list(package = "numpy", pip = TRUE),
+      list(package = "scipy", pip = TRUE),
+      list(package = "networkx", pip = TRUE),
+      list(package = "pandas", pip = TRUE)
+    )
+  )
+  
