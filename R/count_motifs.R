@@ -10,6 +10,10 @@
 #'
 #' @examples
 toPyGraph <- function(g, typeAttr, relabel = TRUE) {
+
+  #github.com/rstudio/reticulate/issues/233 (delay loading till use)
+  load_python_sma()
+
   # function for translating a statnet network object into a Python compatible
   # networkx object
   adjacencyMatrix = network::as.matrix.network(g)
@@ -46,3 +50,5 @@ toPyGraph <- function(g, typeAttr, relabel = TRUE) {
 #
 # set_3_IIC <- sma$motifSet(sma$ThreeEMotifs(pyGraph), sma$is3Type("II.C"))
 # sma$countAnyMotifs(set_3_IIC)
+
+
