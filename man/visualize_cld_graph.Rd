@@ -4,10 +4,20 @@
 \alias{visualize_cld_graph}
 \title{Visualize a causal loop diagramm}
 \usage{
-visualize_cld_graph(concepts_df, id_column, label_column, type_column,
-  links_df, signed = TRUE, layout = c("custom_dot", "circo", "dot",
-  "neato", "twopi", "fdp"), remove_isolates = FALSE, label_size = 14,
-  color_mapping = NULL, shape_mapping = NULL, ranksep = 2)
+visualize_cld_graph(
+  concepts_df,
+  id_column,
+  label_column,
+  type_column,
+  links_df,
+  signed = TRUE,
+  layout = c("custom_dot", "circo", "dot", "neato", "twopi", "fdp"),
+  remove_isolates = FALSE,
+  label_size = 14,
+  color_mapping = NULL,
+  shape_mapping = NULL,
+  ranksep = 2
+)
 }
 \arguments{
 \item{concepts_df}{A dataframe with min. one column specifying all unique concepts in CLD}

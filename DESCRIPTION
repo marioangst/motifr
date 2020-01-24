@@ -11,7 +11,7 @@ Description: Analyze and visualize integrated networks models.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Suggests: 
     testthat (>= 2.1.0)
 Imports: 
@@ -24,7 +24,9 @@ Imports:
     glue,
     multinets,
     graphics,
-    reticulate
+    reticulate,
+    statnet,
+    network
 Config/reticulate:
   list(
     packages = list(
@@ -34,4 +36,3 @@ Config/reticulate:
       list(package = "pandas", pip = TRUE)
     )
   )
-  

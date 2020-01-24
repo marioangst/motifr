@@ -4,8 +4,7 @@
 \alias{get_weighted_sum_of_paths}
 \title{Get the weighted sum of paths between two issues}
 \usage{
-get_weighted_sum_of_paths(issue1, issue2, input_graph, order_chosen,
-  max_path)
+get_weighted_sum_of_paths(issue1, issue2, input_graph, order_chosen, max_path)
 }
 \arguments{
 \item{issue1}{First issue}
@@ -17,6 +16,9 @@ get_weighted_sum_of_paths(issue1, issue2, input_graph, order_chosen,
 \item{order_chosen}{Integer setting the order of the neighborhood to consider in aggregation}
 
 \item{max_path}{Integer setting the maximum path length to consider in aggregation}
+}
+\value{
+
 }
 \description{
 Get the weighted sum of paths between two issues

@@ -4,8 +4,14 @@
 \alias{visualize_mnet}
 \title{Visualize a two-level network of actors and issues}
 \usage{
-visualize_mnet(actor_df, issue_df, actor_links, actor_issue_links,
-  issue_links, viz = c("multinets", "graphviz"))
+visualize_mnet(
+  actor_df,
+  issue_df,
+  actor_links,
+  actor_issue_links,
+  issue_links,
+  viz = c("multinets", "graphviz")
+)
 }
 \arguments{
 \item{actor_df}{Data frame containing actor information. Must contain a column named "actor" providing actor id.}

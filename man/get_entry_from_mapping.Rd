@@ -13,6 +13,9 @@ get_entry_from_mapping(entry, mapping, default)
 
 \item{default}{Default value to choose if entry is not in mapping.}
 }
+\value{
+
+}
 \description{
 Get a entry for a specifc mapping. Used in visualize_cld_graph mainly.
 }

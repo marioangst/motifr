@@ -4,9 +4,17 @@
 \alias{aggregate_cld}
 \title{Aggregate a causal loop diagram}
 \usage{
-aggregate_cld(cld_concepts, cld_el, agg_method = c("dist", "w_sum"),
-  type_col, id_col, agg_target_type, types_to_use_in_agg = NULL,
-  order_to_consider, max_path_length)
+aggregate_cld(
+  cld_concepts,
+  cld_el,
+  agg_method = c("dist", "w_sum"),
+  type_col,
+  id_col,
+  agg_target_type,
+  types_to_use_in_agg = NULL,
+  order_to_consider,
+  max_path_length
+)
 }
 \arguments{
 \item{cld_concepts}{A data frame with the concepts occuring in the causal loop diagram,

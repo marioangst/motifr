@@ -13,6 +13,9 @@ get_shortest_inv_distance(input_graph, max_path, agg_target_vec)
 
 \item{agg_target_vec}{Character vector specifying nodes between which inverse shortest distances are to be calculated}
 }
+\value{
+
+}
 \description{
 Get the shortest inverse distance between two issues
 }
