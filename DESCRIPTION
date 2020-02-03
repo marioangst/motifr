@@ -37,3 +37,4 @@ Config/reticulate:
       list(package = "pandas", pip = TRUE)
     )
   )
+VignetteBuilder: knitr
