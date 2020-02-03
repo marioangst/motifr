@@ -32,6 +32,30 @@ toPyGraph <- function(g, typeAttr, relabel = TRUE) {
   py_g
 }
 
+#' Display all two-level motifs consisting of three nodes
+#'
+#' @return Opens image
+#' @export
+#'
+#' @examples
+show_3_motifs <- function(){
+  magick::image_read(path = system.file("motif_reference",
+                                        "motif_reference_3motifs.png",
+                                        package = packageName()))
+}
+
+#' Display all two-level motifs consisting of four nodes
+#'
+#' @return Opens figure from Ö. Bodin, M. Tengö: Disentangling intangible social–ecological systems in Global Environmental Change 22 (2012) 430–439 http://dx.doi.org/10.1016/j.gloenvcha.2012.01.005
+
+#' @export
+#'
+#' @examples
+show_4_motifs <- function(){
+  magick::image_read(path = system.file("motif_reference",
+                                        "motif_reference_4motifs.jpg",
+                                        package = packageName()))
+}
 
 # load("data/reussebene_mlnet.RData")
 # # get python equivalent to statnet network type

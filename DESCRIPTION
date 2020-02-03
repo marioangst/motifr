@@ -26,7 +26,8 @@ Imports:
     graphics,
     reticulate,
     statnet,
-    network
+    network,
+    magick
 Config/reticulate:
   list(
     packages = list(
