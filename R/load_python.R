@@ -12,7 +12,7 @@
 load_python_sma <- function(){
   sma <<- reticulate::import_from_path(module = "sma", path = system.file("python",
                                                                           "sesmotifanalyser",
-                                                                          package = packageName()))
+                                                                          package = utils::packageName()))
 }
 
 

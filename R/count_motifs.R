@@ -12,7 +12,9 @@
 toPyGraph <- function(g, typeAttr, relabel = TRUE) {
 
   #github.com/rstudio/reticulate/issues/233 (delay loading till use)
-  load_python_sma()
+  if(!(exists("sma") & typeof(sma) == "environment")){
+    load_python_sma()
+  }
 
   # function for translating a statnet network object into a Python compatible
   # networkx object
@@ -41,7 +43,7 @@ toPyGraph <- function(g, typeAttr, relabel = TRUE) {
 show_3_motifs <- function(){
   magick::image_read(path = system.file("motif_reference",
                                         "motif_reference_3motifs.png",
-                                        package = packageName()))
+                                        package = utils::packageName()))
 }
 
 #' Display all two-level motifs consisting of four nodes
@@ -54,7 +56,7 @@ show_3_motifs <- function(){
 show_4_motifs <- function(){
   magick::image_read(path = system.file("motif_reference",
                                         "motif_reference_4motifs.jpg",
-                                        package = packageName()))
+                                        package = utils::packageName()))
 }
 
 # load("data/reussebene_mlnet.RData")
