@@ -33,7 +33,7 @@ Config/reticulate:
     packages = list(
       list(package = "numpy", pip = TRUE),
       list(package = "scipy", pip = TRUE),
-      list(package = "networkx", pip = TRUE),
+      list(package = "networkx==2.3", pip = TRUE),
       list(package = "pandas", pip = TRUE)
     )
   )

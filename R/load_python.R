@@ -22,6 +22,8 @@ load_python_sma <- function(){
 nx <- NULL
 
 .onLoad <- function(libname, pkgname) {
-  # delay load nx module (will only be loaded when accessed via $)
+  # make sure networkx v2.3 is loaded (problems exist with 2.4 at the moment)
+  # reticulate::py_install("networkx==2.3", pip = TRUE)
+  # delay load nx module (will only be loaded whlen accessed via $)
   nx <<- reticulate::import("networkx", delay_load = TRUE)
 }
