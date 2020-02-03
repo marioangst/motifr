@@ -1,19 +1,35 @@
 Package: integrateR
-Title: Analyze and visualize integrated networks
-Version: 0.0.0.9000
+Title: Analyze and visualize integrated (multi-level) networks
+Version: 0.1
 Authors@R: 
+    c(
     person(given = "Mario",
            family = "Angst",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "0000-0002-8297-9827"))
-Description: Analyze and visualize integrated networks models.
+           email = "mario.angst@gmail.com",
+           comment = c(ORCID = "0000-0002-8297-9827")),
+    person(given = "Tim",
+           family = "Seppelt",
+           role = c("aut"),
+           email = "first.last@example.com"))
+Description: This package provides tools to analyze and visualize integrated (multi-level) networks.
+    Multi-level networks combine multiple networks in one, e.g. social-ecological networks.
+    Integrated networks are specific networks combining causal loop diagrams (CLDs) and social networks.
+    The package has three main areas: Visualization, Aggregation and Analysis.
+    Visualization: The package visualizes CLDs and two-level networks.
+    Aggregation: The package implements ways to aggregate CLDs to use as inputs in multi-level networks.
+    Analysis: The package is in many parts a R wrapper for the excellent sesmotifanalyser Python package written by
+    Tim Seppelt to count multi-level network motifs, compare them to a baseline and much more. 
+    It further identifies and visualizes functional gaps in integrated networks and virtuous and vicious
+    cycles in CLDs.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.2
 Suggests: 
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    knitr,
+    rmarkdown
 Imports: 
     DiagrammeR,
     igraph,
