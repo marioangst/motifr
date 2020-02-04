@@ -2,7 +2,7 @@
 title: integrateR
 always_allow_html: yes
 output: 
-  github_document
+  html_document
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
