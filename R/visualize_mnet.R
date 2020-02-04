@@ -2,14 +2,14 @@
 #' Visualize a two-level network of actors and issues
 #'
 #' @param actor_df Data frame containing actor information. Must contain a column named "actor" providing actor id.
-#' @param issue_df Data frame containing issue information. Must contain a column named "issue" providing issue id.
+#' @param issue_df Data frame containing issue information. Must contain a column named "concept" providing issue id.
 #' @param actor_links Links between actors, must contain columns named "sender" and "receiver"
 #' @param actor_issue_links Links between actors and issues, must contain columns named "sender" and "receiver"
 #' @param issue_links Links between issues, must contain columns named "sender" and "receiver"
 #' @param viz Choose which R package to use for visualization. At present options are "graphviz" (using DiagrammeR, fdp layout)
 #' and "multinets" using the multinets package
 #'
-#' @return Returns a plot.
+#' @return For graphviz: returns list with plot object and dot code. For multinets: returns plot
 #' @export
 #'
 #' @examples
@@ -21,7 +21,7 @@ visualize_mnet <- function(actor_df,
                            viz = c("multinets", "graphviz")){
 
   unique_actors <- unique(actor_df$actor)
-  unique_issues <- unique(issue_df$issue)
+  unique_issues <- unique(issue_df$concept)
   actor_issue_incidence <- matrix(0,nrow = length(unique_actors),
                                     ncol = length(unique_issues),
                                   dimnames = list(unique_actors, unique_issues))
@@ -47,10 +47,12 @@ visualize_mnet <- function(actor_df,
     multilevel_graph <- multinets::set_shape_multilevel(multilevel_graph)
 
     # Plot with simple colors
-    graphics::plot(multilevel_graph,
-         layout = l2,
-         vertex.size = 5,
-         vertex.label = " ")
+    multinets_graph <-
+      graphics::plot(multilevel_graph,
+           layout = l2,
+           vertex.size = 5,
+           vertex.label = " ")
+    return(multinets_graph)
   }
 
   if (viz == "graphviz"){
@@ -118,7 +120,9 @@ visualize_mnet <- function(actor_df,
     dot_out <- gsub(pattern = "}$",
                     replacement = paste(clust_dot,"}"),
                     x = dot_out)
-    DiagrammeR::grViz(dot_out)
+    plot <- DiagrammeR::grViz(dot_out)
+    return(list(dot = dot_out,
+           plot = plot))
   }
 
 }
@@ -139,8 +143,8 @@ visualize_mnet <- function(actor_df,
 #
 # issue_df <- data.frame(issue = rownames(agg), stringsAsFactors = FALSE)
 # visualize_mnet(actor_df = actors,
-#                issue_df = issue_df,
+#                issue_df = cld_concepts,
 #                actor_links = actor_el,
 #                actor_issue_links = actor_concept_el,
-#                issue_links = issue_links,viz = "graphviz"
+#                issue_links = cld_el,viz = "graphviz"
 #                )

@@ -76,23 +76,61 @@ cld_viz$plot
 
 <img src="man/figures/cld_example.svg">
 
-Visualize a multi-level network.
+### Visualize a multi-level network.
 
-```{r}
+Visualizations exist for two-level networks at the moment. The following uses DiagrammeR and is based on a network model gathered in a Swiss wetland. Actors are red, activities in wetlands governance are blue. Relations between activities are based on causal interdependence:
 
+```{r, eval=FALSE}
+visualize_mnet(actor_df = actors,
+               issue_df = cld_concepts,
+               actor_links = actor_el, 
+               actor_issue_links = actor_concept_el,
+               issue_links = cld_el,
+               viz = "graphviz")
 ```
 
-Count motifs.
+<img src="man/figures/mlnet_graphviz_example.svg">
+
+### Count motifs. 
+3-node motifs and 4-node motifs are possible to count. You can display possible configurations with their names.
+
+```{r}
+show_3_motifs()
+```
+
+```{r}
+show_4_motifs()
+```
 
 ```{r echo=FALSE}
 load_python_sma()
 ```
 
+This counts the number of times a motif occurs, using the wetlands governance network visualized above, here for 3-node motifs with a focal (single) node, which is social.
 
 ```{r}
 count_motifs(net = ml_net,
              type_attr = "sesType",
-             number_nodes = 4,
-             motif = "I.C")
+             number_nodes = 3,
+             motif = "I.C",
+             three_motif_focus = "social")
 ```
 
+This counts the number of times a motif occurs for a four-motif configuration.
+
+```{r, cache=TRUE}
+count_motifs(net = ml_net,
+             type_attr = "sesType",
+             number_nodes = 4,
+             motif = "II.A")
+```
+
+Advanced motif classifications based on sesmotifanalyser syntax can be specified.
+Here an optional parameter specifies that a given actor must be included in the motif.
+
+```{r, cache=TRUE}
+count_motifs(net = ml_net,
+             type_attr = "sesType",
+             number_nodes = 4,
+             motif = "II.A", sma$hasNode("actor5"))
+```

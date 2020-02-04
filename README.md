@@ -80,14 +80,45 @@ cld_viz$plot
 
 <img src="man/figures/cld_example.svg">
 
-Visualize a multi-level network.
+### Visualize a multi-level network.
 
-Count motifs.
+Visualizations exist for two-level networks at the moment. The following
+uses DiagrammeR:
+
+``` r
+visualize_mnet(actor_df = actors,
+               issue_df = cld_concepts,
+               actor_links = actor_el, 
+               actor_issue_links = actor_concept_el,
+               issue_links = cld_el,
+               viz = "graphviz")
+```
+
+<img src="man/figures/mlnet_graphviz_example.svg">
+
+### Count motifs.
+
+3-node motifs and 4-node motifs are possible to count. You can display
+possible configurations with their names.
+
+``` r
+show_3_motifs()
+```
+
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+
+``` r
+show_4_motifs()
+```
+
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+
+This counts the number of times the motif occurs.
 
 ``` r
 count_motifs(net = ml_net,
              type_attr = "sesType",
-             number_nodes = 4,
+             number_nodes = 3,
              motif = "I.C")
-#> [1] 99
+#> [1] 543
 ```

@@ -2,7 +2,9 @@
 #' Translate multi-level statnet network object to networkx (python) object
 #'
 #' @param g statnet network object
-#' @param typeAttr character vector specifying the attribute name where level information is stored in statnet object
+#' @param typeAttr character vector specifying the attribute name where level information
+#' is stored in statnet object. The attribute should be a binary vector. 1 indicates a "social" node
+#' and 0 indicates a "non-social" node.
 #' @param relabel should nodes be relabeled with statnet vertex.names? (defaults to TRUE)
 #'
 #' @return python graph object
@@ -14,6 +16,11 @@ toPyGraph <- function(g, typeAttr, relabel = TRUE) {
   #github.com/rstudio/reticulate/issues/233 (delay loading till use)
   if(!(exists("sma") & typeof(sma) == "environment")){
     load_python_sma()
+  }
+
+  if(!(identical(unique(network::get.vertex.attribute(g, typeAttr)),c(1,0)))){
+    stop("Please specify the typeAttr attribute of the network object as a binary vector.
+         1s indicate social nodes, 0s non-social nodes")
   }
 
   # function for translating a statnet network object into a Python compatible
@@ -83,12 +90,18 @@ show_4_motifs <- function(){
 #' @param type_attr character vector specifying the attribute name where level information is stored in statnet object
 #' @param number_nodes The number of nodes in the motif to be counted (3 or 4 are possible)
 #' @param motif The motif name. Use show_3_motifs() or show_4_motifs() to see possible motifs
+#' @param three_motif_focus If a three-node motif is chosen, specify the focal (single) node, as either
+#' "social" or "non-social"
 #'
 #' @return Integer giving the motif count
 #' @export
 #'
 #' @examples
-count_motifs <- function(net, type_attr, number_nodes, motif){
+count_motifs <- function(net,
+                         type_attr,
+                         number_nodes,
+                         motif,
+                         three_motif_focus = c("social","non-social")){
 
   if(!(number_nodes %in% c(3,4))){
     stop(paste("At the moment, only motifs with 3 or 4 nodes can
@@ -122,12 +135,26 @@ count_motifs <- function(net, type_attr, number_nodes, motif){
 
   py_g <- integrateR::toPyGraph(net,typeAttr = type_attr)
   if(number_nodes == 3){
-    motif_set <- sma$motifSet(sma$ThreeEMotifs(py_g), sma$is3Type(motif))
-    sma$countAnyMotifs(motif_set)
+    if(missing(three_motif_focus)){
+      stop("For motifs with 3 nodes, specify the focal (single) node either as
+      social or non-social")
+    }
+    if(three_motif_focus == "social"){
+      motif_set <- sma$motifSet(sma$ThreeSMotifs(py_g),
+                                sma$is3Type(motif))
+    }
+    if(three_motif_focus == "non-social"){
+      motif_set <- sma$motifSet(sma$ThreeSMotifs(py_g),
+                                sma$is3Type(motif))
+    }
+    count <- sma$countAnyMotifs(motif_set)
+    return(count)
   }
   if(number_nodes == 4){
-    motif_set <- sma$motifSet(sma$FourMotifs(py_g), sma$is4Type(motif))
-    sma$countAnyMotifs(motif_set)
+    motif_set <- sma$motifSet(sma$FourMotifs(py_g),
+                              sma$is4Type(motif))
+    count <- sma$countAnyMotifs(motif_set)
+    return(count)
   }
 }
 

@@ -9,7 +9,9 @@ toPyGraph(g, typeAttr, relabel = TRUE)
 \arguments{
 \item{g}{statnet network object}
 
-\item{typeAttr}{character vector specifying the attribute name where level information is stored in statnet object}
+\item{typeAttr}{character vector specifying the attribute name where level information
+is stored in statnet object. The attribute should be a binary vector. 1 indicates a "social" node
+and 0 indicates a "non-social" node.}
 
 \item{relabel}{should nodes be relabeled with statnet vertex.names? (defaults to TRUE)}
 }

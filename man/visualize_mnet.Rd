@@ -16,7 +16,7 @@ visualize_mnet(
 \arguments{
 \item{actor_df}{Data frame containing actor information. Must contain a column named "actor" providing actor id.}
 
-\item{issue_df}{Data frame containing issue information. Must contain a column named "issue" providing issue id.}
+\item{issue_df}{Data frame containing issue information. Must contain a column named "concept" providing issue id.}
 
 \item{actor_links}{Links between actors, must contain columns named "sender" and "receiver"}
 
@@ -28,7 +28,7 @@ visualize_mnet(
 and "multinets" using the multinets package}
 }
 \value{
-Returns a plot.
+For graphviz: returns list with plot object and dot code. For multinets: returns plot
 }
 \description{
 Visualize a two-level network of actors and issues

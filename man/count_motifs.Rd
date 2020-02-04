@@ -4,7 +4,13 @@
 \alias{count_motifs}
 \title{Count multi-level motifs}
 \usage{
-count_motifs(net, type_attr, number_nodes, motif)
+count_motifs(
+  net,
+  type_attr,
+  number_nodes,
+  motif,
+  three_motif_focus = c("social", "non-social")
+)
 }
 \arguments{
 \item{net}{A statnet network object with a node attribute specifying the level of each node}
@@ -14,6 +20,9 @@ count_motifs(net, type_attr, number_nodes, motif)
 \item{number_nodes}{The number of nodes in the motif to be counted (3 or 4 are possible)}
 
 \item{motif}{The motif name. Use show_3_motifs() or show_4_motifs() to see possible motifs}
+
+\item{three_motif_focus}{If a three-node motif is chosen, specify the focal (single) node, as either
+"social" or "non-social"}
 }
 \value{
 Integer giving the motif count
