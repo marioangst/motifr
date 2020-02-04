@@ -1,8 +1,7 @@
 ---
 title: integrateR
-always_allow_html: yes
 output: 
-  html_document
+  github_document
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -63,7 +62,7 @@ library(integrateR)
 
 Visualize a causal loop diagram, based on DiagrammeR. This is based on an expert interview conducted in a Swiss wetland.
 
-```{r, warning=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 cld_viz <- visualize_cld_graph(concepts_df = cld_concepts, 
                                links_df = cld_el, 
                                id_column = "concept", 
@@ -71,8 +70,29 @@ cld_viz <- visualize_cld_graph(concepts_df = cld_concepts,
                                layout = "dot",
                                color_mapping = list(Target = "gray"), 
                                shape_mapping = list(Activity = "square"))
+
 cld_viz$plot
 ```
 
+<img src="man/figures/cld_example.svg">
 
+Visualize a multi-level network.
+
+```{r}
+
+```
+
+Count motifs.
+
+```{r echo=FALSE}
+load_python_sma()
+```
+
+
+```{r}
+count_motifs(net = ml_net,
+             type_attr = "sesType",
+             number_nodes = 4,
+             motif = "I.C")
+```
 
