@@ -83,7 +83,9 @@ cld_viz$plot
 ### Visualize a multi-level network.
 
 Visualizations exist for two-level networks at the moment. The following
-uses DiagrammeR:
+uses DiagrammeR and is based on a network model gathered in a Swiss
+wetland. Actors are red, activities in wetlands governance are blue.
+Relations between activities are based on causal interdependence:
 
 ``` r
 visualize_mnet(actor_df = actors,
@@ -113,12 +115,26 @@ show_4_motifs()
 
 <img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
 
-This counts the number of times the motif occurs.
+This counts the number of times a motif occurs, using the wetlands
+governance network visualized above, here for 3-node motifs with a focal
+(single) node, which is social.
 
 ``` r
 count_motifs(net = ml_net,
              type_attr = "sesType",
              number_nodes = 3,
-             motif = "I.C")
-#> [1] 543
+             motif = "I.C",
+             three_motif_focus = "social")
+#> [1] 217
+```
+
+This counts the number of times a motif occurs for a four-motif
+configuration.
+
+``` r
+count_motifs(net = ml_net,
+             type_attr = "sesType",
+             number_nodes = 4,
+             motif = "II.A")
+#> [1] 22682
 ```

@@ -125,12 +125,4 @@ count_motifs(net = ml_net,
              motif = "II.A")
 ```
 
-Advanced motif classifications based on sesmotifanalyser syntax can be specified.
-Here an optional parameter specifies that a given actor must be included in the motif.
 
-```{r, cache=TRUE}
-count_motifs(net = ml_net,
-             type_attr = "sesType",
-             number_nodes = 4,
-             motif = "II.A", sma$hasNode("actor5"))
-```
