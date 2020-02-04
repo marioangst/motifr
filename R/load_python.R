@@ -26,4 +26,5 @@ nx <- NULL
   # reticulate::py_install("networkx==2.3", pip = TRUE)
   # delay load nx module (will only be loaded whlen accessed via $)
   nx <<- reticulate::import("networkx", delay_load = TRUE)
+  itertools <<- reticulate::import("itertools", delay_load = TRUE)
 }

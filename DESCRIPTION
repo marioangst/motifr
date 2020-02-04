@@ -50,7 +50,8 @@ Config/reticulate:
       list(package = "numpy", pip = TRUE),
       list(package = "scipy", pip = TRUE),
       list(package = "networkx==2.3", pip = TRUE),
-      list(package = "pandas", pip = TRUE)
+      list(package = "pandas", pip = TRUE),
+      list(package = "itertools", pip = TRUE)
     )
   )
 VignetteBuilder: knitr
