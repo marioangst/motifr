@@ -26,7 +26,7 @@ integrateR
 This package provides tools to analyze and visualize multi-level
 networks in general, and so-called integrated networks specifically.
 
-Multi-level networks combine multiple networks in one,
+Multi-level networks combine multiple networks in one representation,
 e.g. social-ecological networks. Integrated networks are specific
 networks combining causal loop diagrams (CLDs) and social networks.
 
@@ -35,16 +35,19 @@ Analysis.
 
   - Visualization: The package visualizes CLDs and two-level networks.
 
-  - Aggregation: The package implements ways to aggregate CLDs to use as
-    inputs in multi-level networks by way of finding common causes of
-    parts of a CLD.
+  - Aggregation: The package implements ways to aggregate CLDs by
+    creating a network between a subset of nodes in a CLD based on how
+    these nodes are related via other parts (common causes) of the
+    network.
 
   - Analysis: The package is in many parts a R wrapper for the excellent
     [sesmotifanalyser](https://gitlab.com/t.seppelt/sesmotifanalyser)
     Python framework written by Tim Seppelt to count multi-level network
-    motifs, compare them to a baseline and much more. It further
-    identifies and visualizes functional gaps in integrated networks and
-    virtuous and vicious cycles in CLDs.
+    motifs, compare them to a baseline and much more. Only small part of
+    sesmotifanalyser are yet wrapped, so consult the python framework
+    for full functionality. IntegrateR further identifies and visualizes
+    functional gaps in integrated networks and virtuous and vicious
+    cycles in CLDs.
 
 ## Installation
 
@@ -80,7 +83,7 @@ cld_viz$plot
 
 <img src="man/figures/cld_example.svg">
 
-### Visualize a multi-level network.
+### Visualize a multi-level network
 
 Visualizations exist for two-level networks at the moment. The following
 uses DiagrammeR and is based on a network model gathered in a Swiss

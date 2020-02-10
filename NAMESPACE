@@ -2,6 +2,8 @@
 
 export(aggregate_cld)
 export(count_motifs)
+export(generate_random_ml_adjmat)
+export(generate_random_ml_net)
 export(get_entry_from_mapping)
 export(get_shortest_inv_distance)
 export(get_weighted_sum_of_paths)
