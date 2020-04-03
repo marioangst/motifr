@@ -4,13 +4,15 @@
 \name{cld_el}
 \alias{cld_el}
 \title{CLD edgelist dataframe}
-\format{A data frame with n rows and n variables:
+\format{
+A data frame with n rows and n variables:
 \describe{
   \item{sender}{Sender concept}
   \item{receiver}{Target concept}
   \item{sign}{Type of relation (negative/ positive)}
   ...
-}}
+}
+}
 \source{
 survey
 }

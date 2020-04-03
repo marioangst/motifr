@@ -4,12 +4,14 @@
 \name{actor_el}
 \alias{actor_el}
 \title{Actor edgelist}
-\format{A data frame with n rows and n variables:
+\format{
+A data frame with n rows and n variables:
 \describe{
   \item{sender}{Actors who indicated collaboration}
   \item{receiver}{Target actor of collaboration indicated by sender}
   ...
-}}
+}
+}
 \source{
 survey
 }

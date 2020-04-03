@@ -4,12 +4,14 @@
 \name{actor_concept_el}
 \alias{actor_concept_el}
 \title{Actor-concept edgelist}
-\format{A data frame with 140 rows and 2 variables
+\format{
+A data frame with 140 rows and 2 variables
 \describe{
   \item{sender}{Actors}
   \item{receiver}{Activities}
   ...
-}}
+}
+}
 \source{
 Reussebene survey
 }

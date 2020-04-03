@@ -11,7 +11,7 @@ Authors@R:
     person(given = "Tim",
            family = "Seppelt",
            role = c("aut"),
-           email = "first.last@example.com"))
+           email = "t.seppelt@posteo.de"))
 Description: This package provides tools to analyze and visualize integrated (multi-level) networks.
     Multi-level networks combine multiple networks in one, e.g. social-ecological networks.
     Integrated networks are specific networks combining causal loop diagrams (CLDs) and social networks.
@@ -25,7 +25,7 @@ Description: This package provides tools to analyze and visualize integrated (mu
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Suggests: 
     testthat (>= 2.1.0),
     knitr,
@@ -47,10 +47,8 @@ Imports:
 Config/reticulate:
   list(
     packages = list(
-      list(package = "numpy", pip = TRUE),
-      list(package = "scipy", pip = TRUE),
-      list(package = "networkx==2.3", pip = TRUE),
-      list(package = "pandas", pip = TRUE)
+      list(package = "sma", pip = TRUE),
+      list(package = "networkx", pip = TRUE)
     )
   )
 VignetteBuilder: knitr

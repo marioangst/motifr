@@ -13,11 +13,6 @@
 #' @examples
 toPyGraph <- function(g, typeAttr, relabel = TRUE) {
 
-  #github.com/rstudio/reticulate/issues/233 (delay loading till use)
-  if(!(exists("sma") & typeof(sma) == "environment")){
-    load_python_sma()
-  }
-
   if(!(identical(unique(network::get.vertex.attribute(g, typeAttr)),c(1,0)))){
     stop("Please specify the typeAttr attribute of the network object as a binary vector.
          1s indicate social nodes, 0s non-social nodes")

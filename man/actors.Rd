@@ -4,11 +4,13 @@
 \name{actors}
 \alias{actors}
 \title{Actor dataframe}
-\format{A data frame with 80 rows and 1 variable:
+\format{
+A data frame with 80 rows and 1 variable:
 \describe{
   \item{actor}{Actor names}
   ...
-}}
+}
+}
 \source{
 Reussebene survey
 }

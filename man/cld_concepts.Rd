@@ -4,13 +4,15 @@
 \name{cld_concepts}
 \alias{cld_concepts}
 \title{CLD concepts dataframe}
-\format{A data frame with 52 rows and 3 variables:
+\format{
+A data frame with 52 rows and 3 variables:
 \describe{
   \item{concept}{Short name of the concept}
   \item{type}{Type of concept based on Open Standards methodology}
   \item{english}{Full english name of concept, used for labeling}
   ...
-}}
+}
+}
 \source{
 survey
 }

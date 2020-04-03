@@ -103,10 +103,6 @@ show_3_motifs()
 show_4_motifs()
 ```
 
-```{r echo=FALSE}
-load_python_sma()
-```
-
 This counts the number of times a motif occurs, using the wetlands governance network visualized above, here for 3-node motifs with a focal (single) node, which is social.
 
 ```{r}
