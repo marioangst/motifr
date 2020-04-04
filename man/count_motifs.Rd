@@ -4,28 +4,19 @@
 \alias{count_motifs}
 \title{Count multi-level motifs}
 \usage{
-count_motifs(
-  net,
-  type_attr,
-  number_nodes,
-  motif,
-  three_motif_focus = c("social", "non-social")
-)
+count_motifs(net, type_attr = c("sesType"), assume_sparse = TRUE, ...)
 }
 \arguments{
 \item{net}{A statnet network object with a node attribute specifying the level of each node}
 
 \item{type_attr}{character vector specifying the attribute name where level information is stored in statnet object}
 
-\item{number_nodes}{The number of nodes in the motif to be counted (3 or 4 are possible)}
+\item{assume_sparse}{whether the network shall be assumed to be sparse (for optimization)}
 
-\item{motif}{The motif name. Use show_3_motifs() or show_4_motifs() to see possible motifs}
-
-\item{three_motif_focus}{If a three-node motif is chosen, specify the focal (single) node, as either
-"social" or "non-social"}
+\item{...}{a list of motif identifiers which shall be counted, e.g. "1,2[I.C]"}
 }
 \value{
-Integer giving the motif count
+Dataframe of integers giving the motif counts
 }
 \description{
 Count multi-level motifs

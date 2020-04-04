@@ -83,73 +83,26 @@ show_4_motifs <- function(){
 #'
 #' @param net A statnet network object with a node attribute specifying the level of each node
 #' @param type_attr character vector specifying the attribute name where level information is stored in statnet object
-#' @param number_nodes The number of nodes in the motif to be counted (3 or 4 are possible)
-#' @param motif The motif name. Use show_3_motifs() or show_4_motifs() to see possible motifs
-#' @param three_motif_focus If a three-node motif is chosen, specify the focal (single) node, as either
-#' "social" or "non-social"
+#' @param ... a list of motif identifiers which shall be counted, e.g. "1,2[I.C]"
+#' @param assume_sparse whether the network shall be assumed to be sparse (for optimization)
 #'
-#' @return Integer giving the motif count
+#' @return Dataframe of integers giving the motif counts
 #' @export
 #'
 #' @examples
 count_motifs <- function(net,
-                         type_attr,
-                         number_nodes,
-                         motif,
-                         three_motif_focus = c("social","non-social")){
-
-  if(!(number_nodes %in% c(3,4))){
-    stop(paste("At the moment, only motifs with 3 or 4 nodes can
-         be classified. You entered",number_nodes,".
-               Use show_3_motifs() or show_4_motifs() to see possible motifs"))
-  }
-
-  all_possibilities_4 <- expand.grid(
-    c("I","II","III","IV","V","VI","VII"),
-    c("A","B","C","D"))
-  all_possibilities_4 <- paste(all_possibilities_4$Var1,all_possibilities_4$Var2,sep = ".")
-
-  all_possibilities_3 <- expand.grid(
-    c("I","II"),
-    c("A","B","C","D"))
-  all_possibilities_3 <- paste(all_possibilities_3$Var1,all_possibilities_3$Var2,sep = ".")
-
-  if(number_nodes == 3 & !(motif %in% all_possibilities_3)){
-    stop(paste("This motif (",
-               motif,
-                ") cannot be counted. For three nodes, only these are possible: ",
-               paste(all_possibilities_3,collapse = ", ")))
-  }
-
-  if(number_nodes == 4 & !(motif %in% all_possibilities_4)){
-    stop(paste("This motif (",
-               motif,
-                ") cannot be counted. For four nodes, only these are possible: ",
-               paste(all_possibilities_4,collapse = ", ")))
-  }
-
+                         type_attr = c("sesType"),
+                         assume_sparse = TRUE,
+                         ...){
+  # convert net to python object
   py_g <- integrateR::toPyGraph(net,typeAttr = type_attr)
-  if(number_nodes == 3){
-    if(missing(three_motif_focus)){
-      stop("For motifs with 3 nodes, specify the focal (single) node either as
-      social or non-social")
-    }
-    if(three_motif_focus == "social"){
-      motif_set <- sma$motifSet(sma$ThreeSMotifs(py_g),
-                                sma$is3Type(motif))
-    }
-    if(three_motif_focus == "non-social"){
-      motif_set <- sma$motifSet(sma$ThreeSMotifs(py_g),
-                                sma$is3Type(motif))
-    }
-    count <- sma$countAnyMotifs(motif_set)
-    return(count)
-  }
-  if(number_nodes == 4){
-    motif_set <- sma$motifSet(sma$FourMotifs(py_g),
-                              sma$is4Type(motif))
-    count <- sma$countAnyMotifs(motif_set)
-    return(count)
-  }
+
+  # call counter
+  result <- sma$countMotifsAuto(py_g, ..., assume_sparse = assume_sparse)
+
+  # process result
+  partial_count <- result[[1]]
+  total_count <- result[[2]]
+  return(data.frame(partial_count))
 }
 
