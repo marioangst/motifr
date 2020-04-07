@@ -16,8 +16,11 @@ count_motifs(net, type_attr = c("sesType"), assume_sparse = TRUE, ...)
 \item{...}{a list of motif identifiers which shall be counted, e.g. "1,2[I.C]"}
 }
 \value{
-Dataframe of integers giving the motif counts
+list indexed by motif identifers giving the motif counts
 }
 \description{
 Count multi-level motifs
+}
+\examples{
+count_motifs(ml_net, type_attr = c("sesType"), "1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]")
 }

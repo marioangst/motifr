@@ -83,26 +83,28 @@ show_4_motifs <- function(){
 #'
 #' @param net A statnet network object with a node attribute specifying the level of each node
 #' @param type_attr character vector specifying the attribute name where level information is stored in statnet object
-#' @param ... a list of motif identifiers which shall be counted, e.g. "1,2[I.C]"
+#' @param motifs a list of motif identifiers which shall be counted, e.g. list("1,2[I.C]")
 #' @param assume_sparse whether the network shall be assumed to be sparse (for optimization)
 #'
-#' @return Dataframe of integers giving the motif counts
+#' @return list indexed by motif identifers giving the motif counts
 #' @export
 #'
-#' @examples
+#' @examples count_motifs(ml_net, type_attr = c("sesType"), motifs=list("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]"))
 count_motifs <- function(net,
                          type_attr = c("sesType"),
                          assume_sparse = TRUE,
-                         ...){
+                         motifs){
   # convert net to python object
   py_g <- integrateR::toPyGraph(net,typeAttr = type_attr)
 
   # call counter
-  result <- sma$countMotifsAuto(py_g, ..., assume_sparse = assume_sparse)
+  counted <- sma$countMotifsAutoR(py_g, motifs, assume_sparse = assume_sparse)
 
   # process result
-  partial_count <- result[[1]]
-  total_count <- result[[2]]
-  return(data.frame(partial_count))
-}
+  partial_count <- counted[[1]]
+  total_count <- counted[[2]]
 
+  partial_count$`total` <- total_count
+
+  return(partial_count)
+}
