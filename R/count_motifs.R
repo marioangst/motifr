@@ -145,3 +145,34 @@ motifs_distribution <- function(net,
 
   return(partial)
 }
+
+#' Summary for motif counts and distribution (Erdos-Renyi)
+#'
+#' @param g statnet network object
+#' @param typeAttr character vector specifying the attribute name where level
+#'   information is stored in statnet object. The attribute should be a binary
+#'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
+#'
+#' @return dataframe with motif counts, expectations and variances for set of
+#'   selected motifs
+#' @export
+#'
+#' @examples motif_summary(ml_net)
+motif_summary <- function(net,
+                          type_attr = c("sesType")) {
+  motifs <- c("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]", "2,2[III.C]", "2,2[III.D]")
+  counts <- count_motifs(net, type_attr, motifs = motifs)
+  distribution <- motifs_distribution(net, type_attr, motifs = motifs)
+  result <- data.frame("count" = sapply(counts[motifs], function(x){x[1]}),
+                       "expectation" =sapply(distribution[motifs], function(x){x[[1]][1]}),
+                       "variance" = sapply(distribution[motifs], function(x){
+                         val = x[[2]][[1]]
+                         if(is.null(val)){
+                           return(NA)
+                         }else{
+                           return(val)
+                         }
+                       }),
+                       row.names = motifs)
+  return(result)
+}
