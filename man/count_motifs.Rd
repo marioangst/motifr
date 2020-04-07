@@ -4,7 +4,7 @@
 \alias{count_motifs}
 \title{Count multi-level motifs}
 \usage{
-count_motifs(net, type_attr = c("sesType"), assume_sparse = TRUE, ...)
+count_motifs(net, type_attr = c("sesType"), assume_sparse = TRUE, motifs)
 }
 \arguments{
 \item{net}{A statnet network object with a node attribute specifying the level of each node}
@@ -13,7 +13,7 @@ count_motifs(net, type_attr = c("sesType"), assume_sparse = TRUE, ...)
 
 \item{assume_sparse}{whether the network shall be assumed to be sparse (for optimization)}
 
-\item{...}{a list of motif identifiers which shall be counted, e.g. "1,2[I.C]"}
+\item{motifs}{a list of motif identifiers which shall be counted, e.g. list("1,2[I.C]")}
 }
 \value{
 list indexed by motif identifers giving the motif counts
@@ -22,5 +22,5 @@ list indexed by motif identifers giving the motif counts
 Count multi-level motifs
 }
 \examples{
-count_motifs(ml_net, type_attr = c("sesType"), "1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]")
+count_motifs(ml_net, type_attr = c("sesType"), motifs=list("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]"))
 }

@@ -108,3 +108,40 @@ count_motifs <- function(net,
 
   return(partial_count)
 }
+
+#' Compute statistical properties of the distribution of motifs in a random
+#' baseline
+#'
+#' @param g statnet network object
+#' @param typeAttr character vector specifying the attribute name where level
+#'   information is stored in statnet object. The attribute should be a binary
+#'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
+#' @param motifs list of motif identifiers describing the motifs whose
+#'   distribution shall be analysed
+#' @param model model to be used, either erdos_renyi or actors_choice, see sma documentation
+#' @param level additional parameter for actors_choice
+#'
+#' @return list indexed by motif identifers giving the tuple of expectation and
+#'   variance of this motif in the random baseline
+#' @export
+#'
+#' @examples
+motifs_distribution <- function(net,
+                                type_attr = c("sesType"),
+                                motifs,
+                                model = c("erdos_renyi"),
+                                level = -1) {
+  # convert net to python object
+  py_g <- integrateR::toPyGraph(net,typeAttr = type_attr)
+
+  # call counter
+  result <- sma$distributionMotifsAutoR(py_g, motifs, model = model, level = level)
+
+  # process result
+  partial <- result[[1]]
+  total <- result[[2]]
+
+  partial$`total` <- total
+
+  return(partial)
+}
