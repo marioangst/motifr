@@ -2,6 +2,7 @@
 
 export(aggregate_cld)
 export(count_motifs)
+export(exemplify_motif)
 export(generate_random_ml_adjmat)
 export(generate_random_ml_net)
 export(get_entry_from_mapping)

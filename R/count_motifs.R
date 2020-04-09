@@ -176,3 +176,24 @@ motif_summary <- function(net,
                        row.names = motifs)
   return(result)
 }
+
+#' Returns an example for a motif specified by a motif identifier string
+#'
+#' @param g statnet network object
+#' @param motif motif identifier string for the motif
+#' @param typeAttr character vector specifying the attribute name where level
+#'   information is stored in statnet object. The attribute should be a binary
+#'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
+#'
+#' @return list of nodes in the motif
+#' @export
+#'
+#' @examples exemplify_motif(ml_net, motif = '1,2[I.C]')
+exemplify_motif <- function(net,
+                            motif,
+                            type_attr = c("sesType")) {
+  # convert net to python object
+  py_g <- integrateR::toPyGraph(net,typeAttr = type_attr)
+
+  return(sma$exemplifyMotif(py_g, motif))
+}
