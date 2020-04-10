@@ -197,3 +197,26 @@ exemplify_motif <- function(net,
 
   return(sma$exemplifyMotif(py_g, motif))
 }
+
+#' Plots an example for a motif with given motif identifier string taken from
+#' the given graph.
+#'
+#' @param g statnet network object
+#' @param motif motif identifier string for the motif
+#' @param typeAttr character vector specifying the attribute name where level
+#'   information is stored in statnet object. The attribute should be a binary
+#'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
+#'
+#' @return plot
+#' @export
+#'
+#' @examples show_motif(ml_net, motif = '1,2[I.C]')
+show_motif <- function(net,
+                       motif,
+                       type_attr = c("sesType")) {
+  motif <- exemplify_motif(net, motif, type_attr = type_attr)
+  vertices <- get.vertex.attribute(net, "vertex.names")
+  indices <- sapply(motif, function(x){match(x, vertices)})
+  subgraph <- get.inducedSubgraph(net, indices)
+  return(plot.network(subgraph))
+}
