@@ -43,7 +43,8 @@ Imports:
     reticulate,
     statnet,
     network,
-    magick
+    magick,
+    purrr
 Config/reticulate:
   list(
     packages = list(

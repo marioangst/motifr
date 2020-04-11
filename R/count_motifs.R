@@ -81,12 +81,17 @@ show_4_motifs <- function(){
 
 #' Count multi-level motifs
 #'
-#' @param net A statnet network object with a node attribute specifying the level of each node
-#' @param type_attr character vector specifying the attribute name where level information is stored in statnet object
-#' @param motifs a list of motif identifiers which shall be counted, e.g. list("1,2[I.C]")
-#' @param assume_sparse whether the network shall be assumed to be sparse (for optimization)
+#' @param net A statnet network object with a node attribute specifying the
+#'   level of each node
+#' @param type_attr character vector specifying the attribute name where level
+#'   information is stored in statnet object
+#' @param motifs a list of motif identifiers which shall be counted, e.g.
+#'   list("1,2[I.C]")
+#' @param assume_sparse whether the network shall be assumed to be sparse (for
+#'   optimization)
+#' @param omit_total_result whether total results shall be omitted
 #'
-#' @return list indexed by motif identifers giving the motif counts
+#' @return data frame with counts indexed by motif identifiers
 #' @export
 #'
 #' @examples count_motifs(ml_net, type_attr = c("sesType"), motifs=list("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]"))
@@ -94,7 +99,7 @@ count_motifs <- function(net,
                          motifs,
                          type_attr = c("sesType"),
                          assume_sparse = TRUE,
-                         omit_total_result = FALSE){
+                         omit_total_result = TRUE){
   # convert net to python object
   py_g <- integrateR::toPyGraph(net,typeAttr = type_attr)
 
@@ -103,17 +108,8 @@ count_motifs <- function(net,
                                   motifs,
                                   assume_sparse = assume_sparse,
                                   omit_total_result = omit_total_result)
-  if(!omit_total_result){
-    # process result
-    partial_count <- counted[[1]]
-    total_count <- counted[[2]]
-
-    partial_count$`total` <- total_count
-
-    return(partial_count)
-  }else{
-    return(counted)
-  }
+  df <- data.frame(counted, check.names = FALSE)
+  return(df)
 }
 
 #' Compute statistical properties of the distribution of motifs in a random
@@ -125,11 +121,13 @@ count_motifs <- function(net,
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #' @param motifs list of motif identifiers describing the motifs whose
 #'   distribution shall be analysed
-#' @param model model to be used, either erdos_renyi or actors_choice, see sma documentation
+#' @param model model to be used, either erdos_renyi or actors_choice, see sma
+#'   documentation
 #' @param level additional parameter for actors_choice
+#' @param omit_total_result whether total results shall be omitted
 #'
-#' @return list indexed by motif identifers giving the tuple of expectation and
-#'   variance of this motif in the random baseline
+#' @return data frame indexed by motif identifers and with rows expectation and
+#'   variances
 #' @export
 #'
 #' @examples
@@ -137,20 +135,20 @@ motifs_distribution <- function(net,
                                 motifs,
                                 type_attr = c("sesType"),
                                 model = c("erdos_renyi"),
-                                level = -1) {
+                                level = -1,
+                                omit_total_result = TRUE) {
   # convert net to python object
   py_g <- integrateR::toPyGraph(net,typeAttr = type_attr)
 
   # call counter
-  result <- sma$distributionMotifsAutoR(py_g, motifs, model = model, level = level)
+  result <- sma$distributionMotifsAutoR(py_g,
+                                        motifs,
+                                        model = model,
+                                        level = level,
+                                        omit_total_result = omit_total_result)
+  df <- data.frame(result, check.names = FALSE)
+  return(df)
 
-  # process result
-  partial <- result[[1]]
-  total <- result[[2]]
-
-  partial$`total` <- total
-
-  return(partial)
 }
 
 #' Summary for motif counts and distribution (Erdos-Renyi)
@@ -172,21 +170,11 @@ motif_summary <- function(net,
   motifs <- c("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]", "2,2[III.C]", "2,2[III.D]")
 
   # count and compute distribution parameters
-  counts <- integrateR::count_motifs(net, type_attr, motifs = motifs)
-  distribution <- integrateR::motifs_distribution(net, type_attr, motifs = motifs)
+  counts <- integrateR::count_motifs(net, type_attr, motifs = motifs, omit_total_result = TRUE)
+  distribution <- integrateR::motifs_distribution(net, type_attr, motifs = motifs, omit_total_result = TRUE)
 
   # reformat data
-  result <- data.frame("count" = sapply(counts[motifs], function(x){x[1]}),
-                       "expectation" =sapply(distribution[motifs], function(x){x[[1]][1]}),
-                       "variance" = sapply(distribution[motifs], function(x){
-                         val = x[[2]][[1]]
-                         if(is.null(val)){
-                           return(NA)
-                         }else{
-                           return(val)
-                         }
-                       }),
-                       row.names = motifs)
+  result <- rbind(counts, distribution)
   return(result)
 }
 
@@ -198,7 +186,7 @@ motif_summary <- function(net,
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #'
-#' @return list of nodes in the motif
+#' @return vector of nodes in the motif
 #' @export
 #'
 #' @examples exemplify_motif(ml_net, motif = '1,2[I.C]')
@@ -207,8 +195,8 @@ exemplify_motif <- function(net,
                             type_attr = c("sesType")) {
   # convert net to python object
   py_g <- integrateR::toPyGraph(net,typeAttr = type_attr)
-
-  return(sma$exemplifyMotif(py_g, motif))
+  motif <-sma$exemplifyMotif(py_g, motif)
+  return(purrr::simplify(motif))
 }
 
 #' Plots an example for a motif with given motif identifier string taken from
@@ -227,11 +215,12 @@ exemplify_motif <- function(net,
 show_motif <- function(net,
                        motif,
                        type_attr = c("sesType")) {
-  motif <- integrateR::exemplify_motif(net, motif, type_attr = type_attr)
-  vertices <- get.vertex.attribute(net, "vertex.names")
-  indices <- sapply(motif, function(x){match(x, vertices)})
-  subgraph <- get.inducedSubgraph(net, indices)
-  return(plot.network(subgraph))
+  motif    <- integrateR::exemplify_motif(net, motif, type_attr = type_attr)
+  vertices <- network::get.vertex.attribute(net, "vertex.names")
+  indices  <- sapply(motif, function(x){match(x, vertices)})
+  subgraph <- network::get.inducedSubgraph(net, indices)
+  pl       <- network::plot.network(subgraph)
+  return(pl)
 }
 
 #' Simulates base line.
@@ -252,7 +241,7 @@ show_motif <- function(net,
 #' @examples simulate_baseline(ml_net, list('1,2[I.C]'), n = 10)
 simulate_baseline <- function(net,
                               motifs,
-                              n = 100,
+                              n = 10,
                               type_attr = c("sesType"),
                               assume_sparse = TRUE) {
   py_g <- integrateR::toPyGraph(net, typeAttr = type_attr)
@@ -262,8 +251,7 @@ simulate_baseline <- function(net,
   return(df)
 }
 
-#' Simulates a number of random graphs and compares the numbers of motifs in the
-#' given graph with this random baseline.
+#' Compares number of motif in a given graph with a random baseline.
 #'
 #' @param g statnet network object
 #' @param motifs list of motif identifier strings
@@ -278,10 +266,10 @@ simulate_baseline <- function(net,
 #'   row for every computed random graph
 #' @export
 #'
-#' @examples
+#' @examples compare_to_baseline(ml_net, list('1,2[I.C]', '1,2[II.C]'))
 compare_to_baseline <- function(net,
                                 motifs,
-                                n = 100,
+                                n = 10,
                                 type_attr = c("sesType"),
                                 assume_sparse = TRUE) {
   simulation <- integrateR::simulate_baseline(net,

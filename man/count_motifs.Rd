@@ -9,20 +9,26 @@ count_motifs(
   motifs,
   type_attr = c("sesType"),
   assume_sparse = TRUE,
-  omit_total_result = FALSE
+  omit_total_result = TRUE
 )
 }
 \arguments{
-\item{net}{A statnet network object with a node attribute specifying the level of each node}
+\item{net}{A statnet network object with a node attribute specifying the
+level of each node}
 
-\item{motifs}{a list of motif identifiers which shall be counted, e.g. list("1,2[I.C]")}
+\item{motifs}{a list of motif identifiers which shall be counted, e.g.
+list("1,2[I.C]")}
 
-\item{type_attr}{character vector specifying the attribute name where level information is stored in statnet object}
+\item{type_attr}{character vector specifying the attribute name where level
+information is stored in statnet object}
 
-\item{assume_sparse}{whether the network shall be assumed to be sparse (for optimization)}
+\item{assume_sparse}{whether the network shall be assumed to be sparse (for
+optimization)}
+
+\item{omit_total_result}{whether total results shall be omitted}
 }
 \value{
-list indexed by motif identifers giving the motif counts
+data frame with counts indexed by motif identifiers
 }
 \description{
 Count multi-level motifs
