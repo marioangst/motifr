@@ -285,3 +285,30 @@ compare_to_baseline <- function(net,
 
   # put nice plots together
 }
+
+#' List gaps ordered by contribution to a motif. This is a list of ties together
+#' with the number of motifs of a given class the dyad would generate by being
+#' flipped.
+#'
+#' @param g statnet network object
+#' @param motif motif identifier
+#' @param typeAttr character vector specifying the attribute name where level
+#'   information is stored in statnet object. The attribute should be a binary
+#'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
+#' @param level ties on which level (sesType) shall be considered
+#'
+#' @return data frame with three columns, listing edges and their contribution
+#'   to motifs described by the motif identifier in descending order
+#' @export
+#'
+#' @examples identify_gaps(ml_net, list('1,2[I.C]'))
+identify_gaps <- function(net,
+                          motif,
+                          type_attr = c("sesType"),
+                          level = -1) {
+  py_g <- integrateR::toPyGraph(net, typeAttr = type_attr)
+
+  result <- sma$identifyGapsR(py_g, motif, level = level)
+  df <- data.frame(result)
+  return(df)
+}
