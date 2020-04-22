@@ -44,7 +44,9 @@ Imports:
     statnet,
     network,
     magick,
-    purrr
+    purrr,
+    ggraph,
+    ggplot2
 Config/reticulate:
   list(
     packages = list(
