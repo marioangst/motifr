@@ -1,4 +1,66 @@
 
+#' Visualize a two-level network using ggraph
+#'
+#' @param net
+#' @param type_attr
+#' @param layouts
+#'
+#' @return
+#' @export
+#'
+#' @examples
+plot_mnet <- function(net,
+                      type_attr = c("sesType"),
+                      layouts = list("kk","kk")){
+
+  t_g <- tidygraph::as_tbl_graph(net)
+  nodes <- tibble::as_tibble(tidygraph::activate(t_g,nodes))
+  edges <- tibble::as_tibble(tidygraph::activate(t_g,edges))
+
+  edges$to_level <- ifelse((edges$to %in%
+            as.numeric(rownames(nodes))[nodes$sesType == 0]),0,1
+  )
+  edges$from_level <- ifelse((edges$from %in%
+                              as.numeric(rownames(nodes))[nodes$sesType == 0]),0,1
+  )
+  edges$between <- ifelse(edges$from_level != edges$to_level, "within","between")
+
+  t_g <- tidygraph::tbl_graph(nodes = nodes, edges = edges)
+
+  # separate subgraphs
+  t_g1 <- tidygraph::to_subgraph(t_g, sesType == 0 ,subset_by = "nodes")$subgraph
+  p1 <- ggraph::ggraph(graph = t_g1, layout = layouts[[1]])
+
+  t_g2 <- tidygraph::to_subgraph(t_g, sesType == 1 ,subset_by = "nodes")$subgraph
+  p2 <- ggraph::ggraph(graph = t_g2, layout = layouts[[2]])
+
+  p1$data$x <- p1$data$x + 10
+  p1$data$y <- p1$data$y + 10
+
+  p_comb <- ggraph::ggraph(t_g) +
+    ggraph::geom_edge_link(ggplot2::aes(color =
+                                          ifelse(edges$between == "between",
+                                                 "dark gray","light gray")),
+                           alpha = 0.8)
+
+  p_comb$data$x[p_comb$data$sesType == 0] <- p1$data$x
+  p_comb$data$y[p_comb$data$sesType == 0] <- p1$data$y
+
+  p_comb$data$x[p_comb$data$sesType == 1] <- p2$data$x
+  p_comb$data$y[p_comb$data$sesType == 1] <- p2$data$y
+
+  p_comb <-
+    p_comb +
+    ggraph::geom_node_point(ggplot2::aes(color = factor(sesType))) +
+    # ggraph::geom_node_label(ggplot2::aes(label = network::get.vertex.attribute(net, "vertex.names"),
+    #                                      color = factor(sesType))) +
+    ggplot2::theme_void() +
+    ggplot2::scale_color_discrete("Level")
+
+  p_comb
+
+  }
+
 #' Visualize a two-level network of actors and issues
 #'
 #' @param actor_df Data frame containing actor information. Must contain a column named "actor" providing actor id.
