@@ -30,19 +30,16 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-This package provides tools to analyze and visualize multi-level networks in general, and so-called integrated networks specifically.
+This package provides tools to analyze multi-level networks in terms of _motifs_. Motifs are small configurations of nodes within an overall network
 
-Multi-level networks combine multiple networks in one representation, e.g. social-ecological networks.
-Integrated networks are specific networks combining causal loop diagrams (CLDs) and social networks.
+Multi-level networks combine multiple networks in one representation, e.g. social-ecological networks, which connect a social network (eg. interactions among fishermen) with an ecological network (eg. interactions between fish species) and the ties inbetween (eg. fishers who fish specific species).
 
-The package has three main areas: Visualization, Aggregation and Analysis.
+The package has three main areas: Visualization and Analysis.
 
-  - Visualization: The package visualizes CLDs and two-level networks.
+  - Visualization: The package provides functions to visualize multi-level networks, based on [ggraph](https://github.com/thomasp85/ggraph).
   
-  - Aggregation: The package implements ways to aggregate CLDs by creating a network between a subset of nodes in a CLD based on how these nodes are related via other parts (common causes) of the network.
-  
-  - Analysis: The package is in many parts a R wrapper for the excellent [sesmotifanalyser](https://gitlab.com/t.seppelt/sesmotifanalyser) Python framework written by Tim Seppelt to count multi-level network motifs, compare them to a baseline and much more. Only small part of sesmotifanalyser are yet wrapped, so consult the python framework for full functionality.
-  IntegrateR further identifies and visualizes functional gaps in integrated networks and virtuous and vicious cycles in CLDs.
+  - Analysis: The package is in many parts a R wrapper for the excellent [sesmotifanalyser](https://gitlab.com/t.seppelt/sesmotifanalyser) Python framework written by Tim Seppelt to count multi-level network motifs, compare them to a baseline and much more. Only parts of of sesmotifanalyser are yet wrapped, so consult the python framework for additional functionality.
+  IntegrateR further identifies and visualizes functional gaps and critical edges in integrated networks based on theories of fit and misfit.
 
 
 ## Installation
@@ -50,7 +47,7 @@ The package has three main areas: Visualization, Aggregation and Analysis.
 The package is currently at a very early stage of development. Explore at your own risk and please report any issues using the [issue tracker on github](https://github.com/marioangst/integrateR/issues). You can install the package from github, using devtools:
 
 ```{r eval=FALSE}
-devtools::install_github("marioangst/integrater")
+devtools::install_github("marioangst/integrateR")
 ```
 
 
@@ -61,65 +58,35 @@ devtools::install_github("marioangst/integrater")
 library(integrateR)
 ```
 
-Visualize a causal loop diagram, based on DiagrammeR. This is based on an expert interview conducted in a Swiss wetland.
-
-```{r, eval=FALSE}
-cld_viz <- visualize_cld_graph(concepts_df = cld_concepts, 
-                               links_df = cld_el, 
-                               id_column = "concept", 
-                               label_column = "english",
-                               layout = "dot",
-                               color_mapping = list(Target = "gray"), 
-                               shape_mapping = list(Activity = "square"))
-
-cld_viz$plot
-```
-
-<img src="man/figures/cld_example.svg">
-
 ### Visualize a multi-level network
 
-Visualizations exist for two-level networks at the moment. The following uses DiagrammeR and is based on a network model gathered in a Swiss wetland. Actors are red, activities in wetlands governance are blue. Relations between activities are based on causal interdependence:
+The following network is an example network from an empirical analysis of wetlands management in Switzerland. It consists of two levels - one level specifies a network of relations between actors. A second level specifies a network of relations between different activities occurring in the wetland, based on causal interdependence among activites. Links between the levels specify which actors carry out which activities.
 
-```{r, eval=FALSE}
-visualize_mnet(actor_df = actors,
-               issue_df = cld_concepts,
-               actor_links = actor_el, 
-               actor_issue_links = actor_concept_el,
-               issue_links = cld_el,
-               viz = "graphviz")
-```
-
-<img src="man/figures/mlnet_graphviz_example.svg">
-
-### Count motifs. 
-3-node motifs and 4-node motifs are possible to count. You can display possible configurations with their names.
+It is possible to specify layouts for every network level separately.
 
 ```{r}
-show_3_motifs()
+plot_mnet(net = ml_net,
+          type_attr = "sesType",
+          layouts = list("kk","circle"))
 ```
+
+
+### Count motifs
+
+tbd
 
 ```{r}
-show_4_motifs()
-```
+motifs = list('1,2[I.C]', '1,2[II.C]')
+motif = c('1,2[II.C]') # closed triangle
 
-This counts the number of times a motif occurs, using the wetlands governance network visualized above, here for 3-node motifs with a focal (single) node, which is social.
-
-```{r}
-count_motifs(net = ml_net,
-             type_attr = "sesType",
-             number_nodes = 3,
-             motif = "I.C",
-             three_motif_focus = "social")
-```
-
-This counts the number of times a motif occurs for a four-motif configuration.
-
-```{r, cache=TRUE}
-count_motifs(net = ml_net,
-             type_attr = "sesType",
-             number_nodes = 4,
-             motif = "II.A")
+compare_to_baseline(ml_net, motifs = motifs, n = 100)
 ```
 
 
+### Motif classification - what do all this codes stand for?
+
+tbd
+
+### How does motif counting work
+
+tbd
