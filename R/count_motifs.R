@@ -274,7 +274,7 @@ compare_to_baseline <- function(net,
                                 n = 10,
                                 type_attr = c("sesType"),
                                 assume_sparse = TRUE) {
-  simulation <- integrateR::simulate_baseline(net,
+  simulation < - integrateR::simulate_baseline(net,
                                               motifs,
                                               n = n,
                                               type_attr = type_attr,
@@ -285,7 +285,18 @@ compare_to_baseline <- function(net,
                                     assume_sparse = assume_sparse,
                                     omit_total_result = TRUE)
 
-  # put nice plots together
+  plot_df <- reshape2::melt(simulation)
+  plot_df_count <- reshape2::melt(count)
+
+  p <-
+  ggplot2::ggplot(plot_df, ggplot2::aes(value)) +
+    ggplot2::facet_wrap(~ variable, scales = "free") +
+    ggplot2::geom_histogram(fill = "gray") +
+    ggplot2::geom_vline(data = plot_df_count, ggplot2::aes(xintercept = value)) +
+    ggplot2::theme_minimal() +
+    ggplot2::xlab("Simulated (gray histogram) versus actual (solid line) motif counts")
+
+  return(p)
 }
 
 #' List gaps ordered by contribution to a motif. This is a list of ties together
