@@ -274,7 +274,7 @@ compare_to_baseline <- function(net,
                                 n = 10,
                                 type_attr = c("sesType"),
                                 assume_sparse = TRUE) {
-  simulation < - integrateR::simulate_baseline(net,
+  simulation <- integrateR::simulate_baseline(net,
                                               motifs,
                                               n = n,
                                               type_attr = type_attr,
