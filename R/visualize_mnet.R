@@ -4,6 +4,7 @@
 #' @param net A statnet network object (igraph or tidygraph should also work)
 #' @param type_attr The name of the categorical node attribute specifying at which level a node is situated
 #' @param layouts A list of layouts (see ?ggraph::layout_ggraph) for every level eg. for two levels list("auto","circle")
+#' @param label logical - should nodes be labelled? (defaults to false)
 #'
 #' @return A ggraph object
 #' @export
@@ -11,7 +12,8 @@
 #' @examples
 plot_mnet <- function(net,
                       type_attr = c("sesType"),
-                      layouts = rep("kk",n_levels)){
+                      layouts = rep("kk",n_levels),
+                      label = FALSE){
 
   t_g <- tidygraph::as_tbl_graph(net)
   nodes <- tibble::as_tibble(tidygraph::activate(t_g,nodes))
@@ -82,9 +84,18 @@ plot_mnet <- function(net,
     p_comb +
     ggraph::geom_node_point(ggplot2::aes(color = factor(sesType))) +
     ggplot2::theme_void() +
-    ggplot2::scale_color_viridis_d("Level", breaks = levels(factor(nodes$sesType))) +
+    ggplot2::scale_color_brewer("Level", breaks = levels(factor(nodes$sesType)),
+                               palette = "Accent") +
     ggplot2::theme(legend.position="bottom")
 
-  p_comb
+  if(label == TRUE){
+    p_comb <-
+      p_comb + ggraph::geom_node_label(ggplot2::aes(label = name, fill = factor(sesType)),
+                                       alpha = 0.5) +
+      ggplot2::scale_fill_brewer("Level", breaks = levels(factor(nodes$sesType)),
+                                 palette = "Accent")
+  }
+
+  p_comb + ggplot2::theme(plot.margin=ggplot2::unit(c(0.5,0.5,0.5,0.5),"cm"))
 
   }

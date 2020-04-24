@@ -5,10 +5,12 @@
 \title{Plots an example for a motif with given motif identifier string taken from
 the given graph.}
 \usage{
-show_motif(net, motif, type_attr = c("sesType"))
+show_motif(net, motif, type_attr = c("sesType"), ...)
 }
 \arguments{
 \item{motif}{motif identifier string for the motif}
+
+\item{...}{additional arguments to be passed to plotting function}
 
 \item{g}{statnet network object}
 

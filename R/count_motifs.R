@@ -207,6 +207,7 @@ exemplify_motif <- function(net,
 #' @param typeAttr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
+#' @param ... additional arguments to be passed to plotting function
 #'
 #' @return plot
 #' @export
@@ -214,12 +215,13 @@ exemplify_motif <- function(net,
 #' @examples show_motif(ml_net, motif = '1,2[I.C]')
 show_motif <- function(net,
                        motif,
-                       type_attr = c("sesType")) {
+                       type_attr = c("sesType"),
+                       ...) {
   motif    <- integrateR::exemplify_motif(net, motif, type_attr = type_attr)
   vertices <- network::get.vertex.attribute(net, "vertex.names")
   indices  <- sapply(motif, function(x){match(x, vertices)})
   subgraph <- network::get.inducedSubgraph(net, indices)
-  p       <- integrateR::plot_mnet(subgraph, type_attr = type_attr)
+  p       <- integrateR::plot_mnet(subgraph, type_attr = type_attr, ...)
   return(p)
 }
 

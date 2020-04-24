@@ -4,7 +4,12 @@
 \alias{plot_mnet}
 \title{Visualize a multi-level network (using ggraph)}
 \usage{
-plot_mnet(net, type_attr = c("sesType"), layouts = rep("kk", n_levels))
+plot_mnet(
+  net,
+  type_attr = c("sesType"),
+  layouts = rep("kk", n_levels),
+  label = FALSE
+)
 }
 \arguments{
 \item{net}{A statnet network object (igraph or tidygraph should also work)}
@@ -12,6 +17,8 @@ plot_mnet(net, type_attr = c("sesType"), layouts = rep("kk", n_levels))
 \item{type_attr}{The name of the categorical node attribute specifying at which level a node is situated}
 
 \item{layouts}{A list of layouts (see ?ggraph::layout_ggraph) for every level eg. for two levels list("auto","circle")}
+
+\item{label}{logical - should nodes be labelled? (defaults to false)}
 }
 \value{
 A ggraph object
