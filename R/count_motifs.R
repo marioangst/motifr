@@ -13,10 +13,11 @@
 #' @examples
 toPyGraph <- function(g, typeAttr, relabel = TRUE) {
 
-  if(!(identical(unique(network::get.vertex.attribute(g, typeAttr)),c(1,0)))){
-    stop("Please specify the typeAttr attribute of the network object as a binary vector.
-         1s indicate social nodes, 0s non-social nodes")
-  }
+  # Support multi-level graphs:
+  # if(!(identical(unique(network::get.vertex.attribute(g, typeAttr)),c(1,0)))){
+  #   stop("Please specify the typeAttr attribute of the network object as a binary vector.
+  #        1s indicate social nodes, 0s non-social nodes")
+  # }
 
   # function for translating a statnet network object into a Python compatible
   # networkx object
@@ -202,8 +203,10 @@ exemplify_motif <- function(net,
 #' Plots an example for a motif with given motif identifier string taken from
 #' the given graph.
 #'
-#' @param g statnet network object
+#' If no network is provided, a motif in a dummy network will be shown.
+#'
 #' @param motif motif identifier string for the motif
+#' @param net statnet network object
 #' @param typeAttr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
@@ -213,8 +216,8 @@ exemplify_motif <- function(net,
 #' @export
 #'
 #' @examples show_motif(ml_net, motif = '1,2[I.C]')
-show_motif <- function(net,
-                       motif,
+show_motif <- function(motif,
+                       net = dummy_net,
                        type_attr = c("sesType"),
                        ...) {
   motif    <- integrateR::exemplify_motif(net, motif, type_attr = type_attr)
