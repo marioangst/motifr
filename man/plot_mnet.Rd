@@ -2,16 +2,20 @@
 % Please edit documentation in R/visualize_mnet.R
 \name{plot_mnet}
 \alias{plot_mnet}
-\title{Visualize a two-level network using ggraph}
+\title{Visualize a multi-level network (using ggraph)}
 \usage{
-plot_mnet(net, type_attr = c("sesType"), layouts = list("kk", "kk"))
+plot_mnet(net, type_attr = c("sesType"), layouts = rep("kk", n_levels))
 }
 \arguments{
-\item{layouts}{}
+\item{net}{A statnet network object (igraph or tidygraph should also work)}
+
+\item{type_attr}{The name of the categorical node attribute specifying at which level a node is situated}
+
+\item{layouts}{A list of layouts (see ?ggraph::layout_ggraph) for every level eg. for two levels list("auto","circle")}
 }
 \value{
-
+A ggraph object
 }
 \description{
-Visualize a two-level network using ggraph
+Visualize a multi-level network (using ggraph)
 }

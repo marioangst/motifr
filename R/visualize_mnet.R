@@ -1,212 +1,90 @@
 
-#' Visualize a two-level network using ggraph
+#' Visualize a multi-level network (using ggraph)
 #'
-#' @param net
-#' @param type_attr
-#' @param layouts
+#' @param net A statnet network object (igraph or tidygraph should also work)
+#' @param type_attr The name of the categorical node attribute specifying at which level a node is situated
+#' @param layouts A list of layouts (see ?ggraph::layout_ggraph) for every level eg. for two levels list("auto","circle")
 #'
-#' @return
+#' @return A ggraph object
 #' @export
 #'
 #' @examples
 plot_mnet <- function(net,
                       type_attr = c("sesType"),
-                      layouts = list("kk","kk")){
+                      layouts = rep("kk",n_levels)){
 
   t_g <- tidygraph::as_tbl_graph(net)
   nodes <- tibble::as_tibble(tidygraph::activate(t_g,nodes))
   edges <- tibble::as_tibble(tidygraph::activate(t_g,edges))
 
-  edges$to_level <- ifelse((edges$to %in%
-            as.numeric(rownames(nodes))[nodes$sesType == 0]),0,1
-  )
-  edges$from_level <- ifelse((edges$from %in%
-                              as.numeric(rownames(nodes))[nodes$sesType == 0]),0,1
-  )
+  colnames(nodes)[colnames(nodes) == type_attr] <- "sesType"
+  # ensure numeric and starting at 1
+  nodes$sesType_n <- as.numeric(factor(nodes$sesType))
+
+  n_levels <- length(unique(nodes$sesType_n))
+
+  edges$to_level <- nodes$sesType_n[edges$to]
+
+  edges$from_level <- nodes$sesType_n[edges$from]
+
   edges$between <- ifelse(edges$from_level != edges$to_level, "within","between")
 
   t_g <- tidygraph::tbl_graph(nodes = nodes, edges = edges)
 
   # separate subgraphs
-  t_g1 <- tidygraph::to_subgraph(t_g, sesType == 0 ,subset_by = "nodes")$subgraph
-  p1 <- ggraph::ggraph(graph = t_g1, layout = layouts[[1]])
+  sub_g_list <- vector(mode = "list", length = length(unique(nodes$sesType_n)))
 
-  t_g2 <- tidygraph::to_subgraph(t_g, sesType == 1 ,subset_by = "nodes")$subgraph
-  p2 <- ggraph::ggraph(graph = t_g2, layout = layouts[[2]])
+  for(level in 1:n_levels){
+    t_g_sub <- tidygraph::to_subgraph(t_g, sesType_n == level, subset_by = "nodes")$subgraph
+    # if graph has no edges (bug in igraph), create self_loop to have one (hacky)
+    if(nrow(tibble::as_tibble(tidygraph::activate(t_g_sub,edges))) == 0){
+      disc_edges <- tibble::as_tibble(tidygraph::activate(t_g_sub,edges))
+      disc_nodes <- tibble::as_tibble(tidygraph::activate(t_g_sub,nodes))
+      disc_edges <- dplyr::bind_rows(disc_edges,tibble::tibble(to = 1, from = 1, between = NA))
+      t_g_sub <- tidygraph::tbl_graph(nodes = disc_nodes, edges = disc_edges)
+    }
+    sub_g_list[[level]] <- ggraph::ggraph(graph = t_g_sub, layout = layouts[[level]]) +
+      ggraph::geom_edge_loop()
+  }
 
-  p1$data$x <- p1$data$x + 10
-  p1$data$y <- p1$data$y + 10
+  #compute x and y offsets (very basic at the moment just stacking to the right up)
+  coord_offset <- lapply(c(1:n_levels), function(lvl) {
+    x <- lvl - 1.5
+    y <- lvl - 1
+    return(list(x = x, y = y))
+  })
+
+  for(level in 1:n_levels){
+    sub_g_list[[level]][["data"]][["x"]] <- scales::rescale(sub_g_list[[level]][["data"]][["x"]],
+                                                            to = c(0,1)) +
+      coord_offset[[level]][["x"]]
+    sub_g_list[[level]][["data"]][["y"]] <- scales::rescale(sub_g_list[[level]][["data"]][["y"]],
+                                                            to = c(0,1)) +
+      coord_offset[[level]][["y"]]
+  }
 
   p_comb <- ggraph::ggraph(t_g) +
     ggraph::geom_edge_link(ggplot2::aes(color =
                                           ifelse(edges$between == "between",
-                                                 "dark gray","light gray")),
-                           alpha = 0.8)
+                                                 "#646973","#b1b4ba")))
 
-  p_comb$data$x[p_comb$data$sesType == 0] <- p1$data$x
-  p_comb$data$y[p_comb$data$sesType == 0] <- p1$data$y
+  for(level in 1:n_levels){
+    p_comb[["data"]][["x"]][
+      p_comb[["data"]][["sesType_n"]] == level] <-
+      sub_g_list[[level]][["data"]][["x"]]
 
-  p_comb$data$x[p_comb$data$sesType == 1] <- p2$data$x
-  p_comb$data$y[p_comb$data$sesType == 1] <- p2$data$y
+    p_comb[["data"]][["y"]][
+      p_comb[["data"]][["sesType_n"]] == level] <-
+      sub_g_list[[level]][["data"]][["y"]]
+  }
 
   p_comb <-
     p_comb +
     ggraph::geom_node_point(ggplot2::aes(color = factor(sesType))) +
-    # ggraph::geom_node_label(ggplot2::aes(label = network::get.vertex.attribute(net, "vertex.names"),
-    #                                      color = factor(sesType))) +
     ggplot2::theme_void() +
-    ggplot2::scale_color_discrete("Level")
+    ggplot2::scale_color_viridis_d("Level", breaks = levels(factor(nodes$sesType))) +
+    ggplot2::theme(legend.position="bottom")
 
   p_comb
 
   }
-
-#' Visualize a two-level network of actors and issues
-#'
-#' @param actor_df Data frame containing actor information. Must contain a column named "actor" providing actor id.
-#' @param issue_df Data frame containing issue information. Must contain a column named "concept" providing issue id.
-#' @param actor_links Links between actors, must contain columns named "sender" and "receiver"
-#' @param actor_issue_links Links between actors and issues, must contain columns named "sender" and "receiver"
-#' @param issue_links Links between issues, must contain columns named "sender" and "receiver"
-#' @param viz Choose which R package to use for visualization. At present options are "graphviz" (using DiagrammeR, fdp layout)
-#' and "multinets" using the multinets package
-#'
-#' @return For graphviz: returns list with plot object and dot code. For multinets: returns plot
-#' @export
-#'
-#' @examples
-visualize_mnet <- function(actor_df,
-                            issue_df,
-                            actor_links,
-                            actor_issue_links,
-                            issue_links,
-                           viz = c("multinets", "graphviz")){
-
-  unique_actors <- unique(actor_df$actor)
-  unique_issues <- unique(issue_df$concept)
-  actor_issue_incidence <- matrix(0,nrow = length(unique_actors),
-                                    ncol = length(unique_issues),
-                                  dimnames = list(unique_actors, unique_issues))
-  actor_issue_incidence[cbind(actor_issue_links$sender, actor_issue_links$receiver)] <- 1
-
-  bip_graph <- igraph::graph_from_incidence_matrix(actor_issue_incidence)
-
-  actor_actor_graph <- igraph::graph_from_data_frame(d = actor_links,vertices = actor_df, directed = FALSE)
-
-  issue_issue_graph <- igraph::graph_from_data_frame(d = issue_links, vertices = issue_df, directed = FALSE)
-
-  multilevel_graph <- igraph::graph.union(bip_graph,actor_actor_graph,issue_issue_graph)
-
-  names_att <- igraph::V(multilevel_graph)$name
-  type_multi <- ifelse(names_att %in% actor_df$actor, TRUE, FALSE)
-  igraph::V(multilevel_graph)$type <- type_multi
-
-  if(viz == "multinets"){
-    # l <- multinets::layout_multilevel(multilevel_graph, layout = igraph::layout_with_fr)
-    l2 <- multinets::layout_multilevel(multilevel_graph, layout = igraph::layout.drl)
-
-    multilevel_graph <- multinets::set_color_multilevel(multilevel_graph)
-    multilevel_graph <- multinets::set_shape_multilevel(multilevel_graph)
-
-    # Plot with simple colors
-    multinets_graph <-
-      graphics::plot(multilevel_graph,
-           layout = l2,
-           vertex.size = 5,
-           vertex.label = " ")
-    return(multinets_graph)
-  }
-
-  if (viz == "graphviz"){
-    nodes_df<- data.frame(label = igraph::V(multilevel_graph)$name,
-                          level = igraph::V(multilevel_graph)$type, stringsAsFactors = FALSE)
-    nodes_df$level <- ifelse(nodes_df$level,"actor","issue")
-
-    edges_df <- as.data.frame(igraph::get.edgelist(multilevel_graph,names = TRUE), stringsAsFactors = FALSE)
-    colnames(edges_df) <- c("sender","receiver")
-
-    ml_graphv <- DiagrammeR::create_graph()
-    ml_graphv <-
-      DiagrammeR::add_nodes_from_table(graph = ml_graphv,
-                           table = nodes_df,
-                           label_col = "label",
-                           type_col = "level")
-
-
-    ml_graphv <- DiagrammeR::add_edges_from_table(graph = ml_graphv,
-                                                  table = edges_df,
-                                                  from_col = "sender",
-                                                  to_col = "receiver",
-                                                  from_to_map = "label")
-
-    ml_graphv <-
-      DiagrammeR::add_global_graph_attrs(graph = ml_graphv, "layout", "fdp", "graph")
-    ml_graphv <-
-      DiagrammeR::add_global_graph_attrs(graph = ml_graphv,"K", "3", "graph")
-    #additional params for fdp are especially K (to consider)
-
-    ml_graphv$nodes_df$fillcolor <- ifelse(nodes_df$level == "actor", "red", "blue")
-    ml_graphv$nodes_df$shape <- ifelse(nodes_df$level == "actor", "circle", "square")
-
-    #make undirected - can later change per edge (cool stuff)
-    ml_graphv$edges_df$dir <- "none"
-
-    node_df <- DiagrammeR::get_node_df(ml_graphv)
-    actor_ids <- node_df$id[node_df$type == "actor"]
-    issue_ids <- node_df$id[node_df$type == "issue"]
-    actor_ids_pasted <- paste(node_df$id[node_df$type == "actor"],collapse = ";")
-    issue_ids_pasted <- paste(node_df$id[node_df$type == "issue"],collapse = ";")
-
-    within_actor_edges <- (ml_graphv$edges_df$from %in% actor_ids) & (ml_graphv$edges_df$to %in% actor_ids)
-    within_issue_edges <- (ml_graphv$edges_df$from %in% issue_ids) & (ml_graphv$edges_df$to %in% issue_ids)
-
-    ml_graphv$edges_df$color <- ifelse(within_actor_edges,"red",ifelse(within_issue_edges,"blue","gray"))
-
-    ml_graphv$global_attrs <- rbind(ml_graphv$global_attrs,
-                                    c("fontsize","10","node"),
-                                    c("arrowsize",1,"edge"))
-
-    dot_out <- DiagrammeR::generate_dot(ml_graphv)
-
-    clust_dot <-
-      glue::glue(
-        "subgraph cluster_0 {{
-    label=\"Actors\";
-    {actor_ids_pasted}
-    }}
-  subgraph cluster_1 {{
-    label=\"Issues\";
-  {issue_ids_pasted}
-  }}")
-
-    dot_out <- gsub(pattern = "}$",
-                    replacement = paste(clust_dot,"}"),
-                    x = dot_out)
-    plot <- DiagrammeR::grViz(dot_out)
-    return(list(dot = dot_out,
-           plot = plot))
-  }
-
-}
-
-
-# # some tests
-# load(file = "data/reussebene_mlnet.RData")
-# agg <- aggregate_cld(cld_concepts = cld_concepts, cld_el = cld_el,
-#                      agg_method = "w_sum", type_col = "type",
-#                      id_col = "concept",
-#                      agg_target_type = "Activity",
-#                      types_to_use_in_agg = "Direct Threat",
-#                      max_path_length = 2,order_to_consider = 2)
-#
-# issue_links <- as.data.frame(igraph::as_edgelist(igraph::graph_from_adjacency_matrix(agg)), stringsAsFactors = FALSE)
-# colnames(issue_links) <- c("sender","receiver")
-# issue_links$weight <- agg[cbind(issue_links$sender,issue_links$receiver)]
-#
-# issue_df <- data.frame(issue = rownames(agg), stringsAsFactors = FALSE)
-# visualize_mnet(actor_df = actors,
-#                issue_df = cld_concepts,
-#                actor_links = actor_el,
-#                actor_issue_links = actor_concept_el,
-#                issue_links = cld_el,viz = "graphviz"
-#                )

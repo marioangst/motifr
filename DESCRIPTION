@@ -46,7 +46,10 @@ Imports:
     magick,
     purrr,
     ggraph,
-    ggplot2
+    ggplot2,
+    tibble,
+    tidygraph,
+    scales
 Config/reticulate:
   list(
     packages = list(

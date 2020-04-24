@@ -219,12 +219,7 @@ show_motif <- function(net,
   vertices <- network::get.vertex.attribute(net, "vertex.names")
   indices  <- sapply(motif, function(x){match(x, vertices)})
   subgraph <- network::get.inducedSubgraph(net, indices)
-  p       <- ggraph::ggraph(subgraph) +
-    ggraph::geom_edge_link() +
-    ggraph::geom_node_label(ggplot2::aes(label = network::get.vertex.attribute(subgraph, "vertex.names"),
-                        color = factor(sesType))) +
-    ggplot2::theme_void() +
-    ggplot2::scale_color_discrete("Level")
+  p       <- integrateR::plot_mnet(subgraph, type_attr = type_attr)
   return(p)
 }
 
