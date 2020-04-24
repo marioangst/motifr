@@ -325,3 +325,50 @@ identify_gaps <- function(net,
   df <- data.frame(result)
   return(df)
 }
+
+#' Plot gaps in network vizualization
+#'
+#' @param net
+#' @param motif
+#' @param type_attr
+#' @param level
+#' @param cutoff
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
+plot_gaps <- function(net,
+                      motif,
+                      type_attr = c("sesType"),
+                      level = -1,
+                      cutoff = 2,
+                      ...){
+
+  gaps <- integrateR::identify_gaps(net = net,
+                                    motif = motif,
+                                    type_attr = type_attr,
+                                    level = level)
+  gaps <- gaps[gaps$contribution > cutoff,]
+
+  netviz <- plot_mnet(net = net, type_attr = type_attr, ...)
+
+  # get coordinates for all lines
+  coord_gaps <- data.frame(
+    x1 =
+      unlist(lapply(gaps$vertex0, function(vertex){netviz$data$x[netviz$data$name == vertex]})),
+    y1 =
+      unlist(lapply(gaps$vertex0, function(vertex){netviz$data$y[netviz$data$name == vertex]})),
+    x2 =
+      unlist(lapply(gaps$vertex1, function(vertex){netviz$data$x[netviz$data$name == vertex]})),
+    y2 =
+      unlist(lapply(gaps$vertex1, function(vertex){netviz$data$y[netviz$data$name == vertex]})),
+    weight = gaps$contribution
+  )
+
+  netviz + ggplot2::geom_segment(data = coord_gaps,
+                                 ggplot2::aes(x = x1, y = y1, xend = x2, yend = y2, size = weight),
+                                 colour="red", alpha = 0.7)
+
+}
