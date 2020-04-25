@@ -11,13 +11,14 @@ identify_gaps(net, motif, type_attr = c("sesType"), level = -1)
 \arguments{
 \item{motif}{motif identifier}
 
-\item{level}{ties on which level (sesType) shall be considered}
-
-\item{g}{statnet network object}
-
-\item{typeAttr}{character vector specifying the attribute name where level
+\item{type_attr}{character vector specifying the attribute name where level
 information is stored in statnet object. The attribute should be a binary
 vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
+
+\item{level}{level of the dyads which shall be considered, or -1 if the level
+shall be determined automatically.}
+
+\item{g}{statnet network object}
 }
 \value{
 data frame with three columns, listing edges and their contribution

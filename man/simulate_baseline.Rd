@@ -2,7 +2,7 @@
 % Please edit documentation in R/count_motifs.R
 \name{simulate_baseline}
 \alias{simulate_baseline}
-\title{Simulates base line.}
+\title{Simulate a random baseline}
 \usage{
 simulate_baseline(
   net,
@@ -17,21 +17,23 @@ simulate_baseline(
 
 \item{n}{number of random graphs}
 
+\item{type_attr}{character vector specifying the attribute name where level
+information is stored in statnet object. The attribute should be a binary
+vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
+
 \item{assume_sparse}{whether the random graphs shall be assumed to be sparse.
 used to find ideal counting function}
 
 \item{g}{statnet network object}
-
-\item{typeAttr}{character vector specifying the attribute name where level
-information is stored in statnet object. The attribute should be a binary
-vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
 }
 \value{
 data frame with one column for each motif identifier string and one
   row for every computed random graph
 }
 \description{
-Simulates base line.
+A specified number of random networks usind a modified Erdős-Rényi model is
+computed. In each of the random networks motifs are counted. A dataframe with
+this counts is returned.
 }
 \examples{
 simulate_baseline(ml_net, list('1,2[I.C]'), n = 10)

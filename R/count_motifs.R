@@ -37,60 +37,42 @@ toPyGraph <- function(g, type_attr, relabel = TRUE) {
   py_g
 }
 
-#' Display all two-level motifs consisting of three nodes
+#' Display all supported motifs with signature ``1,2``.
 #'
 #' @return Opens image
 #' @export
 #'
-#' @examples
+#' @examples show_3_motifs()
 show_3_motifs <- function(){
   magick::image_read(path = system.file("motif_reference",
                                         "motif_reference_3motifs.png",
                                         package = utils::packageName()))
 }
 
-#' Display all two-level motifs consisting of four nodes
+#' Display all supported motifs with signature ``2,2``.
 #'
 #' @return Opens figure from Ö. Bodin, M. Tengö: Disentangling intangible social–ecological systems in Global Environmental Change 22 (2012) 430–439 http://dx.doi.org/10.1016/j.gloenvcha.2012.01.005
-
 #' @export
 #'
-#' @examples
+#' @examples show_4_motifs()
 show_4_motifs <- function(){
   magick::image_read(path = system.file("motif_reference",
                                         "motif_reference_4motifs.jpg",
                                         package = utils::packageName()))
 }
 
-# load("data/reussebene_mlnet.RData")
-# # get python equivalent to statnet network type
-# pyGraph = toPyGraph(ml_net, 'sesType')
-#
-# nx$nodes(pyGraph)
-#
-# sma$ThreeEMotifs(G = pyGraph)
-#
-# # count motifs
-#
-# # first create set specifying types of motifs (3 or 4 (or any?)), then type eg. II.B
-# # then count motifs
-# # achtung:
-# # procedure empties "set" object after iteration, thus always needs to be rewritten (not very R-like)
-#
-# set_3_IIC <- sma$motifSet(sma$ThreeEMotifs(pyGraph), sma$is3Type("II.C"))
-# sma$countAnyMotifs(set_3_IIC)
-
 #' Count multi-level motifs
 #'
 #' @param net A statnet network object with a node attribute specifying the
 #'   level of each node
-#' @param type_attr character vector specifying the attribute name where level
-#'   information is stored in statnet object
 #' @param motifs a list of motif identifiers which shall be counted, e.g.
 #'   list("1,2[I.C]")
+#' @param type_attr character vector specifying the attribute name where level
+#'   information is stored in statnet object
 #' @param assume_sparse whether the network shall be assumed to be sparse (for
-#'   optimization)
-#' @param omit_total_result whether total results shall be omitted
+#'   optimization), default TRUE
+#' @param omit_total_result whether total results shall be omitted, default
+#'   FALSE
 #'
 #' @return data frame with counts indexed by motif identifiers
 #' @export
@@ -131,7 +113,7 @@ count_motifs <- function(net,
 #'   variances
 #' @export
 #'
-#' @examples
+#' @examples motifs_distribution(ml_net, motif = list('1,2[I.C]'))
 motifs_distribution <- function(net,
                                 motifs,
                                 type_attr = c("sesType"),
@@ -188,6 +170,7 @@ motif_summary <- function(net,
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #'
 #' @return vector of nodes in the motif
+#' @seealso show_motif
 #' @export
 #'
 #' @examples exemplify_motif(ml_net, motif = '1,2[I.C]')
@@ -211,8 +194,8 @@ exemplify_motif <- function(net,
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #' @param ... additional arguments to be passed to plotting function
-#'
 #' @return plot
+#' @seealso exemplify_motif
 #' @export
 #'
 #' @examples show_motif('1,2[I.C]', net = ml_net)
@@ -228,7 +211,11 @@ show_motif <- function(motif,
   return(p)
 }
 
-#' Simulates base line.
+#' Simulate a random baseline
+#'
+#' A specified number of random networks usind a modified Erdős-Rényi model is
+#' computed. In each of the random networks motifs are counted. A dataframe with
+#' this counts is returned.
 #'
 #' @param g statnet network object
 #' @param motifs list of motif identifier strings
@@ -256,7 +243,10 @@ simulate_baseline <- function(net,
   return(df)
 }
 
-#' Compares number of motif in a given graph with a random baseline.
+#' Compare empirical network to random baseline
+#'
+#' This function compares the motif counts in a given network with the motif
+#' counts in a random baseline of motifs.
 #'
 #' @param g statnet network object
 #' @param motifs list of motif identifier strings
@@ -311,7 +301,8 @@ compare_to_baseline <- function(net,
 #' @param type_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
-#' @param level ties on which level (sesType) shall be considered
+#' @param level level of the dyads which shall be considered, or -1 if the level
+#'   shall be determined automatically.
 #'
 #' @return data frame with three columns, listing edges and their contribution
 #'   to motifs described by the motif identifier in descending order

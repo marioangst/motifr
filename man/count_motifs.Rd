@@ -23,9 +23,10 @@ list("1,2[I.C]")}
 information is stored in statnet object}
 
 \item{assume_sparse}{whether the network shall be assumed to be sparse (for
-optimization)}
+optimization), default TRUE}
 
-\item{omit_total_result}{whether total results shall be omitted}
+\item{omit_total_result}{whether total results shall be omitted, default
+FALSE}
 }
 \value{
 data frame with counts indexed by motif identifiers
