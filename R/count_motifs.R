@@ -215,7 +215,7 @@ exemplify_motif <- function(net,
 #' @return plot
 #' @export
 #'
-#' @examples show_motif(ml_net, motif = '1,2[I.C]')
+#' @examples show_motif('1,2[I.C]', net = ml_net)
 show_motif <- function(motif,
                        net = dummy_net,
                        type_attr = c("sesType"),
@@ -297,7 +297,7 @@ compare_to_baseline <- function(net,
     ggplot2::geom_histogram(fill = "gray") +
     ggplot2::geom_vline(data = plot_df_count, ggplot2::aes(xintercept = value)) +
     ggplot2::theme_minimal() +
-    ggplot2::xlab("Simulated (gray histogram) versus actual (solid line) motif counts")
+    ggplot2::xlab(sprintf("Simulated (gray histogram) versus actual (solid line) motif counts, n = %d iterations", n))
 
   return(p)
 }
