@@ -2,7 +2,7 @@
 #' Translate multi-level statnet network object to networkx (python) object
 #'
 #' @param g statnet network object
-#' @param typeAttr character vector specifying the attribute name where level information
+#' @param type_attr character vector specifying the attribute name where level information
 #' is stored in statnet object. The attribute should be a binary vector. 1 indicates a "social" node
 #' and 0 indicates a "non-social" node.
 #' @param relabel should nodes be relabeled with statnet vertex.names? (defaults to TRUE)
@@ -11,11 +11,11 @@
 #' @export
 #'
 #' @examples
-toPyGraph <- function(g, typeAttr, relabel = TRUE) {
+toPyGraph <- function(g, type_attr, relabel = TRUE) {
 
   # Support multi-level graphs:
-  # if(!(identical(unique(network::get.vertex.attribute(g, typeAttr)),c(1,0)))){
-  #   stop("Please specify the typeAttr attribute of the network object as a binary vector.
+  # if(!(identical(unique(network::get.vertex.attribute(g, type_attr)),c(1,0)))){
+  #   stop("Please specify the type_attr attribute of the network object as a binary vector.
   #        1s indicate social nodes, 0s non-social nodes")
   # }
 
@@ -25,7 +25,7 @@ toPyGraph <- function(g, typeAttr, relabel = TRUE) {
   attributeNames  = network::list.vertex.attributes(g)
   attributeValues = lapply(network::list.vertex.attributes(g),
                            function(x) network::get.vertex.attribute(g,x))
-  py_g <- sma$translateGraph(adjacencyMatrix, attributeNames, attributeValues, typeAttr)
+  py_g <- sma$translateGraph(adjacencyMatrix, attributeNames, attributeValues, type_attr)
 
   if (relabel == TRUE){
     # JS: renaming in here right now, but will suggest update to rbridge.py to do in Python
@@ -102,7 +102,7 @@ count_motifs <- function(net,
                          assume_sparse = TRUE,
                          omit_total_result = TRUE){
   # convert net to python object
-  py_g <- integrateR::toPyGraph(net,typeAttr = type_attr)
+  py_g <- integrateR::toPyGraph(net,type_attr = type_attr)
 
   # call counter
   counted <- sma$countMotifsAutoR(py_g,
@@ -117,7 +117,7 @@ count_motifs <- function(net,
 #' baseline
 #'
 #' @param g statnet network object
-#' @param typeAttr character vector specifying the attribute name where level
+#' @param type_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #' @param motifs list of motif identifiers describing the motifs whose
@@ -139,7 +139,7 @@ motifs_distribution <- function(net,
                                 level = -1,
                                 omit_total_result = TRUE) {
   # convert net to python object
-  py_g <- integrateR::toPyGraph(net,typeAttr = type_attr)
+  py_g <- integrateR::toPyGraph(net,type_attr = type_attr)
 
   # call counter
   result <- sma$distributionMotifsAutoR(py_g,
@@ -155,7 +155,7 @@ motifs_distribution <- function(net,
 #' Summary for motif counts and distribution (Erdos-Renyi)
 #'
 #' @param g statnet network object
-#' @param typeAttr character vector specifying the attribute name where level
+#' @param type_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #'
@@ -183,7 +183,7 @@ motif_summary <- function(net,
 #'
 #' @param g statnet network object
 #' @param motif motif identifier string for the motif
-#' @param typeAttr character vector specifying the attribute name where level
+#' @param type_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #'
@@ -195,7 +195,7 @@ exemplify_motif <- function(net,
                             motif,
                             type_attr = c("sesType")) {
   # convert net to python object
-  py_g <- integrateR::toPyGraph(net,typeAttr = type_attr)
+  py_g <- integrateR::toPyGraph(net,type_attr = type_attr)
   motif <-sma$exemplifyMotif(py_g, motif)
   return(purrr::simplify(motif))
 }
@@ -207,7 +207,7 @@ exemplify_motif <- function(net,
 #'
 #' @param motif motif identifier string for the motif
 #' @param net statnet network object
-#' @param typeAttr character vector specifying the attribute name where level
+#' @param type_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #' @param ... additional arguments to be passed to plotting function
@@ -233,7 +233,7 @@ show_motif <- function(motif,
 #' @param g statnet network object
 #' @param motifs list of motif identifier strings
 #' @param n number of random graphs
-#' @param typeAttr character vector specifying the attribute name where level
+#' @param type_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
@@ -249,7 +249,7 @@ simulate_baseline <- function(net,
                               n = 10,
                               type_attr = c("sesType"),
                               assume_sparse = TRUE) {
-  py_g <- integrateR::toPyGraph(net, typeAttr = type_attr)
+  py_g <- integrateR::toPyGraph(net, type_attr = type_attr)
 
   result <- sma$simulateBaselineAutoR(py_g, motifs, n = n, assume_sparse = assume_sparse)
   df <- data.frame(result, check.names = FALSE)
@@ -261,7 +261,7 @@ simulate_baseline <- function(net,
 #' @param g statnet network object
 #' @param motifs list of motif identifier strings
 #' @param n number of random graphs
-#' @param typeAttr character vector specifying the attribute name where level
+#' @param type_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
@@ -308,7 +308,7 @@ compare_to_baseline <- function(net,
 #'
 #' @param g statnet network object
 #' @param motif motif identifier
-#' @param typeAttr character vector specifying the attribute name where level
+#' @param type_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #' @param level ties on which level (sesType) shall be considered
@@ -322,7 +322,7 @@ identify_gaps <- function(net,
                           motif,
                           type_attr = c("sesType"),
                           level = -1) {
-  py_g <- integrateR::toPyGraph(net, typeAttr = type_attr)
+  py_g <- integrateR::toPyGraph(net, type_attr = type_attr)
 
   result <- sma$identifyGapsR(py_g, motif, level = level)
   df <- data.frame(result)

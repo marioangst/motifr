@@ -45,7 +45,7 @@ generate_random_ml_net <- function(n_social_nodes,
                                                                                                "vertex.names")),
                                                        1,0))
   if(to_py == TRUE){
-    pynet <- toPyGraph(net,typeAttr = "sesType")
+    pynet <- toPyGraph(net, type_attr = "sesType")
     return(pynet)
   }
   else{
