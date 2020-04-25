@@ -292,9 +292,39 @@ compare_to_baseline <- function(net,
   return(p)
 }
 
+#' List gaps
+#'
 #' List gaps ordered by contribution to a motif. This is a list of ties together
 #' with the number of motifs of a given class the dyad would generate by being
-#' flipped.
+#' added to the netwok.
+#'
+#' @param g statnet network object
+#' @param motif motif identifier
+#' @param type_attr character vector specifying the attribute name where level
+#'   information is stored in statnet object. The attribute should be a binary
+#'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
+#' @param level level of the dyads which shall be considered, or -1 if the level
+#'   shall be determined automatically.
+#'
+#' @return data frame with three columns, listing edges and their contribution
+#'   to motifs described by the motif identifier in descending order
+#' @export
+#'
+#' @examples identify_gaps(ml_net, list('1,2[II.C]'))
+identify_gaps <- function(net,
+                          motif,
+                          type_attr = c("sesType"),
+                          level = -1) {
+  if(sma$isClosedMotifR(motif, level) == FALSE){
+    stop("The specified motif is not closed. Look for critical_dyads instead.")
+  }
+  return(edge_contribution(net, motif, type_attr, level))
+}
+
+#' List critical dyads
+#'
+#' Critical dyads are edges on a specified level which break motifs by being
+#' removed from the network.
 #'
 #' @param g statnet network object
 #' @param motif motif identifier
@@ -309,12 +339,40 @@ compare_to_baseline <- function(net,
 #' @export
 #'
 #' @examples identify_gaps(ml_net, list('1,2[I.C]'))
-identify_gaps <- function(net,
-                          motif,
-                          type_attr = c("sesType"),
-                          level = -1) {
-  py_g <- integrateR::toPyGraph(net, type_attr = type_attr)
+critical_dyads <- function(net,
+                           motif,
+                           type_attr = c("sesType"),
+                           level = -1) {
+  if(sma$isClosedMotifR(motif, level) == TRUE){
+    stop("The specified motif is not open. Look for identify_gaps instead.")
+  }
+  return(edge_contribution(net, motif, type_attr, level))
+}
 
+#' List edge contribution
+#'
+#' List gaps ordered by contribution to a motif. This is a list of ties together
+#' with the number of motifs of a given class the dyad would generate by being
+#' flipped. This is a gneralisation of ``identify_gaps`` and ``critical_dyads``.
+#'
+#' @param g statnet network object
+#' @param motif motif identifier
+#' @param type_attr character vector specifying the attribute name where level
+#'   information is stored in statnet object. The attribute should be a binary
+#'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
+#' @param level level of the dyads which shall be considered, or -1 if the level
+#'   shall be determined automatically.
+#'
+#' @return data frame with three columns, listing edges and their contribution
+#'   to motifs described by the motif identifier in descending order
+#' @export
+#'
+#' @examples edge_contribtion(ml_net, list('1,2[I.C]'))
+edge_contribution <- function(net,
+                              motif,
+                              type_attr = c("sesType"),
+                              level = -1) {
+  py_g <- integrateR::toPyGraph(net, type_attr = type_attr)
   result <- sma$identifyGapsR(py_g, motif, level = level)
   df <- data.frame(result)
   return(df)

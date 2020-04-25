@@ -3,6 +3,8 @@
 export(aggregate_cld)
 export(compare_to_baseline)
 export(count_motifs)
+export(critical_dyads)
+export(edge_contribution)
 export(exemplify_motif)
 export(generate_random_ml_adjmat)
 export(generate_random_ml_net)
