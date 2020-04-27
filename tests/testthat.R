@@ -1,4 +1,4 @@
 library(testthat)
-library(integrateR)
+library(motifr)
 
-test_check("integrateR")
+test_check("motifr")

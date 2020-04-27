@@ -84,7 +84,7 @@ count_motifs <- function(net,
                          assume_sparse = TRUE,
                          omit_total_result = TRUE){
   # convert net to python object
-  py_g <- integrateR::toPyGraph(net,type_attr = type_attr)
+  py_g <- motifr::toPyGraph(net,type_attr = type_attr)
 
   # call counter
   counted <- sma$countMotifsAutoR(py_g,
@@ -121,7 +121,7 @@ motifs_distribution <- function(net,
                                 level = -1,
                                 omit_total_result = TRUE) {
   # convert net to python object
-  py_g <- integrateR::toPyGraph(net,type_attr = type_attr)
+  py_g <- motifr::toPyGraph(net,type_attr = type_attr)
 
   # call counter
   result <- sma$distributionMotifsAutoR(py_g,
@@ -153,8 +153,8 @@ motif_summary <- function(net,
   motifs <- c("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]", "2,2[III.C]", "2,2[III.D]")
 
   # count and compute distribution parameters
-  counts <- integrateR::count_motifs(net, type_attr, motifs = motifs, omit_total_result = TRUE)
-  distribution <- integrateR::motifs_distribution(net, type_attr, motifs = motifs, omit_total_result = TRUE)
+  counts <- motifr::count_motifs(net, type_attr, motifs = motifs, omit_total_result = TRUE)
+  distribution <- motifr::motifs_distribution(net, type_attr, motifs = motifs, omit_total_result = TRUE)
 
   # reformat data
   result <- rbind(counts, distribution)
@@ -178,7 +178,7 @@ exemplify_motif <- function(net,
                             motif,
                             type_attr = c("sesType")) {
   # convert net to python object
-  py_g <- integrateR::toPyGraph(net,type_attr = type_attr)
+  py_g <- motifr::toPyGraph(net,type_attr = type_attr)
   motif <-sma$exemplifyMotif(py_g, motif)
   return(purrr::simplify(motif))
 }
@@ -203,11 +203,11 @@ show_motif <- function(motif,
                        net = dummy_net,
                        type_attr = c("sesType"),
                        ...) {
-  motif    <- integrateR::exemplify_motif(net, motif, type_attr = type_attr)
+  motif    <- motifr::exemplify_motif(net, motif, type_attr = type_attr)
   vertices <- network::get.vertex.attribute(net, "vertex.names")
   indices  <- sapply(motif, function(x){match(x, vertices)})
   subgraph <- network::get.inducedSubgraph(net, indices)
-  p       <- integrateR::plot_mnet(subgraph, type_attr = type_attr, ...)
+  p       <- motifr::plot_mnet(subgraph, type_attr = type_attr, ...)
   return(p)
 }
 
@@ -236,7 +236,7 @@ simulate_baseline <- function(net,
                               n = 10,
                               type_attr = c("sesType"),
                               assume_sparse = TRUE) {
-  py_g <- integrateR::toPyGraph(net, type_attr = type_attr)
+  py_g <- motifr::toPyGraph(net, type_attr = type_attr)
 
   result <- sma$simulateBaselineAutoR(py_g, motifs, n = n, assume_sparse = assume_sparse)
   df <- data.frame(result, check.names = FALSE)
@@ -267,12 +267,12 @@ compare_to_baseline <- function(net,
                                 n = 10,
                                 type_attr = c("sesType"),
                                 assume_sparse = TRUE) {
-  simulation <- integrateR::simulate_baseline(net,
+  simulation <- motifr::simulate_baseline(net,
                                               motifs,
                                               n = n,
                                               type_attr = type_attr,
                                               assume_sparse = assume_sparse)
-  count <- integrateR::count_motifs(net,
+  count <- motifr::count_motifs(net,
                                     motifs,
                                     type_attr = type_attr,
                                     assume_sparse = assume_sparse,
@@ -372,7 +372,7 @@ edge_contribution <- function(net,
                               motif,
                               type_attr = c("sesType"),
                               level = -1) {
-  py_g <- integrateR::toPyGraph(net, type_attr = type_attr)
+  py_g <- motifr::toPyGraph(net, type_attr = type_attr)
   result <- sma$identifyGapsR(py_g, motif, level = level)
   df <- data.frame(result)
   return(df)
@@ -398,7 +398,7 @@ plot_gaps <- function(net,
                       cutoff = 2,
                       ...){
 
-  gaps <- integrateR::identify_gaps(net = net,
+  gaps <- motifr::identify_gaps(net = net,
                                     motif = motif,
                                     type_attr = type_attr,
                                     level = level)

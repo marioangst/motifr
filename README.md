@@ -1,4 +1,4 @@
-integrateR
+motifr
 ================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -52,17 +52,17 @@ The package has three main areas: Visualization and Analysis.
 
 The package is currently at a very early stage of development. Explore
 at your own risk and please report any issues using the [issue tracker
-on github](https://github.com/marioangst/integrateR/issues). You can
+on github](https://github.com/marioangst/motifr/issues). You can
 install the package from github, using devtools:
 
 ``` r
-devtools::install_github("marioangst/integrateR")
+devtools::install_github("marioangst/motifr")
 ```
 
 ## Examples
 
 ``` r
-library(integrateR)
+library(motifr)
 ```
 
 ### Visualize a multi-level network
