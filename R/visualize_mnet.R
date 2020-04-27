@@ -1,6 +1,10 @@
 
 #' Visualize a multi-level network (using ggraph)
 #'
+#' Visualize a multi-level network, with the possibility of specifying separate layouts
+#' for each level. This is a somewhat hacky wrapper for arranging separate
+#' ggraph calls for each network level in a circle.
+#'
 #' @param net A tidygraph, igraph or statnet network object
 #' @param type_attr The name of the categorical node attribute specifying at which
 #' level a node is situated
@@ -18,6 +22,9 @@ plot_mnet <- function(net,
 
   if(class(net) == "network"){
     net <- intergraph::asIgraph(net)
+    net <-
+    igraph::set.vertex.attribute(net, name = "name", value =
+                                   igraph::get.vertex.attribute(net,"vertex.names"))
   }
 
   t_g <- tidygraph::as_tbl_graph(net)
@@ -54,10 +61,12 @@ plot_mnet <- function(net,
       ggraph::geom_edge_loop()
   }
 
-  #compute x and y offsets (very basic at the moment just stacking to the right up)
-  coord_offset <- lapply(c(1:n_levels), function(lvl) {
-    x <- lvl - 1.5
-    y <- lvl - 1
+  #compute x and y offsets
+  # When arranging n points on a circle, the k-th point, k = 0, …, n-1, has coordinates
+  # x = cos(2 * pi * k /n) and y = sin(2 * pi * k/n). This gives coordinates ranging from -1 to 1.
+  coord_offset <- lapply(c(1:n_levels), function(level) {
+    x <- cos(2 * pi * level/n_levels)
+    y <- sin(2 * pi * level/n_levels)
     return(list(x = x, y = y))
   })
 
@@ -73,7 +82,7 @@ plot_mnet <- function(net,
   p_comb <- ggraph::ggraph(t_g, layout = "kk") +
     ggraph::geom_edge_link(ggplot2::aes(color =
                                           ifelse(edges$between == "between",
-                                                 "#646973","#b1b4ba")))
+                                                 "#64697380","#b1b4ba50")))
 
   for(level in 1:n_levels){
     p_comb[["data"]][["x"]][
@@ -90,7 +99,7 @@ plot_mnet <- function(net,
     ggraph::geom_node_point(ggplot2::aes(color = factor(sesType))) +
     ggplot2::theme_void() +
     ggplot2::scale_color_brewer("Level", breaks = levels(factor(nodes$sesType)),
-                               palette = "Accent") +
+                               palette = "Dark2") +
     ggplot2::theme(legend.position="bottom")
 
   if(label == TRUE){
@@ -98,7 +107,7 @@ plot_mnet <- function(net,
       p_comb + ggraph::geom_node_label(ggplot2::aes(label = name, fill = factor(sesType)),
                                        alpha = 0.5) +
       ggplot2::scale_fill_brewer("Level", breaks = levels(factor(nodes$sesType)),
-                                 palette = "Accent")
+                                 palette = "Dark2")
   }
 
   p_comb + ggplot2::theme(plot.margin=ggplot2::unit(c(0.5,0.5,0.5,0.5),"cm"))

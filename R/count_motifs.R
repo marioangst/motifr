@@ -203,9 +203,10 @@ show_motif <- function(motif,
                        net = dummy_net,
                        type_attr = c("sesType"),
                        ...) {
-  motif    <- motifr::exemplify_motif(net, motif, type_attr = type_attr)
+  motif_names <- motifr::exemplify_motif(net = net, motif = motif,
+                                         type_attr = type_attr)
   vertices <- network::get.vertex.attribute(net, "vertex.names")
-  indices  <- sapply(motif, function(x){match(x, vertices)})
+  indices  <- sapply(motif_names, function(x){match(x, vertices)})
   subgraph <- network::get.inducedSubgraph(net, indices)
   p       <- motifr::plot_mnet(subgraph, type_attr = type_attr, ...)
   return(p)

@@ -1,5 +1,5 @@
-motifr <img src='man/figures/logo.png' align="right" height="139" />
-================
+
+# motifr Vignette <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -32,7 +32,7 @@ interactions among fishermen) with an ecological network (eg.
 interactions between fish species) and the ties inbetween (eg. fishers
 who fish specific species).
 
-[https://en.wikipedia.org/wiki/Network\_motif](Motifs) are small
+[Motifs](https://en.wikipedia.org/wiki/Network_motif) are small
 configurations of nodes and edges (subgraphs) within an overall network.
 
 Package features include:
