@@ -78,9 +78,7 @@ plot_mnet(net = ml_net,
 
 Motifs can be counted using the versatile function ``count_motifs()``. It takes as parameters a statnet network object (use ``ml_net`` or ``dummy_net`` provided by this package as example) and a list of motif identifiers (see below) specifying the motifs. See the package [vignette on the motif zoo](vignettes/motif_zoo.Rmd) for details on nomenclature for motifs (motif identifier strings). Let's quickly check out some examples of three-node, two-level motifs.
 
-```{r}
-show_3_motifs()
-```
+![](inst/motif_reference/motif_reference_3motifs.png){ width=10% }
 
 Let's count two of these motifs (open and closed triangles) in the wetland management network introduced above.
 

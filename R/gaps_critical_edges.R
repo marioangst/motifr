@@ -21,10 +21,9 @@ identify_gaps <- function(net,
                           motif,
                           type_attr = c("sesType"),
                           level = -1) {
-  # safety check temporarily disabled
-  # if(sma$isClosedMotifR(motif, level) == FALSE){
-  #   stop("The specified motif is not closed. Look for critical_dyads instead.")
-  # }
+  if(sma$isClosedMotifR(motif, level) == FALSE){
+    stop("The specified motif is not closed. Look for critical_dyads instead.")
+  }
   return(edge_contribution(net = net, motif = motif, type_attr = type_attr, level = level))
 }
 

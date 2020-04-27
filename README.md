@@ -103,11 +103,7 @@ on the motif zoo](vignettes/motif_zoo.Rmd) for details on nomenclature
 for motifs (motif identifier strings). Let’s quickly check out some
 examples of three-node, two-level motifs.
 
-``` r
-show_3_motifs()
-```
-
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+![](inst/motif_reference/motif_reference_3motifs.png)
 
 Let’s count two of these motifs (open and closed triangles) in the
 wetland management network introduced above.
@@ -173,7 +169,7 @@ plot_gaps(ml_net,
           cutoff = 5, label = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-8-1.svg" width="100%" />
 
 `identify_gaps` has a sibling in `critical_dyads`. Critical\_dyads works
 in reverse to identifying gaps - it analyzes for every existing edge how
@@ -198,4 +194,4 @@ compare_to_baseline(ml_net, motifs = motifs, n = 100)
 #> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-9-1.svg" width="100%" />
