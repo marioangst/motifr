@@ -1,66 +1,34 @@
-#' Actor-concept edgelist
+#' Two-level network example (wetlands management)
 #'
-#' A dataset, specifying actor-activity ties. Thus,
-#' every row specifies that an actor (sender) partakes in a specific activity (receiver)
+#' A statnet network object based on empirical data about actors and their activities
+#' in a case study of Swiss wetlands management
 #'
-#' @format A data frame with 140 rows and 2 variables
+#' @format Statnet network object with 132 nodes and 566 edges on two levels.
+#' One network level contains actors, a second network level contains activities.
+#' Links between actors indicate collaboration among actors.
+#' Links between actors and activities indicate that an actor is active in a given activity.
+#' Links between activities indicate that the activities are causally interdependent.
+#' The network contains two variables to describe nodes/ vertices.
 #' \describe{
-#'   \item{sender}{Actors}
-#'   \item{receiver}{Activities}
+#'   \item{vertex.names}{node labes}
+#'   \item{sesType}{Binary variable specifying network levels for every node (1 = node is a social node (actor)
+#'   , 0 = node is a non-social node (an activity))}
 #'   ...
 #' }
-#' @source Reussebene survey
-"actor_concept_el"
+#' @source Surveys and expert interviews in a Swiss wetland. Data is anonymized and should only be used
+#' for exemplary purposes.
+"ml_net"
 
-#' Actor dataframe
+#' Three-level network dummy example
 #'
-#' A dataset specifying the list of unique actors
+#' A simple statnet network object based on dummy data.
 #'
-#' @format A data frame with 80 rows and 1 variable:
+#' @format Statnet network object with 60 nodes and 1035 edges on three levels.
+#' The network contains two variables to describe nodes/ vertices.
 #' \describe{
-#'   \item{actor}{Actor names}
+#'   \item{vertex.names}{node labes}
+#'   \item{sesType}{Categorical variable specifying network levels for every node (levels are 0,1 and 2)}
 #'   ...
 #' }
-#' @source Reussebene survey
-"actors"
-
-#' Actor edgelist
-#'
-#' A dataset specifying collaboration links between actors. Every record indicates a tie between actors.
-#'
-#' @format A data frame with n rows and n variables:
-#' \describe{
-#'   \item{sender}{Actors who indicated collaboration}
-#'   \item{receiver}{Target actor of collaboration indicated by sender}
-#'   ...
-#' }
-#' @source survey
-"actor_el"
-
-#' CLD concepts dataframe
-#'
-#' A dataset providing information on all concepts (nodes) in a causal loop diagram elaborated for the Reussebene
-#'
-#' @format A data frame with 52 rows and 3 variables:
-#' \describe{
-#'   \item{concept}{Short name of the concept}
-#'   \item{type}{Type of concept based on Open Standards methodology}
-#'   \item{english}{Full english name of concept, used for labeling}
-#'   ...
-#' }
-#' @source survey
-"cld_concepts"
-
-#' CLD edgelist dataframe
-#'
-#' A dataset of links between causal loop diagraming concepts. Every record indicates a link
-#'
-#' @format A data frame with n rows and n variables:
-#' \describe{
-#'   \item{sender}{Sender concept}
-#'   \item{receiver}{Target concept}
-#'   \item{sign}{Type of relation (negative/ positive)}
-#'   ...
-#' }
-#' @source survey
-"cld_el"
+#' @source Dummy data
+"dummy_net"
