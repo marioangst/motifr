@@ -1,19 +1,24 @@
 
 #' Visualize a multi-level network (using ggraph)
 #'
-#' @param net A statnet network object (igraph or tidygraph should also work)
-#' @param type_attr The name of the categorical node attribute specifying at which level a node is situated
+#' @param net A tidygraph, igraph or statnet network object
+#' @param type_attr The name of the categorical node attribute specifying at which
+#' level a node is situated
 #' @param layouts A list of layouts (see ?ggraph::layout_ggraph) for every level eg. for two levels list("auto","circle")
 #' @param label logical - should nodes be labelled? (defaults to false)
 #'
 #' @return A ggraph object
 #' @export
 #'
-#' @examples
+#' @examples plot_mnet(net = ml_net, type_attr = "sesType", layouts = list("kk","circle"))
 plot_mnet <- function(net,
                       type_attr = c("sesType"),
                       layouts = rep("kk",n_levels),
                       label = FALSE){
+
+  if(class(net) == "network"){
+    net <- intergraph::asIgraph(net)
+  }
 
   t_g <- tidygraph::as_tbl_graph(net)
   nodes <- tibble::as_tibble(tidygraph::activate(t_g,nodes))

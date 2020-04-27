@@ -35,7 +35,7 @@ This package provides tools to analyze multi-level networks in terms of _motifs_
 
 Multi-level networks combine multiple networks in one representation, e.g. social-ecological networks, which connect a social network (eg. interactions among fishermen) with an ecological network (eg. interactions between fish species) and the ties inbetween (eg. fishers who fish specific species).
 
-[https://en.wikipedia.org/wiki/Network_motif](Motifs) are small configurations of nodes and edges (subgraphs) within an overall network.
+[Motifs](https://en.wikipedia.org/wiki/Network_motif) are small configurations of nodes and edges (subgraphs) within an overall network.
 
 Package features include:
 

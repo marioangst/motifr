@@ -47,7 +47,8 @@ Imports:
     tibble,
     tidygraph,
     scales,
-    reshape2
+    reshape2,
+    intergraph
 Config/reticulate:
   list(
     packages = list(
