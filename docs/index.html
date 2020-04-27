@@ -149,14 +149,20 @@
 <div class="sourceCode" id="cb6"><pre class="r"><span class="no">motifs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'1,2[I.C]'</span>, <span class="st">'1,2[II.C]'</span>) <span class="co"># open and closed triangle</span>
 
 <span class="fu"><a href="reference/count_motifs.html">count_motifs</a></span>(<span class="no">ml_net</span>, <span class="no">motifs</span>)
-<span class="co">#&gt;       1,2[I.C] 1,2[II.C]</span>
-<span class="co">#&gt; count      543       167</span></pre></div>
+<span class="co">#&gt; # A tibble: 2 x 2</span>
+<span class="co">#&gt;   motif     count</span>
+<span class="co">#&gt;   &lt;chr&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 1,2[I.C]    543</span>
+<span class="co">#&gt; 2 1,2[II.C]   167</span></pre></div>
 <p>An exploratory approach can be taken by calling <code><a href="reference/motif_summary.html">motif_summary()</a></code>. This function counts the occurrences of a couple of interesting motifs. Furthermore it computes expectations and variances for the occurrence of these motifs in a modified Erdős-Rényi model. See the package <a href="doc/random_baselines.html">vignette on random baselines</a> for details.</p>
 <div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="reference/motif_summary.html">motif_summary</a></span>(<span class="no">ml_net</span>)
-<span class="co">#&gt;             1,2[I.C] 1,2[II.C] 2,1[I.C] 2,1[II.C] 2,2[III.C] 2,2[III.D]</span>
-<span class="co">#&gt; count       543.0000 167.00000 217.0000   7.00000 73.0000000 1.00000000</span>
-<span class="co">#&gt; expectation 169.1442  16.96154 109.9057  10.23854  0.4481177 0.04174551</span>
-<span class="co">#&gt; variance    949.7743  25.69287 437.5976  13.91309        NaN        NaN</span></pre></div>
+<span class="co">#&gt;        motif count  expectation  variance</span>
+<span class="co">#&gt; 1   1,2[I.C]   543 169.14423077 949.77429</span>
+<span class="co">#&gt; 2  1,2[II.C]   167  16.96153846  25.69287</span>
+<span class="co">#&gt; 3   2,1[I.C]   217 109.90569527 437.59758</span>
+<span class="co">#&gt; 4  2,1[II.C]     7  10.23853550  13.91309</span>
+<span class="co">#&gt; 5 2,2[III.C]    73   0.44811771       NaN</span>
+<span class="co">#&gt; 6 2,2[III.D]     1   0.04174551       NaN</span></pre></div>
 </div>
 <div id="identify-gaps-and-critical-edges" class="section level3">
 <h3 class="hasAnchor">

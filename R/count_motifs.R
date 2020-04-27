@@ -67,7 +67,7 @@ show_4_motifs <- function(){
 #' @param omit_total_result whether total results shall be omitted, default
 #'   FALSE
 #'
-#' @return data frame with counts indexed by motif identifiers
+#' @return data frame with a column containing motif identifier strings and one column containing motif counts
 #' @export
 #'
 #' @examples count_motifs(ml_net, lvl_attr = c("sesType"), motifs=list("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]"))
@@ -84,7 +84,7 @@ count_motifs <- function(net,
                                   motifs,
                                   assume_sparse = assume_sparse,
                                   omit_total_result = omit_total_result)
-  df <- data.frame(counted, check.names = FALSE)
+  df <- tibble::tibble(motif = names(counted), count = unlist(counted))
   return(df)
 }
 
@@ -101,8 +101,8 @@ count_motifs <- function(net,
 #' @param level additional parameter for actors_choice
 #' @param omit_total_result whether total results shall be omitted
 #'
-#' @return data frame indexed by motif identifers and with rows expectation and
-#'   variances
+#' @return data frame with one column giving names of motif identifers and two column giving
+#'  expectation and variances per motif
 #' @export
 #'
 #' @examples motifs_distribution(ml_net, motif = list('1,2[I.C]'))
@@ -121,7 +121,9 @@ motifs_distribution <- function(net,
                                         model = model,
                                         level = level,
                                         omit_total_result = omit_total_result)
-  df <- data.frame(result, check.names = FALSE)
+  df <- tibble::tibble(motif = names(result),
+                       expectation = unlist(result[1,]),
+                       variance = unlist(result[2,]))
   return(df)
 
 }
@@ -148,7 +150,7 @@ motif_summary <- function(net,
   distribution <- motifr::motifs_distribution(net, lvl_attr, motifs = motifs, omit_total_result = TRUE)
 
   # reformat data
-  result <- rbind(counts, distribution)
+  result <- merge(counts, distribution)
   return(result)
 }
 
@@ -234,7 +236,7 @@ simulate_baseline <- function(net,
                                       n = n,
                                       assume_sparse = assume_sparse,
                                       model = model)
-  df <- data.frame(result, check.names = FALSE)
+  df <- tibble::tibble(result)
   return(df)
 }
 
@@ -252,7 +254,7 @@ simulate_baseline <- function(net,
 #'   used to find ideal counting function
 #' @param model baseline model
 #'
-#' @return data frame with one column for each motif identifier string and one
+#' @return data frame with one row for each motif identifier string and one
 #'   row for every computed random graph
 #' @export
 #'
@@ -275,14 +277,14 @@ compare_to_baseline <- function(net,
                                     assume_sparse = assume_sparse,
                                     omit_total_result = TRUE)
 
-  plot_df <- suppressMessages(reshape2::melt(simulation))
-  plot_df_count <- suppressMessages(reshape2::melt(count))
+  plot_df <- suppressMessages(reshape2::melt(simulation, variable.name = "motif"))
+  # plot_df_count <- suppressMessages(reshape2::melt(count))
 
   p <-
   ggplot2::ggplot(plot_df, ggplot2::aes(value)) +
-    ggplot2::facet_wrap(~ variable, scales = "free") +
+    ggplot2::facet_wrap(~ motif, scales = "free") +
     ggplot2::geom_histogram(fill = "gray",bins = 50) +
-    ggplot2::geom_vline(data = plot_df_count, ggplot2::aes(xintercept = value)) +
+    ggplot2::geom_vline(data = count, ggplot2::aes(xintercept = count)) +
     ggplot2::theme_minimal() +
     ggplot2::xlab(sprintf("Simulated (gray histogram) versus actual (solid line) motif counts, n = %d iterations", n))
 

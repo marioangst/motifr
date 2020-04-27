@@ -133,8 +133,11 @@ Let’s count the number of of these motifs in the entire network.
 motifs = list('1,2[I.C]', '1,2[II.C]') # open and closed triangle
 
 count_motifs(ml_net, motifs)
-#>       1,2[I.C] 1,2[II.C]
-#> count      543       167
+#> # A tibble: 2 x 2
+#>   motif     count
+#>   <chr>     <dbl>
+#> 1 1,2[I.C]    543
+#> 2 1,2[II.C]   167
 ```
 
 An exploratory approach can be taken by calling `motif_summary()`. This
@@ -145,10 +148,13 @@ on random baselines](doc/random_baselines.html) for details.
 
 ``` r
 motif_summary(ml_net)
-#>             1,2[I.C] 1,2[II.C] 2,1[I.C] 2,1[II.C] 2,2[III.C] 2,2[III.D]
-#> count       543.0000 167.00000 217.0000   7.00000 73.0000000 1.00000000
-#> expectation 169.1442  16.96154 109.9057  10.23854  0.4481177 0.04174551
-#> variance    949.7743  25.69287 437.5976  13.91309        NaN        NaN
+#>        motif count  expectation  variance
+#> 1   1,2[I.C]   543 169.14423077 949.77429
+#> 2  1,2[II.C]   167  16.96153846  25.69287
+#> 3   2,1[I.C]   217 109.90569527 437.59758
+#> 4  2,1[II.C]     7  10.23853550  13.91309
+#> 5 2,2[III.C]    73   0.44811771       NaN
+#> 6 2,2[III.D]     1   0.04174551       NaN
 ```
 
 ### Identify gaps and critical edges

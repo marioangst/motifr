@@ -114,21 +114,25 @@
 <a href="#random-networks" class="anchor"></a>Random networks</h2>
 <p>Motifs in random networks can be counted using <code><a href="../reference/simulate_baseline.html">simulate_baseline()</a></code>. The supported models are <code>erdos_renyi</code> and <code>fixed_densities</code>. The function <code><a href="../reference/compare_to_baseline.html">compare_to_baseline()</a></code> can be used for plotting the results:</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="../reference/simulate_baseline.html">simulate_baseline</a></span>(<span class="no">ml_net</span>, <span class="kw">motifs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'1,2[I.C]'</span>, <span class="st">'1,2[II.C]'</span>), <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5</span>)
-<span class="co">#&gt;   1,2[I.C] 1,2[II.C]</span>
-<span class="co">#&gt; 1      161        21</span>
-<span class="co">#&gt; 2      113        17</span>
-<span class="co">#&gt; 3      154        17</span>
-<span class="co">#&gt; 4      125        17</span>
-<span class="co">#&gt; 5      147        11</span></pre></body></html></div>
+<span class="co">#&gt; # A tibble: 5 x 2</span>
+<span class="co">#&gt;   `1,2[I.C]` `1,2[II.C]`</span>
+<span class="co">#&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
+<span class="co">#&gt; 1        159          19</span>
+<span class="co">#&gt; 2        197          23</span>
+<span class="co">#&gt; 3        168          14</span>
+<span class="co">#&gt; 4        200          15</span>
+<span class="co">#&gt; 5        230          20</span></pre></body></html></div>
 </div>
 <div id="motif-distributions-without-simulation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#motif-distributions-without-simulation" class="anchor"></a>Motif distributions without simulation</h2>
 <p>Expectations and variances in <code>erdos_renyi</code> and <code>actors_choice</code> can be computed analytically, i.e. without simulating hundrets of random networks. Until now variances can only be computed for 1,2-motifs.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/motifs_distribution.html">motifs_distribution</a></span>(<span class="no">ml_net</span>, <span class="kw">motifs</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'1,2[I.C]'</span>, <span class="st">'2,2[II.D]'</span>))
-<span class="co">#&gt;             1,2[I.C] 2,2[II.D]</span>
-<span class="co">#&gt; expectation 169.1442  68.83919</span>
-<span class="co">#&gt; variance    949.7743       NaN</span></pre></body></html></div>
+<span class="co">#&gt; # A tibble: 2 x 3</span>
+<span class="co">#&gt;   motif     expectation variance</span>
+<span class="co">#&gt;   &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 1,2[I.C]        169.      950.</span>
+<span class="co">#&gt; 2 2,2[II.D]        68.8     NaN</span></pre></body></html></div>
 </div>
 <div id="difference-between-erdős-rényi-and-fixed-densities" class="section level2">
 <h2 class="hasAnchor">
