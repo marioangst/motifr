@@ -88,7 +88,7 @@ motifs = list('1,2[I.C]', '1,2[II.C]') # open and closed triangle
 count_motifs(ml_net, motifs)
 ```
 
-An exploratory approach can be taken by calling ``motif_summary()``. This function counts the occurrences of a couple of interesting motifs. Furthermore it computes expectations and variances for the occurrence of these motifs in a modified Erdős-Rényi model.
+An exploratory approach can be taken by calling ``motif_summary()``. This function counts the occurrences of a couple of interesting motifs. Furthermore it computes expectations and variances for the occurrence of these motifs in a modified Erdős-Rényi model. See the package [vignette on random baselines](vignettes/random_baselines.Rmd) for details.
 
 ```{r}
 motif_summary(ml_net)
@@ -119,7 +119,7 @@ plot_gaps(ml_net,
 
 ### Comparing motif occurrence to a random baseline
 
-Motifr can be used to simulate a random baseline of networks. Motif counts in an empirical network can then be compared to the distribution of motif counts in the random networks. We do so again here for open and closed triangles in the wetland management network. Unsurprisingly, we find that both of these motifs occur much more often in the empirically observed network than in the random baseline.
+Motifr can be used to simulate a random baseline of networks. Motif counts in an empirical network can then be compared to the distribution of motif counts in the random networks. We do so again here for open and closed triangles in the wetland management network. Unsurprisingly, we find that both of these motifs occur much more often in the empirically observed network than in the random baseline. See the package [vignette on random baselines](vignettes/random_baselines.Rmd) for details.
 
 ```{r}
 motifs = list('1,2[I.C]', '1,2[II.C]') # open ('1,2[I.C]') and closed ('1,2[II.C]') triangles
