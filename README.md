@@ -110,10 +110,11 @@ Motifs can be counted using the versatile function `count_motifs()`. It
 takes as parameters a statnet network object (use `ml_net` or
 `dummy_net` provided by this package as example) and a list of motif
 identifiers (see below) specifying the motifs. See the [vignette on the
-motif zoo](doc/motif_zoo.html) for details on nomenclature for motifs
-(motif identifier strings). Let’s quickly check out two classic examples
-of three-node, two-level motifs (open and closed triangles) in the
-wetlands management network introduced above:
+motif zoo](https://marioangst.github.io/motifr/articles/motif_zoo.html)
+for details on nomenclature for motifs (motif identifier strings). Let’s
+quickly check out two classic examples of three-node, two-level motifs
+(open and closed triangles) in the wetlands management network
+introduced above:
 
 ``` r
 show_motif(motif = '1,2[I.C]', net = ml_net, label = TRUE) # open ('1,2[I.C]') triangle
@@ -144,7 +145,9 @@ An exploratory approach can be taken by calling `motif_summary()`. This
 function counts the occurrences of a couple of interesting motifs.
 Furthermore it computes expectations and variances for the occurrence of
 these motifs in a modified Erdős-Rényi model. See the package [vignette
-on random baselines](doc/random_baselines.html) for details.
+on random
+baselines](https://marioangst.github.io/motifr/articles/random_baselines.html)
+for details.
 
 ``` r
 motif_summary(ml_net)
