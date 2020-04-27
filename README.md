@@ -24,8 +24,7 @@ motifr
 <!-- badges: end -->
 
 This package provides tools to analyze multi-level networks in terms of
-*motifs*. Motifs are small configurations of nodes within an overall
-network
+*motifs*.
 
 Multi-level networks combine multiple networks in one representation,
 e.g. social-ecological networks, which connect a social network (eg.
@@ -33,27 +32,35 @@ interactions among fishermen) with an ecological network (eg.
 interactions between fish species) and the ties inbetween (eg. fishers
 who fish specific species).
 
-The package has three main areas: Visualization and Analysis.
+[https://en.wikipedia.org/wiki/Network\_motif](Motifs) are small
+configurations of nodes and edges (subgraphs) within an overall network.
+
+Package features include:
 
   - Visualization: The package provides functions to visualize
     multi-level networks, based on
     [ggraph](https://github.com/thomasp85/ggraph).
 
-  - Analysis: The package is in many parts a R wrapper for the excellent
+  - Motif counts: The package is in many parts a R wrapper for the
+    excellent
     [sesmotifanalyser](https://gitlab.com/t.seppelt/sesmotifanalyser)
     Python framework written by Tim Seppelt to count multi-level network
     motifs, compare them to a baseline and much more. Only parts of of
     sesmotifanalyser are yet wrapped, so consult the python framework
-    for additional functionality. IntegrateR further identifies and
-    visualizes functional gaps and critical edges in integrated networks
-    based on theories of fit and misfit.
+    for additional functionality.
+
+  - Contributions of edges to motifs: motifr further identifies and
+    visualizes functional gaps and critical edges in multi-level
+    networks based on contributions of existing or potential edges to
+    given motifs (this is theoretically based on network theories of
+    functional fit and misfit).
 
 ## Installation
 
-The package is currently at a very early stage of development. Explore
-at your own risk and please report any issues using the [issue tracker
-on github](https://github.com/marioangst/motifr/issues). You can
-install the package from github, using devtools:
+The package is currently at an early stage of development. Explore at
+your own risk and please report any issues using the [issue tracker on
+github](https://github.com/marioangst/motifr/issues). You can install
+the package from github, using devtools:
 
 ``` r
 devtools::install_github("marioangst/motifr")
@@ -75,6 +82,8 @@ in the wetland, based on causal interdependence among activites. Links
 between the levels specify which actors carry out which activities.
 
 It is possible to specify layouts for every network level separately.
+Below, one level is plotted based on a circle layout, the second one
+based on Kamada-Kawai.
 
 ``` r
 plot_mnet(net = ml_net,
@@ -102,7 +111,7 @@ count_motifs(ml_net, motifs)
 An exploratory approach can be taken by calling `motif_summary()`. This
 function counts the occurrences of a couple of interesting motifs.
 Furthermore it computes expectations and variances for the occurrence of
-this motif in a modified Erdős-Rényi model.
+these motifs in a modified Erdős-Rényi model.
 
 ``` r
 motif_summary(ml_net)
@@ -112,7 +121,9 @@ motif_summary(ml_net)
 #> variance    949.7743  25.69287 437.5976  13.91309        NaN        NaN
 ```
 
-### Motif classification – what do all this codes stand for?
+### Identify gaps and critical edges
+
+### Motif classification – what do all the codes stand for?
 
 Motifs are small subgraphs whose occurrences can reveal interesting
 structures in empirical networks. Motifs can span several levels of a
@@ -125,17 +136,22 @@ identifying motifs. These must provide information about
     (*motif class*).
 
 A motif identifier string contains these two pieces of information. It
-consists of a *head* and *class*, and is for the form `HEAD[CLASS]`,
-e.g. `1,2[II.C]`. The head specifies the signature and the positions of
+consists of a *head* and *class*, and is of the form `HEAD[CLASS]`,
+e.g. `1,2[II.C]`. The head specifies the signature and the positions of
 the motif while the class represents the motif class.
 
-Let’s consider an example. The motif identifier string `1,2[II.C]`
-represents the closed triangle with one node on level 0 (the ecological
-level) and two nodes on level 1 (the social level). `1,2` signifies that
-the first level provides one node and the second two nodes. The
-expression `II.C` in brackets stands for closed triangle. Alternatively,
-`1,2[I.C]` represents the open triangle with the same number of nodes
-taken from the levels.
+Let’s consider an example in a two-level network. The motif identifier
+string `1,2[II.C]` represents the closed triangle with one node on level
+0 and two nodes on level 1. `1,2` signifies that the first level
+provides one node and the second two nodes. The expression `II.C` in
+brackets stands for closed triangle. Alternatively, `1,2[I.C]`
+represents the open triangle with the same number of nodes taken from
+the levels.
+
+When in doubt about what a given identifier string implies, you can let
+motifr show you the motif either in a dummy network or an example of the
+motif in a network you are analyzing (the second will only work if the
+network you are analyzing actually contains the motif).
 
 ``` r
 show_motif('1,2[II.C]', label = TRUE)
@@ -148,47 +164,6 @@ in the [documentation of the Python sma
 package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false)
 in section *Appendix: The Motif Zoo*.
 
-This package uses an internal mechanism called *position matching* for
-translating the head of a motif identifier string, e.g. `1,2`, two a
-sequence of levels corresponding the signature of the motif. Usually,
-this procedure yields the desired matching and is of no interest to the
-user. However, sometimes it might be necessary two overwrite the
-position matching by providing custom positions.
-
-An example for this is the motif `2,2[II.D]`. It contains two nodes on
-level 0 and two nodes on level 1. The two nodes on level 0 and the two
-nodes on level 1 are respectively adjacent. Furthermore the two nodes on
-level 0 are linked to one of the nodes on level 1. This motif differs
-from the motif `2:1,2:0[II.D]` which contains the same number of nodes
-from the different levels. However, here the roles of the levels are
-swapped, i.e. in this motif, the two nodes on level 1 are adjacent to
-the two nodes on level 0.
-
-``` r
-show_motif('2,2[II.D]', label = TRUE)
-```
-
-<img src="man/figures/README-unnamed-chunk-8-1.svg" width="100%" />
-
-``` r
-show_motif('2:1,2:0[II.D]', label = TRUE)
-```
-
-<img src="man/figures/README-unnamed-chunk-8-2.svg" width="100%" />
-
-The position matching can be overwritten by providinng the levels
-corresponding to the entries in the motif signature, e.g. the head
-`2:1,2:0` signalises that the first level containing two nodes is level
-1 while the second level containing two nodes is level 0. See the
-[documentation of the Python sma
-package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false),
-subsection *Position matching* for a detailed description of the
-procedure.
-
-In general, it is recommended to use `show_motif(motif)` to check
-whether the provided motif identifier string is interpreted as intended
-by the software.
-
 ### Comparing motif occurrence to a random baseline
 
 This package can be used to simulate a random baseline of networks.
@@ -196,7 +171,7 @@ Motif counts in an empirical network can then be compared to the
 distribution of motif counts in the random networks.
 
 ``` r
-motifs = list('1,2[I.C]', '1,2[II.C]') # open and closed triangle
+motifs = list('1,2[I.C]', '1,2[II.C]') # open ('1,2[I.C]') and closed ('1,2[II.C]') triangles
 
 compare_to_baseline(ml_net, motifs = motifs, n = 100)
 #> No id variables; using all as measure variables
@@ -204,4 +179,4 @@ compare_to_baseline(ml_net, motifs = motifs, n = 100)
 #> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-8-1.svg" width="100%" />

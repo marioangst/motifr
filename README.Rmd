@@ -41,8 +41,9 @@ Package features include:
 
   - Visualization: The package provides functions to visualize multi-level networks, based on [ggraph](https://github.com/thomasp85/ggraph).
   
-  - Analysis: The package is in many parts a R wrapper for the excellent [sesmotifanalyser](https://gitlab.com/t.seppelt/sesmotifanalyser) Python framework written by Tim Seppelt to count multi-level network motifs, compare them to a baseline and much more. Only parts of of sesmotifanalyser are yet wrapped, so consult the python framework for additional functionality. Thi
-  motifr further identifies and visualizes functional gaps and critical edges in multi-level networks based on contributions of existing or potential edges to given motifs (this is theoretically based on network theories of functional fit and misfit).
+  - Motif counts: The package is in many parts a R wrapper for the excellent [sesmotifanalyser](https://gitlab.com/t.seppelt/sesmotifanalyser) Python framework written by Tim Seppelt to count multi-level network motifs, compare them to a baseline and much more. Only parts of of sesmotifanalyser are yet wrapped, so consult the python framework for additional functionality. 
+  
+- Contributions of edges to motifs: motifr further identifies and visualizes functional gaps and critical edges in multi-level networks based on contributions of existing or potential edges to given motifs (this is theoretically based on network theories of functional fit and misfit).
 
 
 ## Installation
@@ -90,7 +91,9 @@ An exploratory approach can be taken by calling ``motif_summary()``. This functi
 motif_summary(ml_net)
 ```
 
-### Motif classification – what do all this codes stand for?
+### Identify gaps and critical edges
+
+### Motif classification – what do all the codes stand for?
 
 Motifs are small subgraphs whose occurrences can reveal interesting structures in empirical networks. Motifs can span several levels of a multilevel networks. This package uses *motif identifier strings* for identifying motifs. These must provide information about
 
@@ -115,7 +118,7 @@ A full list of all supported signatures and motif classes can be found in the [d
 This package can be used to simulate a random baseline of networks. Motif counts in an empirical network can then be compared to the distribution of motif counts in the random networks.
 
 ```{r}
-motifs = list('1,2[I.C]', '1,2[II.C]') # open and closed triangle
+motifs = list('1,2[I.C]', '1,2[II.C]') # open ('1,2[I.C]') and closed ('1,2[II.C]') triangles
 
 compare_to_baseline(ml_net, motifs = motifs, n = 100)
 ```
