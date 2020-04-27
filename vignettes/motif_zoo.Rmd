@@ -1,0 +1,57 @@
+---
+title: The motif zoo <img src='../man/figures/logo.png' align="right" height="139" />
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{motifr-Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, include=FALSE}
+library(motifr)
+```
+
+This vignette introduces the nomenclature used for labeling motifs in multi-level motifs used in motifr.
+
+## Motif classification – what do all the codes stand for?
+
+Motifs are small subgraphs whose occurrences can reveal interesting structures in empirical networks. Motifs can span several levels of a multilevel networks. This package uses *motif identifier strings* for identifying motifs. These must provide information about
+
+- the number of nodes contained by the motif on the various levels of the network (*signature* and *positions*),
+- the structure of the motif itself, i.e. which edges are present, (*motif class*).
+
+A motif identifier string contains these two pieces of information. It consists of a *head* and *class*, and is of the form ``HEAD[CLASS]``, e.g. ``1,2[II.C]``. The head specifies the signature and the positions of the motif while the class represents the motif class.
+
+Let's consider an example in a two-level network. The motif identifier string ``1,2[II.C]`` represents the closed triangle with one node on level 0 and two nodes on level 1. ``1,2`` signifies that the first level provides one node and the second two nodes. The expression ``II.C`` in brackets stands for closed triangle. Alternatively, ``1,2[I.C]`` represents the open triangle with the same number of nodes taken from the levels.
+
+When in doubt about what a given identifier string implies, you can let motifr show you the motif either in a dummy network or an example of the motif in a network you are analyzing (the second will only work if the network you are analyzing actually contains the motif).
+
+```{r}
+show_motif('1,2[II.C]', label = TRUE)
+```
+
+A full list of all supported signatures and motif classes can be found in the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false) in section *Appendix: The Motif Zoo*.
+
+The functions ```show_3_motifs``` and ```show_4_motifs``` also quickly give an overview over three- and four-level motifs in two-level networks.
+
+## A word of caution on counting: Position matching
+
+Motifr uses an internal mechanism called *position matching* for translating the head of a motif identifier string, e.g. ``1,2``, to a sequence of levels corresponding to the signature of the motif. Usually, this procedure yields the desired matching and is of no interest to the user. However, sometimes it might be necessary two overwrite the position matching by providing custom positions. 
+
+An example for this is the motif ``2,2[II.D]``. It contains two nodes on level 0 and two nodes on level 1. The two nodes on level 0 and the two nodes on level 1 are respectively adjacent. Furthermore the two nodes on level 0 are linked to one of the nodes on level 1. This motif differs from the motif ``2:1,2:0[II.D]`` which contains the same number of nodes from the different levels. However, here the roles of the levels are swapped, i.e. in this motif, the two nodes on level 1 are adjacent to the two nodes on level 0.
+
+```{r}
+show_motif(motif = '2,2[II.D]', label = TRUE)
+show_motif(motif = '2:1,2:0[II.D]', label = TRUE)
+```
+
+The position matching can be overwritten by providinng the levels corresponding to the entries in the motif signature, e.g. the head ``2:1,2:0`` signalises that the first level containing two nodes is level 1 while the second level containing two nodes is level 0. See the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false), subsection *Position matching* for a detailed description of the procedure.
+
+In general, it is recommended to use ``show_motif(motif)`` to check whether the provided motif identifier string is interpreted as intended by the software.

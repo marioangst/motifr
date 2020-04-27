@@ -20,7 +20,7 @@ plot_mnet <- function(net,
                       layouts = rep("kk",n_levels),
                       label = FALSE){
 
-  if(class(net) == "network"){
+  if("network" %in% class(net)){
     net <- intergraph::asIgraph(net)
     net <-
     igraph::set.vertex.attribute(net, name = "name", value =

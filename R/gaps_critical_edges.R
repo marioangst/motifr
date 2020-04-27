@@ -96,7 +96,7 @@ edge_contribution <- function(net,
 #' One of "none" (no subset, default), "partial" (only focal level is subset) or "focal" (only focal
 #' level shown)
 #'
-#' @return
+#' @return A plot of gaps, sized by weight in a multilevel network
 #' @export
 #'
 #' @examples plot_gaps(ml_net, "1,2[II.C]", level = -1)
@@ -118,7 +118,7 @@ plot_gaps <- function(net,
 
   gap_nodes <- unique(c(gaps$vertex0,gaps$vertex1))
 
-  if(class(net) == "network"){
+  if("network" %in% class(net)){
     net <- intergraph::asIgraph(net)
     net <-
       igraph::set.vertex.attribute(net, name = "name", value =
@@ -168,6 +168,6 @@ plot_gaps <- function(net,
     ggplot2::geom_segment(data = coord_gaps,
                           ggplot2::aes(x = x1, y = y1, xend = x2, yend = y2, size = weight),
                           colour="#f2790070", alpha = 0.7) +
-    scale_size_continuous("Gap weight", range = c(1,2))
+    ggplot2::scale_size_continuous("Gap weight", range = c(1,2))
 
 }

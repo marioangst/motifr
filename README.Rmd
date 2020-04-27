@@ -74,10 +74,15 @@ plot_mnet(net = ml_net,
           layouts = list("kk","circle"))
 ```
 
-
 ### Count motifs
 
-Motifs can be counted using the versatile function ``count_motifs()``. It takes as parameters a statnet network object (use ``ml_net`` or ``dummy_net`` provided by this package as example) and a list of motif identifiers (see below) specifying the motifs. 
+Motifs can be counted using the versatile function ``count_motifs()``. It takes as parameters a statnet network object (use ``ml_net`` or ``dummy_net`` provided by this package as example) and a list of motif identifiers (see below) specifying the motifs. See the package [vignette on the motif zoo](vignettes/motif_zoo.Rmd) for details on nomenclature for motifs (motif identifier strings). Let's quickly check out some examples of three-node, two-level motifs.
+
+```{r}
+show_3_motifs()
+```
+
+Let's count two of these motifs (open and closed triangles) in the wetland management network introduced above.
 
 ```{r}
 motifs = list('1,2[I.C]', '1,2[II.C]') # open and closed triangle
@@ -93,29 +98,30 @@ motif_summary(ml_net)
 
 ### Identify gaps and critical edges
 
-### Motif classification – what do all the codes stand for?
+motifr makes it possible to identify gaps and critical edges in multi-level networks. This is motivated by theories of functional fit and misfit in networks, which posit that certain motifs are especially valuable for network outcomes (depending on the context). 
 
-Motifs are small subgraphs whose occurrences can reveal interesting structures in empirical networks. Motifs can span several levels of a multilevel networks. This package uses *motif identifier strings* for identifying motifs. These must provide information about
-
-- the number of nodes contained by the motif on the various levels of the network (*signature* and *positions*),
-- the structure of the motif itself, i.e. which edges are present, (*motif class*).
-
-A motif identifier string contains these two pieces of information. It consists of a *head* and *class*, and is of the form ``HEAD[CLASS]``, e.g. ``1,2[II.C]``. The head specifies the signature and the positions of the motif while the class represents the motif class.
-
-Let's consider an example in a two-level network. The motif identifier string ``1,2[II.C]`` represents the closed triangle with one node on level 0 and two nodes on level 1. ``1,2`` signifies that the first level provides one node and the second two nodes. The expression ``II.C`` in brackets stands for closed triangle. Alternatively, ``1,2[I.C]`` represents the open triangle with the same number of nodes taken from the levels.
-
-When in doubt about what a given identifier string implies, you can let motifr show you the motif either in a dummy network or an example of the motif in a network you are analyzing (the second will only work if the network you are analyzing actually contains the motif).
+In relation to gaps, we can therefore try to identify potential edges that would create a large number of a given motif if they were to exist ("activated" or "flipped"). The number of such motifs created by an edge is their contribution. For example, we can get all edges that would create closed triangles ('1,2[II.C]'), including the information about how many such triangles they would create for the wetlands case study network:
 
 ```{r}
-show_motif('1,2[II.C]', label = TRUE)
+gaps <- identify_gaps(ml_net, motif = '1,2[II.C]')
+head(gaps)
 ```
 
-A full list of all supported signatures and motif classes can be found in the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false) in section *Appendix: The Motif Zoo*.
+We can also plot these gaps in our network, including option to only look at gaps above a certain weight (contribution) and different levels of focus to only show nodes involved in such gaps. Here again for the wetlands management network, only showing gaps with a weight above 5.
 
+```{r}
+plot_gaps(ml_net, 
+          "1,2[II.C]", 
+          level = -1, 
+          subset_graph = "partial", 
+          cutoff = 5, label = TRUE)
+```
+
+``identify_gaps`` has a sibling in ``critical_dyads``. Critical_dyads works in reverse to identifying gaps - it analyzes for every existing edge how many instances of a given motif would disappear if the edge would be removed.
 
 ### Comparing motif occurrence to a random baseline
 
-This package can be used to simulate a random baseline of networks. Motif counts in an empirical network can then be compared to the distribution of motif counts in the random networks.
+Motifr can be used to simulate a random baseline of networks. Motif counts in an empirical network can then be compared to the distribution of motif counts in the random networks. We do so again here for open and closed triangles in the wetland management network. Unsurprisingly, we find that both of these motifs occur much more often in the empirically observed network than in the random baseline.
 
 ```{r}
 motifs = list('1,2[I.C]', '1,2[II.C]') # open ('1,2[I.C]') and closed ('1,2[II.C]') triangles
