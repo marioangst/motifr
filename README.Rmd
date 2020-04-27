@@ -1,5 +1,5 @@
 ---
-title: motifr
+title: motifr <img src='man/figures/logo.png' align="right" height="139" />
 output: 
   github_document
 ---
