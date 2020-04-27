@@ -1,6 +1,6 @@
 Package: motifr
-Title: Analyze and visualize integrated (multi-level) networks
-Version: 0.1
+Title: Motif analysis in multi-level networks
+Version: 0.2
 Authors@R: 
     c(
     person(given = "Mario",

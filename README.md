@@ -74,7 +74,8 @@ of a network to count motifs in, but typical use cases for which the
 package was designed will likely involve two- or three-level networks.
 
 Network data should currently be prepared as statnet network objects
-with a numeric vertex attribute (named eg. “lvl”) for best results.
+with a numeric vertex attribute to specify a level for each node (named
+eg. “lvl”) for best results.
 
 ## Examples
 
@@ -211,9 +212,6 @@ on random baselines](vignettes/random_baselines.Rmd) for details.
 motifs = list('1,2[I.C]', '1,2[II.C]') # open ('1,2[I.C]') and closed ('1,2[II.C]') triangles
 
 compare_to_baseline(ml_net, motifs = motifs, n = 100)
-#> No id variables; using all as measure variables
-#> No id variables; using all as measure variables
-#> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
 <img src="man/figures/README-unnamed-chunk-10-1.svg" width="100%" />

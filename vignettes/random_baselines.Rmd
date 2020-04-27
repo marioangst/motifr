@@ -1,11 +1,13 @@
 ---
-title: Random baselines <img src='../man/figures/logo.png' align="right" height="139" />
+title: Random baselines
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{random_baselines}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+<img src='../man/figures/logo.png' align="right" height="139" />
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(

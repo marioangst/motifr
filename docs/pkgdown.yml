@@ -1,0 +1,8 @@
+pandoc: 2.7.2
+pkgdown: 1.5.1
+pkgdown_sha: ~
+articles:
+  motif_zoo: motif_zoo.html
+  random_baselines: random_baselines.html
+last_built: 2020-04-27T20:22Z
+

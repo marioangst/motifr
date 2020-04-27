@@ -1,5 +1,5 @@
 ---
-title: The motif zoo <img src='../man/figures/logo.png' align="right" height="139" />
+title: The motif zoo 
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{motif_zoo}
@@ -15,6 +15,8 @@ knitr::opts_chunk$set(
   dev = "svg"
 )
 ```
+
+<img src='../man/figures/logo.png' align="right" height="139" />
 
 ```{r setup, include=FALSE}
 library(motifr)
