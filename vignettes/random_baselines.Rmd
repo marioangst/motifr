@@ -1,0 +1,69 @@
+---
+title: Random baselines <img src='../man/figures/logo.png' align="right" height="139" />
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{motifr-Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%",
+  dev = "svg"
+)
+```
+
+```{r setup, include=FALSE}
+library(motifr)
+```
+
+This vignette describes the models used for random baselines in motifr. Baseline models have to be specified when requesting random networks (e.g., ``compare_to_baseline()``), and when computing properties of motif distributions analytically (e.g, ``motif_distribution()``).
+
+## Baseline models
+
+Currently, three baseline models are implemented:
+
+- *Fixed Densities Model* (``fixed_densities``) In this model it is assumed that the number of edges
+  between level A and level B is fixed for all A, B.
+  The specified number of edges is drawn randomly from the set of all possible edges.
+- *Erdős-Rényi Model* (``erdos_renyi``) In this model edges between the various levels are drawn
+  independently at random with respect to a fixed probability depending on the levels.
+  The (refined) Erdős-Rényi model accounts for the various levels by allowing
+  to specify different probabilites for the different levels.
+- *Actor's Choice Model* (``actors_choice``) In this model all edges but the edges on one level
+  (the level of the actors) are fixed. The edges on the level of the actors
+  are chosen indepently with fixed probability as in Erdős-Rényi.
+
+The paramters of the models are extracted from a given (empirical) network.
+
+For details see the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false).
+
+## Random networks
+
+Motifs in random networks can be counted using ``simulate_baseline()``. The supported models are
+``erdos_renyi`` and ``fixed_densities``. The function ``compare_to_baseline()`` can be used for 
+plotting the results:
+
+```{r}
+simulate_baseline(ml_net, motifs = list('1,2[I.C]', '1,2[II.C]'), n = 5)
+```
+
+## Motif distributions without simulation
+
+Expectations and variances in ``erdos_renyi`` and ``actors_choice`` can be computed analytically, i.e. without simulating hundrets of random networks. Until now variances can only be computed for 1,2-motifs.
+
+```{r}
+motifs_distribution(ml_net, motifs=list('1,2[I.C]', '2,2[II.D]'))
+```
+
+## Difference between Erdős-Rényi and Fixed Densities
+
+There is a crucial difference between the Erdős-Rényi model and Fixed Densities model. In the former, the expected number of edges on each level equals the number of edges in the empirical network, while in the latter the exact number in each random network equals this number. This difference becomes obvious when counting edges in random networks. ``1,1[1]`` is the motif consisting of one node from level 0 and one from level 1, linked by an edge.
+
+```{r}
+compare_to_baseline(ml_net, motifs = list('1,1[1]'), model = 'erdos_renyi', n = 100)
+compare_to_baseline(ml_net, motifs = list('1,1[1]'), model = 'fixed_densities', n = 100)
+```

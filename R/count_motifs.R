@@ -226,6 +226,7 @@ show_motif <- function(motif,
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
 #'   used to find ideal counting function
+#' @param model baseline model to be used
 #'
 #' @return data frame with one column for each motif identifier string and one
 #'   row for every computed random graph
@@ -236,10 +237,15 @@ simulate_baseline <- function(net,
                               motifs,
                               n = 10,
                               type_attr = c("sesType"),
-                              assume_sparse = TRUE) {
+                              assume_sparse = TRUE,
+                              model = 'erdos_renyi') {
   py_g <- motifr::toPyGraph(net, type_attr = type_attr)
 
-  result <- sma$simulateBaselineAutoR(py_g, motifs, n = n, assume_sparse = assume_sparse)
+  result <- sma$simulateBaselineAutoR(py_g,
+                                      motifs,
+                                      n = n,
+                                      assume_sparse = assume_sparse,
+                                      model = model)
   df <- data.frame(result, check.names = FALSE)
   return(df)
 }
@@ -257,6 +263,7 @@ simulate_baseline <- function(net,
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
 #'   used to find ideal counting function
+#' @param model baseline model
 #'
 #' @return data frame with one column for each motif identifier string and one
 #'   row for every computed random graph
@@ -267,12 +274,14 @@ compare_to_baseline <- function(net,
                                 motifs,
                                 n = 10,
                                 type_attr = c("sesType"),
-                                assume_sparse = TRUE) {
+                                assume_sparse = TRUE,
+                                model = c('erdos_renyi')) {
   simulation <- motifr::simulate_baseline(net,
-                                              motifs,
-                                              n = n,
-                                              type_attr = type_attr,
-                                              assume_sparse = assume_sparse)
+                                          motifs,
+                                          n = n,
+                                          type_attr = type_attr,
+                                          assume_sparse = assume_sparse,
+                                          model = model)
   count <- motifr::count_motifs(net,
                                     motifs,
                                     type_attr = type_attr,

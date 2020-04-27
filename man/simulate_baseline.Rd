@@ -9,7 +9,8 @@ simulate_baseline(
   motifs,
   n = 10,
   type_attr = c("sesType"),
-  assume_sparse = TRUE
+  assume_sparse = TRUE,
+  model = "erdos_renyi"
 )
 }
 \arguments{
@@ -23,6 +24,8 @@ vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
 
 \item{assume_sparse}{whether the random graphs shall be assumed to be sparse.
 used to find ideal counting function}
+
+\item{model}{baseline model to be used}
 
 \item{g}{statnet network object}
 }
