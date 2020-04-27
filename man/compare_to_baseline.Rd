@@ -2,7 +2,7 @@
 % Please edit documentation in R/count_motifs.R
 \name{compare_to_baseline}
 \alias{compare_to_baseline}
-\title{Compares number of motif in a given graph with a random baseline.}
+\title{Compare empirical network to random baseline}
 \usage{
 compare_to_baseline(
   net,
@@ -17,21 +17,22 @@ compare_to_baseline(
 
 \item{n}{number of random graphs}
 
+\item{type_attr}{character vector specifying the attribute name where level
+information is stored in statnet object. The attribute should be a binary
+vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
+
 \item{assume_sparse}{whether the random graphs shall be assumed to be sparse.
 used to find ideal counting function}
 
 \item{g}{statnet network object}
-
-\item{typeAttr}{character vector specifying the attribute name where level
-information is stored in statnet object. The attribute should be a binary
-vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
 }
 \value{
 data frame with one column for each motif identifier string and one
   row for every computed random graph
 }
 \description{
-Compares number of motif in a given graph with a random baseline.
+This function compares the motif counts in a given network with the motif
+counts in a random baseline of motifs.
 }
 \examples{
 compare_to_baseline(ml_net, list('1,2[I.C]', '1,2[II.C]'))

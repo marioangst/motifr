@@ -2,7 +2,7 @@
 % Please edit documentation in R/count_motifs.R
 \name{show_4_motifs}
 \alias{show_4_motifs}
-\title{Display all two-level motifs consisting of four nodes}
+\title{Display all supported motifs with signature ``2,2``.}
 \usage{
 show_4_motifs()
 }
@@ -10,5 +10,8 @@ show_4_motifs()
 Opens figure from Ö. Bodin, M. Tengö: Disentangling intangible social–ecological systems in Global Environmental Change 22 (2012) 430–439 http://dx.doi.org/10.1016/j.gloenvcha.2012.01.005
 }
 \description{
-Display all two-level motifs consisting of four nodes
+Display all supported motifs with signature ``2,2``.
+}
+\examples{
+show_4_motifs()
 }

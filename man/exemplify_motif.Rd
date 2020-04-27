@@ -9,11 +9,11 @@ exemplify_motif(net, motif, type_attr = c("sesType"))
 \arguments{
 \item{motif}{motif identifier string for the motif}
 
-\item{g}{statnet network object}
-
-\item{typeAttr}{character vector specifying the attribute name where level
+\item{type_attr}{character vector specifying the attribute name where level
 information is stored in statnet object. The attribute should be a binary
 vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
+
+\item{g}{statnet network object}
 }
 \value{
 vector of nodes in the motif
@@ -23,4 +23,7 @@ Returns an example for a motif specified by a motif identifier string
 }
 \examples{
 exemplify_motif(ml_net, motif = '1,2[I.C]')
+}
+\seealso{
+show_motif
 }

@@ -4,12 +4,12 @@
 \alias{toPyGraph}
 \title{Translate multi-level statnet network object to networkx (python) object}
 \usage{
-toPyGraph(g, typeAttr, relabel = TRUE)
+toPyGraph(g, type_attr, relabel = TRUE)
 }
 \arguments{
 \item{g}{statnet network object}
 
-\item{typeAttr}{character vector specifying the attribute name where level information
+\item{type_attr}{character vector specifying the attribute name where level information
 is stored in statnet object. The attribute should be a binary vector. 1 indicates a "social" node
 and 0 indicates a "non-social" node.}
 

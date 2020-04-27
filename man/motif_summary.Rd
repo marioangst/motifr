@@ -7,11 +7,11 @@
 motif_summary(net, type_attr = c("sesType"))
 }
 \arguments{
-\item{g}{statnet network object}
-
-\item{typeAttr}{character vector specifying the attribute name where level
+\item{type_attr}{character vector specifying the attribute name where level
 information is stored in statnet object. The attribute should be a binary
 vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
+
+\item{g}{statnet network object}
 }
 \value{
 dataframe with motif counts, expectations and variances for set of

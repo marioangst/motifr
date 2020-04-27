@@ -2,7 +2,7 @@
 #' Translate multi-level statnet network object to networkx (python) object
 #'
 #' @param g statnet network object
-#' @param typeAttr character vector specifying the attribute name where level information
+#' @param type_attr character vector specifying the attribute name where level information
 #' is stored in statnet object. The attribute should be a binary vector. 1 indicates a "social" node
 #' and 0 indicates a "non-social" node.
 #' @param relabel should nodes be relabeled with statnet vertex.names? (defaults to TRUE)
@@ -11,12 +11,13 @@
 #' @export
 #'
 #' @examples
-toPyGraph <- function(g, typeAttr, relabel = TRUE) {
+toPyGraph <- function(g, type_attr, relabel = TRUE) {
 
-  if(!(identical(unique(network::get.vertex.attribute(g, typeAttr)),c(1,0)))){
-    stop("Please specify the typeAttr attribute of the network object as a binary vector.
-         1s indicate social nodes, 0s non-social nodes")
-  }
+  # Support multi-level graphs:
+  # if(!(identical(unique(network::get.vertex.attribute(g, type_attr)),c(1,0)))){
+  #   stop("Please specify the type_attr attribute of the network object as a binary vector.
+  #        1s indicate social nodes, 0s non-social nodes")
+  # }
 
   # function for translating a statnet network object into a Python compatible
   # networkx object
@@ -24,7 +25,7 @@ toPyGraph <- function(g, typeAttr, relabel = TRUE) {
   attributeNames  = network::list.vertex.attributes(g)
   attributeValues = lapply(network::list.vertex.attributes(g),
                            function(x) network::get.vertex.attribute(g,x))
-  py_g <- sma$translateGraph(adjacencyMatrix, attributeNames, attributeValues, typeAttr)
+  py_g <- sma$translateGraph(adjacencyMatrix, attributeNames, attributeValues, type_attr)
 
   if (relabel == TRUE){
     # JS: renaming in here right now, but will suggest update to rbridge.py to do in Python
@@ -36,60 +37,42 @@ toPyGraph <- function(g, typeAttr, relabel = TRUE) {
   py_g
 }
 
-#' Display all two-level motifs consisting of three nodes
+#' Display all supported motifs with signature ``1,2``.
 #'
 #' @return Opens image
 #' @export
 #'
-#' @examples
+#' @examples show_3_motifs()
 show_3_motifs <- function(){
   magick::image_read(path = system.file("motif_reference",
                                         "motif_reference_3motifs.png",
                                         package = utils::packageName()))
 }
 
-#' Display all two-level motifs consisting of four nodes
+#' Display all supported motifs with signature ``2,2``.
 #'
 #' @return Opens figure from Ö. Bodin, M. Tengö: Disentangling intangible social–ecological systems in Global Environmental Change 22 (2012) 430–439 http://dx.doi.org/10.1016/j.gloenvcha.2012.01.005
-
 #' @export
 #'
-#' @examples
+#' @examples show_4_motifs()
 show_4_motifs <- function(){
   magick::image_read(path = system.file("motif_reference",
                                         "motif_reference_4motifs.jpg",
                                         package = utils::packageName()))
 }
 
-# load("data/reussebene_mlnet.RData")
-# # get python equivalent to statnet network type
-# pyGraph = toPyGraph(ml_net, 'sesType')
-#
-# nx$nodes(pyGraph)
-#
-# sma$ThreeEMotifs(G = pyGraph)
-#
-# # count motifs
-#
-# # first create set specifying types of motifs (3 or 4 (or any?)), then type eg. II.B
-# # then count motifs
-# # achtung:
-# # procedure empties "set" object after iteration, thus always needs to be rewritten (not very R-like)
-#
-# set_3_IIC <- sma$motifSet(sma$ThreeEMotifs(pyGraph), sma$is3Type("II.C"))
-# sma$countAnyMotifs(set_3_IIC)
-
 #' Count multi-level motifs
 #'
 #' @param net A statnet network object with a node attribute specifying the
 #'   level of each node
-#' @param type_attr character vector specifying the attribute name where level
-#'   information is stored in statnet object
 #' @param motifs a list of motif identifiers which shall be counted, e.g.
 #'   list("1,2[I.C]")
+#' @param type_attr character vector specifying the attribute name where level
+#'   information is stored in statnet object
 #' @param assume_sparse whether the network shall be assumed to be sparse (for
-#'   optimization)
-#' @param omit_total_result whether total results shall be omitted
+#'   optimization), default TRUE
+#' @param omit_total_result whether total results shall be omitted, default
+#'   FALSE
 #'
 #' @return data frame with counts indexed by motif identifiers
 #' @export
@@ -101,7 +84,7 @@ count_motifs <- function(net,
                          assume_sparse = TRUE,
                          omit_total_result = TRUE){
   # convert net to python object
-  py_g <- integrateR::toPyGraph(net,typeAttr = type_attr)
+  py_g <- integrateR::toPyGraph(net,type_attr = type_attr)
 
   # call counter
   counted <- sma$countMotifsAutoR(py_g,
@@ -116,7 +99,7 @@ count_motifs <- function(net,
 #' baseline
 #'
 #' @param g statnet network object
-#' @param typeAttr character vector specifying the attribute name where level
+#' @param type_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #' @param motifs list of motif identifiers describing the motifs whose
@@ -130,7 +113,7 @@ count_motifs <- function(net,
 #'   variances
 #' @export
 #'
-#' @examples
+#' @examples motifs_distribution(ml_net, motif = list('1,2[I.C]'))
 motifs_distribution <- function(net,
                                 motifs,
                                 type_attr = c("sesType"),
@@ -138,7 +121,7 @@ motifs_distribution <- function(net,
                                 level = -1,
                                 omit_total_result = TRUE) {
   # convert net to python object
-  py_g <- integrateR::toPyGraph(net,typeAttr = type_attr)
+  py_g <- integrateR::toPyGraph(net,type_attr = type_attr)
 
   # call counter
   result <- sma$distributionMotifsAutoR(py_g,
@@ -154,7 +137,7 @@ motifs_distribution <- function(net,
 #' Summary for motif counts and distribution (Erdos-Renyi)
 #'
 #' @param g statnet network object
-#' @param typeAttr character vector specifying the attribute name where level
+#' @param type_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #'
@@ -182,11 +165,12 @@ motif_summary <- function(net,
 #'
 #' @param g statnet network object
 #' @param motif motif identifier string for the motif
-#' @param typeAttr character vector specifying the attribute name where level
+#' @param type_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #'
 #' @return vector of nodes in the motif
+#' @seealso show_motif
 #' @export
 #'
 #' @examples exemplify_motif(ml_net, motif = '1,2[I.C]')
@@ -194,7 +178,7 @@ exemplify_motif <- function(net,
                             motif,
                             type_attr = c("sesType")) {
   # convert net to python object
-  py_g <- integrateR::toPyGraph(net,typeAttr = type_attr)
+  py_g <- integrateR::toPyGraph(net,type_attr = type_attr)
   motif <-sma$exemplifyMotif(py_g, motif)
   return(purrr::simplify(motif))
 }
@@ -202,19 +186,21 @@ exemplify_motif <- function(net,
 #' Plots an example for a motif with given motif identifier string taken from
 #' the given graph.
 #'
-#' @param g statnet network object
+#' If no network is provided, a motif in a dummy network will be shown.
+#'
 #' @param motif motif identifier string for the motif
-#' @param typeAttr character vector specifying the attribute name where level
+#' @param net statnet network object
+#' @param type_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #' @param ... additional arguments to be passed to plotting function
-#'
 #' @return plot
+#' @seealso exemplify_motif
 #' @export
 #'
-#' @examples show_motif(ml_net, motif = '1,2[I.C]')
-show_motif <- function(net,
-                       motif,
+#' @examples show_motif('1,2[I.C]', net = ml_net)
+show_motif <- function(motif,
+                       net = dummy_net,
                        type_attr = c("sesType"),
                        ...) {
   motif    <- integrateR::exemplify_motif(net, motif, type_attr = type_attr)
@@ -225,12 +211,16 @@ show_motif <- function(net,
   return(p)
 }
 
-#' Simulates base line.
+#' Simulate a random baseline
+#'
+#' A specified number of random networks usind a modified Erdős-Rényi model is
+#' computed. In each of the random networks motifs are counted. A dataframe with
+#' this counts is returned.
 #'
 #' @param g statnet network object
 #' @param motifs list of motif identifier strings
 #' @param n number of random graphs
-#' @param typeAttr character vector specifying the attribute name where level
+#' @param type_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
@@ -246,19 +236,22 @@ simulate_baseline <- function(net,
                               n = 10,
                               type_attr = c("sesType"),
                               assume_sparse = TRUE) {
-  py_g <- integrateR::toPyGraph(net, typeAttr = type_attr)
+  py_g <- integrateR::toPyGraph(net, type_attr = type_attr)
 
   result <- sma$simulateBaselineAutoR(py_g, motifs, n = n, assume_sparse = assume_sparse)
   df <- data.frame(result, check.names = FALSE)
   return(df)
 }
 
-#' Compares number of motif in a given graph with a random baseline.
+#' Compare empirical network to random baseline
+#'
+#' This function compares the motif counts in a given network with the motif
+#' counts in a random baseline of motifs.
 #'
 #' @param g statnet network object
 #' @param motifs list of motif identifier strings
 #' @param n number of random graphs
-#' @param typeAttr character vector specifying the attribute name where level
+#' @param type_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
@@ -294,33 +287,92 @@ compare_to_baseline <- function(net,
     ggplot2::geom_histogram(fill = "gray") +
     ggplot2::geom_vline(data = plot_df_count, ggplot2::aes(xintercept = value)) +
     ggplot2::theme_minimal() +
-    ggplot2::xlab("Simulated (gray histogram) versus actual (solid line) motif counts")
+    ggplot2::xlab(sprintf("Simulated (gray histogram) versus actual (solid line) motif counts, n = %d iterations", n))
 
   return(p)
 }
 
+#' List gaps
+#'
 #' List gaps ordered by contribution to a motif. This is a list of ties together
 #' with the number of motifs of a given class the dyad would generate by being
-#' flipped.
+#' added to the netwok.
 #'
 #' @param g statnet network object
 #' @param motif motif identifier
-#' @param typeAttr character vector specifying the attribute name where level
+#' @param type_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object. The attribute should be a binary
 #'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
-#' @param level ties on which level (sesType) shall be considered
+#' @param level level of the dyads which shall be considered, or -1 if the level
+#'   shall be determined automatically.
+#'
+#' @return data frame with three columns, listing edges and their contribution
+#'   to motifs described by the motif identifier in descending order
+#' @export
+#'
+#' @examples identify_gaps(ml_net, list('1,2[II.C]'))
+identify_gaps <- function(net,
+                          motif,
+                          type_attr = c("sesType"),
+                          level = -1) {
+  if(sma$isClosedMotifR(motif, level) == FALSE){
+    stop("The specified motif is not closed. Look for critical_dyads instead.")
+  }
+  return(edge_contribution(net, motif, type_attr, level))
+}
+
+#' List critical dyads
+#'
+#' Critical dyads are edges on a specified level which break motifs by being
+#' removed from the network.
+#'
+#' @param g statnet network object
+#' @param motif motif identifier
+#' @param type_attr character vector specifying the attribute name where level
+#'   information is stored in statnet object. The attribute should be a binary
+#'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
+#' @param level level of the dyads which shall be considered, or -1 if the level
+#'   shall be determined automatically.
 #'
 #' @return data frame with three columns, listing edges and their contribution
 #'   to motifs described by the motif identifier in descending order
 #' @export
 #'
 #' @examples identify_gaps(ml_net, list('1,2[I.C]'))
-identify_gaps <- function(net,
-                          motif,
-                          type_attr = c("sesType"),
-                          level = -1) {
-  py_g <- integrateR::toPyGraph(net, typeAttr = type_attr)
+critical_dyads <- function(net,
+                           motif,
+                           type_attr = c("sesType"),
+                           level = -1) {
+  if(sma$isClosedMotifR(motif, level) == TRUE){
+    stop("The specified motif is not open. Look for identify_gaps instead.")
+  }
+  return(edge_contribution(net, motif, type_attr, level))
+}
 
+#' List edge contribution
+#'
+#' List gaps ordered by contribution to a motif. This is a list of ties together
+#' with the number of motifs of a given class the dyad would generate by being
+#' flipped. This is a gneralisation of ``identify_gaps`` and ``critical_dyads``.
+#'
+#' @param g statnet network object
+#' @param motif motif identifier
+#' @param type_attr character vector specifying the attribute name where level
+#'   information is stored in statnet object. The attribute should be a binary
+#'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
+#' @param level level of the dyads which shall be considered, or -1 if the level
+#'   shall be determined automatically.
+#'
+#' @return data frame with three columns, listing edges and their contribution
+#'   to motifs described by the motif identifier in descending order
+#' @export
+#'
+#' @examples edge_contribtion(ml_net, list('1,2[I.C]'))
+edge_contribution <- function(net,
+                              motif,
+                              type_attr = c("sesType"),
+                              level = -1) {
+  py_g <- integrateR::toPyGraph(net, type_attr = type_attr)
   result <- sma$identifyGapsR(py_g, motif, level = level)
   df <- data.frame(result)
   return(df)
