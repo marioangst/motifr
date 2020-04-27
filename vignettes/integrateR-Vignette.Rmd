@@ -19,3 +19,18 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(motifr)
 ```
+
+## A word of caution on counting: Position matching
+
+This package uses an internal mechanism called *position matching* for translating the head of a motif identifier string, e.g. ``1,2``, to a sequence of levels corresponding to the signature of the motif. Usually, this procedure yields the desired matching and is of no interest to the user. However, sometimes it might be necessary two overwrite the position matching by providing custom positions. 
+
+An example for this is the motif ``2,2[II.D]``. It contains two nodes on level 0 and two nodes on level 1. The two nodes on level 0 and the two nodes on level 1 are respectively adjacent. Furthermore the two nodes on level 0 are linked to one of the nodes on level 1. This motif differs from the motif ``2:1,2:0[II.D]`` which contains the same number of nodes from the different levels. However, here the roles of the levels are swapped, i.e. in this motif, the two nodes on level 1 are adjacent to the two nodes on level 0.
+
+```{r}
+show_motif('2,2[II.D]', label = TRUE)
+show_motif('2:1,2:0[II.D]', label = TRUE)
+```
+
+The position matching can be overwritten by providinng the levels corresponding to the entries in the motif signature, e.g. the head ``2:1,2:0`` signalises that the first level containing two nodes is level 1 while the second level containing two nodes is level 0. See the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false), subsection *Position matching* for a detailed description of the procedure.
+
+In general, it is recommended to use ``show_motif(motif)`` to check whether the provided motif identifier string is interpreted as intended by the software.

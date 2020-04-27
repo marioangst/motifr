@@ -12,16 +12,13 @@ Authors@R:
            family = "Seppelt",
            role = c("aut"),
            email = "t.seppelt@posteo.de"))
-Description: This package provides tools to analyze and visualize integrated (multi-level) networks.
-    Multi-level networks combine multiple networks in one, e.g. social-ecological networks.
-    Integrated networks are specific networks combining causal loop diagrams (CLDs) and social networks.
-    The package has three main areas: Visualization, Aggregation and Analysis.
-    Visualization: The package visualizes CLDs and two-level networks.
-    Aggregation: The package implements ways to aggregate CLDs to use as inputs in multi-level networks.
-    Analysis: The package is in many parts a R wrapper for the excellent sesmotifanalyser Python package written by
-    Tim Seppelt to count multi-level network motifs, compare them to a baseline and much more. 
-    It further identifies and visualizes functional gaps in integrated networks and virtuous and vicious
-    cycles in CLDs.
+Description: This package provides tools for motif analysis in multi-level networks.
+    Multi-level networks combine multiple networks in one, e.g. social-ecological networks. 
+    Motifs are small configurations of nodes and edges (subgraphs) occuring in networks.
+    motifr is visualizes multi-level networks, counts multi-level network motifs, compares them to a baseline.
+    It also identifies contributions of potential edges to motifs to find critical or missing edges.
+    The package is in many parts a R wrapper for the excellent sesmotifanalyser Python package written by
+    Tim Seppelt.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
