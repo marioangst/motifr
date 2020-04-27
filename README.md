@@ -66,6 +66,16 @@ the package from github, using devtools:
 devtools::install_github("marioangst/motifr")
 ```
 
+## Input
+
+motifr currently can only reliably handle undirected and unweighted
+networks. There is in principle no restriction on the number of levels
+of a network to count motifs in, but typical use cases for which the
+package was designed will likely involve two- or three-level networks.
+
+Network data should currently be prepared as statnet network objects
+with a numeric vertex attribute named “lvl” for best results.
+
 ## Examples
 
 ``` r
@@ -98,15 +108,25 @@ plot_mnet(net = ml_net,
 Motifs can be counted using the versatile function `count_motifs()`. It
 takes as parameters a statnet network object (use `ml_net` or
 `dummy_net` provided by this package as example) and a list of motif
-identifiers (see below) specifying the motifs. See the package [vignette
-on the motif zoo](vignettes/motif_zoo.Rmd) for details on nomenclature
-for motifs (motif identifier strings). Let’s quickly check out some
-examples of three-node, two-level motifs.
+identifiers (see below) specifying the motifs. See the [vignette on the
+motif zoo](doc/motif_zoo.html) for details on nomenclature for motifs
+(motif identifier strings). Let’s quickly check out two classic examples
+of three-node, two-level motifs (open and closed triangles) in the
+wetlands management network introduced above:
 
-![](inst/motif_reference/motif_reference_3motifs.png)
+``` r
+show_motif(motif = '1,2[I.C]', net = ml_net, label = TRUE) # open ('1,2[I.C]') triangle
+```
 
-Let’s count two of these motifs (open and closed triangles) in the
-wetland management network introduced above.
+<img src="man/figures/README-unnamed-chunk-5-1.svg" width="300px" />
+
+``` r
+show_motif(motif = '1,2[II.C]', net = ml_net, label = TRUE) # closed ('1,2[II.C]') triangle
+```
+
+<img src="man/figures/README-unnamed-chunk-5-2.svg" width="300px" />
+
+Let’s count the number of of these motifs in the entire network.
 
 ``` r
 motifs = list('1,2[I.C]', '1,2[II.C]') # open and closed triangle
@@ -169,7 +189,7 @@ plot_gaps(ml_net,
           cutoff = 5, label = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-9-1.svg" width="100%" />
 
 `identify_gaps` has a sibling in `critical_dyads`. Critical\_dyads works
 in reverse to identifying gaps - it analyzes for every existing edge how
@@ -194,4 +214,4 @@ compare_to_baseline(ml_net, motifs = motifs, n = 100)
 #> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-10-1.svg" width="100%" />
