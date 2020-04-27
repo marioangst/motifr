@@ -2,7 +2,7 @@
 title: Random baselines <img src='../man/figures/logo.png' align="right" height="139" />
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{motifr-Vignette}
+  %\VignetteIndexEntry{random_baselines}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -63,7 +63,7 @@ motifs_distribution(ml_net, motifs=list('1,2[I.C]', '2,2[II.D]'))
 
 There is a crucial difference between the Erdős-Rényi model and Fixed Densities model. In the former, the expected number of edges on each level equals the number of edges in the empirical network, while in the latter the exact number in each random network equals this number. This difference becomes obvious when counting edges in random networks. ``1,1[1]`` is the motif consisting of one node from level 0 and one from level 1, linked by an edge.
 
-```{r}
+```{r out.width="300px"}
 compare_to_baseline(ml_net, motifs = list('1,1[1]'), model = 'erdos_renyi', n = 100)
 compare_to_baseline(ml_net, motifs = list('1,1[1]'), model = 'fixed_densities', n = 100)
 ```

@@ -74,7 +74,7 @@ of a network to count motifs in, but typical use cases for which the
 package was designed will likely involve two- or three-level networks.
 
 Network data should currently be prepared as statnet network objects
-with a numeric vertex attribute named “lvl” for best results.
+with a numeric vertex attribute (named eg. “lvl”) for best results.
 
 ## Examples
 
@@ -97,7 +97,7 @@ based on Kamada-Kawai.
 
 ``` r
 plot_mnet(net = ml_net,
-          type_attr = "sesType",
+          lvl_attr = "sesType",
           layouts = list("kk","circle"))
 ```
 
@@ -140,7 +140,7 @@ An exploratory approach can be taken by calling `motif_summary()`. This
 function counts the occurrences of a couple of interesting motifs.
 Furthermore it computes expectations and variances for the occurrence of
 these motifs in a modified Erdős-Rényi model. See the package [vignette
-on random baselines](vignettes/random_baselines.Rmd) for details.
+on random baselines](doc/random_baselines.html) for details.
 
 ``` r
 motif_summary(ml_net)
@@ -205,8 +205,7 @@ of motif counts in the random networks. We do so again here for open and
 closed triangles in the wetland management network. Unsurprisingly, we
 find that both of these motifs occur much more often in the empirically
 observed network than in the random baseline. See the package [vignette
-on random baselines](vignettes/random_baselines.Rmd) for
-details.
+on random baselines](vignettes/random_baselines.Rmd) for details.
 
 ``` r
 motifs = list('1,2[I.C]', '1,2[II.C]') # open ('1,2[I.C]') and closed ('1,2[II.C]') triangles

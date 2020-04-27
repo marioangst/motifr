@@ -6,7 +6,7 @@
 #' ggraph calls for each network level in a circle.
 #'
 #' @param net A tidygraph, igraph or statnet network object
-#' @param type_attr The name of the categorical node attribute specifying at which
+#' @param lvl_attr The name of the categorical node attribute specifying at which
 #' level a node is situated
 #' @param layouts A list of layouts (see ?ggraph::layout_ggraph) for every level eg. for two levels list("auto","circle")
 #' @param label logical - should nodes be labelled? (defaults to false)
@@ -14,9 +14,9 @@
 #' @return A ggraph object
 #' @export
 #'
-#' @examples plot_mnet(net = ml_net, type_attr = "sesType", layouts = list("kk","circle"))
+#' @examples plot_mnet(net = ml_net, lvl_attr = "sesType", layouts = list("kk","circle"))
 plot_mnet <- function(net,
-                      type_attr = c("sesType"),
+                      lvl_attr,
                       layouts = rep("kk",n_levels),
                       label = FALSE){
 
@@ -31,25 +31,25 @@ plot_mnet <- function(net,
   nodes <- tibble::as_tibble(tidygraph::activate(t_g,nodes))
   edges <- tibble::as_tibble(tidygraph::activate(t_g,edges))
 
-  colnames(nodes)[colnames(nodes) == type_attr] <- "sesType"
+  colnames(nodes)[colnames(nodes) == lvl_attr] <- "lvl"
   # ensure numeric and starting at 1
-  nodes$sesType_n <- as.numeric(factor(nodes$sesType))
+  nodes$lvl_n <- as.numeric(factor(nodes$lvl))
 
-  n_levels <- length(unique(nodes$sesType_n))
+  n_levels <- length(unique(nodes$lvl_n))
 
-  edges$to_level <- nodes$sesType_n[edges$to]
+  edges$to_level <- nodes$lvl_n[edges$to]
 
-  edges$from_level <- nodes$sesType_n[edges$from]
+  edges$from_level <- nodes$lvl_n[edges$from]
 
   edges$between <- ifelse(edges$from_level != edges$to_level, "within","between")
 
   t_g <- tidygraph::tbl_graph(nodes = nodes, edges = edges)
 
   # separate subgraphs
-  sub_g_list <- vector(mode = "list", length = length(unique(nodes$sesType_n)))
+  sub_g_list <- vector(mode = "list", length = length(unique(nodes$lvl_n)))
 
   for(level in 1:n_levels){
-    t_g_sub <- tidygraph::to_subgraph(t_g, sesType_n == level, subset_by = "nodes")$subgraph
+    t_g_sub <- tidygraph::to_subgraph(t_g, lvl_n == level, subset_by = "nodes")$subgraph
     # if graph has no edges (bug in igraph), create self_loop to have one (hacky)
     if(nrow(tibble::as_tibble(tidygraph::activate(t_g_sub,edges))) == 0){
       disc_edges <- tibble::as_tibble(tidygraph::activate(t_g_sub,edges))
@@ -86,27 +86,27 @@ plot_mnet <- function(net,
 
   for(level in 1:n_levels){
     p_comb[["data"]][["x"]][
-      p_comb[["data"]][["sesType_n"]] == level] <-
+      p_comb[["data"]][["lvl_n"]] == level] <-
       sub_g_list[[level]][["data"]][["x"]]
 
     p_comb[["data"]][["y"]][
-      p_comb[["data"]][["sesType_n"]] == level] <-
+      p_comb[["data"]][["lvl_n"]] == level] <-
       sub_g_list[[level]][["data"]][["y"]]
   }
 
   p_comb <-
     p_comb +
-    ggraph::geom_node_point(ggplot2::aes(color = factor(sesType))) +
+    ggraph::geom_node_point(ggplot2::aes(color = factor(lvl))) +
     ggplot2::theme_void() +
-    ggplot2::scale_color_brewer("Level", breaks = levels(factor(nodes$sesType)),
+    ggplot2::scale_color_brewer("Level", breaks = levels(factor(nodes$lvl)),
                                palette = "Dark2") +
     ggplot2::theme(legend.position="bottom")
 
   if(label == TRUE){
     p_comb <-
-      p_comb + ggraph::geom_node_label(ggplot2::aes(label = name, fill = factor(sesType)),
+      p_comb + ggraph::geom_node_label(ggplot2::aes(label = name, fill = factor(lvl)),
                                        alpha = 0.5) +
-      ggplot2::scale_fill_brewer("Level", breaks = levels(factor(nodes$sesType)),
+      ggplot2::scale_fill_brewer("Level", breaks = levels(factor(nodes$lvl)),
                                  palette = "Dark2")
   }
 

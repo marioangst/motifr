@@ -58,7 +58,7 @@ devtools::install_github("marioangst/motifr")
 
 motifr currently can only reliably handle undirected and unweighted networks. There is in principle no restriction on the number of levels of a network to count motifs in, but typical use cases for which the package was designed will likely involve two- or three-level networks.
 
-Network data should currently be prepared as statnet network objects with a numeric vertex attribute named "lvl" for best results.
+Network data should currently be prepared as statnet network objects with a numeric vertex attribute (named eg. "lvl") for best results.
 
 ## Examples
 
@@ -75,7 +75,7 @@ It is possible to specify layouts for every network level separately. Below, one
 
 ```{r}
 plot_mnet(net = ml_net,
-          type_attr = "sesType",
+          lvl_attr = "sesType",
           layouts = list("kk","circle"))
 ```
 
@@ -97,7 +97,7 @@ motifs = list('1,2[I.C]', '1,2[II.C]') # open and closed triangle
 count_motifs(ml_net, motifs)
 ```
 
-An exploratory approach can be taken by calling ``motif_summary()``. This function counts the occurrences of a couple of interesting motifs. Furthermore it computes expectations and variances for the occurrence of these motifs in a modified Erdős-Rényi model. See the package [vignette on random baselines](vignettes/random_baselines.Rmd) for details.
+An exploratory approach can be taken by calling ``motif_summary()``. This function counts the occurrences of a couple of interesting motifs. Furthermore it computes expectations and variances for the occurrence of these motifs in a modified Erdős-Rényi model. See the package [vignette on random baselines](doc/random_baselines.html) for details.
 
 ```{r}
 motif_summary(ml_net)

@@ -6,9 +6,8 @@
 #'
 #' @param g statnet network object
 #' @param motif motif identifier
-#' @param type_attr character vector specifying the attribute name where level
-#'   information is stored in statnet object. The attribute should be a binary
-#'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
+#' @param lvl_attr character vector specifying the attribute name where level
+#'   information is stored in statnet object.
 #' @param level level of the dyads which shall be considered, or -1 if the level
 #'   shall be determined automatically.
 #'
@@ -19,12 +18,12 @@
 #' @examples identify_gaps(ml_net, list('1,2[II.C]'))
 identify_gaps <- function(net,
                           motif,
-                          type_attr = c("sesType"),
+                          lvl_attr = c("sesType"),
                           level = -1) {
   if(sma$isClosedMotifR(motif, level) == FALSE){
     stop("The specified motif is not closed. Look for critical_dyads instead.")
   }
-  return(edge_contribution(net = net, motif = motif, type_attr = type_attr, level = level))
+  return(edge_contribution(net = net, motif = motif, lvl_attr = lvl_attr, level = level))
 }
 
 #' List critical dyads
@@ -34,9 +33,8 @@ identify_gaps <- function(net,
 #'
 #' @param g statnet network object
 #' @param motif motif identifier
-#' @param type_attr character vector specifying the attribute name where level
-#'   information is stored in statnet object. The attribute should be a binary
-#'   vector. 1 indicates a "social" node and 0 indicates a "non-social" node.
+#' @param lvl_attr character vector specifying the attribute name where level
+#'   information is stored in statnet object.
 #' @param level level of the dyads which shall be considered, or -1 if the level
 #'   shall be determined automatically.
 #'
@@ -47,12 +45,12 @@ identify_gaps <- function(net,
 #' @examples identify_gaps(ml_net, list('1,2[I.C]'))
 critical_dyads <- function(net,
                            motif,
-                           type_attr = c("sesType"),
+                           lvl_attr = c("sesType"),
                            level = -1) {
   if(sma$isClosedMotifR(motif, level) == TRUE){
     stop("The specified motif is not open. Look for identify_gaps instead.")
   }
-  return(edge_contribution(net = net, motif = motif, type_attr = type_attr, level = level))
+  return(edge_contribution(net = net, motif = motif, lvl_attr = lvl_attr, level = level))
 }
 
 #' List edge contribution
@@ -63,7 +61,7 @@ critical_dyads <- function(net,
 #'
 #' @param g statnet network object
 #' @param motif motif identifier
-#' @param type_attr character vector specifying the attribute name where level
+#' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object.
 #' @param level level of the dyads which shall be considered, or -1 if the level
 #'   shall be determined automatically.
@@ -75,9 +73,9 @@ critical_dyads <- function(net,
 #' @examples edge_contribtion(ml_net, list('1,2[I.C]'))
 edge_contribution <- function(net,
                               motif,
-                              type_attr = c("sesType"),
+                              lvl_attr = c("sesType"),
                               level = -1) {
-  py_g <- motifr::toPyGraph(g = net, type_attr = type_attr)
+  py_g <- motifr::toPyGraph(g = net, lvl_attr = lvl_attr)
   result <- sma$identifyGapsR(py_g, motif, level = level)
   df <- data.frame(result)
   return(df)
@@ -87,7 +85,7 @@ edge_contribution <- function(net,
 #'
 #' @param net Statnet network object
 #' @param motif Motif to explore gaps in for
-#' @param type_attr Node attribute specifiying level information
+#' @param lvl_attr Node attribute specifiying level information
 #' @param level Focal level for gap analysis
 #' @param cutoff Cutoff point in contributions of an edge to the number of motifs above which to analyse gaps
 #' @param ...
@@ -103,7 +101,7 @@ edge_contribution <- function(net,
 #' plot_gaps(ml_net, "1,2[II.C]", level = -1, subset_graph = "partial", cutoff = 4, label = TRUE)
 plot_gaps <- function(net,
                       motif,
-                      type_attr = c("sesType"),
+                      lvl_attr = c("sesType"),
                       level = -1,
                       cutoff = 2,
                       subset_graph = "none",
@@ -111,7 +109,7 @@ plot_gaps <- function(net,
 
   gaps <- motifr::identify_gaps(net = net,
                                 motif = motif,
-                                type_attr = type_attr,
+                                lvl_attr = lvl_attr,
                                 level = level)
   gaps <- gaps[gaps$contribution >= cutoff,]
 
@@ -131,7 +129,7 @@ plot_gaps <- function(net,
   edges$to_name <- nodes$name[edges$to]
   edges$from_name <- nodes$name[edges$from]
 
-  colnames(nodes)[colnames(nodes) == type_attr] <- "sesType"
+  colnames(nodes)[colnames(nodes) == lvl_attr] <- "sesType"
 
   gap_level <- unique(nodes$sesType[nodes$name %in% gap_nodes])
 
@@ -148,7 +146,7 @@ plot_gaps <- function(net,
     t_g <- tidygraph::to_subgraph(t_g, name %in% nodes$name, subset_by = "nodes")$subgraph
   }
 
-  netviz <- plot_mnet(net = t_g, type_attr = type_attr, ...)
+  netviz <- plot_mnet(net = t_g, lvl_attr = lvl_attr, ...)
 
   # get coordinates for all lines
   coord_gaps <- data.frame(

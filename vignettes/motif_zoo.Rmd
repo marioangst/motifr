@@ -2,7 +2,7 @@
 title: The motif zoo <img src='../man/figures/logo.png' align="right" height="139" />
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{motifr-Vignette}
+  %\VignetteIndexEntry{motif_zoo}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
