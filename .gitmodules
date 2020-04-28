@@ -1,3 +1,0 @@
-[submodule "inst/python/sesmotifanalyser"]
-	path = inst/python/sesmotifanalyser
-	url = https://gitlab.com/t.seppelt/sesmotifanalyser.git
