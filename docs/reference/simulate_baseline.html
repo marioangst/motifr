@@ -152,6 +152,10 @@ these counts is returned.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>net</th>
+      <td><p>statnet network object</p></td>
+    </tr>
+    <tr>
       <th>motifs</th>
       <td><p>list of motif identifier strings</p></td>
     </tr>
@@ -173,10 +177,6 @@ used to find ideal counting function</p></td>
       <th>model</th>
       <td><p>baseline model to be used</p></td>
     </tr>
-    <tr>
-      <th>g</th>
-      <td><p>statnet network object</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -186,16 +186,16 @@ used to find ideal counting function</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>simulate_baseline</span>(<span class='no'>ml_net</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>'1,2[I.C]'</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='output co'>#&gt;    1,2[I.C]
-#&gt; 1       154
-#&gt; 2       189
-#&gt; 3       152
-#&gt; 4       223
-#&gt; 5       163
-#&gt; 6       166
-#&gt; 7       148
-#&gt; 8       235
-#&gt; 9       159
-#&gt; 10      212</div></pre>
+#&gt; 1       200
+#&gt; 2       163
+#&gt; 3       199
+#&gt; 4       162
+#&gt; 5       210
+#&gt; 6       168
+#&gt; 7       164
+#&gt; 8       137
+#&gt; 9       145
+#&gt; 10      234</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

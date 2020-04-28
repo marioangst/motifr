@@ -101,15 +101,14 @@
 <ul>
 <li><p>Visualization: The package provides functions to visualize multi-level networks, based on <a href="https://github.com/thomasp85/ggraph">ggraph</a>.</p></li>
 <li><p>Motif counts: The package is in many parts a R wrapper for the excellent <a href="https://gitlab.com/t.seppelt/sesmotifanalyser">sesmotifanalyser</a> Python framework written by Tim Seppelt to count multi-level network motifs, compare them to a baseline and much more. Only parts of of sesmotifanalyser are yet wrapped, so consult the python framework for additional functionality.</p></li>
-<li><p>Contributions of edges to motifs: motifr further identifies and visualizes functional gaps and critical edges in multi-level networks based on contributions of existing or potential edges to given motifs (this is theoretically based on network theories of functional fit and misfit).</p></li>
+<li><p>Contributions of edges to motifs: motifr further identifies and visualizes functional gaps and critical edges in multi-level networks based on contributions of existing or potential edges to given motifs (this is theoretically motivated by network theories of functional fit and misfit).</p></li>
 </ul>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>The package is currently at an early stage of development. Explore at your own risk and please report any issues using the <a href="https://github.com/marioangst/motifr/issues">issue tracker on github</a>.</p>
 <p>Due to the package’s tight integration with the Python framework sesmotifanalyzer, we recommend explicitly installing the associated sma module through reticulate.</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">reticulate</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/use_python.html">use_condaenv</a></span>()
-<span class="kw pkg">reticulate</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/py_install.html">py_install</a></span>(<span class="st">"sma"</span>, <span class="kw">pip</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">reticulate</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/py_install.html">py_install</a></span>(<span class="st">"sma"</span>, <span class="kw">pip</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
 <p>You can then install motifr from github, using devtools:</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"marioangst/motifr"</span>)</pre></div>
 </div>
