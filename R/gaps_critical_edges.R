@@ -4,7 +4,7 @@
 #' with the number of motifs of a given class the dyad would generate by being
 #' added to the netwok.
 #'
-#' @param g statnet network object
+#' @param net statnet network object
 #' @param motif motif identifier
 #' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object.
@@ -31,7 +31,7 @@ identify_gaps <- function(net,
 #' Critical dyads are edges on a specified level which break motifs by being
 #' removed from the network.
 #'
-#' @param g statnet network object
+#' @param net statnet network object
 #' @param motif motif identifier
 #' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object.
@@ -59,7 +59,7 @@ critical_dyads <- function(net,
 #' with the number of motifs of a given class the dyad would generate by being
 #' flipped. This is a generalisation of ``identify_gaps`` and ``critical_dyads``.
 #'
-#' @param g statnet network object
+#' @param net statnet network object
 #' @param motif motif identifier
 #' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object.

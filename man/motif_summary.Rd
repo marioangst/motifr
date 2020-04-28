@@ -7,10 +7,10 @@
 motif_summary(net, lvl_attr = c("sesType"))
 }
 \arguments{
+\item{net}{statnet network object}
+
 \item{lvl_attr}{character vector specifying the attribute name where level
 information is stored in statnet object.}
-
-\item{g}{statnet network object}
 }
 \value{
 dataframe with motif counts, expectations and variances for set of

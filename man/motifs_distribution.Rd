@@ -15,6 +15,8 @@ motifs_distribution(
 )
 }
 \arguments{
+\item{net}{statnet network object}
+
 \item{motifs}{list of motif identifiers describing the motifs whose
 distribution shall be analysed}
 
@@ -27,8 +29,6 @@ documentation}
 \item{level}{additional parameter for actors_choice}
 
 \item{omit_total_result}{whether total results shall be omitted}
-
-\item{g}{statnet network object}
 }
 \value{
 data frame with one column giving names of motif identifers and two column giving

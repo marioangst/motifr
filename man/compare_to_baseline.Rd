@@ -14,6 +14,8 @@ compare_to_baseline(
 )
 }
 \arguments{
+\item{net}{statnet network object}
+
 \item{motifs}{list of motif identifier strings}
 
 \item{n}{number of random graphs}
@@ -25,8 +27,6 @@ information is stored in statnet object.}
 used to find ideal counting function}
 
 \item{model}{baseline model}
-
-\item{g}{statnet network object}
 }
 \value{
 data frame with one row for each motif identifier string and one

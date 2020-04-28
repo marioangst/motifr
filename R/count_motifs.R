@@ -91,7 +91,7 @@ count_motifs <- function(net,
 #' Compute statistical properties of the distribution of motifs in a random
 #' baseline
 #'
-#' @param g statnet network object
+#' @param net statnet network object
 #' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object.
 #' @param motifs list of motif identifiers describing the motifs whose
@@ -130,7 +130,7 @@ motifs_distribution <- function(net,
 
 #' Summary for motif counts and distribution (Erdos-Renyi)
 #'
-#' @param g statnet network object
+#' @param net statnet network object
 #' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object.
 #'
@@ -156,7 +156,7 @@ motif_summary <- function(net,
 
 #' Returns an example for a motif found in a given network
 #'
-#' @param g statnet network object
+#' @param net statnet network object
 #' @param motif motif identifier string for the motif
 #' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object.
@@ -209,7 +209,7 @@ show_motif <- function(motif,
 #' computed. In each of the random networks motifs are counted. A dataframe with
 #' these counts is returned.
 #'
-#' @param g statnet network object
+#' @param net statnet network object
 #' @param motifs list of motif identifier strings
 #' @param n number of random graphs
 #' @param lvl_attr character vector specifying the attribute name where level
@@ -245,7 +245,7 @@ simulate_baseline <- function(net,
 #' This function compares the motif counts in a given network with the motif
 #' counts in a random baseline of motifs.
 #'
-#' @param g statnet network object
+#' @param net statnet network object
 #' @param motifs list of motif identifier strings
 #' @param n number of random graphs
 #' @param lvl_attr character vector specifying the attribute name where level

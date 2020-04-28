@@ -7,12 +7,12 @@
 exemplify_motif(net, motif, lvl_attr = c("sesType"))
 }
 \arguments{
+\item{net}{statnet network object}
+
 \item{motif}{motif identifier string for the motif}
 
 \item{lvl_attr}{character vector specifying the attribute name where level
 information is stored in statnet object.}
-
-\item{g}{statnet network object}
 }
 \value{
 vector of nodes in the motif
