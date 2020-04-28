@@ -19,7 +19,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Random baselines">
 <meta property="og:description" content="motifr">
-<meta property="og:image" content="/logo.png">
+<meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -92,56 +92,51 @@
 
     
     
-<p><img src="../man/figures/logo.png" align="right" height="139"></p>
+<p><a href="https://marioangst.github.io/motifr"><img src="../man/figures/logo.svg" align="right" height="139"></a></p>
 <p>This vignette describes the models used for random baselines in motifr. Baseline models have to be specified when requesting random networks (e.g., <code><a href="../reference/compare_to_baseline.html">compare_to_baseline()</a></code>), and when computing properties of motif distributions analytically (e.g, <code>motif_distribution()</code>).</p>
 <div id="baseline-models" class="section level2">
 <h2 class="hasAnchor">
 <a href="#baseline-models" class="anchor"></a>Baseline models</h2>
-<p>Currently, three baseline models are implemented:</p>
+<p>Currently, three baseline models are implemented. The parameters of the models are extracted from a given (empirical) network.</p>
 <ul>
 <li>
-<em>Fixed Densities Model</em> (<code>fixed_densities</code>) In this model it is assumed that the number of edges between level A and level B is fixed for all A, B. The specified number of edges is drawn randomly from the set of all possible edges.</li>
+<em>Fixed Densities Model</em> (<code>fixed_densities</code>) Given two levels A and B, in this model it is assumed that the number of edges between level A and level B is fixed for all A-B ties. The specific number of edges is drawn randomly from the set of all possible edges.</li>
 <li>
-<em>Erdős-Rényi Model</em> (<code>erdos_renyi</code>) In this model edges between the various levels are drawn independently at random with respect to a fixed probability depending on the levels. The (refined) Erdős-Rényi model accounts for the various levels by allowing to specify different probabilites for the different levels.</li>
+<em>Erdős-Rényi Model</em> (<code>erdos_renyi</code>) In this model edges <em>between</em> the various levels are drawn independently at random with respect to a fixed probability depending on the levels. The (refined) Erdős-Rényi model accounts for the various levels by allowing to specify different probabilites ties occurring <em>within</em> different levels.</li>
 <li>
-<em>Actor’s Choice Model</em> (<code>actors_choice</code>) In this model all edges but the edges on one level (the level of the actors) are fixed. The edges on the level of the actors are chosen indepently with fixed probability as in Erdős-Rényi.</li>
+<em>Actor’s Choice Model</em> (<code>actors_choice</code>) In this model all edges but the edges on one specific level are fixed. This is motivated by theoretical considerations about the application of multi-level network models in situations where one level is composed of actors, which are more readily able to change their connections, and other levels considered more stable, eg. specific instances of ecological networks. The edges on this non-fixed “actor level” are chosen indepently with fixed probability as in Erdős-Rényi.</li>
 </ul>
-<p>The paramters of the models are extracted from a given (empirical) network.</p>
 <p>For details see the <a href="https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false">documentation of the Python sma package</a>.</p>
 </div>
-<div id="random-networks" class="section level2">
+<div id="motifs-in-networks-simulated-based-on-a-baseline-model" class="section level2">
 <h2 class="hasAnchor">
-<a href="#random-networks" class="anchor"></a>Random networks</h2>
+<a href="#motifs-in-networks-simulated-based-on-a-baseline-model" class="anchor"></a>Motifs in networks simulated based on a baseline model</h2>
 <p>Motifs in random networks can be counted using <code><a href="../reference/simulate_baseline.html">simulate_baseline()</a></code>. The supported models are <code>erdos_renyi</code> and <code>fixed_densities</code>. The function <code><a href="../reference/compare_to_baseline.html">compare_to_baseline()</a></code> can be used for plotting the results:</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="../reference/simulate_baseline.html">simulate_baseline</a></span>(<span class="no">ml_net</span>, <span class="kw">motifs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'1,2[I.C]'</span>, <span class="st">'1,2[II.C]'</span>), <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5</span>)
-<span class="co">#&gt; # A tibble: 5 x 2</span>
-<span class="co">#&gt;   `1,2[I.C]` `1,2[II.C]`</span>
-<span class="co">#&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
-<span class="co">#&gt; 1        212          11</span>
-<span class="co">#&gt; 2        153          18</span>
-<span class="co">#&gt; 3        142          11</span>
-<span class="co">#&gt; 4        210          24</span>
-<span class="co">#&gt; 5        170          16</span></pre></body></html></div>
+<span class="co">#&gt;   1,2[I.C] 1,2[II.C]</span>
+<span class="co">#&gt; 1      156        17</span>
+<span class="co">#&gt; 2      169        21</span>
+<span class="co">#&gt; 3      166        17</span>
+<span class="co">#&gt; 4      172        17</span>
+<span class="co">#&gt; 5      129        12</span></pre></body></html></div>
 </div>
 <div id="motif-distributions-without-simulation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#motif-distributions-without-simulation" class="anchor"></a>Motif distributions without simulation</h2>
-<p>Expectations and variances in <code>erdos_renyi</code> and <code>actors_choice</code> can be computed analytically, i.e. without simulating hundrets of random networks. Until now variances can only be computed for 1,2-motifs.</p>
+<p>Expectations and variances in <code>erdos_renyi</code> and <code>actors_choice</code> can be computed analytically, i.e. without simulating hundreds of random networks. Until now variances can only be computed for 1,2-motifs.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/motifs_distribution.html">motifs_distribution</a></span>(<span class="no">ml_net</span>, <span class="kw">motifs</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'1,2[I.C]'</span>, <span class="st">'2,2[II.D]'</span>))
-<span class="co">#&gt; # A tibble: 2 x 3</span>
-<span class="co">#&gt;   motif     expectation variance</span>
-<span class="co">#&gt;   &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1,2[I.C]        169.      950.</span>
-<span class="co">#&gt; 2 2,2[II.D]        68.8     NaN</span></pre></body></html></div>
+<span class="co">#&gt;               motif expectation variance</span>
+<span class="co">#&gt; 1,2[I.C]   1,2[I.C]   169.14423 949.7743</span>
+<span class="co">#&gt; 2,2[II.D] 2,2[II.D]    68.83919      NaN</span></pre></body></html></div>
 </div>
 <div id="difference-between-erdős-rényi-and-fixed-densities" class="section level2">
 <h2 class="hasAnchor">
 <a href="#difference-between-erd%C5%91s-r%C3%A9nyi-and-fixed-densities" class="anchor"></a>Difference between Erdős-Rényi and Fixed Densities</h2>
-<p>There is a crucial difference between the Erdős-Rényi model and Fixed Densities model. In the former, the expected number of edges on each level equals the number of edges in the empirical network, while in the latter the exact number in each random network equals this number. This difference becomes obvious when counting edges in random networks. <code>1,1[1]</code> is the motif consisting of one node from level 0 and one from level 1, linked by an edge.</p>
+<p>There is a crucial difference between the Erdős-Rényi model and Fixed Densities model. In the former, the expected number of edges on each level equals the number of edges in the empirical network, while in the latter the exact number in each random network equals this number. This difference becomes obvious when counting edges in random networks. For a network with two levels A and B <code>1,1[1]</code> is the motif consisting of one node from level A and one from level B, linked by an edge.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/compare_to_baseline.html">compare_to_baseline</a></span>(<span class="no">ml_net</span>, <span class="kw">motifs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'1,1[1]'</span>), <span class="kw">model</span> <span class="kw">=</span> <span class="st">'erdos_renyi'</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">100</span>)</pre></body></html></div>
-<p><img src="random_baselines_files/figure-html/unnamed-chunk-4-1.png" width="300px"></p>
+<p><img src="random_baselines_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/compare_to_baseline.html">compare_to_baseline</a></span>(<span class="no">ml_net</span>, <span class="kw">motifs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'1,1[1]'</span>), <span class="kw">model</span> <span class="kw">=</span> <span class="st">'fixed_densities'</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">100</span>)</pre></body></html></div>
-<p><img src="random_baselines_files/figure-html/unnamed-chunk-4-2.png" width="300px"></p>
+<p><img src="random_baselines_files/figure-html/unnamed-chunk-4-2.png" width="672"></p>
 </div>
   </div>
 

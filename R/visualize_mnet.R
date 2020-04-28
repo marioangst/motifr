@@ -110,6 +110,6 @@ plot_mnet <- function(net,
                                  palette = "Dark2")
   }
 
-  p_comb + ggplot2::theme(plot.margin=ggplot2::unit(c(0.5,0.5,0.5,0.5),"cm"))
+  p_comb + ggplot2::theme(plot.margin=ggplot2::unit(c(1,1,1,1),"cm"))
 
   }

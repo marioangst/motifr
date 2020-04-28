@@ -48,7 +48,7 @@
 
 <meta property="og:title" content="Summary for motif counts and distribution (Erdos-Renyi) — motif_summary" />
 <meta property="og:description" content="Summary for motif counts and distribution (Erdos-Renyi)" />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg" />
 
 
 
@@ -135,16 +135,15 @@
     <p>Summary for motif counts and distribution (Erdos-Renyi)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>motif_summary</span>(<span class='no'>net</span>, <span class='kw'>type_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>))</pre>
+    <pre class="usage"><span class='fu'>motif_summary</span>(<span class='no'>net</span>, <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>type_attr</th>
+      <th>lvl_attr</th>
       <td><p>character vector specifying the attribute name where level
-information is stored in statnet object. The attribute should be a binary
-vector. 1 indicates a "social" node and 0 indicates a "non-social" node.</p></td>
+information is stored in statnet object.</p></td>
     </tr>
     <tr>
       <th>g</th>

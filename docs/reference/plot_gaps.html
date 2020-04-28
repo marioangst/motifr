@@ -48,7 +48,7 @@
 
 <meta property="og:title" content="Plot gaps in network vizualization — plot_gaps" />
 <meta property="og:description" content="Plot gaps in network vizualization" />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg" />
 
 
 
@@ -138,7 +138,7 @@
     <pre class="usage"><span class='fu'>plot_gaps</span>(
   <span class='no'>net</span>,
   <span class='no'>motif</span>,
-  <span class='kw'>type_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>),
+  <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>),
   <span class='kw'>level</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
   <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>subset_graph</span> <span class='kw'>=</span> <span class='st'>"none"</span>,
@@ -157,7 +157,7 @@
       <td><p>Motif to explore gaps in for</p></td>
     </tr>
     <tr>
-      <th>type_attr</th>
+      <th>lvl_attr</th>
       <td><p>Node attribute specifiying level information</p></td>
     </tr>
     <tr>
@@ -173,6 +173,10 @@
       <td><p>Whether to subset the graph to only show nodes involved in gaps.
 One of "none" (no subset, default), "partial" (only focal level is subset) or "focal" (only focal
 level shown)</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>list of additional parameters to be passed to plotting function (see ?motifr::plot_mnet), eg. label = TRUE</p></td>
     </tr>
     </table>
 

@@ -9,7 +9,7 @@
 #' @return python graph object
 #' @export
 #'
-#' @examples
+#' @examples toPyGraph(dummy_net, lvl_attr = "sesType")
 toPyGraph <- function(g, lvl_attr, relabel = TRUE) {
 
   # function for translating a statnet network object into a Python compatible
@@ -84,7 +84,7 @@ count_motifs <- function(net,
                                   motifs,
                                   assume_sparse = assume_sparse,
                                   omit_total_result = omit_total_result)
-  df <- tibble::tibble(motif = names(counted), count = unlist(counted))
+  df <- data.frame(motif = names(counted), count = unlist(counted))
   return(df)
 }
 
@@ -121,7 +121,7 @@ motifs_distribution <- function(net,
                                         model = model,
                                         level = level,
                                         omit_total_result = omit_total_result)
-  df <- tibble::tibble(motif = names(result),
+  df <- data.frame(motif = names(result),
                        expectation = unlist(result[1,]),
                        variance = unlist(result[2,]))
   return(df)
@@ -154,7 +154,7 @@ motif_summary <- function(net,
   return(result)
 }
 
-#' Returns an example for a motif specified by a motif identifier string
+#' Returns an example for a motif found in a given network
 #'
 #' @param g statnet network object
 #' @param motif motif identifier string for the motif
@@ -184,7 +184,7 @@ exemplify_motif <- function(net,
 #' @param net statnet network object
 #' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object.
-#' @param ... additional arguments to be passed to plotting function
+#' @param ... additional arguments to be passed to plotting function (eg. label = TRUE)
 #' @return plot
 #' @seealso exemplify_motif
 #' @export
@@ -205,9 +205,9 @@ show_motif <- function(motif,
 
 #' Simulate a random baseline
 #'
-#' A specified number of random networks usind a modified Erdős-Rényi model is
+#' A specified number of random networks using a modified Erdős-Rényi model is
 #' computed. In each of the random networks motifs are counted. A dataframe with
-#' this counts is returned.
+#' these counts is returned.
 #'
 #' @param g statnet network object
 #' @param motifs list of motif identifier strings
@@ -236,7 +236,7 @@ simulate_baseline <- function(net,
                                       n = n,
                                       assume_sparse = assume_sparse,
                                       model = model)
-  df <- tibble::tibble(result)
+  df <- data.frame(result, check.names = FALSE)
   return(df)
 }
 
@@ -287,6 +287,7 @@ compare_to_baseline <- function(net,
     ggplot2::geom_vline(data = count, ggplot2::aes(xintercept = count)) +
     ggplot2::theme_minimal() +
     ggplot2::xlab(sprintf("Simulated (gray histogram) versus actual (solid line) motif counts, n = %d iterations", n))
+
 
   return(p)
 }

@@ -48,7 +48,7 @@
 
 <meta property="og:title" content="Count multi-level motifs — count_motifs" />
 <meta property="og:description" content="Count multi-level motifs" />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg" />
 
 
 
@@ -138,7 +138,7 @@
     <pre class="usage"><span class='fu'>count_motifs</span>(
   <span class='no'>net</span>,
   <span class='no'>motifs</span>,
-  <span class='kw'>type_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>),
+  <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>),
   <span class='kw'>assume_sparse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>omit_total_result</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
@@ -157,8 +157,8 @@ level of each node</p></td>
 list("1,2[I.C]")</p></td>
     </tr>
     <tr>
-      <th>type_attr</th>
-      <td><p>character vector specifying the attribute name where level
+      <th>lvl_attr</th>
+      <td><p>character vector specifying the vertex attribute name where level
 information is stored in statnet object</p></td>
     </tr>
     <tr>
@@ -175,10 +175,14 @@ FALSE</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data frame with counts indexed by motif identifiers</p>
+    <p>data frame with a column containing motif identifier strings and one column containing motif counts</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>count_motifs</span>(<span class='no'>ml_net</span>, <span class='kw'>type_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>), <span class='kw'>motifs</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"1,2[I.C]"</span>, <span class='st'>"1,2[II.C]"</span>, <span class='st'>"2,1[I.C]"</span>, <span class='st'>"2,1[II.C]"</span>))</div><div class='output co'>#&gt; <span class='error'>Error in count_motifs(ml_net, type_attr = c("sesType"), motifs = list("1,2[I.C]",     "1,2[II.C]", "2,1[I.C]", "2,1[II.C]")): unused argument (type_attr = c("sesType"))</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>count_motifs</span>(<span class='no'>ml_net</span>, <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>), <span class='kw'>motifs</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"1,2[I.C]"</span>, <span class='st'>"1,2[II.C]"</span>, <span class='st'>"2,1[I.C]"</span>, <span class='st'>"2,1[II.C]"</span>))</div><div class='output co'>#&gt;               motif count
+#&gt; 1,2[I.C]   1,2[I.C]   543
+#&gt; 1,2[II.C] 1,2[II.C]   167
+#&gt; 2,1[I.C]   2,1[I.C]   217
+#&gt; 2,1[II.C] 2,1[II.C]     7</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

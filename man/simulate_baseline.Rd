@@ -8,7 +8,7 @@ simulate_baseline(
   net,
   motifs,
   n = 10,
-  type_attr = c("sesType"),
+  lvl_attr = c("sesType"),
   assume_sparse = TRUE,
   model = "erdos_renyi"
 )
@@ -18,9 +18,8 @@ simulate_baseline(
 
 \item{n}{number of random graphs}
 
-\item{type_attr}{character vector specifying the attribute name where level
-information is stored in statnet object. The attribute should be a binary
-vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
+\item{lvl_attr}{character vector specifying the attribute name where level
+information is stored in statnet object.}
 
 \item{assume_sparse}{whether the random graphs shall be assumed to be sparse.
 used to find ideal counting function}
@@ -34,9 +33,9 @@ data frame with one column for each motif identifier string and one
   row for every computed random graph
 }
 \description{
-A specified number of random networks usind a modified Erdős-Rényi model is
+A specified number of random networks using a modified Erdős-Rényi model is
 computed. In each of the random networks motifs are counted. A dataframe with
-this counts is returned.
+these counts is returned.
 }
 \examples{
 simulate_baseline(ml_net, list('1,2[I.C]'), n = 10)

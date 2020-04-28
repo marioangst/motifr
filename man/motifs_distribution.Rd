@@ -8,7 +8,7 @@ baseline}
 motifs_distribution(
   net,
   motifs,
-  type_attr = c("sesType"),
+  lvl_attr = c("sesType"),
   model = c("erdos_renyi"),
   level = -1,
   omit_total_result = TRUE
@@ -18,9 +18,8 @@ motifs_distribution(
 \item{motifs}{list of motif identifiers describing the motifs whose
 distribution shall be analysed}
 
-\item{type_attr}{character vector specifying the attribute name where level
-information is stored in statnet object. The attribute should be a binary
-vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
+\item{lvl_attr}{character vector specifying the attribute name where level
+information is stored in statnet object.}
 
 \item{model}{model to be used, either erdos_renyi or actors_choice, see sma
 documentation}
@@ -32,8 +31,8 @@ documentation}
 \item{g}{statnet network object}
 }
 \value{
-data frame indexed by motif identifers and with rows expectation and
-  variances
+data frame with one column giving names of motif identifers and two column giving
+ expectation and variances per motif
 }
 \description{
 Compute statistical properties of the distribution of motifs in a random

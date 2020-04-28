@@ -8,7 +8,7 @@ compare_to_baseline(
   net,
   motifs,
   n = 10,
-  type_attr = c("sesType"),
+  lvl_attr = c("sesType"),
   assume_sparse = TRUE,
   model = c("erdos_renyi")
 )
@@ -18,9 +18,8 @@ compare_to_baseline(
 
 \item{n}{number of random graphs}
 
-\item{type_attr}{character vector specifying the attribute name where level
-information is stored in statnet object. The attribute should be a binary
-vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
+\item{lvl_attr}{character vector specifying the attribute name where level
+information is stored in statnet object.}
 
 \item{assume_sparse}{whether the random graphs shall be assumed to be sparse.
 used to find ideal counting function}
@@ -30,7 +29,7 @@ used to find ideal counting function}
 \item{g}{statnet network object}
 }
 \value{
-data frame with one column for each motif identifier string and one
+data frame with one row for each motif identifier string and one
   row for every computed random graph
 }
 \description{

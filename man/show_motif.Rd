@@ -5,18 +5,17 @@
 \title{Plots an example for a motif with given motif identifier string taken from
 the given graph.}
 \usage{
-show_motif(motif, net = dummy_net, type_attr = c("sesType"), ...)
+show_motif(motif, net = dummy_net, lvl_attr = c("sesType"), ...)
 }
 \arguments{
 \item{motif}{motif identifier string for the motif}
 
 \item{net}{statnet network object}
 
-\item{type_attr}{character vector specifying the attribute name where level
-information is stored in statnet object. The attribute should be a binary
-vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
+\item{lvl_attr}{character vector specifying the attribute name where level
+information is stored in statnet object.}
 
-\item{...}{additional arguments to be passed to plotting function}
+\item{...}{additional arguments to be passed to plotting function (eg. label = TRUE)}
 }
 \value{
 plot

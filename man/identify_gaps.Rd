@@ -4,14 +4,13 @@
 \alias{identify_gaps}
 \title{List gaps}
 \usage{
-identify_gaps(net, motif, type_attr = c("sesType"), level = -1)
+identify_gaps(net, motif, lvl_attr = c("sesType"), level = -1)
 }
 \arguments{
 \item{motif}{motif identifier}
 
-\item{type_attr}{character vector specifying the attribute name where level
-information is stored in statnet object. The attribute should be a binary
-vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
+\item{lvl_attr}{character vector specifying the attribute name where level
+information is stored in statnet object.}
 
 \item{level}{level of the dyads which shall be considered, or -1 if the level
 shall be determined automatically.}
@@ -28,5 +27,5 @@ with the number of motifs of a given class the dyad would generate by being
 added to the netwok.
 }
 \examples{
-identify_gaps(ml_net, list('1,2[II.C]'))
+identify_gaps(ml_net, motif = '1,2[II.C]')
 }

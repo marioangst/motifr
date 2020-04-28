@@ -49,7 +49,7 @@
 <meta property="og:title" content="Compare empirical network to random baseline — compare_to_baseline" />
 <meta property="og:description" content="This function compares the motif counts in a given network with the motif
 counts in a random baseline of motifs." />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg" />
 
 
 
@@ -141,7 +141,7 @@ counts in a random baseline of motifs.</p>
   <span class='no'>net</span>,
   <span class='no'>motifs</span>,
   <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>type_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>),
+  <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>),
   <span class='kw'>assume_sparse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>model</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"erdos_renyi"</span>)
 )</pre>
@@ -158,10 +158,9 @@ counts in a random baseline of motifs.</p>
       <td><p>number of random graphs</p></td>
     </tr>
     <tr>
-      <th>type_attr</th>
+      <th>lvl_attr</th>
       <td><p>character vector specifying the attribute name where level
-information is stored in statnet object. The attribute should be a binary
-vector. 1 indicates a "social" node and 0 indicates a "non-social" node.</p></td>
+information is stored in statnet object.</p></td>
     </tr>
     <tr>
       <th>assume_sparse</th>
@@ -180,7 +179,7 @@ used to find ideal counting function</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data frame with one column for each motif identifier string and one
+    <p>data frame with one row for each motif identifier string and one
   row for every computed random graph</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

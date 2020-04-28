@@ -4,14 +4,13 @@
 \alias{toPyGraph}
 \title{Translate multi-level statnet network object to networkx (python) object}
 \usage{
-toPyGraph(g, type_attr, relabel = TRUE)
+toPyGraph(g, lvl_attr, relabel = TRUE)
 }
 \arguments{
 \item{g}{statnet network object}
 
-\item{type_attr}{character vector specifying the attribute name where level information
-is stored in statnet object. The attribute should be a binary vector. 1 indicates a "social" node
-and 0 indicates a "non-social" node.}
+\item{lvl_attr}{character vector specifying the attribute name where level information
+is stored in statnet object.}
 
 \item{relabel}{should nodes be relabeled with statnet vertex.names? (defaults to TRUE)}
 }
@@ -20,4 +19,7 @@ python graph object
 }
 \description{
 Translate multi-level statnet network object to networkx (python) object
+}
+\examples{
+toPyGraph(dummy_net, lvl_attr = "sesType")
 }

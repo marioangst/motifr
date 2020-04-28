@@ -4,12 +4,12 @@
 \alias{edge_contribution}
 \title{List edge contribution}
 \usage{
-edge_contribution(net, motif, type_attr = c("sesType"), level = -1)
+edge_contribution(net, motif, lvl_attr = c("sesType"), level = -1)
 }
 \arguments{
 \item{motif}{motif identifier}
 
-\item{type_attr}{character vector specifying the attribute name where level
+\item{lvl_attr}{character vector specifying the attribute name where level
 information is stored in statnet object.}
 
 \item{level}{level of the dyads which shall be considered, or -1 if the level
@@ -24,8 +24,8 @@ data frame with three columns, listing edges and their contribution
 \description{
 List gaps ordered by contribution to a motif. This is a list of ties together
 with the number of motifs of a given class the dyad would generate by being
-flipped. This is a gneralisation of ``identify_gaps`` and ``critical_dyads``.
+flipped. This is a generalisation of ``identify_gaps`` and ``critical_dyads``.
 }
 \examples{
-edge_contribtion(ml_net, list('1,2[I.C]'))
+edge_contribution(ml_net, '1,2[I.C]')
 }

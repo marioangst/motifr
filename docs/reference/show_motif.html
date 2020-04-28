@@ -50,7 +50,7 @@ the given graph. — show_motif • motifr</title>
 <meta property="og:title" content="Plots an example for a motif with given motif identifier string taken from
 the given graph. — show_motif" />
 <meta property="og:description" content="If no network is provided, a motif in a dummy network will be shown." />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg" />
 
 
 
@@ -138,7 +138,7 @@ the given graph.</h1>
     <p>If no network is provided, a motif in a dummy network will be shown.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>show_motif</span>(<span class='no'>motif</span>, <span class='kw'>net</span> <span class='kw'>=</span> <span class='no'>dummy_net</span>, <span class='kw'>type_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>), <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>show_motif</span>(<span class='no'>motif</span>, <span class='kw'>net</span> <span class='kw'>=</span> <span class='no'>dummy_net</span>, <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>), <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -152,14 +152,13 @@ the given graph.</h1>
       <td><p>statnet network object</p></td>
     </tr>
     <tr>
-      <th>type_attr</th>
+      <th>lvl_attr</th>
       <td><p>character vector specifying the attribute name where level
-information is stored in statnet object. The attribute should be a binary
-vector. 1 indicates a "social" node and 0 indicates a "non-social" node.</p></td>
+information is stored in statnet object.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional arguments to be passed to plotting function</p></td>
+      <td><p>additional arguments to be passed to plotting function (eg. label = TRUE)</p></td>
     </tr>
     </table>
 

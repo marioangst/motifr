@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Returns an example for a motif specified by a motif identifier string — exemplify_motif • motifr</title>
+<title>Returns an example for a motif found in a given network — exemplify_motif • motifr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,9 @@
 
 
 
-<meta property="og:title" content="Returns an example for a motif specified by a motif identifier string — exemplify_motif" />
-<meta property="og:description" content="Returns an example for a motif specified by a motif identifier string" />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:title" content="Returns an example for a motif found in a given network — exemplify_motif" />
+<meta property="og:description" content="Returns an example for a motif found in a given network" />
+<meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg" />
 
 
 
@@ -126,16 +126,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Returns an example for a motif specified by a motif identifier string</h1>
+    <h1>Returns an example for a motif found in a given network</h1>
     
     <div class="hidden name"><code>exemplify_motif.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns an example for a motif specified by a motif identifier string</p>
+    <p>Returns an example for a motif found in a given network</p>
     </div>
 
-    <pre class="usage"><span class='fu'>exemplify_motif</span>(<span class='no'>net</span>, <span class='no'>motif</span>, <span class='kw'>type_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>))</pre>
+    <pre class="usage"><span class='fu'>exemplify_motif</span>(<span class='no'>net</span>, <span class='no'>motif</span>, <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,10 +145,9 @@
       <td><p>motif identifier string for the motif</p></td>
     </tr>
     <tr>
-      <th>type_attr</th>
+      <th>lvl_attr</th>
       <td><p>character vector specifying the attribute name where level
-information is stored in statnet object. The attribute should be a binary
-vector. 1 indicates a "social" node and 0 indicates a "non-social" node.</p></td>
+information is stored in statnet object.</p></td>
     </tr>
     <tr>
       <th>g</th>

@@ -15,7 +15,7 @@
 #'   to motifs described by the motif identifier in descending order
 #' @export
 #'
-#' @examples identify_gaps(ml_net, list('1,2[II.C]'))
+#' @examples identify_gaps(ml_net, motif = '1,2[II.C]')
 identify_gaps <- function(net,
                           motif,
                           lvl_attr = c("sesType"),
@@ -42,7 +42,7 @@ identify_gaps <- function(net,
 #'   to motifs described by the motif identifier in descending order
 #' @export
 #'
-#' @examples identify_gaps(ml_net, list('1,2[I.C]'))
+#' @examples identify_gaps(ml_net, motif = "1,2[II.C]")
 critical_dyads <- function(net,
                            motif,
                            lvl_attr = c("sesType"),
@@ -57,7 +57,7 @@ critical_dyads <- function(net,
 #'
 #' List gaps ordered by contribution to a motif. This is a list of ties together
 #' with the number of motifs of a given class the dyad would generate by being
-#' flipped. This is a gneralisation of ``identify_gaps`` and ``critical_dyads``.
+#' flipped. This is a generalisation of ``identify_gaps`` and ``critical_dyads``.
 #'
 #' @param g statnet network object
 #' @param motif motif identifier
@@ -70,7 +70,7 @@ critical_dyads <- function(net,
 #'   to motifs described by the motif identifier in descending order
 #' @export
 #'
-#' @examples edge_contribtion(ml_net, list('1,2[I.C]'))
+#' @examples edge_contribution(ml_net, '1,2[I.C]')
 edge_contribution <- function(net,
                               motif,
                               lvl_attr = c("sesType"),
@@ -88,7 +88,7 @@ edge_contribution <- function(net,
 #' @param lvl_attr Node attribute specifiying level information
 #' @param level Focal level for gap analysis
 #' @param cutoff Cutoff point in contributions of an edge to the number of motifs above which to analyse gaps
-#' @param ...
+#' @param ... list of additional parameters to be passed to plotting function (see ?motifr::plot_mnet), eg. label = TRUE
 #' @param subset_graph Whether to subset the graph to only show nodes involved in gaps.
 #' One of "none" (no subset, default), "partial" (only focal level is subset) or "focal" (only focal
 #' level shown)

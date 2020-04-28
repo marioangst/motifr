@@ -4,14 +4,13 @@
 \alias{critical_dyads}
 \title{List critical dyads}
 \usage{
-critical_dyads(net, motif, type_attr = c("sesType"), level = -1)
+critical_dyads(net, motif, lvl_attr = c("sesType"), level = -1)
 }
 \arguments{
 \item{motif}{motif identifier}
 
-\item{type_attr}{character vector specifying the attribute name where level
-information is stored in statnet object. The attribute should be a binary
-vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
+\item{lvl_attr}{character vector specifying the attribute name where level
+information is stored in statnet object.}
 
 \item{level}{level of the dyads which shall be considered, or -1 if the level
 shall be determined automatically.}
@@ -27,5 +26,5 @@ Critical dyads are edges on a specified level which break motifs by being
 removed from the network.
 }
 \examples{
-identify_gaps(ml_net, list('1,2[I.C]'))
+identify_gaps(ml_net, motif = "1,2[II.C]")
 }

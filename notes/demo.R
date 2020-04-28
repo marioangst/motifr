@@ -16,8 +16,10 @@ simulate_baseline(ml_net, motifs = motifs, n = 20)
 
 plot_mnet(net = dummy_net,lvl_attr = "sesType")
 
-compare_to_baseline(ml_net, motifs = motifs, n = 10) #works
-compare_to_baseline(ml_net, motifs = motifs, n = 100) #bug
+compare_to_baseline(ml_net, motifs = motifs, n = 10)
+compare_to_baseline(ml_net, motifs = motifs, n = 100)
+
+compare_to_baseline(dummy_net, motifs = list('1,2[I.C]', '1,2[II.C]'))
 
 identify_gaps(ml_net, motif = motif)
 critical_dyads(ml_net, motif = motif)

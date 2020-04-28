@@ -2,16 +2,15 @@
 % Please edit documentation in R/count_motifs.R
 \name{exemplify_motif}
 \alias{exemplify_motif}
-\title{Returns an example for a motif specified by a motif identifier string}
+\title{Returns an example for a motif found in a given network}
 \usage{
-exemplify_motif(net, motif, type_attr = c("sesType"))
+exemplify_motif(net, motif, lvl_attr = c("sesType"))
 }
 \arguments{
 \item{motif}{motif identifier string for the motif}
 
-\item{type_attr}{character vector specifying the attribute name where level
-information is stored in statnet object. The attribute should be a binary
-vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
+\item{lvl_attr}{character vector specifying the attribute name where level
+information is stored in statnet object.}
 
 \item{g}{statnet network object}
 }
@@ -19,7 +18,7 @@ vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
 vector of nodes in the motif
 }
 \description{
-Returns an example for a motif specified by a motif identifier string
+Returns an example for a motif found in a given network
 }
 \examples{
 exemplify_motif(ml_net, motif = '1,2[I.C]')

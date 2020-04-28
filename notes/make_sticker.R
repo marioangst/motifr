@@ -33,8 +33,8 @@ sticker(p4,
         p_family = "Roboto", p_color = "black", h_color = "black")
 
 sticker(p4,
-        package="motifr", p_size=25, s_x=1, s_y=.75, s_width=1.3, s_height=1,
+        package="motifr", p_size=9, s_x=1, s_y=.75, s_width=1.3, s_height=1,
         filename="inst/figures/motifr.svg", h_fill = "#ede9e8", dpi = 300,
         p_family = "Roboto", p_color = "black", h_color = "black")
 
-usethis::use_logo(img = "inst/figures/motifr.png")
+usethis::use_logo(img = "inst/figures/motifr.svg")

@@ -4,12 +4,11 @@
 \alias{motif_summary}
 \title{Summary for motif counts and distribution (Erdos-Renyi)}
 \usage{
-motif_summary(net, type_attr = c("sesType"))
+motif_summary(net, lvl_attr = c("sesType"))
 }
 \arguments{
-\item{type_attr}{character vector specifying the attribute name where level
-information is stored in statnet object. The attribute should be a binary
-vector. 1 indicates a "social" node and 0 indicates a "non-social" node.}
+\item{lvl_attr}{character vector specifying the attribute name where level
+information is stored in statnet object.}
 
 \item{g}{statnet network object}
 }

@@ -28,14 +28,9 @@ Suggests:
     knitr,
     rmarkdown
 Imports: 
-    DiagrammeR,
     igraph,
-    data.table,
-    pbapply,
     utils,
-    DOT,
     glue,
-    multinets,
     graphics,
     reticulate,
     statnet,

@@ -25,7 +25,7 @@
     It also identifies contributions of potential edges to motifs to find critical or missing edges.
     The package is in many parts a R wrapper for the excellent sesmotifanalyser Python package written by
     Tim Seppelt.">
-<meta property="og:image" content="/logo.png">
+<meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -87,19 +87,11 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="motifr-" class="section level1">
+<div id="motifr" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#motifr-" class="anchor"></a>motifr <img src="reference/figures/logo.png" align="right" height="139">
-</h1></div>
+<a href="#motifr" class="anchor"></a>motifr</h1></div>
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<!-- Thanks for this: https://r-pkgs.org/ -->
-<!-- Must make a hex sticker at some point: https://cran.r-project.org/web/packages/hexSticker/readme/README.html -->
-<!-- For packages that depend on python stuff, useful updates here: -->
-<!-- https://blog.rstudio.com/2019/12/20/reticulate-1-14/ -->
-<!-- "To that end, we’ve made the following changes. If the user has not explicitly instructed reticulate to use a pre-existing Python environment, then: -->
-<!-- 1) reticulate will prompt the user to download and install Miniconda; -->
-<!-- 2) reticulate will prepare a default r-reticulate Conda environment, using (currently) Python 3.6 and NumPy; -->
-<!-- 3) When Python is initialized, reticulate will query any loaded R packages for their Python dependencies, and install those dependencies into the aforementioned r-reticulate Conda environment." -->
 <!-- badges: start -->
 <!-- badges: end -->
 <p>This package provides tools to analyze multi-level networks in terms of <em>motifs</em>.</p>
@@ -114,8 +106,12 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>The package is currently at an early stage of development. Explore at your own risk and please report any issues using the <a href="https://github.com/marioangst/motifr/issues">issue tracker on github</a>. You can install the package from github, using devtools:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"marioangst/motifr"</span>)</pre></div>
+<p>The package is currently at an early stage of development. Explore at your own risk and please report any issues using the <a href="https://github.com/marioangst/motifr/issues">issue tracker on github</a>.</p>
+<p>Due to the package’s tight integration with the Python framework sesmotifanalyzer, we recommend explicitly installing the associated sma module through reticulate.</p>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">reticulate</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/use_python.html">use_condaenv</a></span>()
+<span class="kw pkg">reticulate</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/py_install.html">py_install</a></span>(<span class="st">"sma"</span>, <span class="kw">pip</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
+<p>You can then install motifr from github, using devtools:</p>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"marioangst/motifr"</span>)</pre></div>
 </div>
 <div id="input" class="section level2">
 <h2 class="hasAnchor">
@@ -126,36 +122,34 @@
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">motifr</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">motifr</span>)</pre></div>
 <div id="visualize-a-multi-level-network" class="section level3">
 <h3 class="hasAnchor">
 <a href="#visualize-a-multi-level-network" class="anchor"></a>Visualize a multi-level network</h3>
 <p>The following network is an example network from an empirical analysis of wetlands management in Switzerland. It consists of two levels - one level specifies a network of relations between actors. A second level specifies a network of relations between different activities occurring in the wetland, based on causal interdependence among activites. Links between the levels specify which actors carry out which activities.</p>
 <p>It is possible to specify layouts for every network level separately. Below, one level is plotted based on a circle layout, the second one based on Kamada-Kawai.</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="reference/plot_mnet.html">plot_mnet</a></span>(<span class="kw">net</span> <span class="kw">=</span> <span class="no">ml_net</span>,
+<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="reference/plot_mnet.html">plot_mnet</a></span>(<span class="kw">net</span> <span class="kw">=</span> <span class="no">ml_net</span>,
           <span class="kw">lvl_attr</span> <span class="kw">=</span> <span class="st">"sesType"</span>,
           <span class="kw">layouts</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"kk"</span>,<span class="st">"circle"</span>))</pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-4-1.svg" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.svg" width="100%"></p>
 </div>
 <div id="count-motifs" class="section level3">
 <h3 class="hasAnchor">
 <a href="#count-motifs" class="anchor"></a>Count motifs</h3>
 <p>Motifs can be counted using the versatile function <code><a href="reference/count_motifs.html">count_motifs()</a></code>. It takes as parameters a statnet network object (use <code>ml_net</code> or <code>dummy_net</code> provided by this package as example) and a list of motif identifiers (see below) specifying the motifs. See the <a href="https://marioangst.github.io/motifr/articles/motif_zoo.html">vignette on the motif zoo</a> for details on nomenclature for motifs (motif identifier strings). Let’s quickly check out two classic examples of three-node, two-level motifs (open and closed triangles) in the wetlands management network introduced above:</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="reference/show_motif.html">show_motif</a></span>(<span class="kw">motif</span> <span class="kw">=</span> <span class="st">'1,2[I.C]'</span>, <span class="kw">net</span> <span class="kw">=</span> <span class="no">ml_net</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>) <span class="co"># open ('1,2[I.C]') triangle</span></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-1.svg" width="300px"></p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="fu"><a href="reference/show_motif.html">show_motif</a></span>(<span class="kw">motif</span> <span class="kw">=</span> <span class="st">'1,2[II.C]'</span>, <span class="kw">net</span> <span class="kw">=</span> <span class="no">ml_net</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>) <span class="co"># closed ('1,2[II.C]') triangle</span></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-2.svg" width="300px"></p>
+<div class="sourceCode" id="cb5"><pre class="r"><span class="fu"><a href="reference/show_motif.html">show_motif</a></span>(<span class="kw">motif</span> <span class="kw">=</span> <span class="st">'1,2[I.C]'</span>, <span class="kw">net</span> <span class="kw">=</span> <span class="no">ml_net</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>) <span class="co"># open ('1,2[I.C]') triangle</span></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-6-1.svg" width="300px"></p>
+<div class="sourceCode" id="cb6"><pre class="r"><span class="fu"><a href="reference/show_motif.html">show_motif</a></span>(<span class="kw">motif</span> <span class="kw">=</span> <span class="st">'1,2[II.C]'</span>, <span class="kw">net</span> <span class="kw">=</span> <span class="no">ml_net</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>) <span class="co"># closed ('1,2[II.C]') triangle</span></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-6-2.svg" width="300px"></p>
 <p>Let’s count the number of of these motifs in the entire network.</p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="no">motifs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'1,2[I.C]'</span>, <span class="st">'1,2[II.C]'</span>) <span class="co"># open and closed triangle</span>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="no">motifs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'1,2[I.C]'</span>, <span class="st">'1,2[II.C]'</span>) <span class="co"># open and closed triangle</span>
 
 <span class="fu"><a href="reference/count_motifs.html">count_motifs</a></span>(<span class="no">ml_net</span>, <span class="no">motifs</span>)
-<span class="co">#&gt; # A tibble: 2 x 2</span>
-<span class="co">#&gt;   motif     count</span>
-<span class="co">#&gt;   &lt;chr&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 1,2[I.C]    543</span>
-<span class="co">#&gt; 2 1,2[II.C]   167</span></pre></div>
+<span class="co">#&gt;               motif count</span>
+<span class="co">#&gt; 1,2[I.C]   1,2[I.C]   543</span>
+<span class="co">#&gt; 1,2[II.C] 1,2[II.C]   167</span></pre></div>
 <p>An exploratory approach can be taken by calling <code><a href="reference/motif_summary.html">motif_summary()</a></code>. This function counts the occurrences of a couple of interesting motifs. Furthermore it computes expectations and variances for the occurrence of these motifs in a modified Erdős-Rényi model. See the package <a href="https://marioangst.github.io/motifr/articles/random_baselines.html">vignette on random baselines</a> for details.</p>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="reference/motif_summary.html">motif_summary</a></span>(<span class="no">ml_net</span>)
+<div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="reference/motif_summary.html">motif_summary</a></span>(<span class="no">ml_net</span>)
 <span class="co">#&gt;        motif count  expectation  variance</span>
 <span class="co">#&gt; 1   1,2[I.C]   543 169.14423077 949.77429</span>
 <span class="co">#&gt; 2  1,2[II.C]   167  16.96153846  25.69287</span>
@@ -169,7 +163,7 @@
 <a href="#identify-gaps-and-critical-edges" class="anchor"></a>Identify gaps and critical edges</h3>
 <p>motifr makes it possible to identify gaps and critical edges in multi-level networks. This is motivated by theories of functional fit and misfit in networks, which posit that certain motifs are especially valuable for network outcomes (depending on the context).</p>
 <p>In relation to gaps, we can therefore try to identify potential edges that would create a large number of a given motif if they were to exist (“activated” or “flipped”). The number of such motifs created by an edge is their contribution. For example, we can get all edges that would create closed triangles (‘1,2<br><span class="math display"><em>I</em><em>I</em>.<em>C</em></span><br>’), including the information about how many such triangles they would create for the wetlands case study network:</p>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="no">gaps</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/identify_gaps.html">identify_gaps</a></span>(<span class="no">ml_net</span>, <span class="kw">motif</span> <span class="kw">=</span> <span class="st">'1,2[II.C]'</span>)
+<div class="sourceCode" id="cb9"><pre class="r"><span class="no">gaps</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/identify_gaps.html">identify_gaps</a></span>(<span class="no">ml_net</span>, <span class="kw">motif</span> <span class="kw">=</span> <span class="st">'1,2[II.C]'</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">gaps</span>)
 <span class="co">#&gt;   vertex0 vertex1 contribution</span>
 <span class="co">#&gt; 1 actor10 actor27            5</span>
@@ -179,22 +173,22 @@
 <span class="co">#&gt; 5 actor18 actor27            4</span>
 <span class="co">#&gt; 6 actor18 actor31            4</span></pre></div>
 <p>We can also plot these gaps in our network, including option to only look at gaps above a certain weight (contribution) and different levels of focus to only show nodes involved in such gaps. Here again for the wetlands management network, only showing gaps with a weight above 5.</p>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="fu"><a href="reference/plot_gaps.html">plot_gaps</a></span>(<span class="no">ml_net</span>,
+<div class="sourceCode" id="cb10"><pre class="r"><span class="fu"><a href="reference/plot_gaps.html">plot_gaps</a></span>(<span class="no">ml_net</span>,
           <span class="st">"1,2[II.C]"</span>,
           <span class="kw">level</span> <span class="kw">=</span> -<span class="fl">1</span>,
           <span class="kw">subset_graph</span> <span class="kw">=</span> <span class="st">"partial"</span>,
           <span class="kw">cutoff</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-9-1.svg" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-10-1.svg" width="100%"></p>
 <p><code>identify_gaps</code> has a sibling in <code>critical_dyads</code>. Critical_dyads works in reverse to identifying gaps - it analyzes for every existing edge how many instances of a given motif would disappear if the edge would be removed.</p>
 </div>
 <div id="comparing-motif-occurrence-to-a-random-baseline" class="section level3">
 <h3 class="hasAnchor">
 <a href="#comparing-motif-occurrence-to-a-random-baseline" class="anchor"></a>Comparing motif occurrence to a random baseline</h3>
 <p>Motifr can be used to simulate a random baseline of networks. Motif counts in an empirical network can then be compared to the distribution of motif counts in the random networks. We do so again here for open and closed triangles in the wetland management network. Unsurprisingly, we find that both of these motifs occur much more often in the empirically observed network than in the random baseline. See the package <a href="vignettes/random_baselines.Rmd">vignette on random baselines</a> for details.</p>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="no">motifs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'1,2[I.C]'</span>, <span class="st">'1,2[II.C]'</span>) <span class="co"># open ('1,2[I.C]') and closed ('1,2[II.C]') triangles</span>
+<div class="sourceCode" id="cb11"><pre class="r"><span class="no">motifs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'1,2[I.C]'</span>, <span class="st">'1,2[II.C]'</span>) <span class="co"># open ('1,2[I.C]') and closed ('1,2[II.C]') triangles</span>
 
 <span class="fu"><a href="reference/compare_to_baseline.html">compare_to_baseline</a></span>(<span class="no">ml_net</span>, <span class="kw">motifs</span> <span class="kw">=</span> <span class="no">motifs</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">100</span>)</pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-10-1.svg" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-11-1.svg" width="100%"></p>
 </div>
 </div>
 </div>
@@ -216,7 +210,13 @@
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://marioangst.github.io/motifr"><img src="reference/figures/logo.svg" align="right" height="139"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 

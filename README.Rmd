@@ -1,8 +1,10 @@
 ---
-title: motifr <img src='man/figures/logo.png' align="right" height="139" />
+title: motifr
 output: 
   github_document
 ---
+
+<a href='https://marioangst.github.io/motifr'><img src='man/figures/logo.svg' align="right" height="139" /></a>
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -15,18 +17,6 @@ knitr::opts_chunk$set(
   dev = "svg"
 )
 ```
-
-<!-- Thanks for this: https://r-pkgs.org/ -->
-
-<!-- Must make a hex sticker at some point: https://cran.r-project.org/web/packages/hexSticker/readme/README.html -->
-
-<!-- For packages that depend on python stuff, useful updates here: -->
-<!-- https://blog.rstudio.com/2019/12/20/reticulate-1-14/ -->
-
-<!-- "To that end, we’ve made the following changes. If the user has not explicitly instructed reticulate to use a pre-existing Python environment, then: -->
-<!-- 1) reticulate will prompt the user to download and install Miniconda; -->
-<!-- 2) reticulate will prepare a default r-reticulate Conda environment, using (currently) Python 3.6 and NumPy; -->
-<!-- 3) When Python is initialized, reticulate will query any loaded R packages for their Python dependencies, and install those dependencies into the aforementioned r-reticulate Conda environment." -->
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -48,7 +38,16 @@ Package features include:
 
 ## Installation
 
-The package is currently at an early stage of development. Explore at your own risk and please report any issues using the [issue tracker on github](https://github.com/marioangst/motifr/issues). You can install the package from github, using devtools:
+The package is currently at an early stage of development. Explore at your own risk and please report any issues using the [issue tracker on github](https://github.com/marioangst/motifr/issues).
+
+Due to the package's tight integration with the Python framework sesmotifanalyzer, we recommend explicitly installing the associated sma module through reticulate.
+
+```{r eval=FALSE}
+reticulate::use_condaenv()
+reticulate::py_install("sma", pip = TRUE)
+```
+
+You can then install motifr from github, using devtools:
 
 ```{r eval=FALSE}
 devtools::install_github("marioangst/motifr")

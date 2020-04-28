@@ -1,23 +1,9 @@
-motifr <img src='man/figures/logo.png' align="right" height="139" />
+motifr
 ================
 
+<a href='https://marioangst.github.io/motifr'><img src='man/figures/logo.svg' align="right" height="139" /></a>
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-<!-- Thanks for this: https://r-pkgs.org/ -->
-
-<!-- Must make a hex sticker at some point: https://cran.r-project.org/web/packages/hexSticker/readme/README.html -->
-
-<!-- For packages that depend on python stuff, useful updates here: -->
-
-<!-- https://blog.rstudio.com/2019/12/20/reticulate-1-14/ -->
-
-<!-- "To that end, we’ve made the following changes. If the user has not explicitly instructed reticulate to use a pre-existing Python environment, then: -->
-
-<!-- 1) reticulate will prompt the user to download and install Miniconda; -->
-
-<!-- 2) reticulate will prepare a default r-reticulate Conda environment, using (currently) Python 3.6 and NumPy; -->
-
-<!-- 3) When Python is initialized, reticulate will query any loaded R packages for their Python dependencies, and install those dependencies into the aforementioned r-reticulate Conda environment." -->
 
 <!-- badges: start -->
 
@@ -59,8 +45,18 @@ Package features include:
 
 The package is currently at an early stage of development. Explore at
 your own risk and please report any issues using the [issue tracker on
-github](https://github.com/marioangst/motifr/issues). You can install
-the package from github, using devtools:
+github](https://github.com/marioangst/motifr/issues).
+
+Due to the package’s tight integration with the Python framework
+sesmotifanalyzer, we recommend explicitly installing the associated sma
+module through reticulate.
+
+``` r
+reticulate::use_condaenv()
+reticulate::py_install("sma", pip = TRUE)
+```
+
+You can then install motifr from github, using devtools:
 
 ``` r
 devtools::install_github("marioangst/motifr")
@@ -102,7 +98,7 @@ plot_mnet(net = ml_net,
           layouts = list("kk","circle"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-5-1.svg" width="100%" />
 
 ### Count motifs
 
@@ -120,13 +116,13 @@ introduced above:
 show_motif(motif = '1,2[I.C]', net = ml_net, label = TRUE) # open ('1,2[I.C]') triangle
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.svg" width="300px" />
+<img src="man/figures/README-unnamed-chunk-6-1.svg" width="300px" />
 
 ``` r
 show_motif(motif = '1,2[II.C]', net = ml_net, label = TRUE) # closed ('1,2[II.C]') triangle
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-2.svg" width="300px" />
+<img src="man/figures/README-unnamed-chunk-6-2.svg" width="300px" />
 
 Let’s count the number of of these motifs in the entire network.
 
@@ -134,11 +130,9 @@ Let’s count the number of of these motifs in the entire network.
 motifs = list('1,2[I.C]', '1,2[II.C]') # open and closed triangle
 
 count_motifs(ml_net, motifs)
-#> # A tibble: 2 x 2
-#>   motif     count
-#>   <chr>     <dbl>
-#> 1 1,2[I.C]    543
-#> 2 1,2[II.C]   167
+#>               motif count
+#> 1,2[I.C]   1,2[I.C]   543
+#> 1,2[II.C] 1,2[II.C]   167
 ```
 
 An exploratory approach can be taken by calling `motif_summary()`. This
@@ -200,7 +194,7 @@ plot_gaps(ml_net,
           cutoff = 5, label = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-10-1.svg" width="100%" />
 
 `identify_gaps` has a sibling in `critical_dyads`. Critical\_dyads works
 in reverse to identifying gaps - it analyzes for every existing edge how
@@ -223,4 +217,4 @@ motifs = list('1,2[I.C]', '1,2[II.C]') # open ('1,2[I.C]') and closed ('1,2[II.C
 compare_to_baseline(ml_net, motifs = motifs, n = 100)
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-11-1.svg" width="100%" />

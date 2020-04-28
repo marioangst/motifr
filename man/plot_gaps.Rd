@@ -7,7 +7,7 @@
 plot_gaps(
   net,
   motif,
-  type_attr = c("sesType"),
+  lvl_attr = c("sesType"),
   level = -1,
   cutoff = 2,
   subset_graph = "none",
@@ -19,7 +19,7 @@ plot_gaps(
 
 \item{motif}{Motif to explore gaps in for}
 
-\item{type_attr}{Node attribute specifiying level information}
+\item{lvl_attr}{Node attribute specifiying level information}
 
 \item{level}{Focal level for gap analysis}
 
@@ -28,6 +28,8 @@ plot_gaps(
 \item{subset_graph}{Whether to subset the graph to only show nodes involved in gaps.
 One of "none" (no subset, default), "partial" (only focal level is subset) or "focal" (only focal
 level shown)}
+
+\item{...}{list of additional parameters to be passed to plotting function (see ?motifr::plot_mnet), eg. label = TRUE}
 }
 \value{
 A plot of gaps, sized by weight in a multilevel network
