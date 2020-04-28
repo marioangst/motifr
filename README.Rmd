@@ -33,7 +33,7 @@ Package features include:
   
   - Motif counts: The package is in many parts a R wrapper for the excellent [sesmotifanalyser](https://gitlab.com/t.seppelt/sesmotifanalyser) Python framework written by Tim Seppelt to count multi-level network motifs, compare them to a baseline and much more. Only parts of of sesmotifanalyser are yet wrapped, so consult the python framework for additional functionality. 
   
-- Contributions of edges to motifs: motifr further identifies and visualizes functional gaps and critical edges in multi-level networks based on contributions of existing or potential edges to given motifs (this is theoretically based on network theories of functional fit and misfit).
+- Contributions of edges to motifs: motifr further identifies and visualizes functional gaps and critical edges in multi-level networks based on contributions of existing or potential edges to given motifs (this is theoretically motivated by network theories of functional fit and misfit).
 
 
 ## Installation
@@ -43,7 +43,6 @@ The package is currently at an early stage of development. Explore at your own r
 Due to the package's tight integration with the Python framework sesmotifanalyzer, we recommend explicitly installing the associated sma module through reticulate.
 
 ```{r eval=FALSE}
-reticulate::use_condaenv()
 reticulate::py_install("sma", pip = TRUE)
 ```
 

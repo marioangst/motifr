@@ -38,7 +38,7 @@ Package features include:
   - Contributions of edges to motifs: motifr further identifies and
     visualizes functional gaps and critical edges in multi-level
     networks based on contributions of existing or potential edges to
-    given motifs (this is theoretically based on network theories of
+    given motifs (this is theoretically motivated by network theories of
     functional fit and misfit).
 
 ## Installation
@@ -52,7 +52,6 @@ sesmotifanalyzer, we recommend explicitly installing the associated sma
 module through reticulate.
 
 ``` r
-reticulate::use_condaenv()
 reticulate::py_install("sma", pip = TRUE)
 ```
 
