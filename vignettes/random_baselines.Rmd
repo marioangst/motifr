@@ -63,3 +63,23 @@ There is a crucial difference between the Erdős-Rényi model and Fixed Densitie
 compare_to_baseline(ml_net, motifs = list('1,1[1]'), model = 'erdos_renyi', n = 100)
 compare_to_baseline(ml_net, motifs = list('1,1[1]'), model = 'fixed_densities', n = 100)
 ```
+
+## Level selection in Actor's Choice Model
+
+In the Actor's Choice Model all levels in the network except for one are assumed to be fixed. The edges in the remaining variable (or actor's) level are drawn randomly according to the Erdős-Rényi Model. The variable level can be selected using the ``level`` parameter, e.g. in ``motif_distribution()``, or determined automatically. The default level is the first level providing exactly two nodes in the motif.
+
+Let's consider an example. Assume that the variable level is level zero. The edges in the other levels are fixed. The expected number of closed triangles with two nodes on the variable level can be computed as follows. Here ``level`` is automatically determined to be 0.
+```{r}
+motifs_distribution(ml_net, motifs = list('2,1[II.C]'), model = 'actors_choice')
+```
+More interesting is the case of motifs with signature ``2,2``, i.e. with two nodes on two levels. Per default, the variable level is the first level providing two nodes, so level 0 in the first line. Manually, level 1 can be selected as variable level, see second line.
+```{r}
+motifs_distribution(ml_net, motifs = list('2,2[I.A]','2,2[I.B]','2,2[I.C]','2,2[I.D]'), model = 'actors_choice')
+motifs_distribution(ml_net, motifs = list('2,2[I.A]','2,2[I.B]','2,2[I.C]','2,2[I.D]'), model = 'actors_choice', level = 1)
+```
+Note that in the first line, when level 0 is the variable level, motifs I.A and I.B have the same variance. This is because they only differ in the dyad on the variable level. Similarly, in the second line motifs I.A and I.C have the same variance as they only differ in the dyad on the variable level.
+```{r  out.width="300px"}
+show_motif('2,2[I.A]', net = ml_net, label = TRUE)
+show_motif('2,2[I.B]', net = ml_net, label = TRUE)
+show_motif('2,2[I.C]', net = ml_net, label = TRUE)
+```

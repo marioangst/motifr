@@ -31,12 +31,19 @@ documentation}
 \item{omit_total_result}{whether total results shall be omitted}
 }
 \value{
-data frame with one column giving names of motif identifers and two column giving
- expectation and variances per motif
+data frame with one column giving names of motif identifers and two
+  column giving expectation and variances per motif
 }
 \description{
-Compute statistical properties of the distribution of motifs in a random
-baseline
+This function supports the Erdős-Rényi Model (``erdos_renyi``) and the the
+Actor’s Choice Model (``actors_choice``). The model can be specified using
+the ``model`` parameter. The Erdős-Rényi Model can be used without providing
+further parameters. In case of the Actor’s Choice Model a level of the given
+network can be specified which is only level assumed to be variable. All
+other levels are assumed to be fixed. Per default, ``level = -1``, the first
+level carrying two nodes in the signature of the motif is selected as
+variable level. Set the ``level`` paramter to the value of the ``lvl_attr``
+of the nodes in the desired level to specify the level manually.
 }
 \examples{
 motifs_distribution(ml_net, motif = list('1,2[I.C]'))

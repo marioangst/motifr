@@ -91,6 +91,16 @@ count_motifs <- function(net,
 #' Compute statistical properties of the distribution of motifs in a random
 #' baseline
 #'
+#' This function supports the Erdős-Rényi Model (``erdos_renyi``) and the the
+#' Actor’s Choice Model (``actors_choice``). The model can be specified using
+#' the ``model`` parameter. The Erdős-Rényi Model can be used without providing
+#' further parameters. In case of the Actor’s Choice Model a level of the given
+#' network can be specified which is only level assumed to be variable. All
+#' other levels are assumed to be fixed. Per default, ``level = -1``, the first
+#' level carrying two nodes in the signature of the motif is selected as
+#' variable level. Set the ``level`` paramter to the value of the ``lvl_attr``
+#' of the nodes in the desired level to specify the level manually.
+#'
 #' @param net statnet network object
 #' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object.
@@ -101,8 +111,8 @@ count_motifs <- function(net,
 #' @param level additional parameter for actors_choice
 #' @param omit_total_result whether total results shall be omitted
 #'
-#' @return data frame with one column giving names of motif identifers and two column giving
-#'  expectation and variances per motif
+#' @return data frame with one column giving names of motif identifers and two
+#'   column giving expectation and variances per motif
 #' @export
 #'
 #' @examples motifs_distribution(ml_net, motif = list('1,2[I.C]'))

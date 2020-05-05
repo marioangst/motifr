@@ -4,6 +4,12 @@
 #' with the number of motifs of a given class the dyad would generate by being
 #' added to the netwok.
 #'
+#' The level parameter determines on which level of the network gaps are
+#' analysed. Per default, when ``level = -1``, the first level in the motif
+#' which provides exactly two nodes is selected. Use this parameter to specify a
+#' level manually. The procedure for determining the level is the same as for
+#' the Actor's Choice Model, cf. vignette.
+#'
 #' @param net statnet network object
 #' @param motif motif identifier
 #' @param lvl_attr character vector specifying the attribute name where level
@@ -15,7 +21,7 @@
 #'   to motifs described by the motif identifier in descending order
 #' @export
 #'
-#' @examples identify_gaps(ml_net, motif = '1,2[II.C]')
+#' @examples head(identify_gaps(ml_net, motif = '1,2[II.C]'))
 identify_gaps <- function(net,
                           motif,
                           lvl_attr = c("sesType"),
@@ -30,6 +36,12 @@ identify_gaps <- function(net,
 #'
 #' Critical dyads are edges on a specified level which break motifs by being
 #' removed from the network.
+#'
+#' The level parameter determines on which level of the network critical dyads are
+#' analysed. Per default, when ``level = -1``, the first level in the motif
+#' which provides exactly two nodes is selected. Use this parameter to specify a
+#' level manually. The procedure for determining the level is the same as for
+#' the Actor's Choice Model, cf. vignette.
 #'
 #' @param net statnet network object
 #' @param motif motif identifier
@@ -58,6 +70,12 @@ critical_dyads <- function(net,
 #' List gaps ordered by contribution to a motif. This is a list of ties together
 #' with the number of motifs of a given class the dyad would generate by being
 #' flipped. This is a generalisation of ``identify_gaps`` and ``critical_dyads``.
+#'
+#' The level parameter determines on which level of the network edge contributions are
+#' analysed. Per default, when ``level = -1``, the first level in the motif
+#' which provides exactly two nodes is selected. Use this parameter to specify a
+#' level manually. The procedure for determining the level is the same as for
+#' the Actor's Choice Model, cf. vignette.
 #'
 #' @param net statnet network object
 #' @param motif motif identifier

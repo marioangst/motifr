@@ -26,6 +26,13 @@ List gaps ordered by contribution to a motif. This is a list of ties together
 with the number of motifs of a given class the dyad would generate by being
 added to the netwok.
 }
+\details{
+The level parameter determines on which level of the network gaps are
+analysed. Per default, when ``level = -1``, the first level in the motif
+which provides exactly two nodes is selected. Use this parameter to specify a
+level manually. The procedure for determining the level is the same as for
+the Actor's Choice Model, cf. vignette.
+}
 \examples{
-identify_gaps(ml_net, motif = '1,2[II.C]')
+head(identify_gaps(ml_net, motif = '1,2[II.C]'))
 }
