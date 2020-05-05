@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 library(motifr)
 ```
 
-This vignette describes the models used for random baselines in motifr. Baseline models have to be specified when requesting random networks (e.g., ``compare_to_baseline()``), and when computing properties of motif distributions analytically (e.g, ``motif_distribution()``).
+This vignette describes the models used for random baselines in motifr. Baseline models have to be specified when requesting random networks (e.g., ``compare_to_baseline()``), and when computing properties of motif distributions analytically (e.g, ``motifs_distribution()``).
 
 ## Baseline models
 
@@ -66,7 +66,7 @@ compare_to_baseline(ml_net, motifs = list('1,1[1]'), model = 'fixed_densities', 
 
 ## Level selection in Actor's Choice Model
 
-In the Actor's Choice Model all levels in the network except for one are assumed to be fixed. The edges in the remaining variable (or actor's) level are drawn randomly according to the Erdős-Rényi Model. The variable level can be selected using the ``level`` parameter, e.g. in ``motif_distribution()``, or determined automatically. The default level is the first level providing exactly two nodes in the motif.
+In the Actor's Choice Model all levels in the network except for one are assumed to be fixed. The edges in the remaining variable (or actor's) level are drawn randomly according to the Erdős-Rényi Model. The variable level can be selected using the ``level`` parameter, e.g. in ``motifs_distribution()``, or determined automatically. The default level is the first level providing exactly two nodes in the motif.
 
 Let's consider an example. Assume that the variable level is level zero. The edges in the other levels are fixed. The expected number of closed triangles with two nodes on the variable level can be computed as follows. Here ``level`` is automatically determined to be 0.
 ```{r}

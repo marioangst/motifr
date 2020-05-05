@@ -166,6 +166,13 @@ shall be determined automatically.</p></td>
 
     <p>data frame with three columns, listing edges and their contribution
   to motifs described by the motif identifier in descending order</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The level parameter determines on which level of the network critical dyads are
+analysed. Per default, when ``level = -1``, the first level in the motif
+which provides exactly two nodes is selected. Use this parameter to specify a
+level manually. The procedure for determining the level is the same as for
+the Actor's Choice Model, cf. vignette.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='identify_gaps.html'>identify_gaps</a></span>(<span class='no'>ml_net</span>, <span class='kw'>motif</span> <span class='kw'>=</span> <span class='st'>"1,2[II.C]"</span>)</div><div class='output co'>#&gt;      vertex0 vertex1 contribution
