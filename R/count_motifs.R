@@ -88,8 +88,10 @@ count_motifs <- function(net,
   return(df)
 }
 
-#' Compute statistical properties of the distribution of motifs in a random
-#' baseline
+#' Compute statistical properties (expectation and variance) of the distribution
+#' of motifs in a random baseline
+#'
+#' Warning: Variances can only be computed for 1,2 motifs at the moment.
 #'
 #' This function supports the Erdős-Rényi Model (``erdos_renyi``) and the the
 #' Actor’s Choice Model (``actors_choice``). The model can be specified using
@@ -106,22 +108,32 @@ count_motifs <- function(net,
 #'   information is stored in statnet object.
 #' @param motifs list of motif identifiers describing the motifs whose
 #'   distribution shall be analysed
-#' @param model model to be used, either erdos_renyi or actors_choice, see sma
-#'   documentation
-#' @param level additional parameter for actors_choice
+#' @param model model to be used. Options are 'erdos_renyi',
+#' or 'actors_choice'. See vignette "random_baselines" for more details.
+#' Defaults to 'erdos_renyi'.
+#' @param level Additional parameter to set the level to vary for
+#' the actors_choice model manually.
+#' All other levels are held fixed.
 #' @param omit_total_result whether total results shall be omitted
 #'
 #' @return data frame with one column giving names of motif identifers and two
-#'   column giving expectation and variances per motif
+#'   column giving expectation and variances per motif. At the moment, variances
+#'   are only computed for 1,2 motifs. For other motifs, expectations are computed but
+#'   variances are returned as NaN.
 #' @export
 #'
 #' @examples motifs_distribution(ml_net, motif = list('1,2[I.C]'))
 motifs_distribution <- function(net,
                                 motifs,
-                                lvl_attr = c("sesType"),
-                                model = c("erdos_renyi"),
+                                lvl_attr = "sesType",
+                                model = "erdos_renyi",
                                 level = -1,
                                 omit_total_result = TRUE) {
+  if (!(model %in% c("erdos_renyi","actors_choice"))){
+    stop(paste(model," is not supported. Choose one of 'erdos_renyi' or 'fixed_densities'.
+               To use the fixed densities model, for the moment see simulate_baseline()."))
+  }
+
   # convert net to python object
   py_g <- motifr::toPyGraph(net,lvl_attr = lvl_attr)
 
@@ -178,7 +190,7 @@ motif_summary <- function(net,
 #' @examples exemplify_motif(ml_net, motif = '1,2[I.C]')
 exemplify_motif <- function(net,
                             motif,
-                            lvl_attr = c("sesType")) {
+                            lvl_attr = "sesType") {
   # convert net to python object
   py_g <- motifr::toPyGraph(net,lvl_attr = lvl_attr)
   motif <-sma$exemplifyMotif(py_g, motif)
@@ -222,11 +234,13 @@ show_motif <- function(motif,
 #' @param net statnet network object
 #' @param motifs list of motif identifier strings
 #' @param n number of random graphs
-#' @param lvl_attr character vector specifying the attribute name where level
+#' @param lvl_attr character string specifying the attribute name where level
 #'   information is stored in statnet object.
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
-#'   used to find ideal counting function
-#' @param model baseline model to be used
+#'   used to find ideal counting function. defaults to TRUE.
+#' @param model baseline model to be used. Options are 'erdos_renyi',
+#' 'fixed_densities'. See vignette "random_baselines" for more details.
+#' Defaults to 'erdos_renyi'.
 #'
 #' @return data frame with one column for each motif identifier string and one
 #'   row for every computed random graph
@@ -236,9 +250,14 @@ show_motif <- function(motif,
 simulate_baseline <- function(net,
                               motifs,
                               n = 10,
-                              lvl_attr = c("sesType"),
+                              lvl_attr = "sesType",
                               assume_sparse = TRUE,
                               model = 'erdos_renyi') {
+  if (!(model %in% c('erdos_renyi','fixed_densities'))){
+    stop(paste(model," is not supported. Choose one of 'erdos_renyi' or 'fixed_densities'.
+               To use the actors_choice model, for the moment see motifs_distribution to
+               calculate expected mean and variances analytically."))
+  }
   py_g <- motifr::toPyGraph(net, lvl_attr = lvl_attr)
 
   result <- sma$simulateBaselineAutoR(py_g,
@@ -262,7 +281,9 @@ simulate_baseline <- function(net,
 #'   information is stored in statnet object.
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
 #'   used to find ideal counting function
-#' @param model baseline model
+#' @param model baseline model to be used. Options are 'erdos_renyi' and
+#' 'fixed_densities'. See vignette "random_baselines" for more details.
+#' Defaults to 'erdos_renyi'.
 #'
 #' @return data frame with one row for each motif identifier string and one
 #'   row for every computed random graph
@@ -272,9 +293,10 @@ simulate_baseline <- function(net,
 compare_to_baseline <- function(net,
                                 motifs,
                                 n = 10,
-                                lvl_attr = c("sesType"),
+                                lvl_attr = "sesType",
                                 assume_sparse = TRUE,
-                                model = c('erdos_renyi')) {
+                                model = 'erdos_renyi') {
+
   simulation <- motifr::simulate_baseline(net,
                                           motifs,
                                           n = n,

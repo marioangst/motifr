@@ -35,7 +35,7 @@ The (refined) Erdős-Rényi model accounts for the various levels by allowing
 to specify different probabilites ties occurring _within_ different levels.
 - *Actor's Choice Model* (``actors_choice``) In this model all edges but the edges on one specific level are fixed. This is motivated by theoretical considerations about the application of multi-level network models in situations where one level is composed of actors, which are more readily able to change their connections, and other levels considered more stable, eg. specific instances of ecological networks. The edges on this non-fixed "actor level" are chosen indepently with fixed probability as in Erdős-Rényi.
 
-For details see the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false).
+For further details see the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false).
 
 ## Motifs in networks simulated based on a baseline model
 

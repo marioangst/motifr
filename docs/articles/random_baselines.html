@@ -106,7 +106,7 @@
 <li>
 <em>Actor’s Choice Model</em> (<code>actors_choice</code>) In this model all edges but the edges on one specific level are fixed. This is motivated by theoretical considerations about the application of multi-level network models in situations where one level is composed of actors, which are more readily able to change their connections, and other levels considered more stable, eg. specific instances of ecological networks. The edges on this non-fixed “actor level” are chosen indepently with fixed probability as in Erdős-Rényi.</li>
 </ul>
-<p>For details see the <a href="https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false">documentation of the Python sma package</a>.</p>
+<p>For further details see the <a href="https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false">documentation of the Python sma package</a>.</p>
 </div>
 <div id="motifs-in-networks-simulated-based-on-a-baseline-model" class="section level2">
 <h2 class="hasAnchor">
@@ -114,11 +114,11 @@
 <p>Motifs in random networks can be counted using <code><a href="../reference/simulate_baseline.html">simulate_baseline()</a></code>. The supported models are <code>erdos_renyi</code> and <code>fixed_densities</code>. The function <code><a href="../reference/compare_to_baseline.html">compare_to_baseline()</a></code> can be used for plotting the results:</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="../reference/simulate_baseline.html">simulate_baseline</a></span>(<span class="no">ml_net</span>, <span class="kw">motifs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'1,2[I.C]'</span>, <span class="st">'1,2[II.C]'</span>), <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5</span>)
 <span class="co">#&gt;   1,2[I.C] 1,2[II.C]</span>
-<span class="co">#&gt; 1      235        18</span>
-<span class="co">#&gt; 2      172        10</span>
-<span class="co">#&gt; 3      195        19</span>
-<span class="co">#&gt; 4      204        26</span>
-<span class="co">#&gt; 5      164        26</span></pre></body></html></div>
+<span class="co">#&gt; 1      156        19</span>
+<span class="co">#&gt; 2      134         8</span>
+<span class="co">#&gt; 3      173        17</span>
+<span class="co">#&gt; 4      141        15</span>
+<span class="co">#&gt; 5      142        18</span></pre></body></html></div>
 </div>
 <div id="motif-distributions-without-simulation" class="section level2">
 <h2 class="hasAnchor">

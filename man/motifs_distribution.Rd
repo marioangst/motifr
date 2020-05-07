@@ -8,8 +8,8 @@ baseline}
 motifs_distribution(
   net,
   motifs,
-  lvl_attr = c("sesType"),
-  model = c("erdos_renyi"),
+  lvl_attr = "sesType",
+  model = "erdos_renyi",
   level = -1,
   omit_total_result = TRUE
 )
@@ -23,10 +23,13 @@ distribution shall be analysed}
 \item{lvl_attr}{character vector specifying the attribute name where level
 information is stored in statnet object.}
 
-\item{model}{model to be used, either erdos_renyi or actors_choice, see sma
-documentation}
+\item{model}{model to be used. Options are 'erdos_renyi',
+or 'actors_choice'. See vignette "random_baselines" for more details.
+Defaults to 'erdos_renyi'.}
 
-\item{level}{additional parameter for actors_choice}
+\item{level}{Additional parameter to set the level to vary for
+the actors_choice model manually.
+All other levels are held fixed.}
 
 \item{omit_total_result}{whether total results shall be omitted}
 }

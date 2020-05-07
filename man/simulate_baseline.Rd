@@ -8,7 +8,7 @@ simulate_baseline(
   net,
   motifs,
   n = 10,
-  lvl_attr = c("sesType"),
+  lvl_attr = "sesType",
   assume_sparse = TRUE,
   model = "erdos_renyi"
 )
@@ -20,13 +20,15 @@ simulate_baseline(
 
 \item{n}{number of random graphs}
 
-\item{lvl_attr}{character vector specifying the attribute name where level
+\item{lvl_attr}{character string specifying the attribute name where level
 information is stored in statnet object.}
 
 \item{assume_sparse}{whether the random graphs shall be assumed to be sparse.
-used to find ideal counting function}
+used to find ideal counting function. defaults to TRUE.}
 
-\item{model}{baseline model to be used}
+\item{model}{baseline model to be used. Options are 'erdos_renyi',
+'fixed_densities'. See vignette "random_baselines" for more details.
+Defaults to 'erdos_renyi'.}
 }
 \value{
 data frame with one column for each motif identifier string and one

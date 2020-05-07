@@ -141,9 +141,9 @@ counts in a random baseline of motifs.</p>
   <span class='no'>net</span>,
   <span class='no'>motifs</span>,
   <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>),
+  <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='st'>"sesType"</span>,
   <span class='kw'>assume_sparse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>model</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"erdos_renyi"</span>)
+  <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"erdos_renyi"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -173,7 +173,9 @@ used to find ideal counting function</p></td>
     </tr>
     <tr>
       <th>model</th>
-      <td><p>baseline model</p></td>
+      <td><p>baseline model to be used. Options are 'erdos_renyi' and
+'fixed_densities'. See vignette "random_baselines" for more details.
+Defaults to 'erdos_renyi'.</p></td>
     </tr>
     </table>
 

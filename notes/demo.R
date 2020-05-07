@@ -14,10 +14,12 @@ motif_summary(ml_net)
 exemplify_motif(ml_net, motif = motif)
 show_motif(ml_net, motif = motif)
 show_motif(ml_net, motif = motif, label = TRUE)
-simulate_baseline(ml_net, motifs = motifs, n = 20)
 
 plot_mnet(net = dummy_net,lvl_attr = "sesType")
+g <- intergraph::asIgraph(dummy_net)
+plot_mnet(g, lvl_attr = "sesType")
 
+simulate_baseline(ml_net, motifs = motifs, n = 20, model = "actors_choice")
 compare_to_baseline(ml_net, motifs = motifs, n = 10)
 compare_to_baseline(ml_net, motifs = motifs, n = 500)
 

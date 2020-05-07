@@ -8,9 +8,9 @@ compare_to_baseline(
   net,
   motifs,
   n = 10,
-  lvl_attr = c("sesType"),
+  lvl_attr = "sesType",
   assume_sparse = TRUE,
-  model = c("erdos_renyi")
+  model = "erdos_renyi"
 )
 }
 \arguments{
@@ -26,7 +26,9 @@ information is stored in statnet object.}
 \item{assume_sparse}{whether the random graphs shall be assumed to be sparse.
 used to find ideal counting function}
 
-\item{model}{baseline model}
+\item{model}{baseline model to be used. Options are 'erdos_renyi' and
+'fixed_densities'. See vignette "random_baselines" for more details.
+Defaults to 'erdos_renyi'.}
 }
 \value{
 data frame with one row for each motif identifier string and one

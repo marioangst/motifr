@@ -4,7 +4,7 @@
 \alias{exemplify_motif}
 \title{Returns an example for a motif found in a given network}
 \usage{
-exemplify_motif(net, motif, lvl_attr = c("sesType"))
+exemplify_motif(net, motif, lvl_attr = "sesType")
 }
 \arguments{
 \item{net}{statnet network object}
