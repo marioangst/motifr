@@ -79,6 +79,9 @@ plot_mnet <- function(net,
       coord_offset[[level]][["y"]]
   }
 
+  if("ggraph" %in% (.packages())){
+    detach("package:ggraph", unload=TRUE)
+  }
   p_comb <- ggraph::ggraph(t_g, layout = "kk") +
     ggraph::geom_edge_link(ggplot2::aes(color =
                                           ifelse(edges$between == "between",
