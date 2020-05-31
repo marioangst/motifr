@@ -10,7 +10,8 @@ compare_to_baseline(
   n = 10,
   lvl_attr = "sesType",
   assume_sparse = TRUE,
-  model = "erdos_renyi"
+  model = "erdos_renyi",
+  level = -1
 )
 }
 \arguments{
@@ -29,6 +30,8 @@ used to find ideal counting function}
 \item{model}{baseline model to be used. Options are 'erdos_renyi' and
 'fixed_densities'. See vignette "random_baselines" for more details.
 Defaults to 'erdos_renyi'.}
+
+\item{level}{lvl_attr of the variable level for the Actor's Choice model}
 }
 \value{
 data frame with one row for each motif identifier string and one
@@ -37,6 +40,11 @@ data frame with one row for each motif identifier string and one
 \description{
 This function compares the motif counts in a given network with the motif
 counts in a random baseline of motifs.
+}
+\details{
+Note that when using the Actor's Choice model this function does not choose
+the variable level automatically. Use the ``level`` parameter to provide a
+valid level.
 }
 \examples{
 compare_to_baseline(ml_net, list('1,2[I.C]', '1,2[II.C]'))

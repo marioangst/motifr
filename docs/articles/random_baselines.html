@@ -111,14 +111,14 @@
 <div id="motifs-in-networks-simulated-based-on-a-baseline-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#motifs-in-networks-simulated-based-on-a-baseline-model" class="anchor"></a>Motifs in networks simulated based on a baseline model</h2>
-<p>Motifs in random networks can be counted using <code><a href="../reference/simulate_baseline.html">simulate_baseline()</a></code>. The supported models are <code>erdos_renyi</code> and <code>fixed_densities</code>. The function <code><a href="../reference/compare_to_baseline.html">compare_to_baseline()</a></code> can be used for plotting the results:</p>
+<p>Motifs in random networks can be counted using <code><a href="../reference/simulate_baseline.html">simulate_baseline()</a></code>. The supported models are <code>erdos_renyi</code>, <code>fixed_densities</code> and <code>actors_choice</code>. The function <code><a href="../reference/compare_to_baseline.html">compare_to_baseline()</a></code> can be used for plotting the results:</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="../reference/simulate_baseline.html">simulate_baseline</a></span>(<span class="no">ml_net</span>, <span class="kw">motifs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'1,2[I.C]'</span>, <span class="st">'1,2[II.C]'</span>), <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5</span>)
 <span class="co">#&gt;   1,2[I.C] 1,2[II.C]</span>
-<span class="co">#&gt; 1      156        19</span>
-<span class="co">#&gt; 2      134         8</span>
-<span class="co">#&gt; 3      173        17</span>
-<span class="co">#&gt; 4      141        15</span>
-<span class="co">#&gt; 5      142        18</span></pre></body></html></div>
+<span class="co">#&gt; 1      178        14</span>
+<span class="co">#&gt; 2      176        12</span>
+<span class="co">#&gt; 3      161        18</span>
+<span class="co">#&gt; 4      117        19</span>
+<span class="co">#&gt; 5      151        12</span></pre></body></html></div>
 </div>
 <div id="motif-distributions-without-simulation" class="section level2">
 <h2 class="hasAnchor">
@@ -141,7 +141,7 @@
 <div id="level-selection-in-actors-choice-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#level-selection-in-actors-choice-model" class="anchor"></a>Level selection in Actor’s Choice Model</h2>
-<p>In the Actor’s Choice Model all levels in the network except for one are assumed to be fixed. The edges in the remaining variable (or actor’s) level are drawn randomly according to the Erdős-Rényi Model. The variable level can be selected using the <code>level</code> parameter, e.g. in <code><a href="../reference/motifs_distribution.html">motifs_distribution()</a></code>, or determined automatically. The default level is the first level providing exactly two nodes in the motif.</p>
+<p>In the Actor’s Choice Model all levels in the network except for one are assumed to be fixed. The edges in the remaining variable (or actor’s) level are drawn randomly according to the Erdős-Rényi Model. The variable level can be selected using the <code>level</code> parameter, e.g. in <code><a href="../reference/motifs_distribution.html">motifs_distribution()</a></code>, or determined automatically. The default level is the first level providing exactly two nodes in the motif. Note that <code><a href="../reference/simulate_baseline.html">simulate_baseline()</a></code> and <code><a href="../reference/compare_to_baseline.html">compare_to_baseline()</a></code> do not support automatical level selection.</p>
 <p>Let’s consider an example. Assume that the variable level is level zero. The edges in the other levels are fixed. The expected number of closed triangles with two nodes on the variable level can be computed as follows. Here <code>level</code> is automatically determined to be 0.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/motifs_distribution.html">motifs_distribution</a></span>(<span class="no">ml_net</span>, <span class="kw">motifs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'2,1[II.C]'</span>), <span class="kw">model</span> <span class="kw">=</span> <span class="st">'actors_choice'</span>)
 <span class="co">#&gt;       motif expectation variance</span>

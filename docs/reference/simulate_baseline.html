@@ -49,7 +49,8 @@
 <meta property="og:title" content="Simulate a random baseline — simulate_baseline" />
 <meta property="og:description" content="A specified number of random networks using a modified Erdős-Rényi model is
 computed. In each of the random networks motifs are counted. A dataframe with
-these counts is returned." />
+these counts is returned. Optionally, other models than the modified
+Erdős-Rényi model can be used." />
 <meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg" />
 
 
@@ -136,7 +137,8 @@ these counts is returned." />
     <div class="ref-description">
     <p>A specified number of random networks using a modified Erdős-Rényi model is
 computed. In each of the random networks motifs are counted. A dataframe with
-these counts is returned.</p>
+these counts is returned. Optionally, other models than the modified
+Erdős-Rényi model can be used.</p>
     </div>
 
     <pre class="usage"><span class='fu'>simulate_baseline</span>(
@@ -145,7 +147,8 @@ these counts is returned.</p>
   <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>,
   <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='st'>"sesType"</span>,
   <span class='kw'>assume_sparse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"erdos_renyi"</span>
+  <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"erdos_renyi"</span>,
+  <span class='kw'>level</span> <span class='kw'>=</span> -<span class='fl'>1</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -179,25 +182,34 @@ used to find ideal counting function. defaults to TRUE.</p></td>
 'fixed_densities'. See vignette "random_baselines" for more details.
 Defaults to 'erdos_renyi'.</p></td>
     </tr>
+    <tr>
+      <th>level</th>
+      <td><p>lvl_attr of the variable level for the Actor's Choice model</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>data frame with one column for each motif identifier string and one
   row for every computed random graph</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Note that when using the Actor's Choice model this function does not choose
+the variable level automatically. Use the ``level`` parameter to provide a
+valid level.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>simulate_baseline</span>(<span class='no'>ml_net</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>'1,2[I.C]'</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='output co'>#&gt;    1,2[I.C]
-#&gt; 1       184
-#&gt; 2       157
-#&gt; 3       203
-#&gt; 4       201
-#&gt; 5       204
-#&gt; 6       183
-#&gt; 7       140
-#&gt; 8       130
-#&gt; 9       195
-#&gt; 10      181</div></pre>
+#&gt; 1       155
+#&gt; 2       175
+#&gt; 3       190
+#&gt; 4       166
+#&gt; 5       191
+#&gt; 6       121
+#&gt; 7       112
+#&gt; 8       176
+#&gt; 9       123
+#&gt; 10      174</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

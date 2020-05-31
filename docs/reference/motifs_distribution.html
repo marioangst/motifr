@@ -6,8 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compute statistical properties of the distribution of motifs in a random
-baseline — motifs_distribution • motifr</title>
+<title>Compute statistical properties (expectation and variance) of the distribution
+of motifs in a random baseline — motifs_distribution • motifr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -47,17 +47,9 @@ baseline — motifs_distribution • motifr</title>
 
 
 
-<meta property="og:title" content="Compute statistical properties of the distribution of motifs in a random
-baseline — motifs_distribution" />
-<meta property="og:description" content="This function supports the Erdős-Rényi Model (``erdos_renyi``) and the the
-Actor’s Choice Model (``actors_choice``). The model can be specified using
-the ``model`` parameter. The Erdős-Rényi Model can be used without providing
-further parameters. In case of the Actor’s Choice Model a level of the given
-network can be specified which is only level assumed to be variable. All
-other levels are assumed to be fixed. Per default, ``level = -1``, the first
-level carrying two nodes in the signature of the motif is selected as
-variable level. Set the ``level`` paramter to the value of the ``lvl_attr``
-of the nodes in the desired level to specify the level manually." />
+<meta property="og:title" content="Compute statistical properties (expectation and variance) of the distribution
+of motifs in a random baseline — motifs_distribution" />
+<meta property="og:description" content="Warning: Variances can only be computed for 1,2 motifs at the moment." />
 <meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg" />
 
 
@@ -136,22 +128,14 @@ of the nodes in the desired level to specify the level manually." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Compute statistical properties of the distribution of motifs in a random
-baseline</h1>
+    <h1>Compute statistical properties (expectation and variance) of the distribution
+of motifs in a random baseline</h1>
     
     <div class="hidden name"><code>motifs_distribution.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function supports the Erdős-Rényi Model (``erdos_renyi``) and the the
-Actor’s Choice Model (``actors_choice``). The model can be specified using
-the ``model`` parameter. The Erdős-Rényi Model can be used without providing
-further parameters. In case of the Actor’s Choice Model a level of the given
-network can be specified which is only level assumed to be variable. All
-other levels are assumed to be fixed. Per default, ``level = -1``, the first
-level carrying two nodes in the signature of the motif is selected as
-variable level. Set the ``level`` paramter to the value of the ``lvl_attr``
-of the nodes in the desired level to specify the level manually.</p>
+    <p>Warning: Variances can only be computed for 1,2 motifs at the moment.</p>
     </div>
 
     <pre class="usage"><span class='fu'>motifs_distribution</span>(
@@ -201,7 +185,20 @@ All other levels are held fixed.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>data frame with one column giving names of motif identifers and two
-  column giving expectation and variances per motif</p>
+  column giving expectation and variances per motif. At the moment, variances
+  are only computed for 1,2 motifs. For other motifs, expectations are computed but
+  variances are returned as NaN.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function supports the Erdős-Rényi Model (``erdos_renyi``) and the the
+Actor’s Choice Model (``actors_choice``). The model can be specified using
+the ``model`` parameter. The Erdős-Rényi Model can be used without providing
+further parameters. In case of the Actor’s Choice Model a level of the given
+network can be specified which is only level assumed to be variable. All
+other levels are assumed to be fixed. Per default, ``level = -1``, the first
+level carrying two nodes in the signature of the motif is selected as
+variable level. Set the ``level`` paramter to the value of the ``lvl_attr``
+of the nodes in the desired level to specify the level manually.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>motifs_distribution</span>(<span class='no'>ml_net</span>, <span class='kw'>motif</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>'1,2[I.C]'</span>))</div><div class='output co'>#&gt;      motif expectation variance

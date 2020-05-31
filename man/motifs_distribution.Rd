@@ -2,8 +2,8 @@
 % Please edit documentation in R/count_motifs.R
 \name{motifs_distribution}
 \alias{motifs_distribution}
-\title{Compute statistical properties of the distribution of motifs in a random
-baseline}
+\title{Compute statistical properties (expectation and variance) of the distribution
+of motifs in a random baseline}
 \usage{
 motifs_distribution(
   net,
@@ -35,9 +35,14 @@ All other levels are held fixed.}
 }
 \value{
 data frame with one column giving names of motif identifers and two
-  column giving expectation and variances per motif
+  column giving expectation and variances per motif. At the moment, variances
+  are only computed for 1,2 motifs. For other motifs, expectations are computed but
+  variances are returned as NaN.
 }
 \description{
+Warning: Variances can only be computed for 1,2 motifs at the moment.
+}
+\details{
 This function supports the Erdős-Rényi Model (``erdos_renyi``) and the the
 Actor’s Choice Model (``actors_choice``). The model can be specified using
 the ``model`` parameter. The Erdős-Rényi Model can be used without providing

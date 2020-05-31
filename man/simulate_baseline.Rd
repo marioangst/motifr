@@ -10,7 +10,8 @@ simulate_baseline(
   n = 10,
   lvl_attr = "sesType",
   assume_sparse = TRUE,
-  model = "erdos_renyi"
+  model = "erdos_renyi",
+  level = -1
 )
 }
 \arguments{
@@ -29,6 +30,8 @@ used to find ideal counting function. defaults to TRUE.}
 \item{model}{baseline model to be used. Options are 'erdos_renyi',
 'fixed_densities'. See vignette "random_baselines" for more details.
 Defaults to 'erdos_renyi'.}
+
+\item{level}{lvl_attr of the variable level for the Actor's Choice model}
 }
 \value{
 data frame with one column for each motif identifier string and one
@@ -37,7 +40,13 @@ data frame with one column for each motif identifier string and one
 \description{
 A specified number of random networks using a modified Erdős-Rényi model is
 computed. In each of the random networks motifs are counted. A dataframe with
-these counts is returned.
+these counts is returned. Optionally, other models than the modified
+Erdős-Rényi model can be used.
+}
+\details{
+Note that when using the Actor's Choice model this function does not choose
+the variable level automatically. Use the ``level`` parameter to provide a
+valid level.
 }
 \examples{
 simulate_baseline(ml_net, list('1,2[I.C]'), n = 10)

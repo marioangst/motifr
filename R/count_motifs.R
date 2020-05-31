@@ -229,7 +229,12 @@ show_motif <- function(motif,
 #'
 #' A specified number of random networks using a modified Erdős-Rényi model is
 #' computed. In each of the random networks motifs are counted. A dataframe with
-#' these counts is returned.
+#' these counts is returned. Optionally, other models than the modified
+#' Erdős-Rényi model can be used.
+#'
+#' Note that when using the Actor's Choice model this function does not choose
+#' the variable level automatically. Use the ``level`` parameter to provide a
+#' valid level.
 #'
 #' @param net statnet network object
 #' @param motifs list of motif identifier strings
@@ -239,8 +244,9 @@ show_motif <- function(motif,
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
 #'   used to find ideal counting function. defaults to TRUE.
 #' @param model baseline model to be used. Options are 'erdos_renyi',
-#' 'fixed_densities'. See vignette "random_baselines" for more details.
-#' Defaults to 'erdos_renyi'.
+#'   'fixed_densities'. See vignette "random_baselines" for more details.
+#'   Defaults to 'erdos_renyi'.
+#' @param level lvl_attr of the variable level for the Actor's Choice model
 #'
 #' @return data frame with one column for each motif identifier string and one
 #'   row for every computed random graph
@@ -252,11 +258,17 @@ simulate_baseline <- function(net,
                               n = 10,
                               lvl_attr = "sesType",
                               assume_sparse = TRUE,
-                              model = 'erdos_renyi') {
-  if (!(model %in% c('erdos_renyi','fixed_densities'))){
+                              model = 'erdos_renyi',
+                              level = -1) {
+  if (!(model %in% c('erdos_renyi','fixed_densities','actors_choice'))){
     stop(paste(model," is not supported. Choose one of 'erdos_renyi' or 'fixed_densities'.
                To use the actors_choice model, for the moment see motifs_distribution to
                calculate expected mean and variances analytically."))
+  }
+  if(model == 'actors_choice'){
+    if(level < 0) {
+      stop("Please provide a valid level when using an Actor's Choice model")
+    }
   }
   py_g <- motifr::toPyGraph(net, lvl_attr = lvl_attr)
 
@@ -264,7 +276,8 @@ simulate_baseline <- function(net,
                                       motifs,
                                       n = n,
                                       assume_sparse = assume_sparse,
-                                      model = model)
+                                      model = model,
+                                      level = level)
   df <- data.frame(result, check.names = FALSE)
   return(df)
 }
@@ -273,6 +286,10 @@ simulate_baseline <- function(net,
 #'
 #' This function compares the motif counts in a given network with the motif
 #' counts in a random baseline of motifs.
+#'
+#' Note that when using the Actor's Choice model this function does not choose
+#' the variable level automatically. Use the ``level`` parameter to provide a
+#' valid level.
 #'
 #' @param net statnet network object
 #' @param motifs list of motif identifier strings
@@ -284,6 +301,7 @@ simulate_baseline <- function(net,
 #' @param model baseline model to be used. Options are 'erdos_renyi' and
 #' 'fixed_densities'. See vignette "random_baselines" for more details.
 #' Defaults to 'erdos_renyi'.
+#' @param level lvl_attr of the variable level for the Actor's Choice model
 #'
 #' @return data frame with one row for each motif identifier string and one
 #'   row for every computed random graph
@@ -295,14 +313,16 @@ compare_to_baseline <- function(net,
                                 n = 10,
                                 lvl_attr = "sesType",
                                 assume_sparse = TRUE,
-                                model = 'erdos_renyi') {
+                                model = 'erdos_renyi',
+                                level = -1) {
 
   simulation <- motifr::simulate_baseline(net,
                                           motifs,
                                           n = n,
                                           lvl_attr = lvl_attr,
                                           assume_sparse = assume_sparse,
-                                          model = model)
+                                          model = model,
+                                          level = level)
   count <- motifr::count_motifs(net,
                                     motifs,
                                     lvl_attr = lvl_attr,
