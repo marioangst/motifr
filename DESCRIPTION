@@ -11,7 +11,8 @@ Authors@R:
     person(given = "Tim",
            family = "Seppelt",
            role = c("aut"),
-           email = "t.seppelt@posteo.de"))
+           email = "t.seppelt@posteo.de",
+           comment = c(ORCID = "0000-0002-6447-0568")))
 Description: This package provides tools for motif analysis in multi-level networks.
     Multi-level networks combine multiple networks in one, e.g. social-ecological networks. 
     Motifs are small configurations of nodes and edges (subgraphs) occuring in networks.
