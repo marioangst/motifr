@@ -33,7 +33,7 @@ toPyGraph <- function(g, lvl_attr, relabel = TRUE) {
       )
     py_g <- nx$relabel_nodes(py_g, mapping = node_names)
   }
-  py_g
+  return(py_g)
 }
 
 #' Display all supported motifs with signature ``1,2``.
@@ -368,7 +368,6 @@ compare_to_baseline <- function(net,
     ggplot2::geom_vline(data = count, ggplot2::aes(xintercept = count)) +
     ggplot2::theme_minimal() +
     ggplot2::xlab(sprintf("Simulated (gray histogram) versus actual (solid line) motif counts, n = %d iterations", n))
-
 
   return(p)
 }
