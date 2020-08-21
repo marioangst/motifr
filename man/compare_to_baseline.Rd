@@ -11,7 +11,8 @@ compare_to_baseline(
   lvl_attr = "sesType",
   assume_sparse = TRUE,
   model = "erdos_renyi",
-  level = -1
+  level = -1,
+  ergm_model = NULL
 )
 }
 \arguments{
@@ -32,10 +33,13 @@ used to find ideal counting function}
 Defaults to 'erdos_renyi'.}
 
 \item{level}{lvl_attr of the variable level for the Actor's Choice model}
+
+\item{ergm_model}{ergm model as for example fitted by calling
+``ergm::ergm()``. Used when model is set to ergm to sample random network}
 }
 \value{
-data frame with one row for each motif identifier string and one
-  row for every computed random graph
+data frame with one row for each motif identifier string and one row
+  for every computed random graph
 }
 \description{
 This function compares the motif counts in a given network with the motif
@@ -47,5 +51,5 @@ the variable level automatically. Use the ``level`` parameter to provide a
 valid level.
 }
 \examples{
-compare_to_baseline(ml_net, list('1,2[I.C]', '1,2[II.C]'))
+compare_to_baseline(ml_net, list("1,2[I.C]", "1,2[II.C]"))
 }

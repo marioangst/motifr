@@ -9,10 +9,11 @@ plot_mnet(net, lvl_attr, layouts = rep("kk", n_levels), label = FALSE)
 \arguments{
 \item{net}{A tidygraph, igraph or statnet network object}
 
-\item{lvl_attr}{The name of the categorical node attribute specifying at which
-level a node is situated}
+\item{lvl_attr}{The name of the categorical node attribute specifying at
+which level a node is situated}
 
-\item{layouts}{A list of layouts (see ?ggraph::layout_ggraph) for every level eg. for two levels list("auto","circle")}
+\item{layouts}{A list of layouts (see ?ggraph::layout_ggraph) for every level
+eg. for two levels list("auto","circle")}
 
 \item{label}{logical - should nodes be labelled? (defaults to false)}
 }
@@ -20,10 +21,10 @@ level a node is situated}
 A ggraph object
 }
 \description{
-Visualize a multi-level network, with the possibility of specifying separate layouts
-for each level. This is a somewhat hacky wrapper for arranging separate
-ggraph calls for each network level in a circle.
+Visualize a multi-level network, with the possibility of specifying separate
+layouts for each level. This is a somewhat hacky wrapper for arranging
+separate ggraph calls for each network level in a circle.
 }
 \examples{
-plot_mnet(net = ml_net, lvl_attr = "sesType", layouts = list("kk","circle"))
+plot_mnet(net = ml_net, lvl_attr = "sesType", layouts = list("kk", "circle"))
 }

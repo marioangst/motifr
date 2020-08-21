@@ -9,10 +9,11 @@ toPyGraph(g, lvl_attr, relabel = TRUE)
 \arguments{
 \item{g}{statnet network object}
 
-\item{lvl_attr}{character vector specifying the attribute name where level information
-is stored in statnet object.}
+\item{lvl_attr}{character vector specifying the attribute name where level
+information is stored in statnet object.}
 
-\item{relabel}{should nodes be relabeled with statnet vertex.names? (defaults to TRUE)}
+\item{relabel}{should nodes be relabeled with statnet vertex.names? (defaults
+to TRUE)}
 }
 \value{
 python graph object

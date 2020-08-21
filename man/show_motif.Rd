@@ -15,7 +15,8 @@ show_motif(motif, net = dummy_net, lvl_attr = c("sesType"), ...)
 \item{lvl_attr}{character vector specifying the attribute name where level
 information is stored in statnet object.}
 
-\item{...}{additional arguments to be passed to plotting function (eg. label = TRUE)}
+\item{...}{additional arguments to be passed to plotting function (eg. label
+= TRUE)}
 }
 \value{
 plot
@@ -24,7 +25,7 @@ plot
 If no network is provided, a motif in a dummy network will be shown.
 }
 \examples{
-show_motif('1,2[I.C]', net = ml_net)
+show_motif("1,2[I.C]", net = ml_net)
 }
 \seealso{
 exemplify_motif

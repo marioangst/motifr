@@ -7,7 +7,9 @@
 show_4_motifs()
 }
 \value{
-Opens figure from Ö. Bodin, M. Tengö: Disentangling intangible social–ecological systems in Global Environmental Change 22 (2012) 430–439 http://dx.doi.org/10.1016/j.gloenvcha.2012.01.005
+Opens figure from Ö. Bodin, M. Tengö: Disentangling intangible
+  social–ecological systems in Global Environmental Change 22 (2012) 430–439
+  http://dx.doi.org/10.1016/j.gloenvcha.2012.01.005
 }
 \description{
 Display all supported motifs with signature ``2,2``.

@@ -26,8 +26,8 @@ Critical dyads are edges on a specified level which break motifs by being
 removed from the network.
 }
 \details{
-The level parameter determines on which level of the network critical dyads are
-analysed. Per default, when ``level = -1``, the first level in the motif
+The level parameter determines on which level of the network critical dyads
+are analysed. Per default, when ``level = -1``, the first level in the motif
 which provides exactly two nodes is selected. Use this parameter to specify a
 level manually. The procedure for determining the level is the same as for
 the Actor's Choice Model, cf. vignette.

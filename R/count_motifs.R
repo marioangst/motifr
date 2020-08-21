@@ -272,6 +272,8 @@ show_motif <- function(motif,
 #'   'fixed_densities'. See vignette "random_baselines" for more details.
 #'   Defaults to 'erdos_renyi'.
 #' @param level lvl_attr of the variable level for the Actor's Choice model
+#' @param ergm_model ergm model as for example fitted by calling
+#'   ``ergm::ergm()``. Used when model is set to ergm to sample random networks.
 #'
 #' @return data frame with one column for each motif identifier string and one
 #'   row for every computed random graph
@@ -285,28 +287,52 @@ simulate_baseline <- function(net,
                               lvl_attr = "sesType",
                               assume_sparse = TRUE,
                               model = "erdos_renyi",
-                              level = -1) {
-  if (!(model %in% c("erdos_renyi", "fixed_densities", "actors_choice"))) {
+                              level = -1,
+                              ergm_model = NULL) {
+  if (!(model %in% c("erdos_renyi", "fixed_densities", "actors_choice", "ergm"))) {
     stop(paste(model, " is not supported. Choose one of 'erdos_renyi' or 'fixed_densities'.
                To use the actors_choice model, for the moment see motifs_distribution to
                calculate expected mean and variances analytically."))
   }
-  if (model == "actors_choice") {
-    if (level < 0) {
-      stop("Please provide a valid level when using an Actor's Choice model")
+  if (model == "ergm") {
+    if (!requireNamespace("ergm", quietly = TRUE)) {
+      stop("Package \"ergm\" needed for this function to work. Please install it.",
+        call. = FALSE
+      )
     }
-  }
-  py_g <- motifr::toPyGraph(net, lvl_attr = lvl_attr)
+    if (!ergm::is.ergm(ergm_model)) {
+      stop("Please provde a valid ergm model when using ERGM")
+    }
+    # let's do the job ourselves
+    result <- data.frame()
+    for (i in 0:n) {
+      sample <- stats::simulate(ergm_model)
+      counts <- motifr::count_motifs(sample, motifs = motifs, lvl_attr = lvl_attr, assume_sparse = assume_sparse)
+      result <- rbind(result, counts$count)
+      if (i == 0) {
+        colnames(result) <- counts$motif
+      }
+    }
+    return(result)
+  } else {
+    # let sma do the job
+    if (model == "actors_choice") {
+      if (level < 0) {
+        stop("Please provide a valid level when using an Actor's Choice model")
+      }
+    }
+    py_g <- motifr::toPyGraph(net, lvl_attr = lvl_attr)
 
-  result <- sma$simulateBaselineAutoR(py_g,
-    motifs,
-    n = n,
-    assume_sparse = assume_sparse,
-    model = model,
-    level = level
-  )
-  df <- data.frame(result, check.names = FALSE)
-  return(df)
+    result <- sma$simulateBaselineAutoR(py_g,
+      motifs,
+      n = n,
+      assume_sparse = assume_sparse,
+      model = model,
+      level = level
+    )
+    df <- data.frame(result, check.names = FALSE)
+    return(df)
+  }
 }
 
 #' Compare empirical network to random baseline
@@ -329,6 +355,8 @@ simulate_baseline <- function(net,
 #'   'fixed_densities'. See vignette "random_baselines" for more details.
 #'   Defaults to 'erdos_renyi'.
 #' @param level lvl_attr of the variable level for the Actor's Choice model
+#' @param ergm_model ergm model as for example fitted by calling
+#'   ``ergm::ergm()``. Used when model is set to ergm to sample random network
 #'
 #' @return data frame with one row for each motif identifier string and one row
 #'   for every computed random graph
@@ -342,14 +370,16 @@ compare_to_baseline <- function(net,
                                 lvl_attr = "sesType",
                                 assume_sparse = TRUE,
                                 model = "erdos_renyi",
-                                level = -1) {
+                                level = -1,
+                                ergm_model = NULL) {
   simulation <- motifr::simulate_baseline(net,
     motifs,
     n = n,
     lvl_attr = lvl_attr,
     assume_sparse = assume_sparse,
     model = model,
-    level = level
+    level = level,
+    ergm_model = ergm_model
   )
   count <- motifr::count_motifs(net,
     motifs,
@@ -367,7 +397,7 @@ compare_to_baseline <- function(net,
     ggplot2::geom_histogram(fill = "gray", bins = 50) +
     ggplot2::geom_vline(data = count, ggplot2::aes(xintercept = count)) +
     ggplot2::theme_minimal() +
-    ggplot2::xlab(sprintf("Simulated (gray histogram) versus actual (solid line) motif counts, n = %d iterations", n))
+    ggplot2::xlab(sprintf("Simulated (gray histogram) versus actual (solid line) motif counts, n = %d iterations, model %s", n, model))
 
   return(p)
 }

@@ -11,7 +11,8 @@ simulate_baseline(
   lvl_attr = "sesType",
   assume_sparse = TRUE,
   model = "erdos_renyi",
-  level = -1
+  level = -1,
+  ergm_model = NULL
 )
 }
 \arguments{
@@ -32,6 +33,9 @@ used to find ideal counting function. defaults to TRUE.}
 Defaults to 'erdos_renyi'.}
 
 \item{level}{lvl_attr of the variable level for the Actor's Choice model}
+
+\item{ergm_model}{ergm model as for example fitted by calling
+``ergm::ergm()``. Used when model is set to ergm to sample random networks.}
 }
 \value{
 data frame with one column for each motif identifier string and one
@@ -49,5 +53,5 @@ the variable level automatically. Use the ``level`` parameter to provide a
 valid level.
 }
 \examples{
-simulate_baseline(ml_net, list('1,2[I.C]'), n = 10)
+simulate_baseline(ml_net, list("1,2[I.C]"), n = 10)
 }

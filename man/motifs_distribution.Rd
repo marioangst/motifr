@@ -23,21 +23,20 @@ distribution shall be analysed}
 \item{lvl_attr}{character vector specifying the attribute name where level
 information is stored in statnet object.}
 
-\item{model}{model to be used. Options are 'erdos_renyi',
-or 'actors_choice'. See vignette "random_baselines" for more details.
-Defaults to 'erdos_renyi'.}
+\item{model}{model to be used. Options are 'erdos_renyi', or 'actors_choice'.
+See vignette "random_baselines" for more details. Defaults to
+'erdos_renyi'.}
 
-\item{level}{Additional parameter to set the level to vary for
-the actors_choice model manually.
-All other levels are held fixed.}
+\item{level}{Additional parameter to set the level to vary for the
+actors_choice model manually. All other levels are held fixed.}
 
 \item{omit_total_result}{whether total results shall be omitted}
 }
 \value{
 data frame with one column giving names of motif identifers and two
   column giving expectation and variances per motif. At the moment, variances
-  are only computed for 1,2 motifs. For other motifs, expectations are computed but
-  variances are returned as NaN.
+  are only computed for 1,2 motifs. For other motifs, expectations are
+  computed but variances are returned as NaN.
 }
 \description{
 Warning: Variances can only be computed for 1,2 motifs at the moment.
@@ -54,5 +53,5 @@ variable level. Set the ``level`` paramter to the value of the ``lvl_attr``
 of the nodes in the desired level to specify the level manually.
 }
 \examples{
-motifs_distribution(ml_net, motif = list('1,2[I.C]'))
+motifs_distribution(ml_net, motif = list("1,2[I.C]"))
 }

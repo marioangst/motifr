@@ -34,5 +34,5 @@ level manually. The procedure for determining the level is the same as for
 the Actor's Choice Model, cf. vignette.
 }
 \examples{
-head(identify_gaps(ml_net, motif = '1,2[II.C]'))
+head(identify_gaps(ml_net, motif = "1,2[II.C]"))
 }

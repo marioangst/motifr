@@ -23,13 +23,15 @@ plot_gaps(
 
 \item{level}{Focal level for gap analysis}
 
-\item{cutoff}{Cutoff point in contributions of an edge to the number of motifs above which to analyse gaps}
+\item{cutoff}{Cutoff point in contributions of an edge to the number of
+motifs above which to analyse gaps}
 
-\item{subset_graph}{Whether to subset the graph to only show nodes involved in gaps.
-One of "none" (no subset, default), "partial" (only focal level is subset) or "focal" (only focal
-level shown)}
+\item{subset_graph}{Whether to subset the graph to only show nodes involved
+in gaps. One of "none" (no subset, default), "partial" (only focal level is
+subset) or "focal" (only focal level shown)}
 
-\item{...}{list of additional parameters to be passed to plotting function (see ?motifr::plot_mnet), eg. label = TRUE}
+\item{...}{list of additional parameters to be passed to plotting function
+(see ?motifr::plot_mnet), eg. label = TRUE}
 }
 \value{
 A plot of gaps, sized by weight in a multilevel network
