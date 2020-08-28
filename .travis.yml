@@ -12,3 +12,9 @@ deploy:
   local-dir: docs
   on:
     branch: master
+    
+addons:
+  apt:
+    update: true
+    packages:
+      - libmagick++-dev
