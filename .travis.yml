@@ -1,10 +1,11 @@
 language: r
 cache: packages
 sudo: required
+warnings_are_errors: false
 
 before_install:
-  - pip3 install --upgrade pip
-  - pip3 install sma numpy
+  - pip install --upgrade pip
+  - pip install sma numpy
 
 r_packages:
    - testthat
