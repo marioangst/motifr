@@ -11,7 +11,8 @@ motifs_distribution(
   lvl_attr = "sesType",
   model = "erdos_renyi",
   level = -1,
-  omit_total_result = TRUE
+  omit_total_result = TRUE,
+  directed = NULL
 )
 }
 \arguments{
@@ -31,6 +32,9 @@ See vignette "random_baselines" for more details. Defaults to
 actors_choice model manually. All other levels are held fixed.}
 
 \item{omit_total_result}{whether total results shall be omitted}
+
+\item{directed}{whether the graph shall be treated as a directed graph. Per
+default (NULL) this is determined automatically using network::is.directed.}
 }
 \value{
 data frame with one column giving names of motif identifers and two

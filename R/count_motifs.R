@@ -6,13 +6,15 @@
 #'   information is stored in statnet object.
 #' @param relabel should nodes be relabeled with statnet vertex.names? (defaults
 #'   to TRUE)
+#' @param directed whether the graph shall be treated as a directed graph. Per
+#'   default (NULL) this is determined automatically using network::is.directed.
 #'
 #' @return python graph object
 #' @export
 #'
 #' @examples
 #' toPyGraph(dummy_net, lvl_attr = "sesType")
-toPyGraph <- function(g, lvl_attr, relabel = TRUE) {
+toPyGraph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
 
   # function for translating a statnet network object into a Python compatible
   # networkx object
@@ -22,7 +24,16 @@ toPyGraph <- function(g, lvl_attr, relabel = TRUE) {
     network::list.vertex.attributes(g),
     function(x) network::get.vertex.attribute(g, x)
   )
-  py_g <- sma$translateGraph(adjacencyMatrix, attributeNames, attributeValues, lvl_attr)
+
+  if(is.null(directed)){
+    directed = network::is.directed(g)
+  }
+
+  py_g <- sma$translateGraph(adjacencyMatrix,
+                             attributeNames,
+                             attributeValues,
+                             lvl_attr,
+                             directed = directed)
 
   if (relabel == TRUE) {
     # JS: renaming in here right now, but will suggest update to rbridge.py to do in Python
@@ -78,6 +89,8 @@ show_4_motifs <- function() {
 #'   optimization), default TRUE
 #' @param omit_total_result whether total results shall be omitted, default
 #'   FALSE
+#' @param directed whether the graph shall be treated as a directed graph. Per
+#'   default (NULL) this is determined automatically using network::is.directed.
 #'
 #' @return data frame with a column containing motif identifier strings and one
 #'   column containing motif counts
@@ -89,9 +102,12 @@ count_motifs <- function(net,
                          motifs,
                          lvl_attr = c("sesType"),
                          assume_sparse = TRUE,
-                         omit_total_result = TRUE) {
+                         omit_total_result = TRUE,
+                         directed = NULL) {
   # convert net to python object
-  py_g <- motifr::toPyGraph(net, lvl_attr = lvl_attr)
+  py_g <- motifr::toPyGraph(net,
+                            lvl_attr = lvl_attr,
+                            directed = directed)
 
   # call counter
   counted <- sma$countMotifsAutoR(py_g,
@@ -129,6 +145,8 @@ count_motifs <- function(net,
 #' @param level Additional parameter to set the level to vary for the
 #'   actors_choice model manually. All other levels are held fixed.
 #' @param omit_total_result whether total results shall be omitted
+#' @param directed whether the graph shall be treated as a directed graph. Per
+#'   default (NULL) this is determined automatically using network::is.directed.
 #'
 #' @return data frame with one column giving names of motif identifers and two
 #'   column giving expectation and variances per motif. At the moment, variances
@@ -143,14 +161,17 @@ motifs_distribution <- function(net,
                                 lvl_attr = "sesType",
                                 model = "erdos_renyi",
                                 level = -1,
-                                omit_total_result = TRUE) {
+                                omit_total_result = TRUE,
+                                directed = NULL) {
   if (!(model %in% c("erdos_renyi", "actors_choice"))) {
     stop(paste(model, " is not supported. Choose one of 'erdos_renyi' or 'fixed_densities'.
                To use the fixed densities model, for the moment see simulate_baseline()."))
   }
 
   # convert net to python object
-  py_g <- motifr::toPyGraph(net, lvl_attr = lvl_attr)
+  py_g <- motifr::toPyGraph(net,
+                            lvl_attr = lvl_attr,
+                            directed = directed)
 
   # call counter
   result <- sma$distributionMotifsAutoR(py_g,
@@ -175,19 +196,30 @@ motifs_distribution <- function(net,
 #'
 #' @return dataframe with motif counts, expectations and variances for set of
 #'   selected motifs
+#' @param directed whether the graph shall be treated as a directed graph. Per
+#'   default (NULL) this is determined automatically using network::is.directed.
 #' @export
 #'
 #' @examples
 #' motif_summary(ml_net)
 motif_summary <- function(net,
-                          lvl_attr = c("sesType")) {
+                          lvl_attr = c("sesType"),
+                          directed = NULL) {
 
   # exquisite selection of motifs
   motifs <- c("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]", "2,2[III.C]", "2,2[III.D]")
 
   # count and compute distribution parameters
-  counts <- motifr::count_motifs(net, lvl_attr, motifs = motifs, omit_total_result = TRUE)
-  distribution <- motifr::motifs_distribution(net, lvl_attr, motifs = motifs, omit_total_result = TRUE)
+  counts <- motifr::count_motifs(net,
+                                 lvl_attr,
+                                 motifs = motifs,
+                                 omit_total_result = TRUE,
+                                 directed = directed)
+  distribution <- motifr::motifs_distribution(net,
+                                              lvl_attr,
+                                              motifs = motifs,
+                                              omit_total_result = TRUE,
+                                              directed = directed)
 
   # reformat data
   result <- merge(counts, distribution)
@@ -200,6 +232,8 @@ motif_summary <- function(net,
 #' @param motif motif identifier string for the motif
 #' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object.
+#' @param directed whether the graph shall be treated as a directed graph. Per
+#'   default (NULL) this is determined automatically using network::is.directed.
 #'
 #' @return vector of nodes in the motif
 #' @seealso show_motif
@@ -209,9 +243,10 @@ motif_summary <- function(net,
 #' exemplify_motif(ml_net, motif = "1,2[I.C]")
 exemplify_motif <- function(net,
                             motif,
-                            lvl_attr = "sesType") {
+                            lvl_attr = "sesType",
+                            directed = NULL) {
   # convert net to python object
-  py_g <- motifr::toPyGraph(net, lvl_attr = lvl_attr)
+  py_g <- motifr::toPyGraph(net, lvl_attr = lvl_attr, directed = directed)
   motif <- sma$exemplifyMotif(py_g, motif)
   return(purrr::simplify(motif))
 }
@@ -225,6 +260,8 @@ exemplify_motif <- function(net,
 #' @param net statnet network object
 #' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object.
+#' @param directed whether the graph shall be treated as a directed graph. Per
+#'   default (NULL) this is determined automatically using network::is.directed.
 #' @param ... additional arguments to be passed to plotting function (eg. label
 #'   = TRUE)
 #' @return plot
@@ -236,10 +273,12 @@ exemplify_motif <- function(net,
 show_motif <- function(motif,
                        net = dummy_net,
                        lvl_attr = c("sesType"),
+                       directed = NULL,
                        ...) {
   motif_names <- motifr::exemplify_motif(
     net = net, motif = motif,
-    lvl_attr = lvl_attr
+    lvl_attr = lvl_attr,
+    directed = directed
   )
   vertices <- network::get.vertex.attribute(net, "vertex.names")
   indices <- sapply(motif_names, function(x) {
@@ -277,6 +316,8 @@ show_motif <- function(motif,
 #' @param level lvl_attr of the variable level for the Actor's Choice model
 #' @param ergm_model ergm model as for example fitted by calling
 #'   ``ergm::ergm()``. Used when model is set to ergm to sample random networks.
+#' @param directed whether the graph shall be treated as a directed graph. Per
+#'   default (NULL) this is determined automatically using network::is.directed.
 #'
 #' @return data frame with one column for each motif identifier string and one
 #'   row for every computed random graph
@@ -291,7 +332,8 @@ simulate_baseline <- function(net,
                               assume_sparse = TRUE,
                               model = "erdos_renyi",
                               level = -1,
-                              ergm_model = NULL) {
+                              ergm_model = NULL,
+                              directed = NULL) {
   if (!(model %in% c("erdos_renyi", "fixed_densities", "actors_choice", "ergm"))) {
     stop(paste(model, " is not supported. Choose one of 'erdos_renyi' or 'fixed_densities'.
                To use the actors_choice model, for the moment see motifs_distribution to
@@ -310,7 +352,11 @@ simulate_baseline <- function(net,
     result <- data.frame()
     for (i in 0:n) {
       sample <- stats::simulate(ergm_model)
-      counts <- motifr::count_motifs(sample, motifs = motifs, lvl_attr = lvl_attr, assume_sparse = assume_sparse)
+      counts <- motifr::count_motifs(sample,
+                                     motifs = motifs,
+                                     lvl_attr = lvl_attr,
+                                     assume_sparse = assume_sparse,
+                                     directed = directed)
       result <- rbind(result, counts$count)
       if (i == 0) {
         colnames(result) <- counts$motif
@@ -324,7 +370,9 @@ simulate_baseline <- function(net,
         stop("Please provide a valid level when using an Actor's Choice model")
       }
     }
-    py_g <- motifr::toPyGraph(net, lvl_attr = lvl_attr)
+    py_g <- motifr::toPyGraph(net,
+                              lvl_attr = lvl_attr,
+                              directed = directed)
 
     result <- sma$simulateBaselineAutoR(py_g,
       motifs,
@@ -363,6 +411,8 @@ simulate_baseline <- function(net,
 #' @param level lvl_attr of the variable level for the Actor's Choice model
 #' @param ergm_model ergm model as for example fitted by calling
 #'   ``ergm::ergm()``. Used when model is set to ergm to sample random network
+#' @param directed whether the graph shall be treated as a directed graph. Per
+#'   default (NULL) this is determined automatically using network::is.directed.
 #'
 #' @return data frame with one row for each motif identifier string and one row
 #'   for every computed random graph
@@ -377,7 +427,8 @@ compare_to_baseline <- function(net,
                                 assume_sparse = TRUE,
                                 model = "erdos_renyi",
                                 level = -1,
-                                ergm_model = NULL) {
+                                ergm_model = NULL,
+                                directed = directed) {
   simulation <- motifr::simulate_baseline(net,
     motifs,
     n = n,
@@ -385,13 +436,15 @@ compare_to_baseline <- function(net,
     assume_sparse = assume_sparse,
     model = model,
     level = level,
-    ergm_model = ergm_model
+    ergm_model = ergm_model,
+    directed = directed
   )
   count <- motifr::count_motifs(net,
     motifs,
     lvl_attr = lvl_attr,
     assume_sparse = assume_sparse,
-    omit_total_result = TRUE
+    omit_total_result = TRUE,
+    directed = directed
   )
 
   plot_df <- suppressMessages(reshape2::melt(simulation, variable.name = "motif"))
@@ -425,6 +478,8 @@ compare_to_baseline <- function(net,
 #' @param identifier motif identifier string (with or without class, see above)
 #' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object.
+#' @param directed whether the graph shall be treated as a directed graph. Per
+#'   default (NULL) this is determined automatically using network::is.directed.
 #'
 #' @return data frame with one row for each motif
 #' @export
@@ -432,7 +487,8 @@ compare_to_baseline <- function(net,
 #' @examples head(list_motifs(ml_net, "1,2[I.C]"))
 list_motifs <- function(net,
                         identifier,
-                        lvl_attr = "sesType") {
+                        lvl_attr = "sesType",
+                        directed = directed) {
   py_g <- toPyGraph(net, lvl_attr = lvl_attr)
   df <- sma$motifTable(py_g, identifier)
   return(df)

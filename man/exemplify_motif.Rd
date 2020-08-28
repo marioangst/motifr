@@ -4,7 +4,7 @@
 \alias{exemplify_motif}
 \title{Returns an example for a motif found in a given network}
 \usage{
-exemplify_motif(net, motif, lvl_attr = "sesType")
+exemplify_motif(net, motif, lvl_attr = "sesType", directed = NULL)
 }
 \arguments{
 \item{net}{statnet network object}
@@ -13,6 +13,9 @@ exemplify_motif(net, motif, lvl_attr = "sesType")
 
 \item{lvl_attr}{character vector specifying the attribute name where level
 information is stored in statnet object.}
+
+\item{directed}{whether the graph shall be treated as a directed graph. Per
+default (NULL) this is determined automatically using network::is.directed.}
 }
 \value{
 vector of nodes in the motif

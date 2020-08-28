@@ -9,7 +9,8 @@ count_motifs(
   motifs,
   lvl_attr = c("sesType"),
   assume_sparse = TRUE,
-  omit_total_result = TRUE
+  omit_total_result = TRUE,
+  directed = NULL
 )
 }
 \arguments{
@@ -27,6 +28,9 @@ optimization), default TRUE}
 
 \item{omit_total_result}{whether total results shall be omitted, default
 FALSE}
+
+\item{directed}{whether the graph shall be treated as a directed graph. Per
+default (NULL) this is determined automatically using network::is.directed.}
 }
 \value{
 data frame with a column containing motif identifier strings and one

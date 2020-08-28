@@ -4,7 +4,7 @@
 \alias{toPyGraph}
 \title{Translate multi-level statnet network object to networkx (python) object}
 \usage{
-toPyGraph(g, lvl_attr, relabel = TRUE)
+toPyGraph(g, lvl_attr, relabel = TRUE, directed = NULL)
 }
 \arguments{
 \item{g}{statnet network object}
@@ -14,6 +14,9 @@ information is stored in statnet object.}
 
 \item{relabel}{should nodes be relabeled with statnet vertex.names? (defaults
 to TRUE)}
+
+\item{directed}{whether the graph shall be treated as a directed graph. Per
+default (NULL) this is determined automatically using network::is.directed.}
 }
 \value{
 python graph object

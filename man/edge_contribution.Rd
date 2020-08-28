@@ -33,6 +33,9 @@ contributions are analysed. Per default, when ``level = -1``, the first level
 in the motif which provides exactly two nodes is selected. Use this parameter
 to specify a level manually. The procedure for determining the level is the
 same as for the Actor's Choice Model, cf. vignette.
+
+Note that this only works for undirected graphs. Regardless of whether the
+input graph is directed it is treated as undirected graph.
 }
 \examples{
 edge_contribution(ml_net, "1,2[I.C]")

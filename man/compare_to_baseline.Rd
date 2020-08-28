@@ -12,7 +12,8 @@ compare_to_baseline(
   assume_sparse = TRUE,
   model = "erdos_renyi",
   level = -1,
-  ergm_model = NULL
+  ergm_model = NULL,
+  directed = directed
 )
 }
 \arguments{
@@ -36,6 +37,9 @@ Defaults to 'erdos_renyi'.}
 
 \item{ergm_model}{ergm model as for example fitted by calling
 ``ergm::ergm()``. Used when model is set to ergm to sample random network}
+
+\item{directed}{whether the graph shall be treated as a directed graph. Per
+default (NULL) this is determined automatically using network::is.directed.}
 }
 \value{
 data frame with one row for each motif identifier string and one row

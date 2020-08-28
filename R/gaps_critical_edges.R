@@ -10,6 +10,9 @@
 #' level manually. The procedure for determining the level is the same as for
 #' the Actor's Choice Model, cf. vignette.
 #'
+#' Note that this only works for undirected graphs. Regardless of whether the
+#' input graph is directed it is treated as undirected graph.
+#'
 #' @param net statnet network object
 #' @param motif motif identifier
 #' @param lvl_attr character vector specifying the attribute name where level
@@ -43,6 +46,9 @@ identify_gaps <- function(net,
 #' which provides exactly two nodes is selected. Use this parameter to specify a
 #' level manually. The procedure for determining the level is the same as for
 #' the Actor's Choice Model, cf. vignette.
+#'
+#' Note that this only works for undirected graphs. Regardless of whether the
+#' input graph is directed it is treated as undirected graph.
 #'
 #' @param net statnet network object
 #' @param motif motif identifier
@@ -80,6 +86,9 @@ critical_dyads <- function(net,
 #' to specify a level manually. The procedure for determining the level is the
 #' same as for the Actor's Choice Model, cf. vignette.
 #'
+#' Note that this only works for undirected graphs. Regardless of whether the
+#' input graph is directed it is treated as undirected graph.
+#'
 #' @param net statnet network object
 #' @param motif motif identifier
 #' @param lvl_attr character vector specifying the attribute name where level
@@ -97,13 +106,16 @@ edge_contribution <- function(net,
                               motif,
                               lvl_attr = c("sesType"),
                               level = -1) {
-  py_g <- motifr::toPyGraph(g = net, lvl_attr = lvl_attr)
+  py_g <- motifr::toPyGraph(g = net, lvl_attr = lvl_attr, directed = FALSE)
   result <- sma$identifyGapsR(py_g, motif, level = level)
   df <- data.frame(result)
   return(df)
 }
 
 #' Plot gaps in network vizualization
+#'
+#' Note that this only works for undirected graphs. Regardless of whether the
+#' input graph is directed it is treated as undirected graph.
 #'
 #' @param net Statnet network object
 #' @param motif Motif to explore gaps in for

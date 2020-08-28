@@ -5,7 +5,13 @@
 \title{Plots an example for a motif with given motif identifier string taken from
 the given graph.}
 \usage{
-show_motif(motif, net = dummy_net, lvl_attr = c("sesType"), ...)
+show_motif(
+  motif,
+  net = dummy_net,
+  lvl_attr = c("sesType"),
+  directed = NULL,
+  ...
+)
 }
 \arguments{
 \item{motif}{motif identifier string for the motif}
@@ -14,6 +20,9 @@ show_motif(motif, net = dummy_net, lvl_attr = c("sesType"), ...)
 
 \item{lvl_attr}{character vector specifying the attribute name where level
 information is stored in statnet object.}
+
+\item{directed}{whether the graph shall be treated as a directed graph. Per
+default (NULL) this is determined automatically using network::is.directed.}
 
 \item{...}{additional arguments to be passed to plotting function (eg. label
 = TRUE)}
