@@ -9,6 +9,3 @@ update_motifr()
 \description{
 Checks for updates for motifr's Python core, the sma package
 }
-\examples{
-update_motifr()
-}

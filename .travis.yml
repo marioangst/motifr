@@ -9,6 +9,7 @@ r_packages:
    - reticulate
    - pkgdown
 
+# https://www.jumpingrivers.com/blog/r-packages-travis-github-actions-rstudio/
 before_install:
  - python3 -m pip install numpy networkx sma
  - echo "options(repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/bionic/latest'))" >> ~/.Rprofile.site

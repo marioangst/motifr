@@ -22,8 +22,6 @@ sma <- NULL
 #' Checks for updates for motifr's Python core, the sma package
 #'
 #' @export
-#'
-#' @examples update_motifr()
 update_motifr <- function() {
   reticulate::py_install("sma", pip = TRUE)
 }

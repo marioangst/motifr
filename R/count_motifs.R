@@ -460,6 +460,8 @@ compare_to_baseline <- function(net,
   return(p)
 }
 
+#' Lists motifs of a given class or all motifs with a given signature
+#'
 #' Returns a dataframe with one row for each instance of the motif specified by
 #' the given motif identifier string. If the identifier string specifies a motif
 #' class, e.g. ``1,2[I.A]`` , then only motifs of the given class are returned.
