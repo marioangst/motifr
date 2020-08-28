@@ -2,12 +2,11 @@ language: r
 cache: packages
 sudo: required
 
-python:
-  - "3.6"
-  - "pypy3"
 
 before_install:
+  - sudo update-alternatives  --set python /usr/bin/python3.6
   - pip install sma numpy
+
 r_packages:
    - testthat
    - reticulate
