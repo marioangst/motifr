@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 ```
 
 <!-- badges: start -->
+[![Build Status](https://travis-ci.org/marioangst/motifr.svg?branch=master)](https://travis-ci.org/marioangst/motifr)
 <!-- badges: end -->
 
 This package provides tools to analyze multi-level networks in terms of _motifs_. 
