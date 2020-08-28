@@ -7,10 +7,11 @@ warnings_are_errors: false
 r_packages:
    - testthat
    - reticulate
+   - pkgdown
+   - devtools 
 
-install:
+before_install:
  - python3 -m pip install numpy networkx sma
- - R -e 'devtools::install_deps(dep = T)'
  
 after_success:
   - Rscript -e 'pkgdown::build_site()'
