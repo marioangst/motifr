@@ -9,7 +9,7 @@ r_packages:
    - reticulate
 
 install:
- - pip install numpy networkx sma
+ - python3 -m pip install numpy networkx sma
  - R -e 'devtools::install_deps(dep = T)'
  
 after_success:
