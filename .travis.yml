@@ -11,15 +11,19 @@ r_packages:
 
 before_install:
  - python3 -m pip install numpy networkx sma
+ - echo "options(repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/bionic/latest'))" >> ~/.Rprofile.site
+ - echo "options(HTTPUserAgent = paste0('R/', getRversion(), ' R (',
+       paste(getRversion(), R.version['platform'], R.version['arch'], R.version['os']),
+       ')'))" >> ~/.Rprofile.site
  
 after_success:
   - Rscript -e 'pkgdown::build_site()'
 
 deploy:
   provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_PAT
-  keep-history: true
+  skip_cleanup: true
+  github_token: $GITHUB_PAT
+  keep_history: true
   local-dir: docs
   on:
     branch: master
