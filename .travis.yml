@@ -1,3 +1,6 @@
+language: r
+cache: packages
+
 after_success:
   - Rscript -e 'pkgdown::build_site()'
 
