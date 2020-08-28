@@ -3,7 +3,7 @@ cache: packages
 sudo: required
 
 before_install:
-  - pip install sma numpy
+  - pip3 install sma numpy
 
 r_packages:
    - testthat
