@@ -18,3 +18,12 @@ sma <- NULL
   itertools <<- reticulate::import("itertools", delay_load = TRUE)
   sma <<- reticulate::import("sma", delay_load = TRUE)
 }
+
+#' Checks for updates for motifr's Python core, the sma package
+#'
+#' @export
+#'
+#' @examples update_motifr()
+update_motifr <- function() {
+  reticulate::py_install("sma", pip = TRUE)
+}
