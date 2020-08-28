@@ -26,6 +26,8 @@ deploy:
 addons:
   apt:
     update: true
+    sources:
+      - deadsnakes
     packages:
       - libmagick++-dev
-      - python3.6
+      - python3.5
