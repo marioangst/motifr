@@ -1,5 +1,13 @@
 language: r
 cache: packages
+sudo: required
+
+before_install:
+  - pip install sma numpy
+
+r_packages:
+   - testthat
+   - reticulate
 
 after_success:
   - Rscript -e 'pkgdown::build_site()'
