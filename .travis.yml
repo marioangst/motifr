@@ -28,3 +28,4 @@ addons:
     update: true
     packages:
       - libmagick++-dev
+      - python3.6
