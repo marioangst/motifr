@@ -49,6 +49,9 @@ counts in a random baseline of motifs.
 Note that when using the Actor's Choice model this function does not choose
 the variable level automatically. Use the ``level`` parameter to provide a
 valid level.
+
+When using ERGM the paramter ``net`` is not used. Random networks are sampled
+in R using the ``ergm_model`` parameter.
 }
 \examples{
 compare_to_baseline(ml_net, list("1,2[I.C]", "1,2[II.C]"))

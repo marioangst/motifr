@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 
 ```{r setup, include=FALSE}
 library(motifr)
+library(ergm)
 ```
 
 This vignette describes the models used for random baselines in motifr. Baseline models have to be specified when requesting random networks (e.g., ``compare_to_baseline()``), and when computing properties of motif distributions analytically (e.g, ``motifs_distribution()``).
@@ -89,9 +90,6 @@ show_motif("2,2[I.C]", net = ml_net, label = TRUE)
 
 ERGMs are a powerful tool when working with random networks. The R library ``ergm`` provides various so called terms for fitting models based on a multitude of network parameters. motifr can be used to analyse random networks sampled from a given ERGM.
 
-```{r setup, include=FALSE}
-library(ergm)
-```
 ```{r}
 model <- ergm(dummy_net ~ edges + triangle)
 compare_to_baseline(dummy_net, list('1,2[I.A]', '1,2[I.C]', '1,2[II.C]'), n = 50, model = "ergm", ergm_model = model)

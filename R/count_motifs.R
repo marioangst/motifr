@@ -261,6 +261,9 @@ show_motif <- function(motif,
 #' the variable level automatically. Use the ``level`` parameter to provide a
 #' valid level.
 #'
+#' When using ERGM the paramter ``net`` is not used. Random networks are sampled
+#' in R using the ``ergm_model`` parameter.
+#'
 #' @param net statnet network object
 #' @param motifs list of motif identifier strings
 #' @param n number of random graphs
@@ -344,6 +347,9 @@ simulate_baseline <- function(net,
 #' the variable level automatically. Use the ``level`` parameter to provide a
 #' valid level.
 #'
+#' When using ERGM the paramter ``net`` is not used. Random networks are sampled
+#' in R using the ``ergm_model`` parameter.
+#'
 #' @param net statnet network object
 #' @param motifs list of motif identifier strings
 #' @param n number of random graphs
@@ -400,4 +406,34 @@ compare_to_baseline <- function(net,
     ggplot2::xlab(sprintf("Simulated (gray histogram) versus actual (solid line) motif counts, n = %d iterations, model %s", n, model))
 
   return(p)
+}
+
+#' Returns a dataframe with one row for each instance of the motif specified by
+#' the given motif identifier string. If the identifier string specifies a motif
+#' class, e.g. ``1,2[I.A]`` , then only motifs of the given class are returned.
+#' If the identifier string specifies a signature, e.g. ``1,2``, then a full
+#' list of all motifs of this signature is returned. In the latter case, the
+#' dataframe contains an additional column stating the classes of the motifs.
+
+#' The naming scheme of the columns is as follows: Each column is called
+#' ``levelA_nodeB`` where ``A`` is the ``sesType`` of the nodes in the column
+#' and ``B`` the index of the nodes amoung the nodes on the same level. This
+#' index stems from the internal order of the nodes and does not carry any
+#' specific meaning. in R using the ``ergm_model`` parameter.
+#'
+#' @param net statnet network object
+#' @param identifier motif identifier string (with or without class, see above)
+#' @param lvl_attr character vector specifying the attribute name where level
+#'   information is stored in statnet object.
+#'
+#' @return data frame with one row for each motif
+#' @export
+#'
+#' @examples head(list_motifs(ml_net, "1,2[I.C]"))
+list_motifs <- function(net,
+                        identifier,
+                        lvl_attr = "sesType") {
+  py_g <- toPyGraph(net, lvl_attr = lvl_attr)
+  df <- sma$motifTable(py_g, identifier)
+  return(df)
 }
