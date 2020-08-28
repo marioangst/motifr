@@ -2,9 +2,9 @@ language: r
 cache: packages
 sudo: required
 warnings_are_errors: false
+dist: focal
 
 before_install:
-  - pip install --upgrade pip
   - pip install sma numpy
 
 r_packages:
@@ -28,5 +28,3 @@ addons:
     update: true
     packages:
       - libmagick++-dev
-      - python3
-      - python3-pip
