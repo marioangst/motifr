@@ -3,7 +3,7 @@ cache: packages
 sudo: required
 
 before_install:
-  - sudo update-alternatives  --set python /usr/bin/python3.8
+  - sudo update-alternatives  --set python /usr/bin/python3
   - pip install sma numpy
 
 r_packages:
@@ -27,4 +27,4 @@ addons:
     update: true
     packages:
       - libmagick++-dev
-      - python3.8
+      - python3
