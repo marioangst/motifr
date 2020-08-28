@@ -54,7 +54,7 @@ devtools::install_github("marioangst/motifr")
 
 ## Input
 
-motifr currently can only reliably handle undirected and unweighted networks. There is in principle no restriction on the number of levels of a network to count motifs in, but typical use cases for which the package was designed will likely involve two- or three-level networks.
+motifr currently can only reliably handle undirected and unweighted networks (we are working on a directed implementation). There is in principle no restriction on the number of levels of a network to count motifs in, but typical use cases for which the package was designed will likely involve two- or three-level networks.
 
 Network data should currently be prepared as statnet network objects with a numeric vertex attribute to specify a level for each node (named eg. "lvl") for best results.
 
