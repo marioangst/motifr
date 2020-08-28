@@ -2,9 +2,12 @@ language: r
 cache: packages
 sudo: required
 
-before_install:
-  - pip3 install sma numpy
+python:
+  - "3.6"
+  - "pypy3"
 
+before_install:
+  - pip install sma numpy
 r_packages:
    - testthat
    - reticulate
