@@ -5,7 +5,9 @@ warnings_are_errors: false
 dist: focal
 
 before_install:
-  - pip install sma numpy
+  - sudo apt-get update
+  - sudo apt-get install python3
+  - pip install numpy networkx sma
 
 r_packages:
    - testthat
@@ -26,8 +28,5 @@ deploy:
 addons:
   apt:
     update: true
-    sources:
-      - deadsnakes
     packages:
       - libmagick++-dev
-      - python3.5
