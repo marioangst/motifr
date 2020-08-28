@@ -1,8 +1,8 @@
+dist: bionic
 language: r
 cache: packages
-root: required
+sudo: required
 warnings_are_errors: false
-dist: focal
 
 r_packages:
    - testthat
