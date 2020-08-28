@@ -30,3 +30,4 @@ addons:
     packages:
       - libmagick++-dev
       - python3
+      - python3-pip
