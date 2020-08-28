@@ -60,5 +60,5 @@ When using ERGM the paramter ``net`` is not used. Random networks are sampled
 in R using the ``ergm_model`` parameter.
 }
 \examples{
-simulate_baseline(ml_net, list("1,2[I.C]"), n = 10)
+simulate_baseline(ml_net, list("1,2[I.C]"), n = 10, directed = FALSE)
 }

@@ -207,7 +207,6 @@ plot_critical_dyads <- function(net,
 #' @param colour colour code for the weighted edges
 #' @param title title of the plot
 #' @param lvl_attr Node attribute specifiying level information
-#' @param level Focal level for gap analysis
 #' @param cutoff Cutoff point in contributions of an edge to the number of
 #'   motifs above which to analyse gaps
 #' @param ... list of additional parameters to be passed to plotting function

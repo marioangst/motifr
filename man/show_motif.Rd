@@ -7,7 +7,7 @@ the given graph.}
 \usage{
 show_motif(
   motif,
-  net = dummy_net,
+  net = motifr::dummy_net,
   lvl_attr = c("sesType"),
   directed = NULL,
   ...
@@ -34,7 +34,7 @@ plot
 If no network is provided, a motif in a dummy network will be shown.
 }
 \examples{
-show_motif("1,2[I.C]", net = ml_net)
+show_motif("1,2[I.C]", net = ml_net, directed = FALSE)
 }
 \seealso{
 exemplify_motif

@@ -13,7 +13,7 @@ compare_to_baseline(
   model = "erdos_renyi",
   level = -1,
   ergm_model = NULL,
-  directed = directed
+  directed = NULL
 )
 }
 \arguments{
@@ -58,5 +58,5 @@ When using ERGM the paramter ``net`` is not used. Random networks are sampled
 in R using the ``ergm_model`` parameter.
 }
 \examples{
-compare_to_baseline(ml_net, list("1,2[I.C]", "1,2[II.C]"))
+compare_to_baseline(ml_net, list("1,2[I.C]", "1,2[II.C]"), directed = FALSE)
 }

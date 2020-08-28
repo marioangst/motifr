@@ -25,5 +25,5 @@ python graph object
 Translate multi-level statnet network object to networkx (python) object
 }
 \examples{
-toPyGraph(dummy_net, lvl_attr = "sesType")
+toPyGraph(motifr::dummy_net, lvl_attr = "sesType")
 }

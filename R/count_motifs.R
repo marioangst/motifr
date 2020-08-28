@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples
-#' toPyGraph(dummy_net, lvl_attr = "sesType")
+#' toPyGraph(motifr::dummy_net, lvl_attr = "sesType")
 toPyGraph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
 
   # function for translating a statnet network object into a Python compatible
@@ -27,6 +27,8 @@ toPyGraph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
 
   if(is.null(directed)){
     directed = network::is.directed(g)
+  } else if(directed == TRUE && ! network::is.directed(g)) {
+    warning("Attempting to treat an undirected network as a directed network. This might lead to unintended results.")
   }
 
   py_g <- sma$translateGraph(adjacencyMatrix,
@@ -97,7 +99,7 @@ show_4_motifs <- function() {
 #' @export
 #'
 #' @examples
-#' count_motifs(ml_net, lvl_attr = c("sesType"), motifs = list("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]"))
+#' count_motifs(ml_net, lvl_attr = c("sesType"), motifs = list("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]"), directed = FALSE)
 count_motifs <- function(net,
                          motifs,
                          lvl_attr = c("sesType"),
@@ -155,7 +157,7 @@ count_motifs <- function(net,
 #' @export
 #'
 #' @examples
-#' motifs_distribution(ml_net, motif = list("1,2[I.C]"))
+#' motifs_distribution(ml_net, motif = list("1,2[I.C]"), directed = FALSE)
 motifs_distribution <- function(net,
                                 motifs,
                                 lvl_attr = "sesType",
@@ -196,30 +198,27 @@ motifs_distribution <- function(net,
 #'
 #' @return dataframe with motif counts, expectations and variances for set of
 #'   selected motifs
-#' @param directed whether the graph shall be treated as a directed graph. Per
-#'   default (NULL) this is determined automatically using network::is.directed.
 #' @export
 #'
 #' @examples
 #' motif_summary(ml_net)
 motif_summary <- function(net,
-                          lvl_attr = c("sesType"),
-                          directed = NULL) {
-
+                          lvl_attr = c("sesType")) {
   # exquisite selection of motifs
   motifs <- c("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]", "2,2[III.C]", "2,2[III.D]")
+  # all motifs are undirected, hence set directed = FALSE and consider graph as undirected
 
   # count and compute distribution parameters
   counts <- motifr::count_motifs(net,
                                  lvl_attr,
                                  motifs = motifs,
                                  omit_total_result = TRUE,
-                                 directed = directed)
+                                 directed = FALSE)
   distribution <- motifr::motifs_distribution(net,
                                               lvl_attr,
                                               motifs = motifs,
                                               omit_total_result = TRUE,
-                                              directed = directed)
+                                              directed = FALSE)
 
   # reformat data
   result <- merge(counts, distribution)
@@ -240,7 +239,7 @@ motif_summary <- function(net,
 #' @export
 #'
 #' @examples
-#' exemplify_motif(ml_net, motif = "1,2[I.C]")
+#' exemplify_motif(ml_net, motif = "1,2[I.C]", directed = FALSE)
 exemplify_motif <- function(net,
                             motif,
                             lvl_attr = "sesType",
@@ -269,9 +268,9 @@ exemplify_motif <- function(net,
 #' @export
 #'
 #' @examples
-#' show_motif("1,2[I.C]", net = ml_net)
+#' show_motif("1,2[I.C]", net = ml_net, directed = FALSE)
 show_motif <- function(motif,
-                       net = dummy_net,
+                       net = motifr::dummy_net,
                        lvl_attr = c("sesType"),
                        directed = NULL,
                        ...) {
@@ -324,7 +323,7 @@ show_motif <- function(motif,
 #' @export
 #'
 #' @examples
-#' simulate_baseline(ml_net, list("1,2[I.C]"), n = 10)
+#' simulate_baseline(ml_net, list("1,2[I.C]"), n = 10, directed = FALSE)
 simulate_baseline <- function(net,
                               motifs,
                               n = 10,
@@ -419,7 +418,7 @@ simulate_baseline <- function(net,
 #' @export
 #'
 #' @examples
-#' compare_to_baseline(ml_net, list("1,2[I.C]", "1,2[II.C]"))
+#' compare_to_baseline(ml_net, list("1,2[I.C]", "1,2[II.C]"), directed = FALSE)
 compare_to_baseline <- function(net,
                                 motifs,
                                 n = 10,
@@ -428,7 +427,7 @@ compare_to_baseline <- function(net,
                                 model = "erdos_renyi",
                                 level = -1,
                                 ergm_model = NULL,
-                                directed = directed) {
+                                directed = NULL) {
   simulation <- motifr::simulate_baseline(net,
     motifs,
     n = n,
@@ -484,12 +483,12 @@ compare_to_baseline <- function(net,
 #' @return data frame with one row for each motif
 #' @export
 #'
-#' @examples head(list_motifs(ml_net, "1,2[I.C]"))
+#' @examples head(list_motifs(ml_net, "1,2[I.C]", directed = FALSE))
 list_motifs <- function(net,
                         identifier,
                         lvl_attr = "sesType",
-                        directed = directed) {
-  py_g <- toPyGraph(net, lvl_attr = lvl_attr)
+                        directed = NULL) {
+  py_g <- toPyGraph(net, lvl_attr = lvl_attr, directed = directed)
   df <- sma$motifTable(py_g, identifier)
   return(df)
 }

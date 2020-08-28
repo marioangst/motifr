@@ -14,7 +14,7 @@ and ``B`` the index of the nodes amoung the nodes on the same level. This
 index stems from the internal order of the nodes and does not carry any
 specific meaning. in R using the ``ergm_model`` parameter.}
 \usage{
-list_motifs(net, identifier, lvl_attr = "sesType", directed = directed)
+list_motifs(net, identifier, lvl_attr = "sesType", directed = NULL)
 }
 \arguments{
 \item{net}{statnet network object}
@@ -44,5 +44,5 @@ index stems from the internal order of the nodes and does not carry any
 specific meaning. in R using the ``ergm_model`` parameter.
 }
 \examples{
-head(list_motifs(ml_net, "1,2[I.C]"))
+head(list_motifs(ml_net, "1,2[I.C]", directed = FALSE))
 }

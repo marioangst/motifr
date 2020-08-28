@@ -57,5 +57,5 @@ variable level. Set the ``level`` paramter to the value of the ``lvl_attr``
 of the nodes in the desired level to specify the level manually.
 }
 \examples{
-motifs_distribution(ml_net, motif = list("1,2[I.C]"))
+motifs_distribution(ml_net, motif = list("1,2[I.C]"), directed = FALSE)
 }

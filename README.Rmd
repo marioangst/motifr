@@ -31,7 +31,7 @@ Package features include:
 
   - Visualization: The package provides functions to visualize multi-level networks, based on [ggraph](https://github.com/thomasp85/ggraph).
   
-  - Motif counts: The package is in many parts a R wrapper for the excellent [sesmotifanalyser](https://gitlab.com/t.seppelt/sesmotifanalyser) Python framework written by Tim Seppelt to count multi-level network motifs, compare them to a baseline and much more. Only parts of of sesmotifanalyser are yet wrapped, so consult the python framework for additional functionality. 
+  - Motif counts: The package is in many parts a R wrapper for the excellent [SESMotifAnalyser](https://gitlab.com/t.seppelt/sesmotifanalyser) Python framework written by Tim Seppelt to count multi-level network motifs, compare them to a baseline and much more. Only parts of of sesmotifanalyser are yet wrapped, so consult the python framework for additional functionality. 
   
 - Contributions of edges to motifs: motifr further identifies and visualizes functional gaps and critical edges in multi-level networks based on contributions of existing or potential edges to given motifs (this is theoretically motivated by network theories of functional fit and misfit).
 
@@ -82,8 +82,8 @@ plot_mnet(net = ml_net,
 Motifs can be counted using the versatile function ``count_motifs()``. It takes as parameters a statnet network object (use ``ml_net`` or ``dummy_net`` provided by this package as example) and a list of motif identifiers (see below) specifying the motifs. See the [vignette on the motif zoo](https://marioangst.github.io/motifr/articles/motif_zoo.html) for details on nomenclature for motifs (motif identifier strings). Let's quickly check out two classic examples of three-node, two-level motifs (open and closed triangles) in the wetlands management network introduced above:
 
 ```{r  out.width="300px"}
-show_motif(motif = '1,2[I.C]', net = ml_net, label = TRUE) # open ('1,2[I.C]') triangle
-show_motif(motif = '1,2[II.C]', net = ml_net, label = TRUE) # closed ('1,2[II.C]') triangle
+show_motif(motif = '1,2[I.C]', net = ml_net, label = TRUE, directed = FALSE) # open ('1,2[I.C]') triangle
+show_motif(motif = '1,2[II.C]', net = ml_net, label = TRUE, directed = FALSE) # closed ('1,2[II.C]') triangle
 ```
 
 
@@ -92,7 +92,7 @@ Let's count the number of of these motifs in the entire network.
 ```{r}
 motifs = list('1,2[I.C]', '1,2[II.C]') # open and closed triangle
 
-count_motifs(ml_net, motifs)
+count_motifs(ml_net, motifs, directed = FALSE)
 ```
 
 An exploratory approach can be taken by calling ``motif_summary()``. This function counts the occurrences of a couple of interesting motifs. Furthermore it computes expectations and variances for the occurrence of these motifs in a modified Erdős-Rényi model. See the package [vignette on random baselines](https://marioangst.github.io/motifr/articles/random_baselines.html) for details.
@@ -131,5 +131,5 @@ Motifr can be used to simulate a random baseline of networks. Motif counts in an
 ```{r}
 motifs = list('1,2[I.C]', '1,2[II.C]') # open ('1,2[I.C]') and closed ('1,2[II.C]') triangles
 
-compare_to_baseline(ml_net, motifs = motifs, n = 100)
+compare_to_baseline(ml_net, motifs = motifs, n = 50, directed = FALSE)
 ```

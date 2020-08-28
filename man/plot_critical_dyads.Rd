@@ -2,7 +2,7 @@
 % Please edit documentation in R/gaps_critical_edges.R
 \name{plot_critical_dyads}
 \alias{plot_critical_dyads}
-\title{Plot gaps in network vizualization}
+\title{Plot critical dyads in network vizualization}
 \usage{
 plot_critical_dyads(
   net,
@@ -41,7 +41,7 @@ Note that this only works for undirected graphs. Regardless of whether the
 input graph is directed it is treated as undirected graph.
 }
 \examples{
-plot_gaps(ml_net, "1,2[II.C]", level = -1)
-plot_gaps(ml_net, "1,2[II.C]", level = -1, subset_graph = "focal", cutoff = 4, label = TRUE)
-plot_gaps(ml_net, "1,2[II.C]", level = -1, subset_graph = "partial", cutoff = 4, label = TRUE)
+plot_critical_dyads(ml_net, "1,2[I.C]", level = -1)
+plot_critical_dyads(ml_net, "1,2[I.C]", level = -1, subset_graph = "focal", cutoff = 4, label = TRUE)
+plot_critical_dyads(ml_net, "1,2[I.C]", level = -1, subset_graph = "partial", cutoff = 4, label = TRUE)
 }

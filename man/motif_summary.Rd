@@ -4,16 +4,13 @@
 \alias{motif_summary}
 \title{Summary for motif counts and distribution (Erdos-Renyi)}
 \usage{
-motif_summary(net, lvl_attr = c("sesType"), directed = NULL)
+motif_summary(net, lvl_attr = c("sesType"))
 }
 \arguments{
 \item{net}{statnet network object}
 
 \item{lvl_attr}{character vector specifying the attribute name where level
 information is stored in statnet object.}
-
-\item{directed}{whether the graph shall be treated as a directed graph. Per
-default (NULL) this is determined automatically using network::is.directed.}
 }
 \value{
 dataframe with motif counts, expectations and variances for set of

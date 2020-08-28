@@ -27,7 +27,7 @@ Package features include:
 
   - Motif counts: The package is in many parts a R wrapper for the
     excellent
-    [sesmotifanalyser](https://gitlab.com/t.seppelt/sesmotifanalyser)
+    [SESMotifAnalyser](https://gitlab.com/t.seppelt/sesmotifanalyser)
     Python framework written by Tim Seppelt to count multi-level network
     motifs, compare them to a baseline and much more. Only parts of of
     sesmotifanalyser are yet wrapped, so consult the python framework
@@ -62,9 +62,10 @@ devtools::install_github("marioangst/motifr")
 ## Input
 
 motifr currently can only reliably handle undirected and unweighted
-networks. There is in principle no restriction on the number of levels
-of a network to count motifs in, but typical use cases for which the
-package was designed will likely involve two- or three-level networks.
+networks (we are working on a directed implementation). There is in
+principle no restriction on the number of levels of a network to count
+motifs in, but typical use cases for which the package was designed will
+likely involve two- or three-level networks.
 
 Network data should currently be prepared as statnet network objects
 with a numeric vertex attribute to specify a level for each node (named
@@ -110,13 +111,13 @@ quickly check out two classic examples of three-node, two-level motifs
 introduced above:
 
 ``` r
-show_motif(motif = '1,2[I.C]', net = ml_net, label = TRUE) # open ('1,2[I.C]') triangle
+show_motif(motif = '1,2[I.C]', net = ml_net, label = TRUE, directed = FALSE) # open ('1,2[I.C]') triangle
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.svg" width="300px" />
 
 ``` r
-show_motif(motif = '1,2[II.C]', net = ml_net, label = TRUE) # closed ('1,2[II.C]') triangle
+show_motif(motif = '1,2[II.C]', net = ml_net, label = TRUE, directed = FALSE) # closed ('1,2[II.C]') triangle
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-2.svg" width="300px" />
@@ -126,7 +127,7 @@ Let’s count the number of of these motifs in the entire network.
 ``` r
 motifs = list('1,2[I.C]', '1,2[II.C]') # open and closed triangle
 
-count_motifs(ml_net, motifs)
+count_motifs(ml_net, motifs, directed = FALSE)
 #>               motif count
 #> 1,2[I.C]   1,2[I.C]   543
 #> 1,2[II.C] 1,2[II.C]   167
@@ -168,6 +169,9 @@ network:
 
 ``` r
 gaps <- identify_gaps(ml_net, motif = '1,2[II.C]')
+#> Warning in edge_contribution(net = net, motif = motif, lvl_attr = lvl_attr, :
+#> Edge contribution does only make sense for undirected networks. The given
+#> network is automatically treated as an undirected network.
 head(gaps)
 #>   vertex0 vertex1 contribution
 #> 1 actor10 actor27            5
@@ -189,6 +193,9 @@ plot_gaps(ml_net,
           level = -1, 
           subset_graph = "partial", 
           cutoff = 5, label = TRUE)
+#> Warning in edge_contribution(net = net, motif = motif, lvl_attr = lvl_attr, :
+#> Edge contribution does only make sense for undirected networks. The given
+#> network is automatically treated as an undirected network.
 ```
 
 <img src="man/figures/README-unnamed-chunk-10-1.svg" width="100%" />
@@ -211,7 +218,7 @@ on random baselines](vignettes/random_baselines.Rmd) for details.
 ``` r
 motifs = list('1,2[I.C]', '1,2[II.C]') # open ('1,2[I.C]') and closed ('1,2[II.C]') triangles
 
-compare_to_baseline(ml_net, motifs = motifs, n = 100)
+compare_to_baseline(ml_net, motifs = motifs, n = 50, directed = FALSE)
 ```
 
 <img src="man/figures/README-unnamed-chunk-11-1.svg" width="100%" />

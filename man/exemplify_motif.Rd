@@ -24,7 +24,7 @@ vector of nodes in the motif
 Returns an example for a motif found in a given network
 }
 \examples{
-exemplify_motif(ml_net, motif = "1,2[I.C]")
+exemplify_motif(ml_net, motif = "1,2[I.C]", directed = FALSE)
 }
 \seealso{
 show_motif
