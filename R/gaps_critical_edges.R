@@ -106,6 +106,9 @@ edge_contribution <- function(net,
                               motif,
                               lvl_attr = c("sesType"),
                               level = -1) {
+  if (network::is.directed(net)) {
+    warning("Edge contribution does only make sense for undirected networks. The given network is automatically treated as an undirected network.")
+  }
   py_g <- motifr::toPyGraph(g = net, lvl_attr = lvl_attr, directed = FALSE)
   result <- sma$identifyGapsR(py_g, motif, level = level)
   df <- data.frame(result)
@@ -149,9 +152,84 @@ plot_gaps <- function(net,
     lvl_attr = lvl_attr,
     level = level
   )
-  gaps <- gaps[gaps$contribution >= cutoff, ]
 
-  gap_nodes <- unique(c(gaps$vertex0, gaps$vertex1))
+  plot_gaps_or_critical_dyads(net, gaps, "#f2790070", "Gap", lvl_attr = lvl_attr, cutoff = cutoff, subset_graph = subset_graph, ...)
+}
+
+#' Plot critical dyads in network vizualization
+#'
+#' Note that this only works for undirected graphs. Regardless of whether the
+#' input graph is directed it is treated as undirected graph.
+#'
+#' @param net Statnet network object
+#' @param motif Motif to explore gaps in for
+#' @param lvl_attr Node attribute specifiying level information
+#' @param level Focal level for gap analysis
+#' @param cutoff Cutoff point in contributions of an edge to the number of
+#'   motifs above which to analyse gaps
+#' @param ... list of additional parameters to be passed to plotting function
+#'   (see ?motifr::plot_mnet), eg. label = TRUE
+#' @param subset_graph Whether to subset the graph to only show nodes involved
+#'   in gaps. One of "none" (no subset, default), "partial" (only focal level is
+#'   subset) or "focal" (only focal level shown)
+#'
+#' @return A plot of gaps, sized by weight in a multilevel network
+#' @export
+#'
+#' @examples
+#' plot_critical_dyads(ml_net, "1,2[I.C]", level = -1)
+#' plot_critical_dyads(ml_net, "1,2[I.C]", level = -1, subset_graph = "focal", cutoff = 4, label = TRUE)
+#' plot_critical_dyads(ml_net, "1,2[I.C]", level = -1, subset_graph = "partial", cutoff = 4, label = TRUE)
+plot_critical_dyads <- function(net,
+                                motif,
+                                lvl_attr = c("sesType"),
+                                level = -1,
+                                cutoff = 2,
+                                subset_graph = "none",
+                                ...) {
+  gaps <- motifr::critical_dyads(
+    net = net,
+    motif = motif,
+    lvl_attr = lvl_attr,
+    level = level
+  )
+
+  plot_gaps_or_critical_dyads(net, gaps, "#00f24070", "Critical dyad", lvl_attr = lvl_attr, cutoff = cutoff, subset_graph = subset_graph, ...)
+}
+
+#' Helper function for ?motifr::plot_gaps and ?motifr::plot_critical_dyads
+#'
+#' Note that this only works for undirected graphs. Regardless of whether the
+#' input graph is directed it is treated as undirected graph.
+#'
+#' @param net Statnet network object
+#' @param edge_contribution data frame providing edge contribution data
+#' @param colour colour code for the weighted edges
+#' @param title title of the plot
+#' @param lvl_attr Node attribute specifiying level information
+#' @param level Focal level for gap analysis
+#' @param cutoff Cutoff point in contributions of an edge to the number of
+#'   motifs above which to analyse gaps
+#' @param ... list of additional parameters to be passed to plotting function
+#'   (see ?motifr::plot_mnet), eg. label = TRUE
+#' @param subset_graph Whether to subset the graph to only show nodes involved
+#'   in gaps. One of "none" (no subset, default), "partial" (only focal level is
+#'   subset) or "focal" (only focal level shown)
+#'
+#' @return A plot of gaps or critical edges, sized by weight in a multilevel
+#'   network
+#'
+plot_gaps_or_critical_dyads <- function(net,
+                                        edge_contribution,
+                                        colour,
+                                        title,
+                                        lvl_attr = c("sesType"),
+                                        cutoff = 2,
+                                        subset_graph = "none",
+                                        ...) {
+  edge_contribution <- edge_contribution[edge_contribution$contribution >= cutoff, ]
+
+  gap_nodes <- unique(c(edge_contribution$vertex0, edge_contribution$vertex1))
 
   if ("network" %in% class(net)) {
     net <- intergraph::asIgraph(net)
@@ -193,29 +271,29 @@ plot_gaps <- function(net,
   # get coordinates for all lines
   coord_gaps <- data.frame(
     x1 =
-      unlist(lapply(gaps$vertex0, function(vertex) {
+      unlist(lapply(edge_contribution$vertex0, function(vertex) {
         netviz$data$x[netviz$data$name == vertex]
       })),
     y1 =
-      unlist(lapply(gaps$vertex0, function(vertex) {
+      unlist(lapply(edge_contribution$vertex0, function(vertex) {
         netviz$data$y[netviz$data$name == vertex]
       })),
     x2 =
-      unlist(lapply(gaps$vertex1, function(vertex) {
+      unlist(lapply(edge_contribution$vertex1, function(vertex) {
         netviz$data$x[netviz$data$name == vertex]
       })),
     y2 =
-      unlist(lapply(gaps$vertex1, function(vertex) {
+      unlist(lapply(edge_contribution$vertex1, function(vertex) {
         netviz$data$y[netviz$data$name == vertex]
       })),
-    weight = gaps$contribution
+    weight = edge_contribution$contribution
   )
 
   netviz +
     ggplot2::geom_segment(
       data = coord_gaps,
       ggplot2::aes(x = x1, y = y1, xend = x2, yend = y2, size = weight),
-      colour = "#f2790070", alpha = 0.7
+      colour = colour, alpha = 0.7
     ) +
-    ggplot2::scale_size_continuous("Gap weight", range = c(1, 2))
+    ggplot2::scale_size_continuous(sprintf("%s weight", title), range = c(1, 2))
 }
