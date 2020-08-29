@@ -2,17 +2,7 @@
 % Please edit documentation in R/count_motifs.R
 \name{list_motifs}
 \alias{list_motifs}
-\title{Returns a dataframe with one row for each instance of the motif specified by
-the given motif identifier string. If the identifier string specifies a motif
-class, e.g. ``1,2[I.A]`` , then only motifs of the given class are returned.
-If the identifier string specifies a signature, e.g. ``1,2``, then a full
-list of all motifs of this signature is returned. In the latter case, the
-dataframe contains an additional column stating the classes of the motifs.
-The naming scheme of the columns is as follows: Each column is called
-``levelA_nodeB`` where ``A`` is the ``sesType`` of the nodes in the column
-and ``B`` the index of the nodes amoung the nodes on the same level. This
-index stems from the internal order of the nodes and does not carry any
-specific meaning. in R using the ``ergm_model`` parameter.}
+\title{Lists motifs of a given class or all motifs with a given signature}
 \usage{
 list_motifs(net, identifier, lvl_attr = "sesType", directed = NULL)
 }

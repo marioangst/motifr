@@ -34,7 +34,7 @@ plot
 If no network is provided, a motif in a dummy network will be shown.
 }
 \examples{
-show_motif("1,2[I.C]", net = ml_net, directed = FALSE)
+show_motif("1,2[I.C]", net = ml_net, directed = FALSE, label = TRUE)
 }
 \seealso{
 exemplify_motif

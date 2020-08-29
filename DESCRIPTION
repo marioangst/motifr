@@ -21,9 +21,11 @@ Description: This package provides tools for motif analysis in multi-level netwo
     The package is in many parts a R wrapper for the excellent SESMotifAnalyser Python package written by
     Tim Seppelt.
 License: MIT + file LICENSE
+URL: https://marioangst.github.io/motifr/
+BugReports: https://github.com/marioangst/motifr/issues
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Suggests: 
     testthat (>= 2.1.0),
     knitr,
@@ -33,21 +35,19 @@ Suggests:
 Imports: 
     igraph,
     utils,
-    glue,
-    graphics,
     reticulate,
-    statnet,
     network,
     magick,
     purrr,
     ggraph,
-    ggplot2,
+    ggplot2 (>= 2.1.0),
     tibble,
     tidygraph,
     scales,
     reshape2,
     intergraph,
-    dplyr
+    dplyr,
+    rlang
 Config/reticulate:
   list(
     packages = list(

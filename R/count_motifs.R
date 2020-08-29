@@ -25,20 +25,25 @@ toPyGraph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
     function(x) network::get.vertex.attribute(g, x)
   )
 
-  if(is.null(directed)){
-    directed = network::is.directed(g)
-  } else if(directed == TRUE && ! network::is.directed(g)) {
-    warning("Attempting to treat an undirected network as a directed network. This might lead to unintended results.")
+  if (is.null(directed)) {
+    directed <- network::is.directed(g)
+  } else if (directed == TRUE && !network::is.directed(g)) {
+    warning(paste(
+      "Attempting to treat an undirected network as directed.",
+      "This might lead to unintended results."
+    ))
   }
 
   py_g <- sma$translateGraph(adjacencyMatrix,
-                             attributeNames,
-                             attributeValues,
-                             lvl_attr,
-                             directed = directed)
+    attributeNames,
+    attributeValues,
+    lvl_attr,
+    directed = directed
+  )
 
   if (relabel == TRUE) {
-    # JS: renaming in here right now, but will suggest update to rbridge.py to do in Python
+    # JS: renaming in here right now,
+    # but will suggest update to rbridge.py to do in Python
     node_names <-
       reticulate::py_dict(
         keys = as.integer(0:(py_g$number_of_nodes() - 1)),
@@ -99,7 +104,11 @@ show_4_motifs <- function() {
 #' @export
 #'
 #' @examples
-#' count_motifs(ml_net, lvl_attr = c("sesType"), motifs = list("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]"), directed = FALSE)
+#' count_motifs(ml_net,
+#'   lvl_attr = c("sesType"),
+#'   motifs = list("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]"),
+#'   directed = FALSE
+#' )
 count_motifs <- function(net,
                          motifs,
                          lvl_attr = c("sesType"),
@@ -108,8 +117,9 @@ count_motifs <- function(net,
                          directed = NULL) {
   # convert net to python object
   py_g <- motifr::toPyGraph(net,
-                            lvl_attr = lvl_attr,
-                            directed = directed)
+    lvl_attr = lvl_attr,
+    directed = directed
+  )
 
   # call counter
   counted <- sma$countMotifsAutoR(py_g,
@@ -165,15 +175,20 @@ motifs_distribution <- function(net,
                                 level = -1,
                                 omit_total_result = TRUE,
                                 directed = NULL) {
-  if (!(model %in% c("erdos_renyi", "actors_choice"))) {
-    stop(paste(model, " is not supported. Choose one of 'erdos_renyi' or 'fixed_densities'.
-               To use the fixed densities model, for the moment see simulate_baseline()."))
+  supported_models <- c("erdos_renyi", "actors_choice")
+  if (!(model %in% supported_models)) {
+    stop(paste(
+      "Model", model, "is not supported. Choose one of",
+      paste(supported_models, collapse = ", "),
+      "or use simulate_baseline()."
+    ))
   }
 
   # convert net to python object
   py_g <- motifr::toPyGraph(net,
-                            lvl_attr = lvl_attr,
-                            directed = directed)
+    lvl_attr = lvl_attr,
+    directed = directed
+  )
 
   # call counter
   result <- sma$distributionMotifsAutoR(py_g,
@@ -205,20 +220,27 @@ motifs_distribution <- function(net,
 motif_summary <- function(net,
                           lvl_attr = c("sesType")) {
   # exquisite selection of motifs
-  motifs <- c("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]", "2,2[III.C]", "2,2[III.D]")
-  # all motifs are undirected, hence set directed = FALSE and consider graph as undirected
+  # all motifs are undirected, hence set directed = FALSE and suppose graph is
+  # undircted
+  motifs <- c(
+    "1,2[I.C]", "1,2[II.C]",
+    "2,1[I.C]", "2,1[II.C]",
+    "2,2[III.C]", "2,2[III.D]"
+  )
 
   # count and compute distribution parameters
   counts <- motifr::count_motifs(net,
-                                 lvl_attr,
-                                 motifs = motifs,
-                                 omit_total_result = TRUE,
-                                 directed = FALSE)
+    lvl_attr,
+    motifs = motifs,
+    omit_total_result = TRUE,
+    directed = FALSE
+  )
   distribution <- motifr::motifs_distribution(net,
-                                              lvl_attr,
-                                              motifs = motifs,
-                                              omit_total_result = TRUE,
-                                              directed = FALSE)
+    lvl_attr,
+    motifs = motifs,
+    omit_total_result = TRUE,
+    directed = FALSE
+  )
 
   # reformat data
   result <- merge(counts, distribution)
@@ -268,7 +290,7 @@ exemplify_motif <- function(net,
 #' @export
 #'
 #' @examples
-#' show_motif("1,2[I.C]", net = ml_net, directed = FALSE)
+#' show_motif("1,2[I.C]", net = ml_net, directed = FALSE, label = TRUE)
 show_motif <- function(motif,
                        net = motifr::dummy_net,
                        lvl_attr = c("sesType"),
@@ -280,9 +302,7 @@ show_motif <- function(motif,
     directed = directed
   )
   vertices <- network::get.vertex.attribute(net, "vertex.names")
-  indices <- sapply(motif_names, function(x) {
-    match(x, vertices)
-  })
+  indices <- match(motif_names, vertices)
   subgraph <- network::get.inducedSubgraph(net, indices)
   p <- motifr::plot_mnet(subgraph, lvl_attr = lvl_attr, ...)
   return(p)
@@ -333,10 +353,15 @@ simulate_baseline <- function(net,
                               level = -1,
                               ergm_model = NULL,
                               directed = NULL) {
-  if (!(model %in% c("erdos_renyi", "fixed_densities", "actors_choice", "ergm"))) {
-    stop(paste(model, " is not supported. Choose one of 'erdos_renyi' or 'fixed_densities'.
-               To use the actors_choice model, for the moment see motifs_distribution to
-               calculate expected mean and variances analytically."))
+  supported_models <- c(
+    "erdos_renyi", "fixed_densities", "actors_choice",
+    "ergm"
+  )
+  if (!(model %in% supported_models)) {
+    stop(paste(
+      "Model", model, "is not supported. Choose one of",
+      paste(supported_models, collapse = ", ")
+    ))
   }
   if (model == "ergm") {
     if (!requireNamespace("ergm", quietly = TRUE)) {
@@ -345,17 +370,18 @@ simulate_baseline <- function(net,
       )
     }
     if (!ergm::is.ergm(ergm_model)) {
-      stop("Please provde a valid ergm model when using ERGM")
+      stop("Please provde a valid ergm model when using ERGM.")
     }
     # let's do the job ourselves
     result <- data.frame()
     for (i in 0:n) {
       sample <- stats::simulate(ergm_model)
       counts <- motifr::count_motifs(sample,
-                                     motifs = motifs,
-                                     lvl_attr = lvl_attr,
-                                     assume_sparse = assume_sparse,
-                                     directed = directed)
+        motifs = motifs,
+        lvl_attr = lvl_attr,
+        assume_sparse = assume_sparse,
+        directed = directed
+      )
       result <- rbind(result, counts$count)
       if (i == 0) {
         colnames(result) <- counts$motif
@@ -370,8 +396,9 @@ simulate_baseline <- function(net,
       }
     }
     py_g <- motifr::toPyGraph(net,
-                              lvl_attr = lvl_attr,
-                              directed = directed)
+      lvl_attr = lvl_attr,
+      directed = directed
+    )
 
     result <- sma$simulateBaselineAutoR(py_g,
       motifs,
@@ -450,12 +477,15 @@ compare_to_baseline <- function(net,
   # plot_df_count <- suppressMessages(reshape2::melt(count))
 
   p <-
-    ggplot2::ggplot(plot_df, ggplot2::aes(value)) +
+    ggplot2::ggplot(plot_df, ggplot2::aes_(x = ~value)) +
     ggplot2::facet_wrap(~motif, scales = "free") +
     ggplot2::geom_histogram(fill = "gray", bins = 50) +
-    ggplot2::geom_vline(data = count, ggplot2::aes(xintercept = count)) +
+    ggplot2::geom_vline(data = count, ggplot2::aes_(xintercept = ~count)) +
     ggplot2::theme_minimal() +
-    ggplot2::xlab(sprintf("Simulated (gray histogram) versus actual (solid line) motif counts, n = %d iterations, model %s", n, model))
+    ggplot2::xlab(paste(
+      "Simulated (gray histogram) versus actual (solid line) motif counts,",
+      sprintf("n = %d iterations, model %s", n, model)
+    ))
 
   return(p)
 }
@@ -485,7 +515,8 @@ compare_to_baseline <- function(net,
 #' @return data frame with one row for each motif
 #' @export
 #'
-#' @examples head(list_motifs(ml_net, "1,2[I.C]", directed = FALSE))
+#' @examples
+#' head(list_motifs(ml_net, "1,2[I.C]", directed = FALSE))
 list_motifs <- function(net,
                         identifier,
                         lvl_attr = "sesType",

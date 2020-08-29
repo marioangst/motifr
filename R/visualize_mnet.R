@@ -52,7 +52,8 @@ plot_mnet <- function(net,
   sub_g_list <- vector(mode = "list", length = length(unique(nodes$lvl_n)))
 
   for (level in 1:n_levels) {
-    t_g_sub <- tidygraph::to_subgraph(t_g, lvl_n == level, subset_by = "nodes")$subgraph
+    #' @importFrom rlang .data
+    t_g_sub <- tidygraph::to_subgraph(t_g, .data$lvl_n == level, subset_by = "nodes")$subgraph
     # if graph has no edges (bug in igraph), create self_loop to have one (hacky)
     if (nrow(tibble::as_tibble(tidygraph::activate(t_g_sub, edges))) == 0) {
       disc_edges <- tibble::as_tibble(tidygraph::activate(t_g_sub, edges))
@@ -109,7 +110,7 @@ plot_mnet <- function(net,
 
   p_comb <-
     p_comb +
-    ggraph::geom_node_point(ggplot2::aes(color = factor(lvl))) +
+    ggraph::geom_node_point(ggplot2::aes_(color = ~factor(lvl))) +
     ggplot2::theme_void() +
     ggplot2::scale_color_brewer("Level",
       breaks = levels(factor(nodes$lvl)),
@@ -119,7 +120,7 @@ plot_mnet <- function(net,
 
   if (label == TRUE) {
     p_comb <-
-      p_comb + ggraph::geom_node_label(ggplot2::aes(label = name, fill = factor(lvl)),
+      p_comb + ggraph::geom_node_label(ggplot2::aes_(label = ~name, fill = ~factor(lvl)),
         alpha = 0.5
       ) +
       ggplot2::scale_fill_brewer("Level",
