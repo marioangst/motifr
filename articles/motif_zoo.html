@@ -100,7 +100,7 @@
     
     
 <p><a href="https://marioangst.github.io/motifr"><img src="../man/figures/logo.svg" align="right" height="139"></a></p>
-<p>This vignette introduces the nomenclature used for labeling motifs in multi-level motifs used in motifr.</p>
+<p>This vignette introduces the nomenclature used for labelling motifs in multi-level motifs used in motifr.</p>
 <div id="motif-classification-how-to-label-motifs-in-the-wild" class="section level2">
 <h2 class="hasAnchor">
 <a href="#motif-classification-how-to-label-motifs-in-the-wild" class="anchor"></a>Motif classification – how to label motifs in the wild</h2>
@@ -111,7 +111,7 @@
 </ul>
 <p>A motif identifier string contains these two pieces of information. It consists of a <em>head</em> and <em>class</em>, and is of the form <code>HEAD[CLASS]</code>, e.g. <code>1,2[II.C]</code>. The head specifies the signature and the positions of the motif while the class represents the motif class.</p>
 <p>Let’s consider an example in a two-level network with levels 0 and 1. motifr generally counts levels starting at 0, due to its Python roots. The motif identifier string <code>1,2[II.C]</code> represents the closed triangle with one node on level 0 and two nodes on level 1. <code>1,2</code> signifies that the first level (0) provides one node and the second (1) two nodes. The expression <code>II.C</code> in brackets stands for closed triangle. Alternatively, <code>1,2[I.C]</code> represents the open triangle with the same number of nodes taken from the levels.</p>
-<p>When in doubt about what a given identifier string implies, you can let motifr show you the motif either in a dummy network or an example of the motif in a network you are analyzing (the second will only work if the network you are analyzing actually contains the motif).</p>
+<p>When in doubt about what a given identifier string implies, you can let motifr show you the motif either in a dummy network or an example of the motif in a network you are analysing (the second will only work if the network you are analysing actually contains the motif).</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu">show_motif</span>(<span class="st">'1,2[II.C]'</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
 <p><img src="motif_zoo_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
 <p>A full list of all supported signatures and motif classes can be found in the <a href="https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false">documentation of the Python sma package</a> in section <em>Appendix: The Motif Zoo</em>.</p>
@@ -130,7 +130,7 @@
 <p>This motif differs from the motif <code>2:1,2:0[II.D]</code> which contains the same number of nodes from the different levels. However, here the roles of the levels are swapped, i.e. in this motif, the two nodes on level 1 are adjacent to the two nodes on level 0.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu">show_motif</span>(<span class="kw">motif</span> <span class="kw">=</span> <span class="st">'2:1,2:0[II.D]'</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
 <p><img src="motif_zoo_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
-<p>The position matching can be overwritten by providinng the levels corresponding to the entries in the motif signature, e.g. the head <code>2:1,2:0</code> signalises that the first level containing two nodes is level 1 (“2:1”) while the second level containing two nodes is level 0 (“2:0”).</p>
+<p>The position matching can be overwritten by providing the levels corresponding to the entries in the motif signature, e.g. the head <code>2:1,2:0</code> signalises that the first level containing two nodes is level 1 (“2:1”) while the second level containing two nodes is level 0 (“2:0”).</p>
 <p>See the <a href="https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false">documentation of the Python sma package</a>, subsection <em>Position matching</em> for a detailed description of the procedure.</p>
 <p>In general, it is recommended to use <code>show_motif(motif)</code> to check whether the provided motif identifier string is interpreted as intended by the software.</p>
 </div>

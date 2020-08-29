@@ -109,9 +109,9 @@
 <li>
 <em>Fixed Densities Model</em> (<code>fixed_densities</code>) Given two levels A and B, in this model it is assumed that the number of edges between level A and level B is fixed for all A-B ties. The specific number of edges is drawn randomly from the set of all possible edges.</li>
 <li>
-<em>Erdős-Rényi Model</em> (<code>erdos_renyi</code>) In this model edges <em>between</em> the various levels are drawn independently at random with respect to a fixed probability depending on the levels. The (refined) Erdős-Rényi model accounts for the various levels by allowing to specify different probabilites ties occurring <em>within</em> different levels.</li>
+<em>Erdős-Rényi Model</em> (<code>erdos_renyi</code>) In this model edges <em>between</em> the various levels are drawn independently at random with respect to a fixed probability depending on the levels. The (refined) Erdős-Rényi model accounts for the various levels by allowing to specify different probabilities ties occurring <em>within</em> different levels.</li>
 <li>
-<em>Actor’s Choice Model</em> (<code>actors_choice</code>) In this model all edges but the edges on one specific level are fixed. This is motivated by theoretical considerations about the application of multi-level network models in situations where one level is composed of actors, which are more readily able to change their connections, and other levels considered more stable, eg. specific instances of ecological networks. The edges on this non-fixed “actor level” are chosen indepently with fixed probability as in Erdős-Rényi.</li>
+<em>Actor’s Choice Model</em> (<code>actors_choice</code>) In this model all edges but the edges on one specific level are fixed. This is motivated by theoretical considerations about the application of multi-level network models in situations where one level is composed of actors, which are more readily able to change their connections, and other levels considered more stable, eg. specific instances of ecological networks. The edges on this non-fixed “actor level” are chosen independently with fixed probability as in Erdős-Rényi.</li>
 <li>
 <em>Exponential Random Graph Model</em> (<code>ergm</code>) Sophisticated model which accounts for various network parameters. Please consult the documentation of the <code>ergm</code> for details.</li>
 </ul>
@@ -123,11 +123,11 @@
 <p>Motifs in random networks can be counted using <code>simulate_baseline()</code>. The supported models are <code>erdos_renyi</code>, <code>fixed_densities</code>, <code>actors_choice</code> and <code>ergm</code>. The function <code>compare_to_baseline()</code> can be used for plotting the results:</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu">simulate_baseline</span>(<span class="no">ml_net</span>, <span class="kw">motifs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span>), <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">directed</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="co">#&gt;   1,2[I.C] 1,2[II.C]</span>
-<span class="co">#&gt; 1      198        32</span>
-<span class="co">#&gt; 2      209        16</span>
-<span class="co">#&gt; 3      138        18</span>
-<span class="co">#&gt; 4      146        15</span>
-<span class="co">#&gt; 5      173         4</span></pre></body></html></div>
+<span class="co">#&gt; 1      193        23</span>
+<span class="co">#&gt; 2      185        17</span>
+<span class="co">#&gt; 3      135        16</span>
+<span class="co">#&gt; 4      138        15</span>
+<span class="co">#&gt; 5      171        19</span></pre></body></html></div>
 </div>
 <div id="motif-distributions-without-simulation" class="section level2">
 <h2 class="hasAnchor">
@@ -150,7 +150,7 @@
 <div id="level-selection-in-actors-choice-model" class="section level2">
 <h2 class="hasAnchor">
 <a href="#level-selection-in-actors-choice-model" class="anchor"></a>Level selection in Actor’s Choice Model</h2>
-<p>In the Actor’s Choice Model all levels in the network except for one are assumed to be fixed. The edges in the remaining variable (or actor’s) level are drawn randomly according to the Erdős-Rényi Model. The variable level can be selected using the <code>level</code> parameter, e.g. in <code>motifs_distribution()</code>, or determined automatically. The default level is the first level providing exactly two nodes in the motif. Note that <code>simulate_baseline()</code> and <code>compare_to_baseline()</code> do not support automatical level selection.</p>
+<p>In the Actor’s Choice Model all levels in the network except for one are assumed to be fixed. The edges in the remaining variable (or actor’s) level are drawn randomly according to the Erdős-Rényi Model. The variable level can be selected using the <code>level</code> parameter, e.g. in <code>motifs_distribution()</code>, or determined automatically. The default level is the first level providing exactly two nodes in the motif. Note that <code>simulate_baseline()</code> and <code>compare_to_baseline()</code> do not support automatic level selection.</p>
 <p>Let’s consider an example. Assume that the variable level is level zero. The edges in the other levels are fixed. The expected number of closed triangles with two nodes on the variable level can be computed as follows. Here <code>level</code> is automatically determined to be 0.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu">motifs_distribution</span>(<span class="no">ml_net</span>, <span class="kw">motifs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"2,1[II.C]"</span>), <span class="kw">model</span> <span class="kw">=</span> <span class="st">"actors_choice"</span>, <span class="kw">directed</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="co">#&gt;       motif expectation variance</span>
@@ -188,11 +188,11 @@
 <span class="co">#&gt; Starting Monte Carlo maximum likelihood estimation (MCMLE):</span>
 <span class="co">#&gt; Iteration 1 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.02507.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.04065.</span>
 <span class="co">#&gt; Step length converged once. Increasing MCMC sample size.</span>
 <span class="co">#&gt; Iteration 2 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.004226.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.0004335.</span>
 <span class="co">#&gt; Step length converged twice. Stopping.</span>
 <span class="co">#&gt; Finished MCMLE.</span>
 <span class="co">#&gt; Evaluating log-likelihood at the estimate. Using 20 bridges: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 .</span>
