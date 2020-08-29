@@ -47,7 +47,10 @@
 
 
 <meta property="og:title" content="Summary for motif counts and distribution (Erdos-Renyi) — motif_summary" />
-<meta property="og:description" content="Summary for motif counts and distribution (Erdos-Renyi)" />
+<meta property="og:description" content="Returns a data frame with counts and statistical properties (expectation,
+variances) of six selected motifs in the given network. Note that this
+function implicitly assumes that the network is undirected, cf.
+?motifr::to_py_graph." />
 <meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg" />
 
 
@@ -137,7 +140,10 @@
     </div>
 
     <div class="ref-description">
-    <p>Summary for motif counts and distribution (Erdos-Renyi)</p>
+    <p>Returns a data frame with counts and statistical properties (expectation,
+variances) of six selected motifs in the given network. Note that this
+function implicitly assumes that the network is undirected, cf.
+?motifr::to_py_graph.</p>
     </div>
 
     <pre class="usage"><span class='fu'>motif_summary</span>(<span class='no'>net</span>, <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>))</pre>
