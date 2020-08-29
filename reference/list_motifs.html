@@ -6,17 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Returns a dataframe with one row for each instance of the motif specified by
-the given motif identifier string. If the identifier string specifies a motif
-class, e.g. ``1,2[I.A]`` , then only motifs of the given class are returned.
-If the identifier string specifies a signature, e.g. ``1,2``, then a full
-list of all motifs of this signature is returned. In the latter case, the
-dataframe contains an additional column stating the classes of the motifs.
-The naming scheme of the columns is as follows: Each column is called
-``levelA_nodeB`` where ``A`` is the ``sesType`` of the nodes in the column
-and ``B`` the index of the nodes amoung the nodes on the same level. This
-index stems from the internal order of the nodes and does not carry any
-specific meaning. in R using the ``ergm_model`` parameter. — list_motifs • motifr</title>
+<title>Lists motifs of a given class or all motifs with a given signature — list_motifs • motifr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -56,17 +46,7 @@ specific meaning. in R using the ``ergm_model`` parameter. — list_motifs • m
 
 
 
-<meta property="og:title" content="Returns a dataframe with one row for each instance of the motif specified by
-the given motif identifier string. If the identifier string specifies a motif
-class, e.g. ``1,2[I.A]`` , then only motifs of the given class are returned.
-If the identifier string specifies a signature, e.g. ``1,2``, then a full
-list of all motifs of this signature is returned. In the latter case, the
-dataframe contains an additional column stating the classes of the motifs.
-The naming scheme of the columns is as follows: Each column is called
-``levelA_nodeB`` where ``A`` is the ``sesType`` of the nodes in the column
-and ``B`` the index of the nodes amoung the nodes on the same level. This
-index stems from the internal order of the nodes and does not carry any
-specific meaning. in R using the ``ergm_model`` parameter. — list_motifs" />
+<meta property="og:title" content="Lists motifs of a given class or all motifs with a given signature — list_motifs" />
 <meta property="og:description" content="Returns a dataframe with one row for each instance of the motif specified by
 the given motif identifier string. If the identifier string specifies a motif
 class, e.g. ``1,2[I.A]`` , then only motifs of the given class are returned.
@@ -142,7 +122,12 @@ specific meaning. in R using the ``ergm_model`` parameter." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/marioangst/motifr/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -156,18 +141,8 @@ specific meaning. in R using the ``ergm_model`` parameter." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Returns a dataframe with one row for each instance of the motif specified by
-the given motif identifier string. If the identifier string specifies a motif
-class, e.g. ``1,2[I.A]`` , then only motifs of the given class are returned.
-If the identifier string specifies a signature, e.g. ``1,2``, then a full
-list of all motifs of this signature is returned. In the latter case, the
-dataframe contains an additional column stating the classes of the motifs.
-The naming scheme of the columns is as follows: Each column is called
-``levelA_nodeB`` where ``A`` is the ``sesType`` of the nodes in the column
-and ``B`` the index of the nodes amoung the nodes on the same level. This
-index stems from the internal order of the nodes and does not carry any
-specific meaning. in R using the ``ergm_model`` parameter.</h1>
-    
+    <h1>Lists motifs of a given class or all motifs with a given signature</h1>
+    <small class="dont-index">Source: <a href='https://github.com/marioangst/motifr/blob/master/R/count_motifs.R'><code>R/count_motifs.R</code></a></small>
     <div class="hidden name"><code>list_motifs.Rd</code></div>
     </div>
 

@@ -113,7 +113,12 @@ input graph is directed it is treated as undirected graph." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/marioangst/motifr/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -128,7 +133,7 @@ input graph is directed it is treated as undirected graph." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot gaps in network vizualization</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/marioangst/motifr/blob/master/R/gaps_critical_edges.R'><code>R/gaps_critical_edges.R</code></a></small>
     <div class="hidden name"><code>plot_gaps.Rd</code></div>
     </div>
 
@@ -189,7 +194,9 @@ subset) or "focal" (only focal level shown)</p></td>
     <p>A plot of gaps, sized by weight in a multilevel network</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>plot_gaps</span>(<span class='no'>ml_net</span>, <span class='st'>"1,2[II.C]"</span>, <span class='kw'>level</span> <span class='kw'>=</span> -<span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Edge contribution does only make sense for undirected networks. The given network is automatically treated as an undirected network.</span></div><div class='img'><img src='plot_gaps-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_gaps</span>(<span class='no'>ml_net</span>, <span class='st'>"1,2[II.C]"</span>, <span class='kw'>level</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>subset_graph</span> <span class='kw'>=</span> <span class='st'>"focal"</span>, <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Edge contribution does only make sense for undirected networks. The given network is automatically treated as an undirected network.</span></div><div class='img'><img src='plot_gaps-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_gaps</span>(<span class='no'>ml_net</span>, <span class='st'>"1,2[II.C]"</span>, <span class='kw'>level</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>subset_graph</span> <span class='kw'>=</span> <span class='st'>"partial"</span>, <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Edge contribution does only make sense for undirected networks. The given network is automatically treated as an undirected network.</span></div><div class='img'><img src='plot_gaps-3.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>plot_gaps</span>(<span class='no'>ml_net</span>, <span class='st'>"1,2[II.C]"</span>, <span class='kw'>level</span> <span class='kw'>=</span> -<span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Edge contribution does only make sense for undirected networks. The given network is automatically treated as an undirected network.</span></div><div class='img'><img src='plot_gaps-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_gaps</span>(<span class='no'>ml_net</span>, <span class='st'>"1,2[II.C]"</span>, <span class='kw'>level</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
+          <span class='kw'>subset_graph</span> <span class='kw'>=</span> <span class='st'>"focal"</span>, <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Edge contribution does only make sense for undirected networks. The given network is automatically treated as an undirected network.</span></div><div class='img'><img src='plot_gaps-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_gaps</span>(<span class='no'>ml_net</span>, <span class='st'>"1,2[II.C]"</span>, <span class='kw'>level</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
+          <span class='kw'>subset_graph</span> <span class='kw'>=</span> <span class='st'>"partial"</span>, <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Edge contribution does only make sense for undirected networks. The given network is automatically treated as an undirected network.</span></div><div class='img'><img src='plot_gaps-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
