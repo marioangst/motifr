@@ -47,6 +47,14 @@ The package is currently at an early stage of development. Explore at
 your own risk and please report any issues using the [issue tracker on
 github](https://github.com/marioangst/motifr/issues).
 
+Due to the package’s tight integration with the Python framework
+SESMotifAnalyser, we recommend explicitly installing the associated sma
+module through reticulate.
+
+``` r
+reticulate::py_install("sma", pip = TRUE)
+```
+
 You can then install motifr from github, using devtools:
 
 ``` r
@@ -93,7 +101,7 @@ plot_mnet(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-5-1.svg" width="100%" />
 
 ### Count motifs
 
@@ -111,13 +119,13 @@ introduced above:
 show_motif(motif = "1,2[I.C]", net = ml_net, label = TRUE, directed = FALSE) # open ('1,2[I.C]') triangle
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.svg" width="300px" />
+<img src="man/figures/README-unnamed-chunk-6-1.svg" width="300px" />
 
 ``` r
 show_motif(motif = "1,2[II.C]", net = ml_net, label = TRUE, directed = FALSE) # closed ('1,2[II.C]') triangle
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-2.svg" width="300px" />
+<img src="man/figures/README-unnamed-chunk-6-2.svg" width="300px" />
 
 Let’s count the number of of these motifs in the entire network.
 
@@ -160,7 +168,7 @@ In relation to gaps, we can therefore try to identify potential edges
 that would create a large number of a given motif if they were to exist
 (“activated” or “flipped”). The number of such motifs created by an edge
 is their contribution. For example, we can get all edges that would
-create closed triangles (‘1,2\[II.C\]’), including the information about
+create closed triangles (`"1,2[II.C]"`), including the information about
 how many such triangles they would create for the wetlands case study
 network:
 
@@ -196,7 +204,7 @@ plot_gaps(ml_net,
 #> network is automatically treated as an undirected network.
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-10-1.svg" width="100%" />
 
 `identify_gaps` has a sibling in `critical_dyads`. Critical\_dyads works
 in reverse to identifying gaps - it analyses for every existing edge how
@@ -219,4 +227,4 @@ motifs <- list("1,2[I.C]", "1,2[II.C]") # open ('1,2[I.C]') and closed ('1,2[II.
 compare_to_baseline(ml_net, motifs = motifs, n = 50, directed = FALSE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-11-1.svg" width="100%" />
