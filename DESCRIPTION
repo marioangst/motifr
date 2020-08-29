@@ -1,6 +1,6 @@
 Package: motifr
 Title: Motif analysis in multi-level networks
-Version: 0.2
+Version: 0.2.0
 Authors@R: 
     c(person(given = "Mario",
              family = "Angst",

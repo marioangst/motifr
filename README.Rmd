@@ -41,12 +41,6 @@ Package features include:
 
 The package is currently at an early stage of development. Explore at your own risk and please report any issues using the [issue tracker on github](https://github.com/marioangst/motifr/issues).
 
-Due to the package's tight integration with the Python framework SESMotifAnalyser, we recommend explicitly installing the associated sma module through reticulate.
-
-```{r eval=FALSE}
-reticulate::py_install("sma", pip = TRUE)
-```
-
 You can then install motifr from github, using devtools:
 
 ```{r eval=FALSE}

@@ -13,6 +13,11 @@ nx <- NULL
 sma <- NULL
 
 .onLoad <- function(libname, pkgname) {
+  # check whether sma is installed and install if needed
+  if(! reticulate::py_module_available("sma")) {
+    update_motifr()
+  }
+
   # delay load nx module (will only be loaded whlen accessed via $)
   nx <<- reticulate::import("networkx", delay_load = TRUE)
   itertools <<- reticulate::import("itertools", delay_load = TRUE)

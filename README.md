@@ -47,14 +47,6 @@ The package is currently at an early stage of development. Explore at
 your own risk and please report any issues using the [issue tracker on
 github](https://github.com/marioangst/motifr/issues).
 
-Due to the package’s tight integration with the Python framework
-SESMotifAnalyser, we recommend explicitly installing the associated sma
-module through reticulate.
-
-``` r
-reticulate::py_install("sma", pip = TRUE)
-```
-
 You can then install motifr from github, using devtools:
 
 ``` r
@@ -94,12 +86,14 @@ Below, one level is plotted based on a circle layout, the second one
 based on Kamada-Kawai.
 
 ``` r
-plot_mnet(net = ml_net,
-          lvl_attr = "sesType",
-          layouts = list("kk","circle"))
+plot_mnet(
+  net = ml_net,
+  lvl_attr = "sesType",
+  layouts = list("kk", "circle")
+)
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.svg" width="100%" />
 
 ### Count motifs
 
@@ -114,21 +108,21 @@ quickly check out two classic examples of three-node, two-level motifs
 introduced above:
 
 ``` r
-show_motif(motif = '1,2[I.C]', net = ml_net, label = TRUE, directed = FALSE) # open ('1,2[I.C]') triangle
+show_motif(motif = "1,2[I.C]", net = ml_net, label = TRUE, directed = FALSE) # open ('1,2[I.C]') triangle
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.svg" width="300px" />
+<img src="man/figures/README-unnamed-chunk-5-1.svg" width="300px" />
 
 ``` r
-show_motif(motif = '1,2[II.C]', net = ml_net, label = TRUE, directed = FALSE) # closed ('1,2[II.C]') triangle
+show_motif(motif = "1,2[II.C]", net = ml_net, label = TRUE, directed = FALSE) # closed ('1,2[II.C]') triangle
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-2.svg" width="300px" />
+<img src="man/figures/README-unnamed-chunk-5-2.svg" width="300px" />
 
 Let’s count the number of of these motifs in the entire network.
 
 ``` r
-motifs = list('1,2[I.C]', '1,2[II.C]') # open and closed triangle
+motifs <- list("1,2[I.C]", "1,2[II.C]") # open and closed triangle
 
 count_motifs(ml_net, motifs, directed = FALSE)
 #>               motif count
@@ -171,7 +165,7 @@ how many such triangles they would create for the wetlands case study
 network:
 
 ``` r
-gaps <- identify_gaps(ml_net, motif = '1,2[II.C]')
+gaps <- identify_gaps(ml_net, motif = "1,2[II.C]")
 #> Warning in edge_contribution(net = net, motif = motif, lvl_attr = lvl_attr, :
 #> Edge contribution does only make sense for undirected networks. The given
 #> network is automatically treated as an undirected network.
@@ -191,17 +185,18 @@ of focus to only show nodes involved in such gaps. Here again for the
 wetlands management network, only showing gaps with a weight above 5.
 
 ``` r
-plot_gaps(ml_net, 
-          "1,2[II.C]", 
-          level = -1, 
-          subset_graph = "partial", 
-          cutoff = 5, label = TRUE)
+plot_gaps(ml_net,
+  "1,2[II.C]",
+  level = -1,
+  subset_graph = "partial",
+  cutoff = 5, label = TRUE
+)
 #> Warning in edge_contribution(net = net, motif = motif, lvl_attr = lvl_attr, :
 #> Edge contribution does only make sense for undirected networks. The given
 #> network is automatically treated as an undirected network.
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-9-1.svg" width="100%" />
 
 `identify_gaps` has a sibling in `critical_dyads`. Critical\_dyads works
 in reverse to identifying gaps - it analyses for every existing edge how
@@ -219,9 +214,9 @@ observed network than in the random baseline. See the package [vignette
 on random baselines](vignettes/random_baselines.Rmd) for details.
 
 ``` r
-motifs = list('1,2[I.C]', '1,2[II.C]') # open ('1,2[I.C]') and closed ('1,2[II.C]') triangles
+motifs <- list("1,2[I.C]", "1,2[II.C]") # open ('1,2[I.C]') and closed ('1,2[II.C]') triangles
 
 compare_to_baseline(ml_net, motifs = motifs, n = 50, directed = FALSE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-10-1.svg" width="100%" />
