@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-<a href='https://marioangst.github.io/motifr'><img src='../man/figures/logo.svg' align="right" height="139" /></a>
+<a href='https://marioangst.github.io/motifr/'><img src='../man/figures/logo.svg' align="right" height="139" /></a>
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(

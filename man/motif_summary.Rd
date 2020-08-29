@@ -17,7 +17,10 @@ dataframe with motif counts, expectations and variances for set of
   selected motifs
 }
 \description{
-Summary for motif counts and distribution (Erdos-Renyi)
+Returns a data frame with counts and statistical properties (expectation,
+variances) of six selected motifs in the given network. Note that this
+function implicitly assumes that the network is undirected, cf.
+?motifr::to_py_graph.
 }
 \examples{
 motif_summary(ml_net)

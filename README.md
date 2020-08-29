@@ -1,5 +1,5 @@
 
-# motifr <a href='https://marioangst.github.io/motifr'><img src='man/figures/logo.svg' align="right" height="139" /></a>
+# motifr <a href='https://marioangst.github.io/motifr/'><img src='man/figures/logo.svg' align="right" height="139" /></a>
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 

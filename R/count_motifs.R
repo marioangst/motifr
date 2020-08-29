@@ -207,6 +207,11 @@ motifs_distribution <- function(net,
 
 #' Summary for motif counts and distribution (Erdos-Renyi)
 #'
+#' Returns a data frame with counts and statistical properties (expectation,
+#' variances) of six selected motifs in the given network. Note that this
+#' function implicitly assumes that the network is undirected, cf.
+#' ?motifr::to_py_graph.
+#'
 #' @param net statnet network object
 #' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object.
