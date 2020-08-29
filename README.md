@@ -4,17 +4,19 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 <!-- badges: start -->
-[![Build Status](https://travis-ci.org/marioangst/motifr.svg?branch=master)](https://travis-ci.org/marioangst/motifr)
+
+[![Build
+Status](https://travis-ci.org/marioangst/motifr.svg?branch=master)](https://travis-ci.org/marioangst/motifr)
 <!-- badges: end -->
 
-This package provides tools to analyze multi-level networks in terms of
+This package provides tools to analyse multi-level networks in terms of
 *motifs*.
 
 Multi-level networks combine multiple networks in one representation,
-e.g. social-ecological networks, which connect a social network (eg.
-interactions among fishermen) with an ecological network (eg.
-interactions between fish species) and the ties inbetween (eg. fishers
-who fish specific species).
+e.g. social-ecological networks, which connect a social network
+(e.g. interactions among fishermen) with an ecological network
+(e.g. interactions between fish species) and the ties in between
+(e.g. fishers who fish specific species).
 
 [Motifs](https://en.wikipedia.org/wiki/Network_motif) are small
 configurations of nodes and edges (subgraphs) within an overall network.
@@ -30,7 +32,7 @@ Package features include:
     [SESMotifAnalyser](https://gitlab.com/t.seppelt/sesmotifanalyser)
     Python framework written by Tim Seppelt to count multi-level network
     motifs, compare them to a baseline and much more. Only parts of of
-    sesmotifanalyser are yet wrapped, so consult the python framework
+    SESMotifAnalyser are yet wrapped, so consult the python framework
     for additional functionality.
 
   - Contributions of edges to motifs: motifr further identifies and
@@ -46,7 +48,7 @@ your own risk and please report any issues using the [issue tracker on
 github](https://github.com/marioangst/motifr/issues).
 
 Due to the package’s tight integration with the Python framework
-sesmotifanalyzer, we recommend explicitly installing the associated sma
+SESMotifAnalyser, we recommend explicitly installing the associated sma
 module through reticulate.
 
 ``` r
@@ -61,15 +63,16 @@ devtools::install_github("marioangst/motifr")
 
 ## Input
 
-motifr currently can only reliably handle undirected and unweighted
-networks (we are working on a directed implementation). There is in
-principle no restriction on the number of levels of a network to count
-motifs in, but typical use cases for which the package was designed will
-likely involve two- or three-level networks.
+motifr currently can handle unweighted directed and undirected networks.
+There is in principle no restriction on the number of levels of a
+network to count motifs in, but typical use cases for which the package
+was designed will likely involve two- or three-level networks. Support
+for undirected networks has only been introduced recently. Hence, most
+supported motifs are undirected.
 
 Network data should currently be prepared as statnet network objects
 with a numeric vertex attribute to specify a level for each node (named
-eg. “lvl”) for best results.
+e.g. “lvl”) for best results.
 
 ## Examples
 
@@ -83,7 +86,7 @@ The following network is an example network from an empirical analysis
 of wetlands management in Switzerland. It consists of two levels - one
 level specifies a network of relations between actors. A second level
 specifies a network of relations between different activities occurring
-in the wetland, based on causal interdependence among activites. Links
+in the wetland, based on causal interdependence among activities. Links
 between the levels specify which actors carry out which activities.
 
 It is possible to specify layouts for every network level separately.
@@ -201,7 +204,7 @@ plot_gaps(ml_net,
 <img src="man/figures/README-unnamed-chunk-10-1.svg" width="100%" />
 
 `identify_gaps` has a sibling in `critical_dyads`. Critical\_dyads works
-in reverse to identifying gaps - it analyzes for every existing edge how
+in reverse to identifying gaps - it analyses for every existing edge how
 many instances of a given motif would disappear if the edge would be
 removed.
 

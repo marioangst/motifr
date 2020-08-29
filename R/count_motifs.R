@@ -4,7 +4,7 @@
 #' @param g statnet network object
 #' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in statnet object.
-#' @param relabel should nodes be relabeled with statnet vertex.names? (defaults
+#' @param relabel should nodes be relabelled with statnet vertex.names? (defaults
 #'   to TRUE)
 #' @param directed whether the graph shall be treated as a directed graph. Per
 #'   default (NULL) this is determined automatically using network::is.directed.
@@ -143,7 +143,7 @@ count_motifs <- function(net,
 #' network can be specified which is only level assumed to be variable. All
 #' other levels are assumed to be fixed. Per default, ``level = -1``, the first
 #' level carrying two nodes in the signature of the motif is selected as
-#' variable level. Set the ``level`` paramter to the value of the ``lvl_attr``
+#' variable level. Set the ``level`` parameter to the value of the ``lvl_attr``
 #' of the nodes in the desired level to specify the level manually.
 #'
 #' @param net statnet network object
@@ -319,7 +319,7 @@ show_motif <- function(motif,
 #' the variable level automatically. Use the ``level`` parameter to provide a
 #' valid level.
 #'
-#' When using ERGM the paramter ``net`` is not used. Random networks are sampled
+#' When using ERGM the parameter ``net`` is not used. Random networks are sampled
 #' in R using the ``ergm_model`` parameter.
 #'
 #' @param net statnet network object
@@ -421,7 +421,7 @@ simulate_baseline <- function(net,
 #' the variable level automatically. Use the ``level`` parameter to provide a
 #' valid level.
 #'
-#' When using ERGM the paramter ``net`` is not used. Random networks are sampled
+#' When using ERGM the parameter ``net`` is not used. Random networks are sampled
 #' in R using the ``ergm_model`` parameter.
 #'
 #' @param net statnet network object
@@ -501,7 +501,7 @@ compare_to_baseline <- function(net,
 
 #' The naming scheme of the columns is as follows: Each column is called
 #' ``levelA_nodeB`` where ``A`` is the ``sesType`` of the nodes in the column
-#' and ``B`` the index of the nodes amoung the nodes on the same level. This
+#' and ``B`` the index of the nodes among the nodes on the same level. This
 #' index stems from the internal order of the nodes and does not carry any
 #' specific meaning. in R using the ``ergm_model`` parameter.
 #'

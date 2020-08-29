@@ -24,7 +24,7 @@ data frame with three columns, listing edges and their contribution
 \description{
 List gaps ordered by contribution to a motif. This is a list of ties together
 with the number of motifs of a given class the dyad would generate by being
-added to the netwok.
+added to the network.
 }
 \details{
 The level parameter determines on which level of the network gaps are

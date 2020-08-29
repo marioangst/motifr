@@ -2,7 +2,7 @@
 #'
 #' List gaps ordered by contribution to a motif. This is a list of ties together
 #' with the number of motifs of a given class the dyad would generate by being
-#' added to the netwok.
+#' added to the network.
 #'
 #' The level parameter determines on which level of the network gaps are
 #' analysed. Per default, when ``level = -1``, the first level in the motif
@@ -116,14 +116,14 @@ edge_contribution <- function(net,
   return(df)
 }
 
-#' Plot gaps in network vizualization
+#' Plot gaps in network visualisation
 #'
 #' Note that this only works for undirected graphs. Regardless of whether the
 #' input graph is directed it is treated as undirected graph.
 #'
 #' @param net Statnet network object
 #' @param motif Motif to explore gaps in for
-#' @param lvl_attr Node attribute specifiying level information
+#' @param lvl_attr Node attribute specifying level information
 #' @param level Focal level for gap analysis
 #' @param cutoff Cutoff point in contributions of an edge to the number of
 #'   motifs above which to analyse gaps
@@ -166,14 +166,14 @@ plot_gaps <- function(net,
                               ...)
 }
 
-#' Plot critical dyads in network vizualization
+#' Plot critical dyads in network visualisation
 #'
 #' Note that this only works for undirected graphs. Regardless of whether the
 #' input graph is directed it is treated as undirected graph.
 #'
 #' @param net Statnet network object
 #' @param motif Motif to explore gaps in for
-#' @param lvl_attr Node attribute specifiying level information
+#' @param lvl_attr Node attribute specifying level information
 #' @param level Focal level for gap analysis
 #' @param cutoff Cutoff point in contributions of an edge to the number of
 #'   motifs above which to analyse gaps
@@ -229,7 +229,7 @@ plot_critical_dyads <- function(net,
 #' @param edge_contribution data frame providing edge contribution data
 #' @param colour colour code for the weighted edges
 #' @param title title of the plot
-#' @param lvl_attr Node attribute specifiying level information
+#' @param lvl_attr Node attribute specifying level information
 #' @param cutoff Cutoff point in contributions of an edge to the number of
 #'   motifs above which to analyse gaps
 #' @param ... list of additional parameters to be passed to plotting function

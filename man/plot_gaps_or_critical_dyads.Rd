@@ -24,7 +24,7 @@ plot_gaps_or_critical_dyads(
 
 \item{title}{title of the plot}
 
-\item{lvl_attr}{Node attribute specifiying level information}
+\item{lvl_attr}{Node attribute specifying level information}
 
 \item{cutoff}{Cutoff point in contributions of an edge to the number of
 motifs above which to analyse gaps}

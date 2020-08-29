@@ -2,7 +2,7 @@
 % Please edit documentation in R/gaps_critical_edges.R
 \name{plot_critical_dyads}
 \alias{plot_critical_dyads}
-\title{Plot critical dyads in network vizualization}
+\title{Plot critical dyads in network visualisation}
 \usage{
 plot_critical_dyads(
   net,
@@ -19,7 +19,7 @@ plot_critical_dyads(
 
 \item{motif}{Motif to explore gaps in for}
 
-\item{lvl_attr}{Node attribute specifiying level information}
+\item{lvl_attr}{Node attribute specifying level information}
 
 \item{level}{Focal level for gap analysis}
 

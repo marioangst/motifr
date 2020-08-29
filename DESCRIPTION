@@ -2,20 +2,19 @@ Package: motifr
 Title: Motif analysis in multi-level networks
 Version: 0.2
 Authors@R: 
-    c(
-    person(given = "Mario",
-           family = "Angst",
-           role = c("aut", "cre"),
-           email = "mario.angst@gmail.com",
-           comment = c(ORCID = "0000-0002-8297-9827")),
-    person(given = "Tim",
-           family = "Seppelt",
-           role = c("aut"),
-           email = "t.seppelt@posteo.de",
-           comment = c(ORCID = "0000-0002-6447-0568")))
+    c(person(given = "Mario",
+             family = "Angst",
+             role = c("aut", "cre"),
+             email = "t.seppelt@posteo.de",
+             comment = c(ORCID = "0000-0002-8297-9827")),
+      person(given = "Tim",
+             family = "Seppelt",
+             role = "aut",
+             email = "t.seppelt@posteo.de",
+             comment = c(ORCID = "0000-0002-6447-0568")))
 Description: This package provides tools for motif analysis in multi-level networks.
     Multi-level networks combine multiple networks in one, e.g. social-ecological networks. 
-    Motifs are small configurations of nodes and edges (subgraphs) occuring in networks.
+    Motifs are small configurations of nodes and edges (subgraphs) occurring in networks.
     motifr is visualizes multi-level networks, counts multi-level network motifs, compares them to a baseline.
     It also identifies contributions of potential edges to motifs to find critical or missing edges.
     The package is in many parts a R wrapper for the excellent SESMotifAnalyser Python package written by
@@ -23,6 +22,7 @@ Description: This package provides tools for motif analysis in multi-level netwo
 License: MIT + file LICENSE
 URL: https://marioangst.github.io/motifr/
 BugReports: https://github.com/marioangst/motifr/issues
+Language: en-GB
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1

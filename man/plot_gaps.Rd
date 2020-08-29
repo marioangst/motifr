@@ -2,7 +2,7 @@
 % Please edit documentation in R/gaps_critical_edges.R
 \name{plot_gaps}
 \alias{plot_gaps}
-\title{Plot gaps in network vizualization}
+\title{Plot gaps in network visualisation}
 \usage{
 plot_gaps(
   net,
@@ -19,7 +19,7 @@ plot_gaps(
 
 \item{motif}{Motif to explore gaps in for}
 
-\item{lvl_attr}{Node attribute specifiying level information}
+\item{lvl_attr}{Node attribute specifying level information}
 
 \item{level}{Focal level for gap analysis}
 

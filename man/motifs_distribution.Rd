@@ -53,7 +53,7 @@ further parameters. In case of the Actor’s Choice Model a level of the given
 network can be specified which is only level assumed to be variable. All
 other levels are assumed to be fixed. Per default, ``level = -1``, the first
 level carrying two nodes in the signature of the motif is selected as
-variable level. Set the ``level`` paramter to the value of the ``lvl_attr``
+variable level. Set the ``level`` parameter to the value of the ``lvl_attr``
 of the nodes in the desired level to specify the level manually.
 }
 \examples{

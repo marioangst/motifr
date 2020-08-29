@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 library(motifr)
 ```
 
-This vignette introduces the nomenclature used for labeling motifs in multi-level motifs used in motifr.
+This vignette introduces the nomenclature used for labelling motifs in multi-level motifs used in motifr.
 
 ## Motif classification – how to label motifs in the wild
 
@@ -34,7 +34,7 @@ A motif identifier string contains these two pieces of information. It consists 
 
 Let's consider an example in a two-level network with levels 0 and 1. motifr generally counts levels starting at 0, due to its Python roots. The motif identifier string ``1,2[II.C]`` represents the closed triangle with one node on level 0 and two nodes on level 1. ``1,2`` signifies that the first level (0) provides one node and the second (1) two nodes. The expression ``II.C`` in brackets stands for closed triangle. Alternatively, ``1,2[I.C]`` represents the open triangle with the same number of nodes taken from the levels.
 
-When in doubt about what a given identifier string implies, you can let motifr show you the motif either in a dummy network or an example of the motif in a network you are analyzing (the second will only work if the network you are analyzing actually contains the motif).
+When in doubt about what a given identifier string implies, you can let motifr show you the motif either in a dummy network or an example of the motif in a network you are analysing (the second will only work if the network you are analysing actually contains the motif).
 
 ```{r}
 show_motif('1,2[II.C]', label = TRUE)
@@ -68,7 +68,7 @@ This motif differs from the motif ``2:1,2:0[II.D]`` which contains the same numb
 show_motif(motif = '2:1,2:0[II.D]', label = TRUE)
 ```
 
-The position matching can be overwritten by providinng the levels corresponding to the entries in the motif signature, e.g. the head ``2:1,2:0`` signalises that the first level containing two nodes is level 1 ("2:1") while the second level containing two nodes is level 0 ("2:0"). 
+The position matching can be overwritten by providing the levels corresponding to the entries in the motif signature, e.g. the head ``2:1,2:0`` signalises that the first level containing two nodes is level 1 ("2:1") while the second level containing two nodes is level 0 ("2:0"). 
 
 See the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false), subsection *Position matching* for a detailed description of the procedure.
 

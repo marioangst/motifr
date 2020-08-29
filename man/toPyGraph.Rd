@@ -12,7 +12,7 @@ toPyGraph(g, lvl_attr, relabel = TRUE, directed = NULL)
 \item{lvl_attr}{character vector specifying the attribute name where level
 information is stored in statnet object.}
 
-\item{relabel}{should nodes be relabeled with statnet vertex.names? (defaults
+\item{relabel}{should nodes be relabelled with statnet vertex.names? (defaults
 to TRUE)}
 
 \item{directed}{whether the graph shall be treated as a directed graph. Per
