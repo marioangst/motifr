@@ -123,11 +123,11 @@
 <p>Motifs in random networks can be counted using <code>simulate_baseline()</code>. The supported models are <code>erdos_renyi</code>, <code>fixed_densities</code>, <code>actors_choice</code> and <code>ergm</code>. The function <code>compare_to_baseline()</code> can be used for plotting the results:</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu">simulate_baseline</span>(<span class="no">ml_net</span>, <span class="kw">motifs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span>), <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5</span>, <span class="kw">directed</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="co">#&gt;   1,2[I.C] 1,2[II.C]</span>
-<span class="co">#&gt; 1      193        23</span>
-<span class="co">#&gt; 2      185        17</span>
-<span class="co">#&gt; 3      135        16</span>
-<span class="co">#&gt; 4      138        15</span>
-<span class="co">#&gt; 5      171        19</span></pre></body></html></div>
+<span class="co">#&gt; 1      153        28</span>
+<span class="co">#&gt; 2      155        21</span>
+<span class="co">#&gt; 3      178        18</span>
+<span class="co">#&gt; 4      173        19</span>
+<span class="co">#&gt; 5      155        17</span></pre></body></html></div>
 </div>
 <div id="motif-distributions-without-simulation" class="section level2">
 <h2 class="hasAnchor">
@@ -188,19 +188,19 @@
 <span class="co">#&gt; Starting Monte Carlo maximum likelihood estimation (MCMLE):</span>
 <span class="co">#&gt; Iteration 1 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.04065.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.05142.</span>
 <span class="co">#&gt; Step length converged once. Increasing MCMC sample size.</span>
 <span class="co">#&gt; Iteration 2 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.0004335.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.0002722.</span>
 <span class="co">#&gt; Step length converged twice. Stopping.</span>
 <span class="co">#&gt; Finished MCMLE.</span>
 <span class="co">#&gt; Evaluating log-likelihood at the estimate. Using 20 bridges: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 .</span>
 <span class="co">#&gt; This model was fit using MCMC.  To examine model diagnostics and check</span>
 <span class="co">#&gt; for degeneracy, use the mcmc.diagnostics() function.</span>
-<span class="fu">compare_to_baseline</span>(<span class="no">dummy_net</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'1,2[I.A]'</span>, <span class="st">'1,2[I.C]'</span>, <span class="st">'1,2[II.C]'</span>), <span class="kw">n</span> <span class="kw">=</span> <span class="fl">50</span>, <span class="kw">directed</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">model</span> <span class="kw">=</span> <span class="st">"ergm"</span>, <span class="kw">ergm_model</span> <span class="kw">=</span> <span class="no">model</span>)</pre></body></html></div>
+<span class="fu">compare_to_baseline</span>(<span class="no">dummy_net</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"1,2[I.A]"</span>, <span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span>), <span class="kw">n</span> <span class="kw">=</span> <span class="fl">50</span>, <span class="kw">directed</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">model</span> <span class="kw">=</span> <span class="st">"ergm"</span>, <span class="kw">ergm_model</span> <span class="kw">=</span> <span class="no">model</span>)</pre></body></html></div>
 <p><img src="random_baselines_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu">compare_to_baseline</span>(<span class="no">dummy_net</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">'1,2[I.A]'</span>, <span class="st">'1,2[I.C]'</span>, <span class="st">'1,2[II.C]'</span>), <span class="kw">n</span> <span class="kw">=</span> <span class="fl">50</span>, <span class="kw">directed</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">model</span> <span class="kw">=</span> <span class="st">"erdos_renyi"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu">compare_to_baseline</span>(<span class="no">dummy_net</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"1,2[I.A]"</span>, <span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span>), <span class="kw">n</span> <span class="kw">=</span> <span class="fl">50</span>, <span class="kw">directed</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">model</span> <span class="kw">=</span> <span class="st">"erdos_renyi"</span>)</pre></body></html></div>
 <p><img src="random_baselines_files/figure-html/unnamed-chunk-8-2.png" width="672"></p>
 </div>
   </div>
