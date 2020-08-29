@@ -74,9 +74,11 @@ The following network is an example network from an empirical analysis of wetlan
 It is possible to specify layouts for every network level separately. Below, one level is plotted based on a circle layout, the second one based on Kamada-Kawai.
 
 ```{r}
-plot_mnet(net = ml_net,
-          lvl_attr = "sesType",
-          layouts = list("kk","circle"))
+plot_mnet(
+  net = ml_net,
+  lvl_attr = "sesType",
+  layouts = list("kk", "circle")
+)
 ```
 
 ### Count motifs
@@ -84,15 +86,15 @@ plot_mnet(net = ml_net,
 Motifs can be counted using the versatile function ``count_motifs()``. It takes as parameters a statnet network object (use ``ml_net`` or ``dummy_net`` provided by this package as example) and a list of motif identifiers (see below) specifying the motifs. See the [vignette on the motif zoo](https://marioangst.github.io/motifr/articles/motif_zoo.html) for details on nomenclature for motifs (motif identifier strings). Let's quickly check out two classic examples of three-node, two-level motifs (open and closed triangles) in the wetlands management network introduced above:
 
 ```{r  out.width="300px"}
-show_motif(motif = '1,2[I.C]', net = ml_net, label = TRUE, directed = FALSE) # open ('1,2[I.C]') triangle
-show_motif(motif = '1,2[II.C]', net = ml_net, label = TRUE, directed = FALSE) # closed ('1,2[II.C]') triangle
+show_motif(motif = "1,2[I.C]", net = ml_net, label = TRUE, directed = FALSE) # open ('1,2[I.C]') triangle
+show_motif(motif = "1,2[II.C]", net = ml_net, label = TRUE, directed = FALSE) # closed ('1,2[II.C]') triangle
 ```
 
 
 Let's count the number of of these motifs in the entire network.
 
 ```{r}
-motifs = list('1,2[I.C]', '1,2[II.C]') # open and closed triangle
+motifs <- list("1,2[I.C]", "1,2[II.C]") # open and closed triangle
 
 count_motifs(ml_net, motifs, directed = FALSE)
 ```
@@ -110,18 +112,19 @@ motifr makes it possible to identify gaps and critical edges in multi-level netw
 In relation to gaps, we can therefore try to identify potential edges that would create a large number of a given motif if they were to exist ("activated" or "flipped"). The number of such motifs created by an edge is their contribution. For example, we can get all edges that would create closed triangles ('1,2[II.C]'), including the information about how many such triangles they would create for the wetlands case study network:
 
 ```{r}
-gaps <- identify_gaps(ml_net, motif = '1,2[II.C]')
+gaps <- identify_gaps(ml_net, motif = "1,2[II.C]")
 head(gaps)
 ```
 
 We can also plot these gaps in our network, including option to only look at gaps above a certain weight (contribution) and different levels of focus to only show nodes involved in such gaps. Here again for the wetlands management network, only showing gaps with a weight above 5.
 
 ```{r}
-plot_gaps(ml_net, 
-          "1,2[II.C]", 
-          level = -1, 
-          subset_graph = "partial", 
-          cutoff = 5, label = TRUE)
+plot_gaps(ml_net,
+  "1,2[II.C]",
+  level = -1,
+  subset_graph = "partial",
+  cutoff = 5, label = TRUE
+)
 ```
 
 ``identify_gaps`` has a sibling in ``critical_dyads``. Critical_dyads works in reverse to identifying gaps - it analyses for every existing edge how many instances of a given motif would disappear if the edge would be removed.
@@ -131,7 +134,7 @@ plot_gaps(ml_net,
 Motifr can be used to simulate a random baseline of networks. Motif counts in an empirical network can then be compared to the distribution of motif counts in the random networks. We do so again here for open and closed triangles in the wetland management network. Unsurprisingly, we find that both of these motifs occur much more often in the empirically observed network than in the random baseline. See the package [vignette on random baselines](vignettes/random_baselines.Rmd) for details.
 
 ```{r}
-motifs = list('1,2[I.C]', '1,2[II.C]') # open ('1,2[I.C]') and closed ('1,2[II.C]') triangles
+motifs <- list("1,2[I.C]", "1,2[II.C]") # open ('1,2[I.C]') and closed ('1,2[II.C]') triangles
 
 compare_to_baseline(ml_net, motifs = motifs, n = 50, directed = FALSE)
 ```

@@ -107,10 +107,12 @@ edge_contribution <- function(net,
                               lvl_attr = c("sesType"),
                               level = -1) {
   if (network::is.directed(net)) {
-    warning(paste("Edge contribution does only make sense for undirected networks.",
-                  "The given network is automatically treated as an undirected network."))
+    warning(paste(
+      "Edge contribution does only make sense for undirected networks.",
+      "The given network is automatically treated as an undirected network."
+    ))
   }
-  py_g <- motifr::toPyGraph(g = net, lvl_attr = lvl_attr, directed = FALSE)
+  py_g <- motifr::to_py_graph(g = net, lvl_attr = lvl_attr, directed = FALSE)
   result <- sma$identifyGapsR(py_g, motif, level = level)
   df <- data.frame(result)
   return(df)
@@ -138,10 +140,14 @@ edge_contribution <- function(net,
 #'
 #' @examples
 #' plot_gaps(ml_net, "1,2[II.C]", level = -1)
-#' plot_gaps(ml_net, "1,2[II.C]", level = -1,
-#'           subset_graph = "focal", cutoff = 4, label = TRUE)
-#' plot_gaps(ml_net, "1,2[II.C]", level = -1,
-#'           subset_graph = "partial", cutoff = 4, label = TRUE)
+#' plot_gaps(ml_net, "1,2[II.C]",
+#'   level = -1,
+#'   subset_graph = "focal", cutoff = 4, label = TRUE
+#' )
+#' plot_gaps(ml_net, "1,2[II.C]",
+#'   level = -1,
+#'   subset_graph = "partial", cutoff = 4, label = TRUE
+#' )
 plot_gaps <- function(net,
                       motif,
                       lvl_attr = c("sesType"),
@@ -157,13 +163,14 @@ plot_gaps <- function(net,
   )
 
   plot_gaps_or_critical_dyads(net,
-                              gaps,
-                              "#f2790070",
-                              "Gap",
-                              lvl_attr = lvl_attr,
-                              cutoff = cutoff,
-                              subset_graph = subset_graph,
-                              ...)
+    gaps,
+    "#f2790070",
+    "Gap",
+    lvl_attr = lvl_attr,
+    cutoff = cutoff,
+    subset_graph = subset_graph,
+    ...
+  )
 }
 
 #' Plot critical dyads in network visualisation
@@ -211,13 +218,14 @@ plot_critical_dyads <- function(net,
   )
 
   plot_gaps_or_critical_dyads(net,
-                              gaps,
-                              "#00f24070",
-                              "Critical dyad",
-                              lvl_attr = lvl_attr,
-                              cutoff = cutoff,
-                              subset_graph = subset_graph,
-                              ...)
+    gaps,
+    "#00f24070",
+    "Critical dyad",
+    lvl_attr = lvl_attr,
+    cutoff = cutoff,
+    subset_graph = subset_graph,
+    ...
+  )
 }
 
 #' Helper function for ?motifr::plot_gaps and ?motifr::plot_critical_dyads
@@ -320,6 +328,7 @@ plot_gaps_or_critical_dyads <- function(net,
       colour = colour, alpha = 0.7
     ) +
     ggplot2::scale_size_continuous(sprintf("%s weight", title),
-                                   range = c(1, 2),
-                                   breaks = scales::pretty_breaks())
+      range = c(1, 2),
+      breaks = scales::pretty_breaks()
+    )
 }

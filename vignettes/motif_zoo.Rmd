@@ -37,7 +37,7 @@ Let's consider an example in a two-level network with levels 0 and 1. motifr gen
 When in doubt about what a given identifier string implies, you can let motifr show you the motif either in a dummy network or an example of the motif in a network you are analysing (the second will only work if the network you are analysing actually contains the motif).
 
 ```{r}
-show_motif('1,2[II.C]', label = TRUE)
+show_motif("1,2[II.C]", label = TRUE)
 ```
 
 A full list of all supported signatures and motif classes can be found in the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false) in section *Appendix: The Motif Zoo*.
@@ -58,14 +58,14 @@ Motifr uses an internal mechanism called *position matching* for translating the
 An example for this is the motif ``2,2[II.D]``. It contains two nodes on level 0 and two nodes on level 1. The two nodes on level 0 and the two nodes on level 1 are respectively adjacent. Furthermore the two nodes on level 0 are linked to one of the nodes on level 1. 
 
 ```{r}
-show_motif(motif = '2,2[II.D]', label = TRUE)
+show_motif(motif = "2,2[II.D]", label = TRUE)
 ```
 
 
 This motif differs from the motif ``2:1,2:0[II.D]`` which contains the same number of nodes from the different levels. However, here the roles of the levels are swapped, i.e. in this motif, the two nodes on level 1 are adjacent to the two nodes on level 0.
 
 ```{r}
-show_motif(motif = '2:1,2:0[II.D]', label = TRUE)
+show_motif(motif = "2:1,2:0[II.D]", label = TRUE)
 ```
 
 The position matching can be overwritten by providing the levels corresponding to the entries in the motif signature, e.g. the head ``2:1,2:0`` signalises that the first level containing two nodes is level 1 ("2:1") while the second level containing two nodes is level 0 ("2:0"). 

@@ -13,14 +13,14 @@
 #' @export
 #'
 #' @examples
-#' toPyGraph(motifr::dummy_net, lvl_attr = "sesType")
-toPyGraph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
+#' to_py_graph(motifr::dummy_net, lvl_attr = "sesType")
+to_py_graph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
 
   # function for translating a statnet network object into a Python compatible
   # networkx object
-  adjacencyMatrix <- network::as.matrix.network(g)
-  attributeNames <- network::list.vertex.attributes(g)
-  attributeValues <- lapply(
+  adjacency_matrix <- network::as.matrix.network(g)
+  attribute_names <- network::list.vertex.attributes(g)
+  attribute_values <- lapply(
     network::list.vertex.attributes(g),
     function(x) network::get.vertex.attribute(g, x)
   )
@@ -34,9 +34,9 @@ toPyGraph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
     ))
   }
 
-  py_g <- sma$translateGraph(adjacencyMatrix,
-    attributeNames,
-    attributeValues,
+  py_g <- sma$translateGraph(adjacency_matrix,
+    attribute_names,
+    attribute_values,
     lvl_attr,
     directed = directed
   )
@@ -116,7 +116,7 @@ count_motifs <- function(net,
                          omit_total_result = TRUE,
                          directed = NULL) {
   # convert net to python object
-  py_g <- motifr::toPyGraph(net,
+  py_g <- motifr::to_py_graph(net,
     lvl_attr = lvl_attr,
     directed = directed
   )
@@ -185,7 +185,7 @@ motifs_distribution <- function(net,
   }
 
   # convert net to python object
-  py_g <- motifr::toPyGraph(net,
+  py_g <- motifr::to_py_graph(net,
     lvl_attr = lvl_attr,
     directed = directed
   )
@@ -267,7 +267,7 @@ exemplify_motif <- function(net,
                             lvl_attr = "sesType",
                             directed = NULL) {
   # convert net to python object
-  py_g <- motifr::toPyGraph(net, lvl_attr = lvl_attr, directed = directed)
+  py_g <- motifr::to_py_graph(net, lvl_attr = lvl_attr, directed = directed)
   motif <- sma$exemplifyMotif(py_g, motif)
   return(purrr::simplify(motif))
 }
@@ -395,7 +395,7 @@ simulate_baseline <- function(net,
         stop("Please provide a valid level when using an Actor's Choice model")
       }
     }
-    py_g <- motifr::toPyGraph(net,
+    py_g <- motifr::to_py_graph(net,
       lvl_attr = lvl_attr,
       directed = directed
     )
@@ -521,7 +521,7 @@ list_motifs <- function(net,
                         identifier,
                         lvl_attr = "sesType",
                         directed = NULL) {
-  py_g <- toPyGraph(net, lvl_attr = lvl_attr, directed = directed)
+  py_g <- to_py_graph(net, lvl_attr = lvl_attr, directed = directed)
   df <- sma$motifTable(py_g, identifier)
   return(df)
 }

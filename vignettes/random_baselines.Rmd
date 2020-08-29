@@ -92,6 +92,6 @@ ERGMs are a powerful tool when working with random networks. The R library ``erg
 
 ```{r}
 model <- ergm(dummy_net ~ edges + triangle)
-compare_to_baseline(dummy_net, list('1,2[I.A]', '1,2[I.C]', '1,2[II.C]'), n = 50, directed = FALSE, model = "ergm", ergm_model = model)
-compare_to_baseline(dummy_net, list('1,2[I.A]', '1,2[I.C]', '1,2[II.C]'), n = 50, directed = FALSE, model = "erdos_renyi")
+compare_to_baseline(dummy_net, list("1,2[I.A]", "1,2[I.C]", "1,2[II.C]"), n = 50, directed = FALSE, model = "ergm", ergm_model = model)
+compare_to_baseline(dummy_net, list("1,2[I.A]", "1,2[I.C]", "1,2[II.C]"), n = 50, directed = FALSE, model = "erdos_renyi")
 ```

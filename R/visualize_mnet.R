@@ -110,7 +110,7 @@ plot_mnet <- function(net,
 
   p_comb <-
     p_comb +
-    ggraph::geom_node_point(ggplot2::aes_(color = ~factor(lvl))) +
+    ggraph::geom_node_point(ggplot2::aes_(color = ~ factor(lvl))) +
     ggplot2::theme_void() +
     ggplot2::scale_color_brewer("Level",
       breaks = levels(factor(nodes$lvl)),
@@ -120,7 +120,7 @@ plot_mnet <- function(net,
 
   if (label == TRUE) {
     p_comb <-
-      p_comb + ggraph::geom_node_label(ggplot2::aes_(label = ~name, fill = ~factor(lvl)),
+      p_comb + ggraph::geom_node_label(ggplot2::aes_(label = ~name, fill = ~ factor(lvl)),
         alpha = 0.5
       ) +
       ggplot2::scale_fill_brewer("Level",
