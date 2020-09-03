@@ -8,6 +8,7 @@ r_packages:
    - testthat
    - reticulate
    - pkgdown
+   - devtools
 
 # https://www.jumpingrivers.com/blog/r-packages-travis-github-actions-rstudio/
 before_install:
@@ -16,7 +17,7 @@ before_install:
  - echo "options(HTTPUserAgent = paste0('R/', getRversion(), ' R (',
        paste(getRversion(), R.version['platform'], R.version['arch'], R.version['os']),
        ')'))" >> ~/.Rprofile.site
- 
+
 after_success:
   - Rscript -e 'pkgdown::build_site()'
 
@@ -28,7 +29,7 @@ deploy:
   local-dir: docs
   on:
     branch: master
-    
+
 addons:
   apt:
     update: true

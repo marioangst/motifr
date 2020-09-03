@@ -379,7 +379,7 @@ simulate_baseline <- function(net,
     }
     # let's do the job ourselves
     result <- data.frame()
-    for (i in 0:n) {
+    for (i in 1:n) {
       sample <- stats::simulate(ergm_model)
       counts <- motifr::count_motifs(sample,
         motifs = motifs,
