@@ -1,6 +1,7 @@
 library(testthat)
 library(motifr)
 library(reticulate)
+library(igraph)
 
 nx <<- reticulate::import("networkx", delay_load = TRUE)
 itertools <<- reticulate::import("itertools", delay_load = TRUE)

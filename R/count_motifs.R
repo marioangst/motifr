@@ -16,18 +16,38 @@
 #' to_py_graph(motifr::dummy_net, lvl_attr = "sesType")
 to_py_graph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
 
-  # function for translating a statnet network object into a Python compatible
-  # networkx object
-  adjacency_matrix <- network::as.matrix.network(g)
-  attribute_names <- network::list.vertex.attributes(g)
-  attribute_values <- lapply(
-    network::list.vertex.attributes(g),
-    function(x) network::get.vertex.attribute(g, x)
-  )
+  if(class(g) == "network") {
+    # function for translating a statnet network object into a Python compatible
+    # networkx object
+    adjacency_matrix <- network::as.matrix.network(g)
+    attribute_names <- network::list.vertex.attributes(g)
+    attribute_values <- lapply(
+      network::list.vertex.attributes(g),
+      function(x) network::get.vertex.attribute(g, x)
+    )
+    graph_directed <- network::is.directed(g)
+    vertex_names <- network::network.vertex.names(g)
+  }else if(class(g) == "igraph") {
+    adjacency_matrix <- igraph::as_adjacency_matrix(g, sparse = FALSE)
+    attributes <- as.data.frame(igraph::vertex.attributes(g))
+    attribute_names <- colnames(attributes)
+    attribute_values <- lapply(
+      attribute_names,
+      function(x) attributes[[x]]
+    )
+    graph_directed <- igraph::is.directed(g)
+    if(is.null(igraph::V(g)$name)) {
+      vertex_names <- 1:igraph::gorder(g)
+    }else{
+      vertex_names <- igraph::V(g)$name
+    }
+  }else{
+    stop(paste("Provided network object is of unsupported format", class(g)))
+  }
 
   if (is.null(directed)) {
-    directed <- network::is.directed(g)
-  } else if (directed == TRUE && !network::is.directed(g)) {
+    directed <- graph_directed
+  } else if (directed == TRUE && ! graph_directed) {
     warning(paste(
       "Attempting to treat an undirected network as directed.",
       "This might lead to unintended results."
@@ -47,7 +67,7 @@ to_py_graph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
     node_names <-
       reticulate::py_dict(
         keys = as.integer(0:(py_g$number_of_nodes() - 1)),
-        values = network::get.vertex.attribute(g, "vertex.names")
+        values = vertex_names
       )
     py_g <- nx$relabel_nodes(py_g, mapping = node_names)
   }
