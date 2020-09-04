@@ -8,7 +8,6 @@ r_packages:
    - testthat
    - reticulate
    - pkgdown
-   - devtools
 
 # https://www.jumpingrivers.com/blog/r-packages-travis-github-actions-rstudio/
 before_install:
