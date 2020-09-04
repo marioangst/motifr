@@ -15,7 +15,7 @@ The network contains two variables to describe nodes/ vertices.
 }
 \source{
 Dummy data
-https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data
+\url{https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data}
 }
 \usage{
 dummy_net

@@ -29,7 +29,7 @@
 #'   ...
 #' }
 #' @source Dummy data
-#' https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data
+#' \url{https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data}
 "dummy_net"
 
 
@@ -39,5 +39,5 @@
 #'
 #' @format igraph network object
 #' @source Dummy data
-#' https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data
+#' \url{https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data}
 "directed_dummy_net"

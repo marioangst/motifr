@@ -257,7 +257,7 @@ motif_summary <- function(net,
                           lvl_attr = c("sesType")) {
   # exquisite selection of motifs
   # all motifs are undirected, hence set directed = FALSE and suppose graph is
-  # undircted
+  # undirected
   motifs <- c(
     "1,2[I.C]", "1,2[II.C]",
     "2,1[I.C]", "2,1[II.C]",
