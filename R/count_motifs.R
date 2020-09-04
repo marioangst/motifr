@@ -425,7 +425,7 @@ simulate_baseline <- function(net,
         directed = directed
       )
       result <- rbind(result, counts$count)
-      if (i == 0) {
+      if (i == 1) {
         colnames(result) <- counts$motif
       }
     }
