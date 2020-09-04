@@ -7,15 +7,16 @@
 exemplify_motif(net, motif, lvl_attr = "sesType", directed = NULL)
 }
 \arguments{
-\item{net}{statnet network object}
+\item{net}{network object}
 
 \item{motif}{motif identifier string for the motif}
 
 \item{lvl_attr}{character vector specifying the attribute name where level
-information is stored in statnet object.}
+information is stored in \code{net}.}
 
 \item{directed}{whether the graph shall be treated as a directed graph. Per
-default (NULL) this is determined automatically using network::is.directed.}
+default (\code{NULL}), this is determined automatically using the structure
+of the provided network object}
 }
 \value{
 vector of nodes in the motif

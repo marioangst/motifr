@@ -7,15 +7,16 @@
 list_motifs(net, identifier, lvl_attr = "sesType", directed = NULL)
 }
 \arguments{
-\item{net}{statnet network object}
+\item{net}{network object}
 
 \item{identifier}{motif identifier string (with or without class, see above)}
 
 \item{lvl_attr}{character vector specifying the attribute name where level
-information is stored in statnet object.}
+information is stored in \code{net}.}
 
 \item{directed}{whether the graph shall be treated as a directed graph. Per
-default (NULL) this is determined automatically using network::is.directed.}
+default (\code{NULL}), this is determined automatically using the structure
+of the provided network object}
 }
 \value{
 data frame with one row for each motif

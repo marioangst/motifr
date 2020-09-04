@@ -17,14 +17,14 @@ simulate_baseline(
 )
 }
 \arguments{
-\item{net}{statnet network object}
+\item{net}{network object}
 
 \item{motifs}{list of motif identifier strings}
 
 \item{n}{number of random graphs}
 
 \item{lvl_attr}{character string specifying the attribute name where level
-information is stored in statnet object.}
+information is stored in \code{net}.}
 
 \item{assume_sparse}{whether the random graphs shall be assumed to be sparse.
 used to find ideal counting function. defaults to TRUE.}
@@ -39,7 +39,8 @@ Defaults to 'erdos_renyi'.}
 ``ergm::ergm()``. Used when model is set to ergm to sample random networks.}
 
 \item{directed}{whether the graph shall be treated as a directed graph. Per
-default (NULL) this is determined automatically using network::is.directed.}
+default (\code{NULL}), this is determined automatically using the structure
+of the provided network object}
 }
 \value{
 data frame with one column for each motif identifier string and one

@@ -2,7 +2,7 @@
 % Please edit documentation in R/count_motifs.R
 \name{show_4_motifs}
 \alias{show_4_motifs}
-\title{Display all supported motifs with signature ``2,2``.}
+\title{Display all supported motifs with signature (2,2).}
 \usage{
 show_4_motifs()
 }
@@ -12,7 +12,7 @@ Opens figure from Ö. Bodin, M. Tengö: Disentangling intangible
   http://dx.doi.org/10.1016/j.gloenvcha.2012.01.005
 }
 \description{
-Display all supported motifs with signature ``2,2``.
+Display all supported motifs with signature (2,2).
 }
 \examples{
 show_4_motifs()

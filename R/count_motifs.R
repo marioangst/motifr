@@ -1,15 +1,21 @@
 
-#' Translate multi-level statnet network object to networkx (python) object
+#' Translate multi-level statnet or igraph network object to Python networkx
+#' object
 #'
-#' @param g statnet network object
+#' The functions \code{network::is.directed} or
+#' \code{igraph::is.directed} are used to determine whether the provided
+#' network is directed (if \code{directed = FALSE}).
+#'
+#' @param g statnet or igraph network object
 #' @param lvl_attr character vector specifying the attribute name where level
-#'   information is stored in statnet object.
-#' @param relabel should nodes be relabelled with statnet vertex.names? (defaults
-#'   to TRUE)
+#'   information is stored in \code{net}.
+#' @param relabel should nodes be relabelled with statnet \code{vertex.names} or
+#'   igraph nodal attribute \code{name}
 #' @param directed whether the graph shall be treated as a directed graph. Per
-#'   default (NULL) this is determined automatically using network::is.directed.
+#'   default (\code{NULL}), this is determined automatically using the structure
+#'   of the provided network object
 #'
-#' @return python graph object
+#' @return Python networkx graph object
 #' @export
 #'
 #' @examples
@@ -20,7 +26,7 @@ to_py_graph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
     # function for translating a statnet network object into a Python compatible
     # networkx object
     adjacency_matrix <- network::as.matrix.network(g)
-    attribute_names <- network::list.vertex.attributes(g)
+    attribute_names <- as.list(network::list.vertex.attributes(g))
     attribute_values <- lapply(
       network::list.vertex.attributes(g),
       function(x) network::get.vertex.attribute(g, x)
@@ -43,7 +49,7 @@ to_py_graph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
       vertex_names <- igraph::V(g)$name
     }
   }else{
-    stop(paste("Provided network object is of unsupported format", class(g)))
+    stop(paste("Provided network object is of unsupported format:", class(g)))
   }
 
   if (is.null(directed)) {
@@ -75,7 +81,7 @@ to_py_graph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
   return(py_g)
 }
 
-#' Display all supported motifs with signature ``1,2``.
+#' Display all supported motifs with signature (1,2).
 #'
 #' @return Opens image
 #' @export
@@ -89,7 +95,7 @@ show_3_motifs <- function() {
   ))
 }
 
-#' Display all supported motifs with signature ``2,2``.
+#' Display all supported motifs with signature (2,2).
 #'
 #' @return Opens figure from Ö. Bodin, M. Tengö: Disentangling intangible
 #'   social–ecological systems in Global Environmental Change 22 (2012) 430–439
@@ -107,18 +113,19 @@ show_4_motifs <- function() {
 
 #' Count multi-level motifs
 #'
-#' @param net A statnet network object with a node attribute specifying the
+#' @param net A network object with a node attribute specifying the
 #'   level of each node
 #' @param motifs a list of motif identifiers which shall be counted, e.g.
-#'   list("1,2[I.C]")
+#'   \code{list("1,2[I.C]")}
 #' @param lvl_attr character vector specifying the vertex attribute name where
-#'   level information is stored in statnet object
+#'   level information is stored in \code{net}
 #' @param assume_sparse whether the network shall be assumed to be sparse (for
 #'   optimization), default TRUE
 #' @param omit_total_result whether total results shall be omitted, default
 #'   FALSE
 #' @param directed whether the graph shall be treated as a directed graph. Per
-#'   default (NULL) this is determined automatically using network::is.directed.
+#'   default (\code{NULL}), this is determined automatically using the structure
+#'   of the provided network object
 #'
 #' @return data frame with a column containing motif identifier strings and one
 #'   column containing motif counts
@@ -142,6 +149,9 @@ count_motifs <- function(net,
     directed = directed
   )
 
+  # make sure motifs is list
+  motifs <- as.list(motifs)
+
   # call counter
   counted <- sma$countMotifsAutoR(py_g,
     motifs,
@@ -155,36 +165,33 @@ count_motifs <- function(net,
 #' Compute statistical properties (expectation and variance) of the distribution
 #' of motifs in a random baseline
 #'
-#' Warning: Variances can only be computed for 1,2 motifs at the moment.
+#' This function supports the Erdős-Rényi Model (\code{erdos_renyi}) and the the
+#' Actor’s Choice Model (\code{actors_choice}). The model can be specified using
+#' the \code{model} parameter. The Erdős-Rényi Model can be used without
+#' providing further parameters. In case of the Actor’s Choice Model a level of
+#' the given network can be specified which is only level assumed to be
+#' variable. All other levels are assumed to be fixed. Per default, \code{level
+#' = -1}, the first level carrying two nodes in the signature of the motif is
+#' selected as variable level. Set the \code{level} parameter to the value of
+#' the \code{lvl_attr} of the nodes in the desired level to specify the level
+#' manually.
 #'
-#' This function supports the Erdős-Rényi Model (``erdos_renyi``) and the the
-#' Actor’s Choice Model (``actors_choice``). The model can be specified using
-#' the ``model`` parameter. The Erdős-Rényi Model can be used without providing
-#' further parameters. In case of the Actor’s Choice Model a level of the given
-#' network can be specified which is only level assumed to be variable. All
-#' other levels are assumed to be fixed. Per default, ``level = -1``, the first
-#' level carrying two nodes in the signature of the motif is selected as
-#' variable level. Set the ``level`` parameter to the value of the ``lvl_attr``
-#' of the nodes in the desired level to specify the level manually.
-#'
-#' @param net statnet network object
+#' @param net network object
 #' @param lvl_attr character vector specifying the attribute name where level
-#'   information is stored in statnet object.
+#'   information is stored in \code{net}.
 #' @param motifs list of motif identifiers describing the motifs whose
 #'   distribution shall be analysed
-#' @param model model to be used. Options are 'erdos_renyi', or 'actors_choice'.
-#'   See vignette "random_baselines" for more details. Defaults to
-#'   'erdos_renyi'.
+#' @param model model to be used
 #' @param level Additional parameter to set the level to vary for the
 #'   actors_choice model manually. All other levels are held fixed.
 #' @param omit_total_result whether total results shall be omitted
 #' @param directed whether the graph shall be treated as a directed graph. Per
-#'   default (NULL) this is determined automatically using network::is.directed.
+#'   default (\code{NULL}), this is determined automatically using the structure
+#'   of the provided network object
 #'
 #' @return data frame with one column giving names of motif identifers and two
-#'   column giving expectation and variances per motif. At the moment, variances
-#'   are only computed for 1,2 motifs. For other motifs, expectations are
-#'   computed but variances are returned as NaN.
+#'   column giving expectation and variances per motif. For other motifs,
+#'   expectations are computed but variances are returned as NaN.
 #' @export
 #'
 #' @examples
@@ -211,6 +218,9 @@ motifs_distribution <- function(net,
     directed = directed
   )
 
+  # make sure motifs is list
+  motifs <- as.list(motifs)
+
   # call counter
   result <- sma$distributionMotifsAutoR(py_g,
     motifs,
@@ -231,11 +241,11 @@ motifs_distribution <- function(net,
 #' Returns a data frame with counts and statistical properties (expectation,
 #' variances) of six selected motifs in the given network. Note that this
 #' function implicitly assumes that the network is undirected, cf.
-#' ?motifr::to_py_graph.
+#' \code{motifr::to_py_graph}.
 #'
-#' @param net statnet network object
+#' @param net network object
 #' @param lvl_attr character vector specifying the attribute name where level
-#'   information is stored in statnet object.
+#'   information is stored in \code{net}.
 #'
 #' @return dataframe with motif counts, expectations and variances for set of
 #'   selected motifs
@@ -275,12 +285,13 @@ motif_summary <- function(net,
 
 #' Returns an example for a motif found in a given network
 #'
-#' @param net statnet network object
+#' @param net network object
 #' @param motif motif identifier string for the motif
 #' @param lvl_attr character vector specifying the attribute name where level
-#'   information is stored in statnet object.
+#'   information is stored in \code{net}.
 #' @param directed whether the graph shall be treated as a directed graph. Per
-#'   default (NULL) this is determined automatically using network::is.directed.
+#'   default (\code{NULL}), this is determined automatically using the structure
+#'   of the provided network object
 #'
 #' @return vector of nodes in the motif
 #' @seealso show_motif
@@ -304,11 +315,12 @@ exemplify_motif <- function(net,
 #' If no network is provided, a motif in a dummy network will be shown.
 #'
 #' @param motif motif identifier string for the motif
-#' @param net statnet network object
+#' @param net network object
 #' @param lvl_attr character vector specifying the attribute name where level
-#'   information is stored in statnet object.
+#'   information is stored in \code{net}.
 #' @param directed whether the graph shall be treated as a directed graph. Per
-#'   default (NULL) this is determined automatically using network::is.directed.
+#'   default (\code{NULL}), this is determined automatically using the structure
+#'   of the provided network object
 #' @param ... additional arguments to be passed to plotting function (eg. label
 #'   = TRUE)
 #' @return plot
@@ -348,11 +360,11 @@ show_motif <- function(motif,
 #' When using ERGM the parameter ``net`` is not used. Random networks are sampled
 #' in R using the ``ergm_model`` parameter.
 #'
-#' @param net statnet network object
+#' @param net network object
 #' @param motifs list of motif identifier strings
 #' @param n number of random graphs
 #' @param lvl_attr character string specifying the attribute name where level
-#'   information is stored in statnet object.
+#'   information is stored in \code{net}.
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
 #'   used to find ideal counting function. defaults to TRUE.
 #' @param model baseline model to be used. Options are 'erdos_renyi',
@@ -362,7 +374,8 @@ show_motif <- function(motif,
 #' @param ergm_model ergm model as for example fitted by calling
 #'   ``ergm::ergm()``. Used when model is set to ergm to sample random networks.
 #' @param directed whether the graph shall be treated as a directed graph. Per
-#'   default (NULL) this is determined automatically using network::is.directed.
+#'   default (\code{NULL}), this is determined automatically using the structure
+#'   of the provided network object
 #'
 #' @return data frame with one column for each motif identifier string and one
 #'   row for every computed random graph
@@ -379,6 +392,9 @@ simulate_baseline <- function(net,
                               level = -1,
                               ergm_model = NULL,
                               directed = NULL) {
+  # make sure motifs is list
+  motifs <- as.list(motifs)
+
   supported_models <- c(
     "erdos_renyi", "fixed_densities", "actors_choice",
     "ergm"
@@ -450,11 +466,11 @@ simulate_baseline <- function(net,
 #' When using ERGM the parameter ``net`` is not used. Random networks are sampled
 #' in R using the ``ergm_model`` parameter.
 #'
-#' @param net statnet network object
+#' @param net network object
 #' @param motifs list of motif identifier strings
 #' @param n number of random graphs
 #' @param lvl_attr character vector specifying the attribute name where level
-#'   information is stored in statnet object.
+#'   information is stored in \code{net}.
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
 #'   used to find ideal counting function
 #' @param model baseline model to be used. Options are 'erdos_renyi' and
@@ -464,7 +480,8 @@ simulate_baseline <- function(net,
 #' @param ergm_model ergm model as for example fitted by calling
 #'   ``ergm::ergm()``. Used when model is set to ergm to sample random network
 #' @param directed whether the graph shall be treated as a directed graph. Per
-#'   default (NULL) this is determined automatically using network::is.directed.
+#'   default (\code{NULL}), this is determined automatically using the structure
+#'   of the provided network object
 #'
 #' @return data frame with one row for each motif identifier string and one row
 #'   for every computed random graph
@@ -531,12 +548,13 @@ compare_to_baseline <- function(net,
 #' index stems from the internal order of the nodes and does not carry any
 #' specific meaning. in R using the ``ergm_model`` parameter.
 #'
-#' @param net statnet network object
+#' @param net network object
 #' @param identifier motif identifier string (with or without class, see above)
 #' @param lvl_attr character vector specifying the attribute name where level
-#'   information is stored in statnet object.
+#'   information is stored in \code{net}.
 #' @param directed whether the graph shall be treated as a directed graph. Per
-#'   default (NULL) this is determined automatically using network::is.directed.
+#'   default (\code{NULL}), this is determined automatically using the structure
+#'   of the provided network object
 #'
 #' @return data frame with one row for each motif
 #' @export

@@ -2,7 +2,7 @@
 % Please edit documentation in R/count_motifs.R
 \name{show_3_motifs}
 \alias{show_3_motifs}
-\title{Display all supported motifs with signature ``1,2``.}
+\title{Display all supported motifs with signature (1,2).}
 \usage{
 show_3_motifs()
 }
@@ -10,7 +10,7 @@ show_3_motifs()
 Opens image
 }
 \description{
-Display all supported motifs with signature ``1,2``.
+Display all supported motifs with signature (1,2).
 }
 \examples{
 show_3_motifs()

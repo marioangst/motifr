@@ -7,10 +7,10 @@
 motif_summary(net, lvl_attr = c("sesType"))
 }
 \arguments{
-\item{net}{statnet network object}
+\item{net}{network object}
 
 \item{lvl_attr}{character vector specifying the attribute name where level
-information is stored in statnet object.}
+information is stored in \code{net}.}
 }
 \value{
 dataframe with motif counts, expectations and variances for set of
@@ -20,7 +20,7 @@ dataframe with motif counts, expectations and variances for set of
 Returns a data frame with counts and statistical properties (expectation,
 variances) of six selected motifs in the given network. Note that this
 function implicitly assumes that the network is undirected, cf.
-?motifr::to_py_graph.
+\code{motifr::to_py_graph}.
 }
 \examples{
 motif_summary(ml_net)

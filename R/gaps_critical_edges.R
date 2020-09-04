@@ -13,10 +13,10 @@
 #' Note that this only works for undirected graphs. Regardless of whether the
 #' input graph is directed it is treated as undirected graph.
 #'
-#' @param net statnet network object
+#' @param net network object
 #' @param motif motif identifier
 #' @param lvl_attr character vector specifying the attribute name where level
-#'   information is stored in statnet object.
+#'   information is stored in \code{net}.
 #' @param level level of the dyads which shall be considered, or -1 if the level
 #'   shall be determined automatically.
 #'
@@ -42,7 +42,7 @@ identify_gaps <- function(net,
 #' removed from the network.
 #'
 #' The level parameter determines on which level of the network critical dyads
-#' are analysed. Per default, when ``level = -1``, the first level in the motif
+#' are analysed. Per default, when \code{level = -1}, the first level in the motif
 #' which provides exactly two nodes is selected. Use this parameter to specify a
 #' level manually. The procedure for determining the level is the same as for
 #' the Actor's Choice Model, cf. vignette.
@@ -50,10 +50,10 @@ identify_gaps <- function(net,
 #' Note that this only works for undirected graphs. Regardless of whether the
 #' input graph is directed it is treated as undirected graph.
 #'
-#' @param net statnet network object
+#' @param net network object
 #' @param motif motif identifier
 #' @param lvl_attr character vector specifying the attribute name where level
-#'   information is stored in statnet object.
+#'   information is stored in \code{net}
 #' @param level level of the dyads which shall be considered, or -1 if the level
 #'   shall be determined automatically.
 #'
@@ -89,10 +89,10 @@ critical_dyads <- function(net,
 #' Note that this only works for undirected graphs. Regardless of whether the
 #' input graph is directed it is treated as undirected graph.
 #'
-#' @param net statnet network object
+#' @param net network object
 #' @param motif motif identifier
 #' @param lvl_attr character vector specifying the attribute name where level
-#'   information is stored in statnet object.
+#'   information is stored in \code{net}.
 #' @param level level of the dyads which shall be considered, or -1 if the level
 #'   shall be determined automatically.
 #'
@@ -130,7 +130,7 @@ edge_contribution <- function(net,
 #' @param cutoff Cutoff point in contributions of an edge to the number of
 #'   motifs above which to analyse gaps
 #' @param ... list of additional parameters to be passed to plotting function
-#'   (see ?motifr::plot_mnet), eg. label = TRUE
+#'   (see \code{motifr::plot_mnet}), e.g. \code{label = TRUE}
 #' @param subset_graph Whether to subset the graph to only show nodes involved
 #'   in gaps. One of "none" (no subset, default), "partial" (only focal level is
 #'   subset) or "focal" (only focal level shown)
@@ -185,7 +185,7 @@ plot_gaps <- function(net,
 #' @param cutoff Cutoff point in contributions of an edge to the number of
 #'   motifs above which to analyse gaps
 #' @param ... list of additional parameters to be passed to plotting function
-#'   (see ?motifr::plot_mnet), eg. label = TRUE
+#'   (see \code{motifr::plot_mnet}), e.g. \code{label = TRUE}
 #' @param subset_graph Whether to subset the graph to only show nodes involved
 #'   in gaps. One of "none" (no subset, default), "partial" (only focal level is
 #'   subset) or "focal" (only focal level shown)
@@ -228,20 +228,22 @@ plot_critical_dyads <- function(net,
   )
 }
 
-#' Helper function for ?motifr::plot_gaps and ?motifr::plot_critical_dyads
+#' Helper function for plotting gaps and critical edges
 #'
 #' Note that this only works for undirected graphs. Regardless of whether the
 #' input graph is directed it is treated as undirected graph.
 #'
-#' @param net Statnet network object
+#' @seealso \code{plot_gaps}, \code{plot_critical_dyads}.
+#'
+#' @param net network object
 #' @param edge_contribution data frame providing edge contribution data
 #' @param colour colour code for the weighted edges
 #' @param title title of the plot
-#' @param lvl_attr Node attribute specifying level information
+#' @param lvl_attr nodal attribute specifying level information
 #' @param cutoff Cutoff point in contributions of an edge to the number of
 #'   motifs above which to analyse gaps
 #' @param ... list of additional parameters to be passed to plotting function
-#'   (see ?motifr::plot_mnet), eg. label = TRUE
+#'   (see \code{motifr::plot_mnet}), e.g. \code{label = TRUE}
 #' @param subset_graph Whether to subset the graph to only show nodes involved
 #'   in gaps. One of "none" (no subset, default), "partial" (only focal level is
 #'   subset) or "focal" (only focal level shown)

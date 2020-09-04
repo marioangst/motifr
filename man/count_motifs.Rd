@@ -14,14 +14,14 @@ count_motifs(
 )
 }
 \arguments{
-\item{net}{A statnet network object with a node attribute specifying the
+\item{net}{A network object with a node attribute specifying the
 level of each node}
 
 \item{motifs}{a list of motif identifiers which shall be counted, e.g.
-list("1,2[I.C]")}
+\code{list("1,2[I.C]")}}
 
 \item{lvl_attr}{character vector specifying the vertex attribute name where
-level information is stored in statnet object}
+level information is stored in \code{net}}
 
 \item{assume_sparse}{whether the network shall be assumed to be sparse (for
 optimization), default TRUE}
@@ -30,7 +30,8 @@ optimization), default TRUE}
 FALSE}
 
 \item{directed}{whether the graph shall be treated as a directed graph. Per
-default (NULL) this is determined automatically using network::is.directed.}
+default (\code{NULL}), this is determined automatically using the structure
+of the provided network object}
 }
 \value{
 data frame with a column containing motif identifier strings and one

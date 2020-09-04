@@ -2,27 +2,31 @@
 % Please edit documentation in R/count_motifs.R
 \name{to_py_graph}
 \alias{to_py_graph}
-\title{Translate multi-level statnet network object to networkx (python) object}
+\title{Translate multi-level statnet or igraph network object to Python networkx
+object}
 \usage{
 to_py_graph(g, lvl_attr, relabel = TRUE, directed = NULL)
 }
 \arguments{
-\item{g}{statnet network object}
+\item{g}{statnet or igraph network object}
 
 \item{lvl_attr}{character vector specifying the attribute name where level
-information is stored in statnet object.}
+information is stored in \code{net}.}
 
-\item{relabel}{should nodes be relabelled with statnet vertex.names? (defaults
-to TRUE)}
+\item{relabel}{should nodes be relabelled with statnet \code{vertex.names} or
+igraph nodal attribute \code{name}}
 
 \item{directed}{whether the graph shall be treated as a directed graph. Per
-default (NULL) this is determined automatically using network::is.directed.}
+default (\code{NULL}), this is determined automatically using the structure
+of the provided network object}
 }
 \value{
-python graph object
+Python networkx graph object
 }
 \description{
-Translate multi-level statnet network object to networkx (python) object
+The functions \code{network::is.directed} or
+\code{igraph::is.directed} are used to determine whether the provided
+network is directed (if \code{directed = FALSE}).
 }
 \examples{
 to_py_graph(motifr::dummy_net, lvl_attr = "sesType")

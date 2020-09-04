@@ -2,7 +2,7 @@
 % Please edit documentation in R/gaps_critical_edges.R
 \name{plot_gaps_or_critical_dyads}
 \alias{plot_gaps_or_critical_dyads}
-\title{Helper function for ?motifr::plot_gaps and ?motifr::plot_critical_dyads}
+\title{Helper function for plotting gaps and critical edges}
 \usage{
 plot_gaps_or_critical_dyads(
   net,
@@ -16,7 +16,7 @@ plot_gaps_or_critical_dyads(
 )
 }
 \arguments{
-\item{net}{Statnet network object}
+\item{net}{network object}
 
 \item{edge_contribution}{data frame providing edge contribution data}
 
@@ -24,7 +24,7 @@ plot_gaps_or_critical_dyads(
 
 \item{title}{title of the plot}
 
-\item{lvl_attr}{Node attribute specifying level information}
+\item{lvl_attr}{nodal attribute specifying level information}
 
 \item{cutoff}{Cutoff point in contributions of an edge to the number of
 motifs above which to analyse gaps}
@@ -34,7 +34,7 @@ in gaps. One of "none" (no subset, default), "partial" (only focal level is
 subset) or "focal" (only focal level shown)}
 
 \item{...}{list of additional parameters to be passed to plotting function
-(see ?motifr::plot_mnet), eg. label = TRUE}
+(see \code{motifr::plot_mnet}), e.g. \code{label = TRUE}}
 }
 \value{
 A plot of gaps or critical edges, sized by weight in a multilevel
@@ -43,4 +43,7 @@ A plot of gaps or critical edges, sized by weight in a multilevel
 \description{
 Note that this only works for undirected graphs. Regardless of whether the
 input graph is directed it is treated as undirected graph.
+}
+\seealso{
+\code{plot_gaps}, \code{plot_critical_dyads}.
 }

@@ -7,12 +7,12 @@
 critical_dyads(net, motif, lvl_attr = c("sesType"), level = -1)
 }
 \arguments{
-\item{net}{statnet network object}
+\item{net}{network object}
 
 \item{motif}{motif identifier}
 
 \item{lvl_attr}{character vector specifying the attribute name where level
-information is stored in statnet object.}
+information is stored in \code{net}}
 
 \item{level}{level of the dyads which shall be considered, or -1 if the level
 shall be determined automatically.}
@@ -27,7 +27,7 @@ removed from the network.
 }
 \details{
 The level parameter determines on which level of the network critical dyads
-are analysed. Per default, when ``level = -1``, the first level in the motif
+are analysed. Per default, when \code{level = -1}, the first level in the motif
 which provides exactly two nodes is selected. Use this parameter to specify a
 level manually. The procedure for determining the level is the same as for
 the Actor's Choice Model, cf. vignette.

@@ -16,17 +16,15 @@ motifs_distribution(
 )
 }
 \arguments{
-\item{net}{statnet network object}
+\item{net}{network object}
 
 \item{motifs}{list of motif identifiers describing the motifs whose
 distribution shall be analysed}
 
 \item{lvl_attr}{character vector specifying the attribute name where level
-information is stored in statnet object.}
+information is stored in \code{net}.}
 
-\item{model}{model to be used. Options are 'erdos_renyi', or 'actors_choice'.
-See vignette "random_baselines" for more details. Defaults to
-'erdos_renyi'.}
+\item{model}{model to be used}
 
 \item{level}{Additional parameter to set the level to vary for the
 actors_choice model manually. All other levels are held fixed.}
@@ -34,27 +32,25 @@ actors_choice model manually. All other levels are held fixed.}
 \item{omit_total_result}{whether total results shall be omitted}
 
 \item{directed}{whether the graph shall be treated as a directed graph. Per
-default (NULL) this is determined automatically using network::is.directed.}
+default (\code{NULL}), this is determined automatically using the structure
+of the provided network object}
 }
 \value{
 data frame with one column giving names of motif identifers and two
-  column giving expectation and variances per motif. At the moment, variances
-  are only computed for 1,2 motifs. For other motifs, expectations are
-  computed but variances are returned as NaN.
+  column giving expectation and variances per motif. For other motifs,
+  expectations are computed but variances are returned as NaN.
 }
 \description{
-Warning: Variances can only be computed for 1,2 motifs at the moment.
-}
-\details{
-This function supports the Erdős-Rényi Model (``erdos_renyi``) and the the
-Actor’s Choice Model (``actors_choice``). The model can be specified using
-the ``model`` parameter. The Erdős-Rényi Model can be used without providing
-further parameters. In case of the Actor’s Choice Model a level of the given
-network can be specified which is only level assumed to be variable. All
-other levels are assumed to be fixed. Per default, ``level = -1``, the first
-level carrying two nodes in the signature of the motif is selected as
-variable level. Set the ``level`` parameter to the value of the ``lvl_attr``
-of the nodes in the desired level to specify the level manually.
+This function supports the Erdős-Rényi Model (\code{erdos_renyi}) and the the
+Actor’s Choice Model (\code{actors_choice}). The model can be specified using
+the \code{model} parameter. The Erdős-Rényi Model can be used without
+providing further parameters. In case of the Actor’s Choice Model a level of
+the given network can be specified which is only level assumed to be
+variable. All other levels are assumed to be fixed. Per default, \code{level
+= -1}, the first level carrying two nodes in the signature of the motif is
+selected as variable level. Set the \code{level} parameter to the value of
+the \code{lvl_attr} of the nodes in the desired level to specify the level
+manually.
 }
 \examples{
 motifs_distribution(ml_net, motif = list("1,2[I.C]"), directed = FALSE)

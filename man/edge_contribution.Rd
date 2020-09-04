@@ -7,12 +7,12 @@
 edge_contribution(net, motif, lvl_attr = c("sesType"), level = -1)
 }
 \arguments{
-\item{net}{statnet network object}
+\item{net}{network object}
 
 \item{motif}{motif identifier}
 
 \item{lvl_attr}{character vector specifying the attribute name where level
-information is stored in statnet object.}
+information is stored in \code{net}.}
 
 \item{level}{level of the dyads which shall be considered, or -1 if the level
 shall be determined automatically.}

@@ -46,6 +46,46 @@ test_that("io_directed_igraph", {
   testthat::expect_equal(nodes_count$`1`, types[[2]])
 })
 
+test_that("count_directed_motifs_2", {
+  # see https://gitlab.com/t.seppelt/sesmotifanalyser/-/blob/master/test/sma_test.py
+  df <- motifr::count_motifs(directed_dummy_net,
+                             motifs = "2[1]",
+                             omit_total_result = FALSE
+  )
+  motifs <- c(
+    "2[0]", "2[1]", "2[2]"
+  )
+  counts <- c(0, 2, 1)
+  expected <- data.frame(motif = motifs, count = counts, row.names = motifs)
+  testthat::expect_identical(df, expected)
+})
+test_that("count_directed_motifs_0_2", {
+  # see https://gitlab.com/t.seppelt/sesmotifanalyser/-/blob/master/test/sma_test.py
+  df <- motifr::count_motifs(directed_dummy_net,
+                             motifs = "0,2[1]",
+                             omit_total_result = FALSE
+  )
+  motifs <- c(
+    "0,2[0]", "0,2[1]", "0,2[2]"
+  )
+  counts <- c(1, 2, 0)
+  expected <- data.frame(motif = motifs, count = counts, row.names = motifs)
+  testthat::expect_identical(df, expected)
+})
+test_that("count_directed_motifs_1_1", {
+  # see https://gitlab.com/t.seppelt/sesmotifanalyser/-/blob/master/test/sma_test.py
+  df <- motifr::count_motifs(directed_dummy_net,
+                             motifs = "1,1[1]",
+                             omit_total_result = FALSE
+  )
+  motifs <- c(
+    "1,1[0]", "1,1[1]", "1,1[2]", "1,1[3]"
+  )
+  counts <- c(3, 1, 3, 2)
+  expected <- data.frame(motif = motifs, count = counts, row.names = motifs)
+  testthat::expect_identical(df, expected)
+})
+
 
 test_that("count_motifs_1_2", {
   # see https://gitlab.com/t.seppelt/sesmotifanalyser/-/blob/master/test/sma_test.py

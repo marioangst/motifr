@@ -31,7 +31,7 @@ in gaps. One of "none" (no subset, default), "partial" (only focal level is
 subset) or "focal" (only focal level shown)}
 
 \item{...}{list of additional parameters to be passed to plotting function
-(see ?motifr::plot_mnet), eg. label = TRUE}
+(see \code{motifr::plot_mnet}), e.g. \code{label = TRUE}}
 }
 \value{
 A plot of gaps, sized by weight in a multilevel network
