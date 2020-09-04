@@ -1,75 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://marioangst.github.io/motifr//index.html</loc>
+    <loc>https://marioangst.github.io/motifr/index.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/compare_to_baseline.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/compare_to_baseline.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/count_motifs.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/count_motifs.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/critical_dyads.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/critical_dyads.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/dummy_net.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/directed_dummy_net.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/edge_contribution.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/dummy_net.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/exemplify_motif.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/edge_contribution.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/identify_gaps.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/exemplify_motif.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/list_motifs.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/identify_gaps.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/ml_net.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/list_motifs.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/motif_summary.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/ml_net.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/motifs_distribution.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/motif_summary.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/plot_critical_dyads.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/motifs_distribution.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/plot_gaps.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/plot_critical_dyads.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/plot_gaps_or_critical_dyads.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/plot_gaps.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/plot_mnet.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/plot_gaps_or_critical_dyads.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/show_3_motifs.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/plot_mnet.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/show_4_motifs.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/show_3_motifs.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/show_motif.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/show_4_motifs.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/simulate_baseline.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/show_motif.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/to_py_graph.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/simulate_baseline.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//reference/update_motifr.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/to_py_graph.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//articles/motif_zoo.html</loc>
+    <loc>https://marioangst.github.io/motifr/reference/update_motifr.html</loc>
   </url>
   <url>
-    <loc>https://marioangst.github.io/motifr//articles/random_baselines.html</loc>
+    <loc>https://marioangst.github.io/motifr/articles/motif_zoo.html</loc>
+  </url>
+  <url>
+    <loc>https://marioangst.github.io/motifr/articles/random_baselines.html</loc>
   </url>
 </urlset>

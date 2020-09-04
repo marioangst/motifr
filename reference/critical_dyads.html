@@ -149,7 +149,7 @@ removed from the network.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>net</th>
-      <td><p>statnet network object</p></td>
+      <td><p>network object</p></td>
     </tr>
     <tr>
       <th>motif</th>
@@ -158,7 +158,7 @@ removed from the network.</p>
     <tr>
       <th>lvl_attr</th>
       <td><p>character vector specifying the attribute name where level
-information is stored in statnet object.</p></td>
+information is stored in <code>net</code></p></td>
     </tr>
     <tr>
       <th>level</th>
@@ -174,7 +174,7 @@ shall be determined automatically.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The level parameter determines on which level of the network critical dyads
-are analysed. Per default, when ``level = -1``, the first level in the motif
+are analysed. Per default, when <code>level = -1</code>, the first level in the motif
 which provides exactly two nodes is selected. Use this parameter to specify a
 level manually. The procedure for determining the level is the same as for
 the Actor's Choice Model, cf. vignette.</p>

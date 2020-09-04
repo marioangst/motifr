@@ -154,18 +154,18 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>net</th>
-      <td><p>A statnet network object with a node attribute specifying the
+      <td><p>A network object with a node attribute specifying the
 level of each node</p></td>
     </tr>
     <tr>
       <th>motifs</th>
       <td><p>a list of motif identifiers which shall be counted, e.g.
-list("1,2[I.C]")</p></td>
+<code><a href='https://rdrr.io/r/base/list.html'>list("1,2[I.C]")</a></code></p></td>
     </tr>
     <tr>
       <th>lvl_attr</th>
       <td><p>character vector specifying the vertex attribute name where
-level information is stored in statnet object</p></td>
+level information is stored in <code>net</code></p></td>
     </tr>
     <tr>
       <th>assume_sparse</th>
@@ -180,7 +180,8 @@ FALSE</p></td>
     <tr>
       <th>directed</th>
       <td><p>whether the graph shall be treated as a directed graph. Per
-default (NULL) this is determined automatically using network::is.directed.</p></td>
+default (<code>NULL</code>), this is determined automatically using the structure
+of the provided network object</p></td>
     </tr>
     </table>
 

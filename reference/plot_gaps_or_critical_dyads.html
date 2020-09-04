@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Helper function for ?motifr::plot_gaps and ?motifr::plot_critical_dyads — plot_gaps_or_critical_dyads • motifr</title>
+<title>Helper function for plotting gaps and critical edges — plot_gaps_or_critical_dyads • motifr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Helper function for ?motifr::plot_gaps and ?motifr::plot_critical_dyads — plot_gaps_or_critical_dyads" />
+<meta property="og:title" content="Helper function for plotting gaps and critical edges — plot_gaps_or_critical_dyads" />
 <meta property="og:description" content="Note that this only works for undirected graphs. Regardless of whether the
 input graph is directed it is treated as undirected graph." />
 <meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg" />
@@ -132,7 +132,7 @@ input graph is directed it is treated as undirected graph." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Helper function for ?motifr::plot_gaps and ?motifr::plot_critical_dyads</h1>
+    <h1>Helper function for plotting gaps and critical edges</h1>
     <small class="dont-index">Source: <a href='https://github.com/marioangst/motifr/blob/master/R/gaps_critical_edges.R'><code>R/gaps_critical_edges.R</code></a></small>
     <div class="hidden name"><code>plot_gaps_or_critical_dyads.Rd</code></div>
     </div>
@@ -158,7 +158,7 @@ input graph is directed it is treated as undirected graph.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>net</th>
-      <td><p>Statnet network object</p></td>
+      <td><p>network object</p></td>
     </tr>
     <tr>
       <th>edge_contribution</th>
@@ -174,7 +174,7 @@ input graph is directed it is treated as undirected graph.</p>
     </tr>
     <tr>
       <th>lvl_attr</th>
-      <td><p>Node attribute specifying level information</p></td>
+      <td><p>nodal attribute specifying level information</p></td>
     </tr>
     <tr>
       <th>cutoff</th>
@@ -190,7 +190,7 @@ subset) or "focal" (only focal level shown)</p></td>
     <tr>
       <th>...</th>
       <td><p>list of additional parameters to be passed to plotting function
-(see ?motifr::plot_mnet), eg. label = TRUE</p></td>
+(see <code>motifr::plot_mnet</code>), e.g. <code>label = TRUE</code></p></td>
     </tr>
     </table>
 
@@ -198,6 +198,9 @@ subset) or "focal" (only focal level shown)</p></td>
 
     <p>A plot of gaps or critical edges, sized by weight in a multilevel
   network</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>plot_gaps</code>, <code>plot_critical_dyads</code>.</p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

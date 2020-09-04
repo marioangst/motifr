@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Translate multi-level statnet network object to networkx (python) object — to_py_graph • motifr</title>
+<title>Translate multi-level statnet or igraph network object to Python networkx
+object — to_py_graph • motifr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +47,11 @@
 
 
 
-<meta property="og:title" content="Translate multi-level statnet network object to networkx (python) object — to_py_graph" />
-<meta property="og:description" content="Translate multi-level statnet network object to networkx (python) object" />
+<meta property="og:title" content="Translate multi-level statnet or igraph network object to Python networkx
+object — to_py_graph" />
+<meta property="og:description" content="The functions network::is.directed or
+igraph::is.directed are used to determine whether the provided
+network is directed (if directed = FALSE)." />
 <meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg" />
 
 
@@ -131,13 +135,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Translate multi-level statnet network object to networkx (python) object</h1>
+    <h1>Translate multi-level statnet or igraph network object to Python networkx
+object</h1>
     <small class="dont-index">Source: <a href='https://github.com/marioangst/motifr/blob/master/R/count_motifs.R'><code>R/count_motifs.R</code></a></small>
     <div class="hidden name"><code>to_py_graph.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Translate multi-level statnet network object to networkx (python) object</p>
+    <p>The functions <code><a href='https://rdrr.io/pkg/network/man/network.indicators.html'>network::is.directed</a></code> or
+<code><a href='https://rdrr.io/pkg/igraph/man/is_directed.html'>igraph::is.directed</a></code> are used to determine whether the provided
+network is directed (if <code>directed = FALSE</code>).</p>
     </div>
 
     <pre class="usage"><span class='fu'>to_py_graph</span>(<span class='no'>g</span>, <span class='no'>lvl_attr</span>, <span class='kw'>relabel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -147,28 +154,29 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>g</th>
-      <td><p>statnet network object</p></td>
+      <td><p>statnet or igraph network object</p></td>
     </tr>
     <tr>
       <th>lvl_attr</th>
       <td><p>character vector specifying the attribute name where level
-information is stored in statnet object.</p></td>
+information is stored in <code>net</code>.</p></td>
     </tr>
     <tr>
       <th>relabel</th>
-      <td><p>should nodes be relabelled with statnet vertex.names? (defaults
-to TRUE)</p></td>
+      <td><p>should nodes be relabelled with statnet <code>vertex.names</code> or
+igraph nodal attribute <code>name</code></p></td>
     </tr>
     <tr>
       <th>directed</th>
       <td><p>whether the graph shall be treated as a directed graph. Per
-default (NULL) this is determined automatically using network::is.directed.</p></td>
+default (<code>NULL</code>), this is determined automatically using the structure
+of the provided network object</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>python graph object</p>
+    <p>Python networkx graph object</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>to_py_graph</span>(<span class='kw pkg'>motifr</span><span class='kw ns'>::</span><span class='no'>dummy_net</span>, <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='st'>"sesType"</span>)</div><div class='output co'>#&gt; </div></pre>

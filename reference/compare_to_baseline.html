@@ -159,7 +159,7 @@ counts in a random baseline of motifs.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>net</th>
-      <td><p>statnet network object</p></td>
+      <td><p>network object</p></td>
     </tr>
     <tr>
       <th>motifs</th>
@@ -172,7 +172,7 @@ counts in a random baseline of motifs.</p>
     <tr>
       <th>lvl_attr</th>
       <td><p>character vector specifying the attribute name where level
-information is stored in statnet object.</p></td>
+information is stored in <code>net</code>.</p></td>
     </tr>
     <tr>
       <th>assume_sparse</th>
@@ -197,7 +197,8 @@ Defaults to 'erdos_renyi'.</p></td>
     <tr>
       <th>directed</th>
       <td><p>whether the graph shall be treated as a directed graph. Per
-default (NULL) this is determined automatically using network::is.directed.</p></td>
+default (<code>NULL</code>), this is determined automatically using the structure
+of the provided network object</p></td>
     </tr>
     </table>
 
