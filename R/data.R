@@ -29,4 +29,15 @@
 #'   ...
 #' }
 #' @source Dummy data
+#' https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data
 "dummy_net"
+
+
+#' Two-level directed network dummy example
+#'
+#' Simple igraph network object based on dummy data
+#'
+#' @format igraph network object
+#' @source Dummy data
+#' https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data
+"directed_dummy_net"

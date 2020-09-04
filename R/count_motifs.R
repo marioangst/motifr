@@ -30,13 +30,14 @@ to_py_graph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
   }else if(class(g) == "igraph") {
     adjacency_matrix <- igraph::as_adjacency_matrix(g, sparse = FALSE)
     attributes <- as.data.frame(igraph::vertex.attributes(g))
-    attribute_names <- colnames(attributes)
+    attribute_names <- as.list(colnames(attributes))
     attribute_values <- lapply(
       attribute_names,
       function(x) attributes[[x]]
     )
     graph_directed <- igraph::is.directed(g)
     if(is.null(igraph::V(g)$name)) {
+      # vertices don't carry names, uses igraph's internal numbering
       vertex_names <- 1:igraph::gorder(g)
     }else{
       vertex_names <- igraph::V(g)$name
