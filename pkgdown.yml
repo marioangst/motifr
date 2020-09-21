@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   motif_zoo: motif_zoo.html
   random_baselines: random_baselines.html
-last_built: 2020-09-21T14:14Z
+last_built: 2020-09-21T15:53Z
 urls:
   reference: https://marioangst.github.io/motifr/reference
   article: https://marioangst.github.io/motifr/articles
