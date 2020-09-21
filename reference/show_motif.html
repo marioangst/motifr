@@ -147,11 +147,11 @@ the given graph.</h1>
     </div>
 
     <pre class="usage"><span class='fu'>show_motif</span>(
-  <span class='no'>motif</span>,
-  <span class='kw'>net</span> <span class='kw'>=</span> <span class='kw pkg'>motifr</span><span class='kw ns'>::</span><span class='no'>dummy_net</span>,
-  <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>),
-  <span class='kw'>directed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>
+  <span class='kw'>motif</span>,
+  net = <span class='kw'>motifr</span>::<span class='kw'><a href='dummy_net.html'>dummy_net</a></span>,
+  lvl_attr = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>),
+  directed = <span class='kw'>NULL</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -191,7 +191,8 @@ of the provided network object</p></td>
     <div class='dont-index'><p>exemplify_motif</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>show_motif</span>(<span class='st'>"1,2[I.C]"</span>, <span class='kw'>net</span> <span class='kw'>=</span> <span class='no'>ml_net</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='show_motif-1.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>show_motif</span>(<span class='st'>"1,2[I.C]"</span>, net = <span class='kw'>ml_net</span>, directed = <span class='fl'>FALSE</span>, label = <span class='fl'>TRUE</span>)
+</div><div class='img'><img src='show_motif-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -207,7 +208,7 @@ of the provided network object</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

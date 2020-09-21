@@ -49,9 +49,8 @@ object — to_py_graph • motifr</title>
 
 <meta property="og:title" content="Translate multi-level statnet or igraph network object to Python networkx
 object — to_py_graph" />
-<meta property="og:description" content="The functions network::is.directed or
-igraph::is.directed are used to determine whether the provided
-network is directed (if directed = FALSE)." />
+<meta property="og:description" content="The function motifr::is.directed is used to determine whether the
+provided network is directed (if directed = FALSE)." />
 <meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg" />
 
 
@@ -140,17 +139,16 @@ network is directed (if directed = FALSE)." />
     <div class="page-header">
     <h1>Translate multi-level statnet or igraph network object to Python networkx
 object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/marioangst/motifr/blob/master/R/count_motifs.R'><code>R/count_motifs.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/marioangst/motifr/blob/master/R/core.R'><code>R/core.R</code></a></small>
     <div class="hidden name"><code>to_py_graph.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The functions <code><a href='https://rdrr.io/pkg/network/man/network.indicators.html'>network::is.directed</a></code> or
-<code><a href='https://rdrr.io/pkg/igraph/man/is_directed.html'>igraph::is.directed</a></code> are used to determine whether the provided
-network is directed (if <code>directed = FALSE</code>).</p>
+    <p>The function <code><a href='is.directed.html'>motifr::is.directed</a></code> is used to determine whether the
+provided network is directed (if <code>directed = FALSE</code>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>to_py_graph</span>(<span class='no'>g</span>, <span class='no'>lvl_attr</span>, <span class='kw'>relabel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>to_py_graph</span>(<span class='kw'>g</span>, <span class='kw'>lvl_attr</span>, relabel = <span class='fl'>TRUE</span>, directed = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -182,7 +180,8 @@ of the provided network object</p></td>
     <p>Python networkx graph object</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>to_py_graph</span>(<span class='kw pkg'>motifr</span><span class='kw ns'>::</span><span class='no'>dummy_net</span>, <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='st'>"sesType"</span>)</div><div class='output co'>#&gt; </div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>to_py_graph</span>(<span class='kw'>motifr</span>::<span class='kw'><a href='dummy_net.html'>dummy_net</a></span>, lvl_attr = <span class='st'>"sesType"</span>)
+</div><div class='output co'>#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -198,7 +197,7 @@ of the provided network object</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

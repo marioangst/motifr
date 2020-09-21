@@ -49,15 +49,15 @@
 <meta property="og:title" content="Lists motifs of a given class or all motifs with a given signature — list_motifs" />
 <meta property="og:description" content="Returns a dataframe with one row for each instance of the motif specified by
 the given motif identifier string. If the identifier string specifies a motif
-class, e.g. ``1,2[I.A]`` , then only motifs of the given class are returned.
-If the identifier string specifies a signature, e.g. ``1,2``, then a full
+class, e.g. 1,2[I.A], then only motifs of the given class are returned.
+If the identifier string specifies a signature, e.g. 1,2, then a full
 list of all motifs of this signature is returned. In the latter case, the
 dataframe contains an additional column stating the classes of the motifs.
 The naming scheme of the columns is as follows: Each column is called
-``levelA_nodeB`` where ``A`` is the ``sesType`` of the nodes in the column
-and ``B`` the index of the nodes among the nodes on the same level. This
+levelA_nodeB where A is the lvl_attr of the nodes in the column
+and B the index of the nodes among the nodes on the same level. This
 index stems from the internal order of the nodes and does not carry any
-specific meaning. in R using the ``ergm_model`` parameter." />
+specific meaning." />
 <meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg" />
 
 
@@ -152,18 +152,18 @@ specific meaning. in R using the ``ergm_model`` parameter." />
     <div class="ref-description">
     <p>Returns a dataframe with one row for each instance of the motif specified by
 the given motif identifier string. If the identifier string specifies a motif
-class, e.g. ``1,2[I.A]`` , then only motifs of the given class are returned.
-If the identifier string specifies a signature, e.g. ``1,2``, then a full
+class, e.g. <code>1,2[I.A]</code>, then only motifs of the given class are returned.
+If the identifier string specifies a signature, e.g. <code>1,2</code>, then a full
 list of all motifs of this signature is returned. In the latter case, the
 dataframe contains an additional column stating the classes of the motifs.
 The naming scheme of the columns is as follows: Each column is called
-``levelA_nodeB`` where ``A`` is the ``sesType`` of the nodes in the column
-and ``B`` the index of the nodes among the nodes on the same level. This
+<code>levelA_nodeB</code> where <code>A</code> is the <code>lvl_attr</code> of the nodes in the column
+and <code>B</code> the index of the nodes among the nodes on the same level. This
 index stems from the internal order of the nodes and does not carry any
-specific meaning. in R using the ``ergm_model`` parameter.</p>
+specific meaning.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>list_motifs</span>(<span class='no'>net</span>, <span class='no'>identifier</span>, <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='st'>"sesType"</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>list_motifs</span>(<span class='kw'>net</span>, <span class='kw'>identifier</span>, lvl_attr = <span class='st'>"sesType"</span>, directed = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -194,7 +194,8 @@ of the provided network object</p></td>
     <p>data frame with one row for each motif</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>list_motifs</span>(<span class='no'>ml_net</span>, <span class='st'>"1,2[I.C]"</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt;   level0_node0 level1_node0 level1_node1
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>list_motifs</span>(<span class='kw'>ml_net</span>, <span class='st'>"1,2[I.C]"</span>, directed = <span class='fl'>FALSE</span>))
+</div><div class='output co'>#&gt;   level0_node0 level1_node0 level1_node1
 #&gt; 1    SpatPlanA       actor4       actor8
 #&gt; 2    SpatPlanA       actor4      actor18
 #&gt; 3    SpatPlanA       actor4      actor31
@@ -216,7 +217,7 @@ of the provided network object</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -146,13 +146,13 @@ input graph is directed it is treated as undirected graph.</p>
     </div>
 
     <pre class="usage"><span class='fu'>plot_critical_dyads</span>(
-  <span class='no'>net</span>,
-  <span class='no'>motif</span>,
-  <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>),
-  <span class='kw'>level</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
-  <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>subset_graph</span> <span class='kw'>=</span> <span class='st'>"none"</span>,
-  <span class='no'>...</span>
+  <span class='kw'>net</span>,
+  <span class='kw'>motif</span>,
+  lvl_attr = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>),
+  level = <span class='op'>-</span><span class='fl'>1</span>,
+  cutoff = <span class='fl'>2</span>,
+  subset_graph = <span class='st'>"none"</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -188,7 +188,7 @@ subset) or "focal" (only focal level shown)</p></td>
     <tr>
       <th>...</th>
       <td><p>list of additional parameters to be passed to plotting function
-(see <code>motifr::plot_mnet</code>), e.g. <code>label = TRUE</code></p></td>
+(see <code><a href='plot_mnet.html'>motifr::plot_mnet</a></code>), e.g. <code>label = TRUE</code></p></td>
     </tr>
     </table>
 
@@ -197,13 +197,16 @@ subset) or "focal" (only focal level shown)</p></td>
     <p>A plot of gaps, sized by weight in a multilevel network</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>plot_critical_dyads</span>(<span class='no'>ml_net</span>, <span class='st'>"1,2[I.C]"</span>, <span class='kw'>level</span> <span class='kw'>=</span> -<span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Edge contribution does only make sense for undirected networks. The given network is automatically treated as an undirected network.</span></div><div class='img'><img src='plot_critical_dyads-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_critical_dyads</span>(<span class='no'>ml_net</span>, <span class='st'>"1,2[I.C]"</span>,
-  <span class='kw'>level</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
-  <span class='kw'>subset_graph</span> <span class='kw'>=</span> <span class='st'>"focal"</span>, <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div><div class='output co'>#&gt; <span class='warning'>Warning: Edge contribution does only make sense for undirected networks. The given network is automatically treated as an undirected network.</span></div><div class='img'><img src='plot_critical_dyads-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_critical_dyads</span>(<span class='no'>ml_net</span>, <span class='st'>"1,2[I.C]"</span>,
-  <span class='kw'>level</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
-  <span class='kw'>subset_graph</span> <span class='kw'>=</span> <span class='st'>"partial"</span>, <span class='kw'>cutoff</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div><div class='output co'>#&gt; <span class='warning'>Warning: Edge contribution does only make sense for undirected networks. The given network is automatically treated as an undirected network.</span></div><div class='img'><img src='plot_critical_dyads-3.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>plot_critical_dyads</span>(<span class='kw'>ml_net</span>, <span class='st'>"1,2[I.C]"</span>, level = <span class='op'>-</span><span class='fl'>1</span>)
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Edge contribution does only make sense for undirected networks. The given network is automatically treated as an undirected network.</span></div><div class='img'><img src='plot_critical_dyads-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_critical_dyads</span>(<span class='kw'>ml_net</span>, <span class='st'>"1,2[I.C]"</span>,
+  level = <span class='op'>-</span><span class='fl'>1</span>,
+  subset_graph = <span class='st'>"focal"</span>, cutoff = <span class='fl'>4</span>, label = <span class='fl'>TRUE</span>
+)
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Edge contribution does only make sense for undirected networks. The given network is automatically treated as an undirected network.</span></div><div class='img'><img src='plot_critical_dyads-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_critical_dyads</span>(<span class='kw'>ml_net</span>, <span class='st'>"1,2[I.C]"</span>,
+  level = <span class='op'>-</span><span class='fl'>1</span>,
+  subset_graph = <span class='st'>"partial"</span>, cutoff = <span class='fl'>4</span>, label = <span class='fl'>TRUE</span>
+)
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Edge contribution does only make sense for undirected networks. The given network is automatically treated as an undirected network.</span></div><div class='img'><img src='plot_critical_dyads-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -219,7 +222,7 @@ subset) or "focal" (only focal level shown)</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -150,15 +150,15 @@ Erdős-Rényi model can be used.</p>
     </div>
 
     <pre class="usage"><span class='fu'>simulate_baseline</span>(
-  <span class='no'>net</span>,
-  <span class='no'>motifs</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>lvl_attr</span> <span class='kw'>=</span> <span class='st'>"sesType"</span>,
-  <span class='kw'>assume_sparse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>model</span> <span class='kw'>=</span> <span class='st'>"erdos_renyi"</span>,
-  <span class='kw'>level</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
-  <span class='kw'>ergm_model</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>directed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>net</span>,
+  <span class='kw'>motifs</span>,
+  n = <span class='fl'>10</span>,
+  lvl_attr = <span class='st'>"sesType"</span>,
+  assume_sparse = <span class='fl'>TRUE</span>,
+  model = <span class='st'>"erdos_renyi"</span>,
+  level = <span class='op'>-</span><span class='fl'>1</span>,
+  ergm_model = <span class='kw'>NULL</span>,
+  directed = <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -222,17 +222,18 @@ valid level.</p>
 in R using the ``ergm_model`` parameter.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>simulate_baseline</span>(<span class='no'>ml_net</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"1,2[I.C]"</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;    1,2[I.C]
-#&gt; 1       145
-#&gt; 2       206
-#&gt; 3       141
-#&gt; 4       182
-#&gt; 5       177
-#&gt; 6       158
-#&gt; 7       166
-#&gt; 8       179
-#&gt; 9       169
-#&gt; 10      163</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>simulate_baseline</span>(<span class='kw'>ml_net</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"1,2[I.C]"</span>), n = <span class='fl'>10</span>, directed = <span class='fl'>FALSE</span>)
+</div><div class='output co'>#&gt;    1,2[I.C]
+#&gt; 1       176
+#&gt; 2       188
+#&gt; 3       140
+#&gt; 4       157
+#&gt; 5       193
+#&gt; 6       159
+#&gt; 7       158
+#&gt; 8       120
+#&gt; 9       155
+#&gt; 10      189</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -248,7 +249,7 @@ in R using the ``ergm_model`` parameter.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
