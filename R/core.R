@@ -20,7 +20,7 @@
 #' to_py_graph(motifr::dummy_net, lvl_attr = "sesType")
 to_py_graph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
 
-  if(class(g) == "network") {
+  if(network::is.network(g)) {
     # function for translating a statnet network object into a Python compatible
     # networkx object
     adjacency_matrix <- network::as.matrix.network(g)
@@ -30,7 +30,7 @@ to_py_graph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
       function(x) network::get.vertex.attribute(g, x)
     )
     vertex_names <- network::network.vertex.names(g)
-  }else if(class(g) == "igraph") {
+  }else if(igraph::is.igraph(g)) {
     adjacency_matrix <- igraph::as_adjacency_matrix(g, sparse = FALSE)
     attributes <- as.data.frame(igraph::vertex.attributes(g))
     attribute_names <- as.list(colnames(attributes))
@@ -91,11 +91,11 @@ to_py_graph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
 #' @examples is.directed(ml_net)
 #'
 is.directed <- function(net) {
-  if (class(net) == "network") {
+  if (network::is.network(net)) {
     return(network::is.directed(net))
-  } else if (class(net) == "igraph") {
+  } else if (igraph::is.igraph(net)) {
     return(igraph::is.directed(net))
   } else {
-    stop(paste("Provided network object is of unsupported format:", class(g)))
+    stop(paste("Provided network object is of unsupported format:", class(net)))
   }
 }

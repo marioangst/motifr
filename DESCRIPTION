@@ -5,7 +5,7 @@ Authors@R:
     c(person(given = "Mario",
              family = "Angst",
              role = c("aut", "cre"),
-             email = "t.seppelt@posteo.de",
+             email = "mario.angst@wsl.ch",
              comment = c(ORCID = "0000-0002-8297-9827")),
       person(given = "Tim",
              family = "Seppelt",
@@ -25,6 +25,7 @@ BugReports: https://github.com/marioangst/motifr/issues
 Language: en-GB
 Encoding: UTF-8
 LazyData: true
+Depends: R (>= 3.5.0)
 RoxygenNote: 7.1.1
 Suggests: 
     testthat (>= 2.1.0),

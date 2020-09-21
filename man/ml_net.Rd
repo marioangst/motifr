@@ -27,4 +27,7 @@ ml_net
 A statnet network object based on empirical data about actors and their
 activities in a case study of Swiss wetlands management
 }
+\examples{
+plot_mnet(ml_net)
+}
 \keyword{datasets}

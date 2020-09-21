@@ -18,7 +18,7 @@
 #' @examples
 #' plot_mnet(net = ml_net, lvl_attr = "sesType", layouts = list("kk", "circle"))
 plot_mnet <- function(net,
-                      lvl_attr,
+                      lvl_attr = c("sesType"),
                       layouts = rep("kk", n_levels),
                       label = FALSE) {
   if ("network" %in% class(net)) {

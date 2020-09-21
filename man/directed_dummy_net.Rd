@@ -9,12 +9,15 @@ igraph network object
 }
 \source{
 Dummy data
-\url{https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data}
+ \url{https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data}
 }
 \usage{
 directed_dummy_net
 }
 \description{
 Simple igraph network object based on dummy data
+}
+\examples{
+plot_mnet(directed_dummy_net)
 }
 \keyword{datasets}

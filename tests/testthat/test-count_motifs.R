@@ -72,3 +72,11 @@ test_that("simulate_ergm", {
   testthat::expect_true(all(df$`0,1[1]` == 25))
   testthat::expect_true(all(df$`0,0,1[1]` == 15))
 })
+
+test_that("count_motifs_tidygraph_dummy", {
+  motifs <- c("1,2[I.A]", "1,2[I.B]", "1,2[I.C]", "1,2[II.A]", "1,2[II.B]", "1,2[II.C]")
+  df <- motifr::count_motifs(tidygraph_dummy_net, motifs = motifs)
+  counts <- c(2, 0, 1, 4, 0, 2)
+  expected <- data.frame(motif = motifs, count = counts, row.names = motifs)
+  testthat::expect_identical(df, expected)
+})

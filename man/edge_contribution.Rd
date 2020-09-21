@@ -24,15 +24,15 @@ data frame with three columns, listing edges and their contribution
 \description{
 List gaps ordered by contribution to a motif. This is a list of ties together
 with the number of motifs of a given class the dyad would generate by being
-flipped. This is a generalisation of ``identify_gaps`` and
-``critical_dyads``.
+flipped. This is a generalisation of \code{motifr::identify_gaps()} and
+\code{motifr::criticial_dyads()}.
 }
 \details{
 The level parameter determines on which level of the network edge
-contributions are analysed. Per default, when ``level = -1``, the first level
-in the motif which provides exactly two nodes is selected. Use this parameter
-to specify a level manually. The procedure for determining the level is the
-same as for the Actor's Choice Model, cf. vignette.
+contributions are analysed. Per default, when \code{level = -1}, the first
+level in the motif which provides exactly two nodes is selected. Use this
+parameter to specify a level manually. The procedure for determining the
+level is the same as for the Actor's Choice Model, cf. vignette.
 
 Note that this only works for undirected graphs. Regardless of whether the
 input graph is directed it is treated as undirected graph.

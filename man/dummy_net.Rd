@@ -23,4 +23,7 @@ dummy_net
 \description{
 A simple statnet network object based on dummy data.
 }
+\examples{
+plot_mnet(dummy_net)
+}
 \keyword{datasets}

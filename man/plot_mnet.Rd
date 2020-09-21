@@ -4,7 +4,12 @@
 \alias{plot_mnet}
 \title{Visualize a multi-level network (using ggraph)}
 \usage{
-plot_mnet(net, lvl_attr, layouts = rep("kk", n_levels), label = FALSE)
+plot_mnet(
+  net,
+  lvl_attr = c("sesType"),
+  layouts = rep("kk", n_levels),
+  label = FALSE
+)
 }
 \arguments{
 \item{net}{A tidygraph, igraph or statnet network object}
