@@ -84,7 +84,7 @@ plot_mnet(
 
 ### Count motifs
 
-Motifs can be counted using the versatile function ``count_motifs()``. It takes as parameters a statnet network object (use ``ml_net`` or ``dummy_net`` provided by this package as example) and a list of motif identifiers (see below) specifying the motifs. See the [vignette on the motif zoo](https://marioangst.github.io/motifr/articles/motif_zoo.html) for details on nomenclature for motifs (motif identifier strings). Let's quickly check out two classic examples of three-node, two-level motifs (open and closed triangles) in the wetlands management network introduced above:
+Motifs can be counted using the versatile function ``count_motifs()``. It takes as parameters a statnet network object (use ``ml_net`` or ``dummy_net`` provided by this package as example) and a list of motif identifiers (see below) specifying the motifs. See the ``vignette("motif_zoo")`` for details on nomenclature for motifs (motif identifier strings). Let's quickly check out two classic examples of three-node, two-level motifs (open and closed triangles) in the wetlands management network introduced above:
 
 ```{r  out.width="300px"}
 show_motif(motif = "1,2[I.C]", net = ml_net, label = TRUE, directed = FALSE) # open ('1,2[I.C]') triangle
@@ -100,7 +100,7 @@ motifs <- list("1,2[I.C]", "1,2[II.C]") # open and closed triangle
 count_motifs(ml_net, motifs, directed = FALSE)
 ```
 
-An exploratory approach can be taken by calling ``motif_summary()``. This function counts the occurrences of a couple of interesting motifs. Furthermore it computes expectations and variances for the occurrence of these motifs in a modified Erdős-Rényi model. See the package [vignette on random baselines](https://marioangst.github.io/motifr/articles/random_baselines.html) for details.
+An exploratory approach can be taken by calling ``motif_summary()``. This function counts the occurrences of a couple of interesting motifs. Furthermore it computes expectations and variances for the occurrence of these motifs in a modified Erdős-Rényi model. See the package ``vignette("random_baselines")`` for details.
 
 ```{r}
 motif_summary(ml_net)
@@ -132,7 +132,7 @@ plot_gaps(ml_net,
 
 ### Comparing motif occurrence to a random baseline
 
-Motifr can be used to simulate a random baseline of networks. Motif counts in an empirical network can then be compared to the distribution of motif counts in the random networks. We do so again here for open and closed triangles in the wetland management network. Unsurprisingly, we find that both of these motifs occur much more often in the empirically observed network than in the random baseline. See the package [vignette on random baselines](vignettes/random_baselines.Rmd) for details.
+Motifr can be used to simulate a random baseline of networks. Motif counts in an empirical network can then be compared to the distribution of motif counts in the random networks. We do so again here for open and closed triangles in the wetland management network. Unsurprisingly, we find that both of these motifs occur much more often in the empirically observed network than in the random baseline. See the package ``vignette("random_baselines")`` for details.
 
 ```{r}
 motifs <- list("1,2[I.C]", "1,2[II.C]") # open ('1,2[I.C]') and closed ('1,2[II.C]') triangles

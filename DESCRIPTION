@@ -24,6 +24,10 @@ Description: This package provides tools for motif analysis
 License: MIT + file LICENSE
 URL: https://marioangst.github.io/motifr/
 BugReports: https://github.com/marioangst/motifr/issues
+SystemRequirements: 
+    Python (>= 3.0.0),
+    numpy,
+    pandas
 Depends: 
     R (>= 3.5.0)
 Imports: 

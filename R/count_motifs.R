@@ -1,34 +1,3 @@
-
-#' Display all supported motifs with signature (1,2).
-#'
-#' @return Opens image
-#' @export
-#'
-#' @examples
-#' show_3_motifs()
-show_3_motifs <- function() {
-  magick::image_read(path = system.file("motif_reference",
-    "motif_reference_3motifs.png",
-    package = utils::packageName()
-  ))
-}
-
-#' Display all supported motifs with signature (2,2).
-#'
-#' @return Opens figure from Ö. Bodin, M. Tengö: Disentangling intangible
-#'   social–ecological systems in Global Environmental Change 22 (2012) 430–439
-#'   <10.1016/j.gloenvcha.2012.01.005>
-#' @export
-#'
-#' @examples
-#' show_4_motifs()
-show_4_motifs <- function() {
-  magick::image_read(path = system.file("motif_reference",
-    "motif_reference_4motifs.jpg",
-    package = utils::packageName()
-  ))
-}
-
 #' Count multi-level motifs
 #'
 #' @param net A network object with a node attribute specifying the
