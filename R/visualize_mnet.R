@@ -8,9 +8,11 @@
 #' @param net A tidygraph, igraph or statnet network object
 #' @param lvl_attr The name of the categorical node attribute specifying at
 #'   which level a node is situated
-#' @param layouts A list of layouts (see ?ggraph::layout_ggraph) for every level
+#' @param layouts A list of layouts (see \code{ggraph::layout_ggraph}) for every level
 #'   eg. for two levels list("auto","circle")
 #' @param label logical - should nodes be labelled? (defaults to false)
+#' @param directed whether the network object shall be interpreted as directed
+#'   network. Per default, \code{motifr::is.directed} is used to determine that.
 #'
 #' @return A ggraph object
 #' @export
@@ -20,7 +22,8 @@
 plot_mnet <- function(net,
                       lvl_attr = c("sesType"),
                       layouts = rep("kk", n_levels),
-                      label = FALSE) {
+                      label = FALSE,
+                      directed = NULL) {
   if (network::is.network(net)) {
     net <- intergraph::asIgraph(net)
     net <-
@@ -90,7 +93,7 @@ plot_mnet <- function(net,
   }
 
   arrow <- NULL
-  if(motifr::is.directed(net)) {
+  if(directed == TRUE || (is.null(directed) && motifr::is.directed(net))) {
     arrow <- grid::arrow(angle = 10, length = ggplot2::unit(.3, "cm"))
   }
 

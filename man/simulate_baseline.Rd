@@ -30,13 +30,14 @@ information is stored in \code{net}.}
 used to find ideal counting function. defaults to TRUE.}
 
 \item{model}{baseline model to be used. Options are 'erdos_renyi',
-'fixed_densities'. See vignette "random_baselines" for more details.
-Defaults to 'erdos_renyi'.}
+'fixed_densities'. See \code{vignette("random_baselines")} for more
+details. Defaults to 'erdos_renyi'.}
 
 \item{level}{lvl_attr of the variable level for the Actor's Choice model}
 
 \item{ergm_model}{ergm model as for example fitted by calling
-``ergm::ergm()``. Used when model is set to ergm to sample random networks.}
+\code{ergm::ergm()}. Used when model is set to ergm to sample random
+networks.}
 
 \item{directed}{whether the graph shall be treated as a directed graph. Per
 default (\code{NULL}), this is determined automatically using the structure
@@ -54,11 +55,11 @@ Erdős-Rényi model can be used.
 }
 \details{
 Note that when using the Actor's Choice model this function does not choose
-the variable level automatically. Use the ``level`` parameter to provide a
+the variable level automatically. Use the \code{level} parameter to provide a
 valid level.
 
-When using ERGM the parameter ``net`` is not used. Random networks are sampled
-in R using the ``ergm_model`` parameter.
+When using ERGM the parameter \code{net} is not used. Random networks are
+sampled in R using the \code{ergm_model} parameter.
 }
 \examples{
 simulate_baseline(ml_net, list("1,2[I.C]"), n = 10, directed = FALSE)

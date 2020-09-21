@@ -97,7 +97,8 @@ based on Kamada-Kawai.
 plot_mnet(
   net = ml_net,
   lvl_attr = "sesType",
-  layouts = list("kk", "circle")
+  layouts = list("kk", "circle"),
+  directed = FALSE
 )
 ```
 

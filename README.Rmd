@@ -77,7 +77,8 @@ It is possible to specify layouts for every network level separately. Below, one
 plot_mnet(
   net = ml_net,
   lvl_attr = "sesType",
-  layouts = list("kk", "circle")
+  layouts = list("kk", "circle"),
+  directed = FALSE
 )
 ```
 

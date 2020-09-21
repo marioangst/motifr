@@ -8,7 +8,8 @@ plot_mnet(
   net,
   lvl_attr = c("sesType"),
   layouts = rep("kk", n_levels),
-  label = FALSE
+  label = FALSE,
+  directed = NULL
 )
 }
 \arguments{
@@ -17,10 +18,13 @@ plot_mnet(
 \item{lvl_attr}{The name of the categorical node attribute specifying at
 which level a node is situated}
 
-\item{layouts}{A list of layouts (see ?ggraph::layout_ggraph) for every level
+\item{layouts}{A list of layouts (see \code{ggraph::layout_ggraph}) for every level
 eg. for two levels list("auto","circle")}
 
 \item{label}{logical - should nodes be labelled? (defaults to false)}
+
+\item{directed}{whether the network object shall be interpreted as directed
+network. Per default, \code{motifr::is.directed} is used to determine that.}
 }
 \value{
 A ggraph object

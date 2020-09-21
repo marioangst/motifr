@@ -281,11 +281,11 @@ show_motif <- function(motif,
 #' Erdős-Rényi model can be used.
 #'
 #' Note that when using the Actor's Choice model this function does not choose
-#' the variable level automatically. Use the ``level`` parameter to provide a
+#' the variable level automatically. Use the \code{level} parameter to provide a
 #' valid level.
 #'
-#' When using ERGM the parameter ``net`` is not used. Random networks are sampled
-#' in R using the ``ergm_model`` parameter.
+#' When using ERGM the parameter \code{net} is not used. Random networks are
+#' sampled in R using the \code{ergm_model} parameter.
 #'
 #' @param net network object
 #' @param motifs list of motif identifier strings
@@ -295,11 +295,12 @@ show_motif <- function(motif,
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
 #'   used to find ideal counting function. defaults to TRUE.
 #' @param model baseline model to be used. Options are 'erdos_renyi',
-#'   'fixed_densities'. See vignette "random_baselines" for more details.
-#'   Defaults to 'erdos_renyi'.
+#'   'fixed_densities'. See \code{vignette("random_baselines")} for more
+#'   details. Defaults to 'erdos_renyi'.
 #' @param level lvl_attr of the variable level for the Actor's Choice model
 #' @param ergm_model ergm model as for example fitted by calling
-#'   ``ergm::ergm()``. Used when model is set to ergm to sample random networks.
+#'   \code{ergm::ergm()}. Used when model is set to ergm to sample random
+#'   networks.
 #' @param directed whether the graph shall be treated as a directed graph. Per
 #'   default (\code{NULL}), this is determined automatically using the structure
 #'   of the provided network object
@@ -387,11 +388,11 @@ simulate_baseline <- function(net,
 #' counts in a random baseline of motifs.
 #'
 #' Note that when using the Actor's Choice model this function does not choose
-#' the variable level automatically. Use the ``level`` parameter to provide a
+#' the variable level automatically. Use the \code{level} parameter to provide a
 #' valid level.
 #'
-#' When using ERGM the parameter ``net`` is not used. Random networks are sampled
-#' in R using the ``ergm_model`` parameter.
+#' When using ERGM the parameter \code{net} is not used. Random networks are sampled
+#' in R using the \code{ergm_model} parameter.
 #'
 #' @param net network object
 #' @param motifs list of motif identifier strings
@@ -401,11 +402,11 @@ simulate_baseline <- function(net,
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
 #'   used to find ideal counting function
 #' @param model baseline model to be used. Options are 'erdos_renyi' and
-#'   'fixed_densities'. See vignette "random_baselines" for more details.
+#'   'fixed_densities'. See \code{vignette("random_baselines")} for more details.
 #'   Defaults to 'erdos_renyi'.
 #' @param level lvl_attr of the variable level for the Actor's Choice model
 #' @param ergm_model ergm model as for example fitted by calling
-#'   ``ergm::ergm()``. Used when model is set to ergm to sample random network
+#'   \code{ergm::ergm()}. Used when model is set to ergm to sample random network
 #' @param directed whether the graph shall be treated as a directed graph. Per
 #'   default (\code{NULL}), this is determined automatically using the structure
 #'   of the provided network object
