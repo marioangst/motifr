@@ -269,7 +269,8 @@ show_motif <- function(motif,
   vertices <- network::get.vertex.attribute(net, "vertex.names")
   indices <- match(motif_names, vertices)
   subgraph <- network::get.inducedSubgraph(net, indices)
-  p <- motifr::plot_mnet(subgraph, lvl_attr = lvl_attr, ...)
+  p <- motifr::plot_mnet(subgraph, lvl_attr = lvl_attr, directed = directed,
+                         ...)
   return(p)
 }
 

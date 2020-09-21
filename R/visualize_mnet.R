@@ -9,7 +9,7 @@
 #' @param lvl_attr The name of the categorical node attribute specifying at
 #'   which level a node is situated
 #' @param layouts A list of layouts (see \code{ggraph::layout_ggraph}) for every level
-#'   eg. for two levels list("auto","circle")
+#'   eg. for two levels \code{list("auto","circle")}
 #' @param label logical - should nodes be labelled? (defaults to false)
 #' @param directed whether the network object shall be interpreted as directed
 #'   network. Per default, \code{motifr::is.directed} is used to determine that.
