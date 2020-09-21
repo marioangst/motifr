@@ -42,15 +42,6 @@ show_motif("1,2[II.C]", label = TRUE)
 
 A full list of all supported signatures and motif classes can be found in the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false) in section *Appendix: The Motif Zoo*.
 
-The functions ```show_3_motifs()``` and ```show_4_motifs()``` also quickly give an overview over three-node (with signature 1,2) and four-node (with signature 2,2) motifs in two-level networks together with their classes.
-
-For example, for level 0 being the "red" level and level 1 being the "green" level, the figure below shows all possible motif classes for motifs with signature "1,2".
-
-```{r, out.width=300}
-show_3_motifs()
-```
-
-
 ## A word of caution on counting: Position matching
 
 Motifr uses an internal mechanism called *position matching* for translating the head of a motif identifier string, e.g. ``1,2``, to a sequence of levels corresponding to the signature of the motif. Usually, this procedure yields the desired matching and is of no interest to the user. However, sometimes it might be necessary two overwrite the position matching by providing custom positions. 
