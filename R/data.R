@@ -15,7 +15,8 @@
 #'   activity))} ... }
 #' @source Surveys and expert interviews in a Swiss wetland. Data is anonymized
 #'   and should only be used for exemplary purposes.
-#' @examples plot_mnet(ml_net)
+#' @examples
+#' plot_mnet(ml_net)
 "ml_net"
 
 #' Three-level network dummy example
@@ -31,7 +32,8 @@
 #' }
 #' @source Dummy data
 #' \url{https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data}
-#' @examples plot_mnet(dummy_net)
+#' @examples
+#' plot_mnet(dummy_net)
 "dummy_net"
 
 
@@ -42,7 +44,8 @@
 #' @format igraph network object
 #' @source Dummy data
 #'  \url{https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data}
-#' @examples plot_mnet(directed_dummy_net)
+#' @examples
+#' plot_mnet(directed_dummy_net)
 "directed_dummy_net"
 
 #' Two-level tidygraph network example
@@ -51,5 +54,6 @@
 #'
 #' @format tidygraph network object
 #' @source Dummy data
-#' @examples plot_mnet(tidygraph_dummy_net)
+#' @examples
+#' plot_mnet(tidygraph_dummy_net)
 "tidygraph_dummy_net"

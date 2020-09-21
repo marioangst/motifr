@@ -93,8 +93,8 @@ plot_mnet <- function(net,
   }
 
   arrow <- NULL
-  if((is.null(directed) && motifr::is.directed(net)) ||
-     (! is.null(directed) && directed == TRUE)) {
+  if ((is.null(directed) && motifr::is.directed(net)) ||
+    (!is.null(directed) && directed == TRUE)) {
     arrow <- grid::arrow(angle = 10, length = ggplot2::unit(.3, "cm"))
   }
 
@@ -105,7 +105,8 @@ plot_mnet <- function(net,
           "#64697380", "#b1b4ba50"
         )
     ),
-    arrow = arrow)
+    arrow = arrow
+    )
 
   for (level in 1:n_levels) {
     p_comb[["data"]][["x"]][
@@ -140,5 +141,5 @@ plot_mnet <- function(net,
       )
   }
 
-  p_comb + ggplot2::theme(plot.margin = ggplot2::unit(c(1, 1, 1, 1), "cm"))
+  return(p_comb + ggplot2::theme(plot.margin = ggplot2::unit(c(1, 1, 1, 1), "cm")))
 }

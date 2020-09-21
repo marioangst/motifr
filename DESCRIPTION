@@ -12,43 +12,44 @@ Authors@R:
              role = "aut",
              email = "t.seppelt@posteo.de",
              comment = c(ORCID = "0000-0002-6447-0568")))
-Description: This package provides tools for motif analysis in multi-level networks.
-    Multi-level networks combine multiple networks in one, e.g. social-ecological networks. 
-    Motifs are small configurations of nodes and edges (subgraphs) occurring in networks.
-    motifr is visualizes multi-level networks, counts multi-level network motifs, compares them to a baseline.
-    It also identifies contributions of potential edges to motifs to find critical or missing edges.
-    The package is in many parts a R wrapper for the excellent SESMotifAnalyser Python package written by
-    Tim Seppelt.
+Description: This package provides tools for motif analysis
+    in multi-level networks.  Multi-level networks combine multiple
+    networks in one, e.g. social-ecological networks.  Motifs are small
+    configurations of nodes and edges (subgraphs) occurring in networks.
+    motifr is visualizes multi-level networks, counts multi-level network
+    motifs, compares them to a baseline.  It also identifies contributions
+    of potential edges to motifs to find critical or missing edges.  The
+    package is in many parts a R wrapper for the excellent
+    SESMotifAnalyser Python package written by Tim Seppelt.
 License: MIT + file LICENSE
 URL: https://marioangst.github.io/motifr/
 BugReports: https://github.com/marioangst/motifr/issues
-Language: en-GB
-Encoding: UTF-8
-LazyData: true
-Depends: R (>= 3.5.0)
-RoxygenNote: 7.1.1
-Suggests: 
-    testthat (>= 2.1.0),
-    knitr,
-    rmarkdown,
-    pkgdown,
-    ergm
+Depends: 
+    R (>= 3.5.0)
 Imports: 
-    igraph,
-    utils,
-    reticulate,
-    network,
-    magick,
-    purrr,
-    ggraph,
+    dplyr,
     ggplot2 (>= 2.1.0),
+    ggraph,
+    igraph,
+    intergraph,
+    magick,
+    network,
+    purrr,
+    reshape2,
+    reticulate,
+    rlang,
+    scales,
     tibble,
     tidygraph,
-    scales,
-    reshape2,
-    intergraph,
-    dplyr,
-    rlang
+    utils
+Suggests: 
+    ergm,
+    knitr,
+    pkgdown,
+    rmarkdown,
+    testthat (>= 2.1.0)
+VignetteBuilder: 
+    knitr
 Config/reticulate:
   list(
     packages = list(
@@ -56,4 +57,7 @@ Config/reticulate:
       list(package = "networkx", pip = TRUE)
     )
   )
-VignetteBuilder: knitr
+Encoding: UTF-8
+Language: en-GB
+LazyData: true
+RoxygenNote: 7.1.1

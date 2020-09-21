@@ -254,10 +254,10 @@ show_motif <- function(motif,
                        lvl_attr = c("sesType"),
                        directed = NULL,
                        ...) {
-  if(is.null(net)) {
-    if(is.null(directed) || directed == TRUE) {
+  if (is.null(net)) {
+    if (is.null(directed) || directed == TRUE) {
       net <- motifr::dummy_net
-    }else{
+    } else {
       net <- motifr::directed_dummy_net
     }
   }
@@ -269,8 +269,10 @@ show_motif <- function(motif,
   vertices <- network::get.vertex.attribute(net, "vertex.names")
   indices <- match(motif_names, vertices)
   subgraph <- network::get.inducedSubgraph(net, indices)
-  p <- motifr::plot_mnet(subgraph, lvl_attr = lvl_attr, directed = directed,
-                         ...)
+  p <- motifr::plot_mnet(subgraph,
+    lvl_attr = lvl_attr, directed = directed,
+    ...
+  )
   return(p)
 }
 

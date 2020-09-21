@@ -83,7 +83,9 @@ test_that("count_motifs_tidygraph_dummy", {
 
 test_that("exemplify_motif", {
   # use small networks that have only one motif of a certain type (or none)
-  testthat::expect_equal(motifr::exemplify_motif(motifr::tidygraph_dummy_net, "1,2[I.C]"),
-                         c(1, 5, 6))
+  testthat::expect_equal(
+    motifr::exemplify_motif(motifr::tidygraph_dummy_net, "1,2[I.C]"),
+    c(1, 5, 6)
+  )
   testthat::expect_error(motifr::exemplify_motif(motifr::tidygraph_dummy_net, "1,2[I.B]"))
 })

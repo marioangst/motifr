@@ -20,5 +20,4 @@ network formats. For example, this function calls
 }
 \examples{
 is.directed(ml_net)
-
 }
