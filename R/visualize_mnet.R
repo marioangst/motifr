@@ -88,10 +88,7 @@ plot_mnet <- function(net,
       coord_offset[[level]][["y"]]
   }
 
-  if ("ggraph" %in% (.packages())) {
-    detach("package:ggraph", unload = TRUE)
-  }
-
+  # handle directed networks
   arrow <- NULL
   if ((is.null(directed) && motifr::is.directed(net)) ||
     (!is.null(directed) && directed == TRUE)) {
