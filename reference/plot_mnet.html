@@ -151,7 +151,8 @@ separate ggraph calls for each network level in a circle.</p>
   <span class='kw'>net</span>,
   lvl_attr = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>),
   layouts = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"kk"</span>, <span class='kw'>n_levels</span>),
-  label = <span class='fl'>FALSE</span>
+  label = <span class='fl'>FALSE</span>,
+  directed = <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -168,12 +169,17 @@ which level a node is situated</p></td>
     </tr>
     <tr>
       <th>layouts</th>
-      <td><p>A list of layouts (see ?ggraph::layout_ggraph) for every level
-eg. for two levels list("auto","circle")</p></td>
+      <td><p>A list of layouts (see <code><a href='https://ggraph.data-imaginist.com/reference/ggraph.html'>ggraph::layout_ggraph</a></code>) for every level
+eg. for two levels <code><a href='https://rdrr.io/r/base/list.html'>list("auto","circle")</a></code></p></td>
     </tr>
     <tr>
       <th>label</th>
       <td><p>logical - should nodes be labelled? (defaults to false)</p></td>
+    </tr>
+    <tr>
+      <th>directed</th>
+      <td><p>whether the network object shall be interpreted as directed
+network. Per default, <code><a href='is.directed.html'>motifr::is.directed</a></code> is used to determine that.</p></td>
     </tr>
     </table>
 
