@@ -120,27 +120,21 @@
 </pre></div>
 <p><img src="motif_zoo_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
 <p>A full list of all supported signatures and motif classes can be found in the <a href="https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false">documentation of the Python sma package</a> in section <em>Appendix: The Motif Zoo</em>.</p>
-<p>The functions <code><a href="../reference/show_3_motifs.html">show_3_motifs()</a></code> and <code><a href="../reference/show_4_motifs.html">show_4_motifs()</a></code> also quickly give an overview over three-node (with signature 1,2) and four-node (with signature 2,2) motifs in two-level networks together with their classes.</p>
-<p>For example, for level 0 being the “red” level and level 1 being the “green” level, the figure below shows all possible motif classes for motifs with signature “1,2”.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="../reference/show_3_motifs.html">show_3_motifs</a></span>()
-</pre></div>
-<p><img src="motif_zoo_files/figure-html/unnamed-chunk-3-1.png" width="300"></p>
 </div>
 <div id="a-word-of-caution-on-counting-position-matching" class="section level2">
 <h2 class="hasAnchor">
 <a href="#a-word-of-caution-on-counting-position-matching" class="anchor"></a>A word of caution on counting: Position matching</h2>
 <p>Motifr uses an internal mechanism called <em>position matching</em> for translating the head of a motif identifier string, e.g. <code>1,2</code>, to a sequence of levels corresponding to the signature of the motif. Usually, this procedure yields the desired matching and is of no interest to the user. However, sometimes it might be necessary two overwrite the position matching by providing custom positions.</p>
 <p>An example for this is the motif <code>2,2[II.D]</code>. It contains two nodes on level 0 and two nodes on level 1. The two nodes on level 0 and the two nodes on level 1 are respectively adjacent. Furthermore the two nodes on level 0 are linked to one of the nodes on level 1.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
+<div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="fu"><a href="../reference/show_motif.html">show_motif</a></span>(motif = <span class="st">"2,2[II.D]"</span>, label = <span class="fl">TRUE</span>)
 </pre></div>
-<p><img src="motif_zoo_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<p><img src="motif_zoo_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 <p>This motif differs from the motif <code>2:1,2:0[II.D]</code> which contains the same number of nodes from the different levels. However, here the roles of the levels are swapped, i.e. in this motif, the two nodes on level 1 are adjacent to the two nodes on level 0.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
+<div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="fu"><a href="../reference/show_motif.html">show_motif</a></span>(motif = <span class="st">"2:1,2:0[II.D]"</span>, label = <span class="fl">TRUE</span>)
 </pre></div>
-<p><img src="motif_zoo_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
+<p><img src="motif_zoo_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <p>The position matching can be overwritten by providing the levels corresponding to the entries in the motif signature, e.g. the head <code>2:1,2:0</code> signalises that the first level containing two nodes is level 1 (“2:1”) while the second level containing two nodes is level 0 (“2:0”).</p>
 <p>See the <a href="https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false">documentation of the Python sma package</a>, subsection <em>Position matching</em> for a detailed description of the procedure.</p>
 <p>In general, it is recommended to use <code><a href="../reference/show_motif.html">show_motif(motif)</a></code> to check whether the provided motif identifier string is interpreted as intended by the software.</p>
