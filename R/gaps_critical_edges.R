@@ -106,7 +106,7 @@ edge_contribution <- function(net,
                               motif,
                               lvl_attr = c("sesType"),
                               level = -1) {
-  if (network::is.directed(net)) {
+  if (motifr::is.directed(net)) {
     warning(paste(
       "Edge contribution does only make sense for undirected networks.",
       "The given network is automatically treated as an undirected network."

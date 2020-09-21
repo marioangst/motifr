@@ -24,15 +24,15 @@ data frame with one row for each motif
 \description{
 Returns a dataframe with one row for each instance of the motif specified by
 the given motif identifier string. If the identifier string specifies a motif
-class, e.g. ``1,2[I.A]`` , then only motifs of the given class are returned.
-If the identifier string specifies a signature, e.g. ``1,2``, then a full
+class, e.g. \code{1,2[I.A]}, then only motifs of the given class are returned.
+If the identifier string specifies a signature, e.g. \code{1,2}, then a full
 list of all motifs of this signature is returned. In the latter case, the
 dataframe contains an additional column stating the classes of the motifs.
 The naming scheme of the columns is as follows: Each column is called
-``levelA_nodeB`` where ``A`` is the ``sesType`` of the nodes in the column
-and ``B`` the index of the nodes among the nodes on the same level. This
+\code{levelA_nodeB} where \code{A} is the \code{lvl_attr} of the nodes in the column
+and \code{B} the index of the nodes among the nodes on the same level. This
 index stems from the internal order of the nodes and does not carry any
-specific meaning. in R using the ``ergm_model`` parameter.
+specific meaning.
 }
 \examples{
 head(list_motifs(ml_net, "1,2[I.C]", directed = FALSE))

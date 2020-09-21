@@ -1,86 +1,4 @@
 
-#' Translate multi-level statnet or igraph network object to Python networkx
-#' object
-#'
-#' The functions \code{network::is.directed} or
-#' \code{igraph::is.directed} are used to determine whether the provided
-#' network is directed (if \code{directed = FALSE}).
-#'
-#' @param g statnet or igraph network object
-#' @param lvl_attr character vector specifying the attribute name where level
-#'   information is stored in \code{net}.
-#' @param relabel should nodes be relabelled with statnet \code{vertex.names} or
-#'   igraph nodal attribute \code{name}
-#' @param directed whether the graph shall be treated as a directed graph. Per
-#'   default (\code{NULL}), this is determined automatically using the structure
-#'   of the provided network object
-#'
-#' @return Python networkx graph object
-#' @export
-#'
-#' @examples
-#' to_py_graph(motifr::dummy_net, lvl_attr = "sesType")
-to_py_graph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
-
-  if(class(g) == "network") {
-    # function for translating a statnet network object into a Python compatible
-    # networkx object
-    adjacency_matrix <- network::as.matrix.network(g)
-    attribute_names <- as.list(network::list.vertex.attributes(g))
-    attribute_values <- lapply(
-      network::list.vertex.attributes(g),
-      function(x) network::get.vertex.attribute(g, x)
-    )
-    graph_directed <- network::is.directed(g)
-    vertex_names <- network::network.vertex.names(g)
-  }else if(class(g) == "igraph") {
-    adjacency_matrix <- igraph::as_adjacency_matrix(g, sparse = FALSE)
-    attributes <- as.data.frame(igraph::vertex.attributes(g))
-    attribute_names <- as.list(colnames(attributes))
-    attribute_values <- lapply(
-      attribute_names,
-      function(x) attributes[[x]]
-    )
-    graph_directed <- igraph::is.directed(g)
-    if(is.null(igraph::V(g)$name)) {
-      # vertices don't carry names, uses igraph's internal numbering
-      vertex_names <- 1:igraph::gorder(g)
-    }else{
-      vertex_names <- igraph::V(g)$name
-    }
-  }else{
-    stop(paste("Provided network object is of unsupported format:", class(g)))
-  }
-
-  if (is.null(directed)) {
-    directed <- graph_directed
-  } else if (directed == TRUE && ! graph_directed) {
-    warning(paste(
-      "Attempting to treat an undirected network as directed.",
-      "This might lead to unintended results."
-    ))
-  }
-
-  py_g <- sma$translateGraph(adjacency_matrix,
-    attribute_names,
-    attribute_values,
-    lvl_attr,
-    directed = directed
-  )
-
-  if (relabel == TRUE) {
-    # JS: renaming in here right now,
-    # but will suggest update to rbridge.py to do in Python
-    node_names <-
-      reticulate::py_dict(
-        keys = as.integer(0:(py_g$number_of_nodes() - 1)),
-        values = vertex_names
-      )
-    py_g <- nx$relabel_nodes(py_g, mapping = node_names)
-  }
-  return(py_g)
-}
-
 #' Display all supported motifs with signature (1,2).
 #'
 #' @return Opens image
@@ -537,16 +455,16 @@ compare_to_baseline <- function(net,
 #'
 #' Returns a dataframe with one row for each instance of the motif specified by
 #' the given motif identifier string. If the identifier string specifies a motif
-#' class, e.g. ``1,2[I.A]`` , then only motifs of the given class are returned.
-#' If the identifier string specifies a signature, e.g. ``1,2``, then a full
+#' class, e.g. \code{1,2[I.A]}, then only motifs of the given class are returned.
+#' If the identifier string specifies a signature, e.g. \code{1,2}, then a full
 #' list of all motifs of this signature is returned. In the latter case, the
 #' dataframe contains an additional column stating the classes of the motifs.
 
 #' The naming scheme of the columns is as follows: Each column is called
-#' ``levelA_nodeB`` where ``A`` is the ``sesType`` of the nodes in the column
-#' and ``B`` the index of the nodes among the nodes on the same level. This
+#' \code{levelA_nodeB} where \code{A} is the \code{lvl_attr} of the nodes in the column
+#' and \code{B} the index of the nodes among the nodes on the same level. This
 #' index stems from the internal order of the nodes and does not carry any
-#' specific meaning. in R using the ``ergm_model`` parameter.
+#' specific meaning.
 #'
 #' @param net network object
 #' @param identifier motif identifier string (with or without class, see above)
