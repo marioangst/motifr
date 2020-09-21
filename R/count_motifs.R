@@ -310,7 +310,7 @@ simulate_baseline <- function(net,
   }
   if (model == "ergm") {
     if (!requireNamespace("ergm", quietly = TRUE)) {
-      stop("Package \"ergm\" needed for this function to work. Please install it.",
+      stop("Package \"ergm\" needed for this function to work. Please install it with install.packages(ergm).",
         call. = FALSE
       )
     }

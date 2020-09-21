@@ -51,7 +51,8 @@ Suggests:
     knitr,
     pkgdown,
     rmarkdown,
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    shiny
 VignetteBuilder: 
     knitr
 Config/reticulate:

@@ -40,3 +40,18 @@ supported_classes <- function(signature, directed = FALSE) {
   motif_info <- sma$motifInfo(lsi, directed)
   return(motif_info$classes)
 }
+
+#' Explore the motif zoo interactively in a shiny app
+#'
+#' @return Launches a shiny app where all available motifs can be displayed
+#' @export
+#'
+#' @examples
+explore_motifs <- function() {
+  appDir <- system.file("shiny_examples", "explore_zoo", package = "motifr")
+  if (appDir == "") {
+    stop("Could not find example directory. Try re-installing `motifr`.", call. = FALSE)
+  }
+
+  shiny::runApp(appDir, display.mode = "normal")
+}
