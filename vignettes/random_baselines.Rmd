@@ -22,11 +22,11 @@ library(motifr)
 library(ergm)
 ```
 
-This vignette describes the models used for random baselines in motifr. Baseline models have to be specified when requesting random networks (e.g., ``compare_to_baseline()``), and when computing properties of motif distributions analytically (e.g, ``motifs_distribution()``).
+This vignette describes the models used for random baselines in motifr. Baseline models have to be specified when requesting random networks to compare empirically observed networks against (e.g. using ``compare_to_baseline()``), and when computing properties of motif distributions analytically (e.g, ``motifs_distribution()``).
 
 ## Baseline models
 
-Currently, three baseline models are implemented. The parameters of the models are extracted from a given (empirical) network.
+Currently, four baseline models are implemented. The parameters of the models are extracted from a given (empirical) network.
 
 - *Fixed Densities Model* (``fixed_densities``) Given two levels A and B, in this model it is assumed that the number of edges between level A and level B is fixed for all A-B ties.
 The specific number of edges is drawn randomly from the set of all possible edges.
@@ -93,5 +93,4 @@ ERGMs are a powerful tool when working with random networks. The R library ``erg
 ```{r}
 model <- ergm(dummy_net ~ edges + triangle)
 compare_to_baseline(dummy_net, list("1,2[I.A]", "1,2[I.C]", "1,2[II.C]"), n = 50, directed = FALSE, model = "ergm", ergm_model = model)
-compare_to_baseline(dummy_net, list("1,2[I.A]", "1,2[I.C]", "1,2[II.C]"), n = 50, directed = FALSE, model = "erdos_renyi")
 ```

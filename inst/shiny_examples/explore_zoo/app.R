@@ -39,7 +39,8 @@ server <- function(input, output) {
     })
 
     output$motif <- renderPlot({
-        show_motif(paste(input$signature,"[",input$class,"]",sep = ""))
+            show_motif(paste(input$signature,"[",input$class,"]",sep = ""),
+                       nodesize = 7)
     })
 }
 

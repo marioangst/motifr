@@ -40,7 +40,7 @@ You can explore all possible motifs interactively in a shiny app included in the
 explore_motifs()
 ```
 
-When in doubt about what a given identifier string implies for you specific network, you can let motifr show you the motif either in a dummy network or an example of the motif in a network you are analysing (the second will only work if the network you are analysing actually contains the motif) with show_motif().
+When in doubt about what a given identifier string implies for you specific network, you can let motifr show you the motif either in a dummy network or an example of the motif in a network you are analysing (the second will only work if the network you are analysing actually contains the motif) with ``show_motif(motif)``.
 
 The following code below uses show_motif to illustrate a "1,2[II.C]" motif as found in the wetland management network object ml_net. ml_net contains a level attribute (specifying which node belongs to which level) named "sesType".
 

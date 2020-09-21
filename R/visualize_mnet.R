@@ -5,6 +5,10 @@
 #' layouts for each level. This is a somewhat hacky wrapper for arranging
 #' separate ggraph calls for each network level in a circle.
 #'
+#' For more extensive visualization options, it is recommended to explore the
+#' \link[graphlayouts]{layout_as_multilevel} function included in
+#' the package graphlayouts.
+#'
 #' @param net A tidygraph, igraph or statnet network object
 #' @param lvl_attr The name of the categorical node attribute specifying at
 #'   which level a node is situated
@@ -13,6 +17,7 @@
 #' @param label logical - should nodes be labelled? (defaults to false)
 #' @param directed whether the network object shall be interpreted as directed
 #'   network. Per default, \code{motifr::is.directed} is used to determine that.
+#' @param nodesize The size of nodes, if displayed as points (if label = false)
 #'
 #' @return A ggraph object
 #' @export
@@ -23,7 +28,8 @@ plot_mnet <- function(net,
                       lvl_attr = c("sesType"),
                       layouts = rep("kk", n_levels),
                       label = FALSE,
-                      directed = NULL) {
+                      directed = NULL,
+                      nodesize = 3) {
   if (network::is.network(net)) {
     net <- intergraph::asIgraph(net)
     net <-
@@ -48,6 +54,9 @@ plot_mnet <- function(net,
   edges$from_level <- nodes$lvl_n[edges$from]
 
   edges$between <- ifelse(edges$from_level != edges$to_level, "within", "between")
+
+  edges$level_pairs <- apply(data.frame(t(apply(cbind(edges$from_level,edges$to_level),1,sort))),
+                             1,paste, collapse = "_")
 
   t_g <- tidygraph::tbl_graph(nodes = nodes, edges = edges)
 
@@ -89,21 +98,27 @@ plot_mnet <- function(net,
   }
 
   # handle directed networks
-  arrow <- NULL
   if ((is.null(directed) && motifr::is.directed(net)) ||
     (!is.null(directed) && directed == TRUE)) {
-    arrow <- grid::arrow(angle = 10, length = ggplot2::unit(.3, "cm"))
-  }
 
-  p_comb <- ggraph::ggraph(t_g, layout = "kk") +
-    ggraph::geom_edge_link(ggplot2::aes(
-      color =
-        ifelse(edges$between == "between",
-          "#64697380", "#b1b4ba50"
-        )
-    ),
-    arrow = arrow
-    )
+    p_comb <- ggraph::ggraph(t_g, layout = "kk") +
+      ggraph::geom_edge_link(ggplot2::aes(
+        colour = level_pairs),
+        end_cap = ggraph::circle(3, 'mm'),
+        start_cap = ggraph::circle(3, 'mm'),
+        arrow =  grid::arrow(angle = 30,
+                             length = ggplot2::unit(.3, "cm"),
+                             type = "closed")
+      ) +
+      ggraph::scale_edge_color_grey(guide = FALSE)
+  }
+  else{
+    p_comb <- ggraph::ggraph(t_g, layout = "kk") +
+      ggraph::geom_edge_link(ggplot2::aes(
+        colour = level_pairs)
+      ) +
+      ggraph::scale_edge_color_grey(guide = FALSE)
+  }
 
   for (level in 1:n_levels) {
     p_comb[["data"]][["x"]][
@@ -119,11 +134,11 @@ plot_mnet <- function(net,
 
   p_comb <-
     p_comb +
-    ggraph::geom_node_point(ggplot2::aes_(color = ~ factor(lvl))) +
+    ggraph::geom_node_point(ggplot2::aes_(color = ~ factor(lvl)), size = nodesize) +
     ggplot2::theme_void() +
     ggplot2::scale_color_brewer("Level",
       breaks = levels(factor(nodes$lvl)),
-      palette = "Dark2"
+      palette = "Paired"
     ) +
     ggplot2::theme(legend.position = "bottom")
 
@@ -134,7 +149,7 @@ plot_mnet <- function(net,
       ) +
       ggplot2::scale_fill_brewer("Level",
         breaks = levels(factor(nodes$lvl)),
-        palette = "Dark2"
+        palette = "Paired"
       )
   }
 
