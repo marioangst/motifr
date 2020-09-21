@@ -103,11 +103,11 @@
     
     
 <p><a href="https://marioangst.github.io/motifr/"><img src="../man/figures/logo.svg" align="right" height="139"></a></p>
-<p>This vignette describes the models used for random baselines in motifr. Baseline models have to be specified when requesting random networks (e.g., <code><a href="../reference/compare_to_baseline.html">compare_to_baseline()</a></code>), and when computing properties of motif distributions analytically (e.g, <code><a href="../reference/motifs_distribution.html">motifs_distribution()</a></code>).</p>
+<p>This vignette describes the models used for random baselines in motifr. Baseline models have to be specified when requesting random networks to compare empirically observed networks against (e.g. using <code><a href="../reference/compare_to_baseline.html">compare_to_baseline()</a></code>), and when computing properties of motif distributions analytically (e.g, <code><a href="../reference/motifs_distribution.html">motifs_distribution()</a></code>).</p>
 <div id="baseline-models" class="section level2">
 <h2 class="hasAnchor">
 <a href="#baseline-models" class="anchor"></a>Baseline models</h2>
-<p>Currently, three baseline models are implemented. The parameters of the models are extracted from a given (empirical) network.</p>
+<p>Currently, four baseline models are implemented. The parameters of the models are extracted from a given (empirical) network.</p>
 <ul>
 <li>
 <em>Fixed Densities Model</em> (<code>fixed_densities</code>) Given two levels A and B, in this model it is assumed that the number of edges between level A and level B is fixed for all A-B ties. The specific number of edges is drawn randomly from the set of all possible edges.</li>
@@ -127,11 +127,11 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="../reference/simulate_baseline.html">simulate_baseline</a></span>(<span class="kw">ml_net</span>, motifs = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span>), n = <span class="fl">5</span>, directed = <span class="fl">FALSE</span>)
 <span class="co">#&gt;   1,2[I.C] 1,2[II.C]</span>
-<span class="co">#&gt; 1      205        23</span>
-<span class="co">#&gt; 2      141         8</span>
-<span class="co">#&gt; 3      160        12</span>
-<span class="co">#&gt; 4      179        15</span>
-<span class="co">#&gt; 5      211        18</span>
+<span class="co">#&gt; 1      180        22</span>
+<span class="co">#&gt; 2      206        26</span>
+<span class="co">#&gt; 3      178        19</span>
+<span class="co">#&gt; 4      140        16</span>
+<span class="co">#&gt; 5      141        12</span>
 </pre></div>
 </div>
 <div id="motif-distributions-without-simulation" class="section level2">
@@ -210,11 +210,11 @@
 <span class="co">#&gt; Starting Monte Carlo maximum likelihood estimation (MCMLE):</span>
 <span class="co">#&gt; Iteration 1 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.05557.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.03395.</span>
 <span class="co">#&gt; Step length converged once. Increasing MCMC sample size.</span>
 <span class="co">#&gt; Iteration 2 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.003936.</span>
+<span class="co">#&gt; The log-likelihood improved by &lt; 0.0001.</span>
 <span class="co">#&gt; Step length converged twice. Stopping.</span>
 <span class="co">#&gt; Finished MCMLE.</span>
 <span class="co">#&gt; Evaluating log-likelihood at the estimate. Using 20 bridges: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 .</span>
@@ -223,10 +223,6 @@
 <span class="fu"><a href="../reference/compare_to_baseline.html">compare_to_baseline</a></span>(<span class="kw">dummy_net</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"1,2[I.A]"</span>, <span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span>), n = <span class="fl">50</span>, directed = <span class="fl">FALSE</span>, model = <span class="st">"ergm"</span>, ergm_model = <span class="kw">model</span>)
 </pre></div>
 <p><img src="random_baselines_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="fu"><a href="../reference/compare_to_baseline.html">compare_to_baseline</a></span>(<span class="kw">dummy_net</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"1,2[I.A]"</span>, <span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span>), n = <span class="fl">50</span>, directed = <span class="fl">FALSE</span>, model = <span class="st">"erdos_renyi"</span>)
-</pre></div>
-<p><img src="random_baselines_files/figure-html/unnamed-chunk-8-2.png" width="672"></p>
 </div>
   </div>
 
