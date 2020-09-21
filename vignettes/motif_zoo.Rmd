@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 library(motifr)
 ```
 
-This vignette introduces the nomenclature used for labelling motifs in multi-level motifs used in motifr.
+This vignette introduces the nomenclature used for labeling motifs in multi-level networks as used in motifr.
 
 ## Motif classification – how to label motifs in the wild
 
@@ -34,13 +34,23 @@ A motif identifier string contains these two pieces of information. It consists 
 
 Let's consider an example in a two-level network with levels 0 and 1. motifr generally counts levels starting at 0, due to its Python roots. The motif identifier string ``1,2[II.C]`` represents the closed triangle with one node on level 0 and two nodes on level 1. ``1,2`` signifies that the first level (0) provides one node and the second (1) two nodes. The expression ``II.C`` in brackets stands for closed triangle. Alternatively, ``1,2[I.C]`` represents the open triangle with the same number of nodes taken from the levels.
 
-When in doubt about what a given identifier string implies, you can let motifr show you the motif either in a dummy network or an example of the motif in a network you are analysing (the second will only work if the network you are analysing actually contains the motif).
+You can explore all possible motifs interactively in a shiny app included in the package by running (after installing and loading the package):
 
-```{r}
-show_motif("1,2[II.C]", label = TRUE)
+```{r, eval=FALSE}
+explore_motifs()
 ```
 
-A full list of all supported signatures and motif classes can be found in the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false) in section *Appendix: The Motif Zoo*.
+When in doubt about what a given identifier string implies for you specific network, you can let motifr show you the motif either in a dummy network or an example of the motif in a network you are analysing (the second will only work if the network you are analysing actually contains the motif) with show_motif().
+
+The following code below uses show_motif to illustrate a "1,2[II.C]" motif as found in the wetland management network object ml_net. ml_net contains a level attribute (specifying which node belongs to which level) named "sesType".
+
+```{r}
+show_motif(motif = "1,2[II.C]", net = ml_net, label = TRUE, lvl_attr = "sesType")
+```
+
+motifr supports both undirected and directed motifs, although the number of directed motifs currently supported is much more limited currently than the number of supported undirected motifs. If your favorite motif is not part of the zoo yet, reach out to us by [creating an issue on github](https://github.com/marioangst/motifr/issues) describing the motif you would like to have included.
+
+A full list of all supported signatures and motif classes can also be found in the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false) in section *Appendix: The Motif Zoo*.
 
 ## A word of caution on counting: Position matching
 

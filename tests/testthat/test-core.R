@@ -21,7 +21,7 @@ test_that("io_undirected_dummy_net", {
 })
 test_that("io_directed_ml_net", {
   py_g <- to_py_graph(motifr::ml_net, "sesType")
-  testthat::expect_true(nx$is_directed(py_g))
+  testthat::expect_false(nx$is_directed(py_g))
 
   testthat::expect_equal(
     network::network.size(ml_net),
