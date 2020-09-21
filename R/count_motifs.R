@@ -261,6 +261,9 @@ show_motif <- function(motif,
       net <- motifr::directed_dummy_net
     }
   }
+  if(igraph::is.igraph(net)){
+    net <- intergraph::asNetwork(net)
+  }
   motif_names <- motifr::exemplify_motif(
     net = net, motif = motif,
     lvl_attr = lvl_attr,
