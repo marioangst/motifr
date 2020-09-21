@@ -5,13 +5,7 @@
 \title{Plots an example for a motif with given motif identifier string taken from
 the given graph.}
 \usage{
-show_motif(
-  motif,
-  net = motifr::dummy_net,
-  lvl_attr = c("sesType"),
-  directed = NULL,
-  ...
-)
+show_motif(motif, net = NULL, lvl_attr = c("sesType"), directed = NULL, ...)
 }
 \arguments{
 \item{motif}{motif identifier string for the motif}
@@ -25,18 +19,20 @@ information is stored in \code{net}.}
 default (\code{NULL}), this is determined automatically using the structure
 of the provided network object}
 
-\item{...}{additional arguments to be passed to plotting function (eg. label
-= TRUE)}
+\item{...}{additional arguments to be passed to plotting function (eg.
+\code{label = TRUE})}
 }
 \value{
 plot
 }
 \description{
-If no network is provided, a motif in a dummy network will be shown.
+If no network is provided, a motif in a dummy network
+(\code{motifr::dummy_net} or \code{motifr::directed_dummy_net}) will be
+shown.
 }
 \examples{
 show_motif("1,2[I.C]", net = ml_net, directed = FALSE, label = TRUE)
 }
 \seealso{
-exemplify_motif
+\code{motifr::exemplify_motif}
 }

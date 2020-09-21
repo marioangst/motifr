@@ -154,7 +154,7 @@ motifs_distribution <- function(net,
   return(df)
 }
 
-#' Summary for motif counts and distribution (Erdos-Renyi)
+#' Summary for motif counts and Erdős-Rényi distribution
 #'
 #' Returns a data frame with counts and statistical properties (expectation,
 #' variances) of six selected motifs in the given network. Note that this
@@ -212,7 +212,7 @@ motif_summary <- function(net,
 #'   of the provided network object
 #'
 #' @return vector of nodes in the motif
-#' @seealso show_motif
+#' @seealso \code{motifr::show_motif}
 #' @export
 #'
 #' @examples
@@ -230,7 +230,9 @@ exemplify_motif <- function(net,
 #' Plots an example for a motif with given motif identifier string taken from
 #' the given graph.
 #'
-#' If no network is provided, a motif in a dummy network will be shown.
+#' If no network is provided, a motif in a dummy network
+#' (\code{motifr::dummy_net} or \code{motifr::directed_dummy_net}) will be
+#' shown.
 #'
 #' @param motif motif identifier string for the motif
 #' @param net network object
@@ -239,19 +241,26 @@ exemplify_motif <- function(net,
 #' @param directed whether the graph shall be treated as a directed graph. Per
 #'   default (\code{NULL}), this is determined automatically using the structure
 #'   of the provided network object
-#' @param ... additional arguments to be passed to plotting function (eg. label
-#'   = TRUE)
+#' @param ... additional arguments to be passed to plotting function (eg.
+#'   \code{label = TRUE})
 #' @return plot
-#' @seealso exemplify_motif
+#' @seealso \code{motifr::exemplify_motif}
 #' @export
 #'
 #' @examples
 #' show_motif("1,2[I.C]", net = ml_net, directed = FALSE, label = TRUE)
 show_motif <- function(motif,
-                       net = motifr::dummy_net,
+                       net = NULL,
                        lvl_attr = c("sesType"),
                        directed = NULL,
                        ...) {
+  if(is.null(net)) {
+    if(is.null(directed) || directed == TRUE) {
+      net <- motifr::dummy_net
+    }else{
+      net <- motifr::directed_dummy_net
+    }
+  }
   motif_names <- motifr::exemplify_motif(
     net = net, motif = motif,
     lvl_attr = lvl_attr,

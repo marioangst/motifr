@@ -21,7 +21,7 @@ plot_mnet <- function(net,
                       lvl_attr = c("sesType"),
                       layouts = rep("kk", n_levels),
                       label = FALSE) {
-  if ("network" %in% class(net)) {
+  if (network::is.network(net)) {
     net <- intergraph::asIgraph(net)
     net <-
       igraph::set.vertex.attribute(net,
@@ -88,13 +88,20 @@ plot_mnet <- function(net,
   if ("ggraph" %in% (.packages())) {
     detach("package:ggraph", unload = TRUE)
   }
+
+  arrow <- NULL
+  if(motifr::is.directed(net)) {
+    arrow <- grid::arrow(angle = 10, length = ggplot2::unit(.3, "cm"))
+  }
+
   p_comb <- ggraph::ggraph(t_g, layout = "kk") +
     ggraph::geom_edge_link(ggplot2::aes(
       color =
         ifelse(edges$between == "between",
           "#64697380", "#b1b4ba50"
         )
-    ))
+    ),
+    arrow = arrow)
 
   for (level in 1:n_levels) {
     p_comb[["data"]][["x"]][

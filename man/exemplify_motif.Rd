@@ -28,5 +28,5 @@ Returns an example for a motif found in a given network
 exemplify_motif(ml_net, motif = "1,2[I.C]", directed = FALSE)
 }
 \seealso{
-show_motif
+\code{motifr::show_motif}
 }

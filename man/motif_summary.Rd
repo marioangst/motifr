@@ -2,7 +2,7 @@
 % Please edit documentation in R/count_motifs.R
 \name{motif_summary}
 \alias{motif_summary}
-\title{Summary for motif counts and distribution (Erdos-Renyi)}
+\title{Summary for motif counts and Erdős-Rényi distribution}
 \usage{
 motif_summary(net, lvl_attr = c("sesType"))
 }
