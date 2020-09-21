@@ -158,7 +158,7 @@
 <div id="count-motifs" class="section level3">
 <h3 class="hasAnchor">
 <a href="#count-motifs" class="anchor"></a>Count motifs</h3>
-<p>Motifs can be counted using the versatile function <code><a href="reference/count_motifs.html">count_motifs()</a></code>. It takes as parameters a statnet network object (use <code>ml_net</code> or <code>dummy_net</code> provided by this package as example) and a list of motif identifiers (see below) specifying the motifs. See the <a href="https://marioangst.github.io/motifr/articles/motif_zoo.html">vignette on the motif zoo</a> for details on nomenclature for motifs (motif identifier strings). Let’s quickly check out two classic examples of three-node, two-level motifs (open and closed triangles) in the wetlands management network introduced above:</p>
+<p>Motifs can be counted using the versatile function <code><a href="reference/count_motifs.html">count_motifs()</a></code>. It takes as parameters a statnet network object (use <code>ml_net</code> or <code>dummy_net</code> provided by this package as example) and a list of motif identifiers (see below) specifying the motifs. See the <code><a href="articles/motif_zoo.html">vignette("motif_zoo")</a></code> for details on nomenclature for motifs (motif identifier strings). Let’s quickly check out two classic examples of three-node, two-level motifs (open and closed triangles) in the wetlands management network introduced above:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="fu"><a href="reference/show_motif.html">show_motif</a></span>(motif = <span class="st">"1,2[I.C]"</span>, net = <span class="kw">ml_net</span>, label = <span class="fl">TRUE</span>, directed = <span class="fl">FALSE</span>) <span class="co"># open ('1,2[I.C]') triangle</span>
 </pre></div>
@@ -176,7 +176,7 @@
 <span class="co">#&gt; 1,2[I.C]   1,2[I.C]   543</span>
 <span class="co">#&gt; 1,2[II.C] 1,2[II.C]   167</span>
 </pre></div>
-<p>An exploratory approach can be taken by calling <code><a href="reference/motif_summary.html">motif_summary()</a></code>. This function counts the occurrences of a couple of interesting motifs. Furthermore it computes expectations and variances for the occurrence of these motifs in a modified Erdős-Rényi model. See the package <a href="https://marioangst.github.io/motifr/articles/random_baselines.html">vignette on random baselines</a> for details.</p>
+<p>An exploratory approach can be taken by calling <code><a href="reference/motif_summary.html">motif_summary()</a></code>. This function counts the occurrences of a couple of interesting motifs. Furthermore it computes expectations and variances for the occurrence of these motifs in a modified Erdős-Rényi model. See the package <code><a href="articles/random_baselines.html">vignette("random_baselines")</a></code> for details.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="fu"><a href="reference/motif_summary.html">motif_summary</a></span>(<span class="kw">ml_net</span>)
 <span class="co">#&gt;        motif count  expectation     variance</span>
@@ -225,7 +225,7 @@
 <div id="comparing-motif-occurrence-to-a-random-baseline" class="section level3">
 <h3 class="hasAnchor">
 <a href="#comparing-motif-occurrence-to-a-random-baseline" class="anchor"></a>Comparing motif occurrence to a random baseline</h3>
-<p>Motifr can be used to simulate a random baseline of networks. Motif counts in an empirical network can then be compared to the distribution of motif counts in the random networks. We do so again here for open and closed triangles in the wetland management network. Unsurprisingly, we find that both of these motifs occur much more often in the empirically observed network than in the random baseline. See the package <a href="vignettes/random_baselines.Rmd">vignette on random baselines</a> for details.</p>
+<p>Motifr can be used to simulate a random baseline of networks. Motif counts in an empirical network can then be compared to the distribution of motif counts in the random networks. We do so again here for open and closed triangles in the wetland management network. Unsurprisingly, we find that both of these motifs occur much more often in the empirically observed network than in the random baseline. See the package <code><a href="articles/random_baselines.html">vignette("random_baselines")</a></code> for details.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="kw">motifs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span>) <span class="co"># open ('1,2[I.C]') and closed ('1,2[II.C]') triangles</span>
 
