@@ -49,8 +49,8 @@
 <meta property="og:title" content="List edge contribution — edge_contribution" />
 <meta property="og:description" content="List gaps ordered by contribution to a motif. This is a list of ties together
 with the number of motifs of a given class the dyad would generate by being
-flipped. This is a generalisation of ``identify_gaps`` and
-``critical_dyads``." />
+flipped. This is a generalisation of motifr::identify_gaps() and
+motifr::criticial_dyads()." />
 <meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg" />
 
 
@@ -145,8 +145,8 @@ flipped. This is a generalisation of ``identify_gaps`` and
     <div class="ref-description">
     <p>List gaps ordered by contribution to a motif. This is a list of ties together
 with the number of motifs of a given class the dyad would generate by being
-flipped. This is a generalisation of ``identify_gaps`` and
-``critical_dyads``.</p>
+flipped. This is a generalisation of <code><a href='identify_gaps.html'>motifr::identify_gaps()</a></code> and
+<code>motifr::criticial_dyads()</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>edge_contribution</span>(<span class='kw'>net</span>, <span class='kw'>motif</span>, lvl_attr = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>), level = <span class='op'>-</span><span class='fl'>1</span>)</pre>
@@ -181,10 +181,10 @@ shall be determined automatically.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The level parameter determines on which level of the network edge
-contributions are analysed. Per default, when ``level = -1``, the first level
-in the motif which provides exactly two nodes is selected. Use this parameter
-to specify a level manually. The procedure for determining the level is the
-same as for the Actor's Choice Model, cf. vignette.</p>
+contributions are analysed. Per default, when <code>level = -1</code>, the first
+level in the motif which provides exactly two nodes is selected. Use this
+parameter to specify a level manually. The procedure for determining the
+level is the same as for the Actor's Choice Model, cf. vignette.</p>
 <p>Note that this only works for undirected graphs. Regardless of whether the
 input graph is directed it is treated as undirected graph.</p>
 
