@@ -9,7 +9,7 @@
 #'
 supported_signatures <- function() {
   result <- data.frame()
-  iter <- motifr::sma$supportedSignatures()
+  iter <- sma$supportedSignatures()
   while (TRUE) {
     item <- reticulate::iter_next(iter)
     if (is.null(item))
@@ -37,7 +37,7 @@ supported_signatures <- function() {
 supported_classes <- function(signature, directed = FALSE) {
   ls <- strsplit(signature, ",")
   lsi <- as.list(lapply(ls, as.integer)[[1]])
-  motif_info <- motifr::sma$motifInfo(lsi, directed)
+  motif_info <- sma$motifInfo(lsi, directed)
   return(motif_info$classes)
 }
 
