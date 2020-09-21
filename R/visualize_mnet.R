@@ -93,7 +93,8 @@ plot_mnet <- function(net,
   }
 
   arrow <- NULL
-  if(directed == TRUE || (is.null(directed) && motifr::is.directed(net))) {
+  if((is.null(directed) && motifr::is.directed(net)) ||
+     (! is.null(directed) && directed == TRUE)) {
     arrow <- grid::arrow(angle = 10, length = ggplot2::unit(.3, "cm"))
   }
 

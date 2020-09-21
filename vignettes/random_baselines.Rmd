@@ -2,7 +2,7 @@
 title: Random baselines
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{random_baselines}
+  %\VignetteIndexEntry{Random baselines}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

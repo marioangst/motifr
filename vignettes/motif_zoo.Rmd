@@ -2,7 +2,7 @@
 title: The motif zoo 
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{motif_zoo}
+  %\VignetteIndexEntry{The motif zoo}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
