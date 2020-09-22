@@ -19,11 +19,11 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Motif Analysis in Multi-Level Networks">
 <meta property="og:description" content="This package provides tools for motif analysis
-    in multi-level networks.  Multi-level networks combine multiple
-    networks in one, e.g. social-ecological networks.  Motifs are small
+    in multi-level networks. Multi-level networks combine multiple
+    networks in one, e.g. social-ecological networks. Motifs are small
     configurations of nodes and edges (subgraphs) occurring in networks.
     motifr is visualizes multi-level networks, counts multi-level network
-    motifs, compares them to a baseline.  It also identifies contributions
+    motifs, compares them to a baseline. It also identifies contributions
     of potential edges to motifs to find critical or missing edges.  The
     package is in many parts a R wrapper for the excellent
     SESMotifAnalyser Python package written by Tim Seppelt.">
@@ -195,9 +195,6 @@
 <p>In relation to gaps, we can therefore try to identify potential edges that would create a large number of a given motif if they were to exist (“activated” or “flipped”). The number of such motifs created by an edge is their contribution. For example, we can get all edges that would create closed triangles (<code>"1,2[II.C]"</code>), including the information about how many such triangles they would create for the wetlands case study network:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="kw">gaps</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/identify_gaps.html">identify_gaps</a></span>(<span class="kw">ml_net</span>, motif = <span class="st">"1,2[II.C]"</span>)
-<span class="co">#&gt; Warning in edge_contribution(net = net, motif = motif, lvl_attr = lvl_attr, :</span>
-<span class="co">#&gt; Edge contribution does only make sense for undirected networks. The given</span>
-<span class="co">#&gt; network is automatically treated as an undirected network.</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">gaps</span>)
 <span class="co">#&gt;   vertex0 vertex1 contribution</span>
 <span class="co">#&gt; 1 actor10 actor27            5</span>
@@ -215,9 +212,6 @@
   subset_graph = <span class="st">"partial"</span>,
   cutoff = <span class="fl">5</span>, label = <span class="fl">TRUE</span>
 )
-<span class="co">#&gt; Warning in edge_contribution(net = net, motif = motif, lvl_attr = lvl_attr, :</span>
-<span class="co">#&gt; Edge contribution does only make sense for undirected networks. The given</span>
-<span class="co">#&gt; network is automatically treated as an undirected network.</span>
 </pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-10-1.svg" width="100%"></p>
 <p><code>identify_gaps</code> has a sibling in <code>critical_dyads</code>. Critical_dyads works in reverse to identifying gaps - it analyses for every existing edge how many instances of a given motif would disappear if the edge would be removed.</p>
