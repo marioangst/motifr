@@ -172,9 +172,6 @@ network:
 
 ``` r
 gaps <- identify_gaps(ml_net, motif = "1,2[II.C]")
-#> Warning in edge_contribution(net = net, motif = motif, lvl_attr = lvl_attr, :
-#> Edge contribution does only make sense for undirected networks. The given
-#> network is automatically treated as an undirected network.
 head(gaps)
 #>   vertex0 vertex1 contribution
 #> 1 actor10 actor27            5
@@ -197,9 +194,6 @@ plot_gaps(ml_net,
   subset_graph = "partial",
   cutoff = 5, label = TRUE
 )
-#> Warning in edge_contribution(net = net, motif = motif, lvl_attr = lvl_attr, :
-#> Edge contribution does only make sense for undirected networks. The given
-#> network is automatically treated as an undirected network.
 ```
 
 <img src="man/figures/README-unnamed-chunk-10-1.svg" width="100%" />

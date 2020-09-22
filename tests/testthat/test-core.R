@@ -85,4 +85,5 @@ test_that("is_directed", {
   testthat::expect_equal(motifr::is.directed(dummy_net), FALSE)
   testthat::expect_equal(motifr::is.directed(directed_dummy_net), TRUE)
   testthat::expect_equal(motifr::is.directed(tidygraph_dummy_net), FALSE)
+  testthat::expect_equal(motifr::is.directed(ml_net), FALSE)
 })
