@@ -32,9 +32,9 @@ supported_signatures <- function() {
 #' @param directed whether the motifs are directed.
 #' @export
 #' @examples
-#' supported_classes("1,2")
-#' supported_classes("1,1", directed = TRUE)
-supported_classes <- function(signature, directed = FALSE) {
+#' supported_classes("1,2", FALSE)
+#' supported_classes("1,1", TRUE)
+supported_classes <- function(signature, directed) {
   ls <- strsplit(signature, ",")
   lsi <- as.list(lapply(ls, as.integer)[[1]])
   motif_info <- sma$motifInfo(lsi, directed)

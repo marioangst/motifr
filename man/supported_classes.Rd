@@ -4,7 +4,7 @@
 \alias{supported_classes}
 \title{Lists all supported motif classes for a given signature}
 \usage{
-supported_classes(signature, directed = FALSE)
+supported_classes(signature, directed)
 }
 \arguments{
 \item{signature}{head of a motif identifier string, i.e. string with
@@ -20,6 +20,6 @@ Returns a list with all supported motif classes for the given signature.
 Raises an error if the given signature is not supported.
 }
 \examples{
-supported_classes("1,2")
-supported_classes("1,1", directed = TRUE)
+supported_classes("1,2", FALSE)
+supported_classes("1,1", TRUE)
 }
