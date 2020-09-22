@@ -26,7 +26,7 @@ plot_gaps_or_critical_dyads(
 
 \item{lvl_attr}{nodal attribute specifying level information}
 
-\item{cutoff}{Cutoff point in contributions of an edge to the number of
+\item{cutoff}{Cut-off point in contributions of an edge to the number of
 motifs above which to analyse gaps}
 
 \item{subset_graph}{Whether to subset the graph to only show nodes involved

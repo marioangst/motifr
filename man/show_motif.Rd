@@ -19,7 +19,7 @@ information is stored in \code{net}.}
 default (\code{NULL}), this is determined automatically using the structure
 of the provided network object}
 
-\item{...}{additional arguments to be passed to plotting function (eg.
+\item{...}{additional arguments to be passed to plotting function (e.g.
 \code{label = TRUE})}
 }
 \value{

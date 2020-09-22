@@ -36,7 +36,6 @@ Imports:
     ggraph,
     igraph,
     intergraph,
-    magick,
     network,
     purrr,
     reshape2,
@@ -44,8 +43,7 @@ Imports:
     rlang,
     scales,
     tibble,
-    tidygraph,
-    utils
+    tidygraph
 Suggests: 
     ergm,
     knitr,

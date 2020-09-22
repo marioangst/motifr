@@ -210,7 +210,7 @@ exemplify_motif <- function(net,
 #' @param directed whether the graph shall be treated as a directed graph. Per
 #'   default (\code{NULL}), this is determined automatically using the structure
 #'   of the provided network object
-#' @param ... additional arguments to be passed to plotting function (eg.
+#' @param ... additional arguments to be passed to plotting function (e.g.
 #'   \code{label = TRUE})
 #' @return plot
 #' @seealso \code{motifr::exemplify_motif}
@@ -230,7 +230,7 @@ show_motif <- function(motif,
       net <- motifr::directed_dummy_net
     }
   }
-  if(igraph::is.igraph(net)){
+  if (igraph::is.igraph(net)) {
     net <- intergraph::asNetwork(net)
   }
   motif_names <- motifr::exemplify_motif(

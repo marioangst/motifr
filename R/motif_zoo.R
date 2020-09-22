@@ -4,7 +4,8 @@
 #' indicating whether the motifs are directed
 #'
 #' @return data frame with all supported signatures
-#' @examples supported_signatures()
+#' @examples
+#' supported_signatures()
 #' @seealso \code{supported_classes()}
 #' @export
 #'
@@ -13,11 +14,16 @@ supported_signatures <- function() {
   iter <- sma$supportedSignatures()
   while (TRUE) {
     item <- reticulate::iter_next(iter)
-    if (is.null(item))
+    if (is.null(item)) {
       break
-    result <- rbind(result,
-                    data.frame(signature = c(paste(item[[1]], collapse = ",")),
-                               directed = c(item[[2]])))
+    }
+    result <- rbind(
+      result,
+      data.frame(
+        signature = c(paste(item[[1]], collapse = ",")),
+        directed = c(item[[2]])
+      )
+    )
   }
   return(result)
 }

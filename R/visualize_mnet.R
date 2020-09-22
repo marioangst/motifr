@@ -13,7 +13,7 @@
 #' @param lvl_attr The name of the categorical node attribute specifying at
 #'   which level a node is situated
 #' @param layouts A list of layouts (see \code{ggraph::layout_ggraph}) for every level
-#'   eg. for two levels \code{list("auto","circle")}
+#'   e.g. for two levels \code{list("auto","circle")}
 #' @param label logical - should nodes be labelled? (defaults to false)
 #' @param directed whether the network object shall be interpreted as directed
 #'   network. Per default, \code{motifr::is.directed} is used to determine that.
@@ -55,8 +55,10 @@ plot_mnet <- function(net,
 
   edges$between <- ifelse(edges$from_level != edges$to_level, "within", "between")
 
-  edges$level_pairs <- apply(data.frame(t(apply(cbind(edges$from_level,edges$to_level),1,sort))),
-                             1,paste, collapse = "_")
+  edges$level_pairs <- apply(data.frame(t(apply(cbind(edges$from_level, edges$to_level), 1, sort))),
+    1, paste,
+    collapse = "_"
+  )
 
   t_g <- tidygraph::tbl_graph(nodes = nodes, edges = edges)
 
@@ -100,23 +102,25 @@ plot_mnet <- function(net,
   # handle directed networks
   if ((is.null(directed) && motifr::is.directed(net)) ||
     (!is.null(directed) && directed == TRUE)) {
-
     p_comb <- ggraph::ggraph(t_g, layout = "kk") +
-      ggraph::geom_edge_link(ggplot2::aes(
-        colour = level_pairs),
-        end_cap = ggraph::circle(3, 'mm'),
-        start_cap = ggraph::circle(3, 'mm'),
-        arrow =  grid::arrow(angle = 30,
-                             length = ggplot2::unit(.3, "cm"),
-                             type = "closed")
+      ggraph::geom_edge_link(ggplot2::aes_(
+        colour = ~level_pairs
+      ),
+      end_cap = ggraph::circle(3, "mm"),
+      start_cap = ggraph::circle(3, "mm"),
+      arrow = grid::arrow(
+        angle = 30,
+        length = ggplot2::unit(.3, "cm"),
+        type = "closed"
+      )
       ) +
       ggraph::scale_edge_color_grey(guide = FALSE)
   }
-  else{
+  else {
     p_comb <- ggraph::ggraph(t_g, layout = "kk") +
-      ggraph::geom_edge_link(ggplot2::aes(
-        colour = level_pairs)
-      ) +
+      ggraph::geom_edge_link(ggplot2::aes_(
+        colour = ~level_pairs
+      )) +
       ggraph::scale_edge_color_grey(guide = FALSE)
   }
 

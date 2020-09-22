@@ -48,7 +48,7 @@ The following code below uses show_motif to illustrate a "1,2[II.C]" motif as fo
 show_motif(motif = "1,2[II.C]", net = ml_net, label = TRUE, lvl_attr = "sesType")
 ```
 
-motifr supports both undirected and directed motifs, although the number of directed motifs currently supported is much more limited currently than the number of supported undirected motifs. If your favorite motif is not part of the zoo yet, reach out to us by [creating an issue on github](https://github.com/marioangst/motifr/issues) describing the motif you would like to have included.
+motifr supports both undirected and directed motifs, although the number of directed motifs currently supported is much more limited currently than the number of supported undirected motifs. If your favourite motif is not part of the zoo yet, reach out to us by [creating an issue on github](https://github.com/marioangst/motifr/issues) describing the motif you would like to have included.
 
 A full list of all supported signatures and motif classes can also be found in the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false) in section *Appendix: The Motif Zoo*.
 

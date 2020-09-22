@@ -20,7 +20,7 @@ plot_mnet(
 which level a node is situated}
 
 \item{layouts}{A list of layouts (see \code{ggraph::layout_ggraph}) for every level
-eg. for two levels \code{list("auto","circle")}}
+e.g. for two levels \code{list("auto","circle")}}
 
 \item{label}{logical - should nodes be labelled? (defaults to false)}
 

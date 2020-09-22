@@ -23,7 +23,7 @@ plot_critical_dyads(
 
 \item{level}{Focal level for gap analysis}
 
-\item{cutoff}{Cutoff point in contributions of an edge to the number of
+\item{cutoff}{Cut-off point in contributions of an edge to the number of
 motifs above which to analyse gaps}
 
 \item{subset_graph}{Whether to subset the graph to only show nodes involved
