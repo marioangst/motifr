@@ -114,7 +114,7 @@
 <li>
 <em>Erdős-Rényi Model</em> (<code>erdos_renyi</code>) In this model edges <em>between</em> the various levels are drawn independently at random with respect to a fixed probability depending on the levels. The (refined) Erdős-Rényi model accounts for the various levels by allowing to specify different probabilities ties occurring <em>within</em> different levels.</li>
 <li>
-<em>Actor’s Choice Model</em> (<code>actors_choice</code>) In this model all edges but the edges on one specific level are fixed. This is motivated by theoretical considerations about the application of multi-level network models in situations where one level is composed of actors, which are more readily able to change their connections, and other levels considered more stable, eg. specific instances of ecological networks. The edges on this non-fixed “actor level” are chosen independently with fixed probability as in Erdős-Rényi.</li>
+<em>Actor’s Choice Model</em> (<code>actors_choice</code>) In this model all edges but the edges on one specific level are fixed. This is motivated by theoretical considerations about the application of multi-level network models in situations where one level is composed of actors, which are more readily able to change their connections, and other levels considered more stable, e.g. specific instances of ecological networks. The edges on this non-fixed “actor level” are chosen independently with fixed probability as in Erdős-Rényi.</li>
 <li>
 <em>Exponential Random Graph Model</em> (<code>ergm</code>) Sophisticated model which accounts for various network parameters. Please consult the documentation of the <code>ergm</code> for details.</li>
 </ul>
@@ -127,11 +127,11 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="../reference/simulate_baseline.html">simulate_baseline</a></span>(<span class="kw">ml_net</span>, motifs = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span>), n = <span class="fl">5</span>, directed = <span class="fl">FALSE</span>)
 <span class="co">#&gt;   1,2[I.C] 1,2[II.C]</span>
-<span class="co">#&gt; 1      212        28</span>
-<span class="co">#&gt; 2      168        16</span>
-<span class="co">#&gt; 3      164        17</span>
-<span class="co">#&gt; 4      153        11</span>
-<span class="co">#&gt; 5      141        11</span>
+<span class="co">#&gt; 1      256        21</span>
+<span class="co">#&gt; 2      130        15</span>
+<span class="co">#&gt; 3      148        22</span>
+<span class="co">#&gt; 4      152        20</span>
+<span class="co">#&gt; 5      189        20</span>
 </pre></div>
 </div>
 <div id="motif-distributions-without-simulation" class="section level2">
@@ -210,11 +210,11 @@
 <span class="co">#&gt; Starting Monte Carlo maximum likelihood estimation (MCMLE):</span>
 <span class="co">#&gt; Iteration 1 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.03616.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.04643.</span>
 <span class="co">#&gt; Step length converged once. Increasing MCMC sample size.</span>
 <span class="co">#&gt; Iteration 2 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.0048.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.002535.</span>
 <span class="co">#&gt; Step length converged twice. Stopping.</span>
 <span class="co">#&gt; Finished MCMLE.</span>
 <span class="co">#&gt; Evaluating log-likelihood at the estimate. Using 20 bridges: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 .</span>
