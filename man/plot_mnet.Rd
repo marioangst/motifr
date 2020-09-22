@@ -9,7 +9,8 @@ plot_mnet(
   lvl_attr = c("sesType"),
   layouts = rep("kk", n_levels),
   label = FALSE,
-  directed = NULL
+  directed = NULL,
+  nodesize = 3
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ eg. for two levels \code{list("auto","circle")}}
 
 \item{directed}{whether the network object shall be interpreted as directed
 network. Per default, \code{motifr::is.directed} is used to determine that.}
+
+\item{nodesize}{The size of nodes, if displayed as points (if label = false)}
 }
 \value{
 A ggraph object
@@ -33,6 +36,11 @@ A ggraph object
 Visualize a multi-level network, with the possibility of specifying separate
 layouts for each level. This is a somewhat hacky wrapper for arranging
 separate ggraph calls for each network level in a circle.
+}
+\details{
+For more extensive visualization options, it is recommended to explore the
+\link[graphlayouts]{layout_as_multilevel} function included in
+the package graphlayouts.
 }
 \examples{
 plot_mnet(net = ml_net, lvl_attr = "sesType", layouts = list("kk", "circle"))

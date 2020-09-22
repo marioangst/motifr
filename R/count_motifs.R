@@ -224,7 +224,7 @@ show_motif <- function(motif,
                        directed = NULL,
                        ...) {
   if (is.null(net)) {
-    if (is.null(directed) || directed == TRUE) {
+    if (is.null(directed) || directed == FALSE) {
       net <- motifr::dummy_net
     } else {
       net <- motifr::directed_dummy_net

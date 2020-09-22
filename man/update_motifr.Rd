@@ -7,5 +7,5 @@
 update_motifr()
 }
 \description{
-Checks for updates for motifr's Python core, the sma package
+It might be necessary to restart your R session after updating the sma package.
 }

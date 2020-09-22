@@ -21,6 +21,8 @@ sma <- NULL
 
 #' Checks for updates for motifr's Python core, the sma package
 #'
+#' It might be necessary to restart your R session after updating the sma package.
+#'
 #' @export
 update_motifr <- function() {
   reticulate::py_install("sma", pip = TRUE)
