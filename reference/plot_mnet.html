@@ -152,7 +152,8 @@ separate ggraph calls for each network level in a circle.</p>
   lvl_attr = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>),
   layouts = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"kk"</span>, <span class='kw'>n_levels</span>),
   label = <span class='fl'>FALSE</span>,
-  directed = <span class='kw'>NULL</span>
+  directed = <span class='kw'>NULL</span>,
+  nodesize = <span class='fl'>3</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -181,11 +182,20 @@ eg. for two levels <code><a href='https://rdrr.io/r/base/list.html'>list("auto",
       <td><p>whether the network object shall be interpreted as directed
 network. Per default, <code><a href='is.directed.html'>motifr::is.directed</a></code> is used to determine that.</p></td>
     </tr>
+    <tr>
+      <th>nodesize</th>
+      <td><p>The size of nodes, if displayed as points (if label = false)</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A ggraph object</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>For more extensive visualization options, it is recommended to explore the
+<a href='https://rdrr.io/pkg/graphlayouts/man/layout_multilevel.html'>layout_as_multilevel</a> function included in
+the package graphlayouts.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>plot_mnet</span>(net = <span class='kw'>ml_net</span>, lvl_attr = <span class='st'>"sesType"</span>, layouts = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"kk"</span>, <span class='st'>"circle"</span>))
