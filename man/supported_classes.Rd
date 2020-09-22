@@ -23,3 +23,6 @@ Raises an error if the given signature is not supported.
 supported_classes("1,2", FALSE)
 supported_classes("1,1", TRUE)
 }
+\seealso{
+\code{supported_signatures()}
+}

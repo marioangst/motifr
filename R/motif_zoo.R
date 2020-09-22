@@ -5,6 +5,7 @@
 #'
 #' @return data frame with all supported signatures
 #' @examples supported_signatures()
+#' @seealso \code{supported_classes()}
 #' @export
 #'
 supported_signatures <- function() {
@@ -31,6 +32,7 @@ supported_signatures <- function() {
 #'   comma-separated list specifying the signature of the motif
 #' @param directed whether the motifs are directed.
 #' @export
+#' @seealso \code{supported_signatures()}
 #' @examples
 #' supported_classes("1,2", FALSE)
 #' supported_classes("1,1", TRUE)
@@ -46,7 +48,6 @@ supported_classes <- function(signature, directed) {
 #' @return Launches a shiny app where all available motifs can be displayed
 #' @export
 #'
-#' @examples
 explore_motifs <- function() {
   appDir <- system.file("shiny_examples", "explore_zoo", package = "motifr")
   if (appDir == "") {

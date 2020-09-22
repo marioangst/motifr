@@ -16,3 +16,6 @@ indicating whether the motifs are directed
 \examples{
 supported_signatures()
 }
+\seealso{
+\code{supported_classes()}
+}
