@@ -10,8 +10,9 @@ supported_signatures()
 data frame with all supported signatures
 }
 \description{
-Returns a data frame with two columns: signature and a logical value
-indicating whether the motifs are directed
+Returns a data frame with three columns: signature, a Boolean value
+indicating whether the motifs are directed, the number of levels which the
+motif spans across
 }
 \examples{
 supported_signatures()

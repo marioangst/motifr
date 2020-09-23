@@ -1,7 +1,8 @@
 #' Lists all supported signatures
 #'
-#' Returns a data frame with two columns: signature and a logical value
-#' indicating whether the motifs are directed
+#' Returns a data frame with three columns: signature, a Boolean value
+#' indicating whether the motifs are directed, the number of levels which the
+#' motif spans across
 #'
 #' @return data frame with all supported signatures
 #' @examples
@@ -21,11 +22,11 @@ supported_signatures <- function() {
       result,
       data.frame(
         signature = c(paste(item[[1]], collapse = ",")),
-        directed = c(item[[2]])
+        directed = c(item[[2]]),
+        n_levels = c(length(item[[1]]))
       )
     )
   }
-  result$n_levels <- nchar(gsub(",","",result$signature))
   return(result)
 }
 

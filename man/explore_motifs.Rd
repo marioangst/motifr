@@ -4,11 +4,26 @@
 \alias{explore_motifs}
 \title{Explore the motif zoo interactively in a shiny app}
 \usage{
-explore_motifs()
+explore_motifs(net = NULL, lvl_attr = c("sesType"))
+}
+\arguments{
+\item{net}{optional: you may supply your own network object here
+(must be loaded as an R object in the global environment)}
+
+\item{lvl_attr}{if you supply your own network object, indicate the name of
+the network attribute where level information is stored for each node}
 }
 \value{
-Launches a shiny app where all available motifs can be displayed
+Launches a shiny app where all available motifs can be displayed or, alternatively,
+all available motifs for a user-supplied network
 }
 \description{
-Explore the motif zoo interactively in a shiny app
+Without any arguments, this launches a shiny app, where all available motifs
+in motifr can be graphically displayed by selecting signature-class combinations
+from a dropdown list.
+}
+\details{
+If arguments net and lvl_attr are provided, you can load you own network into
+the shiny app to explore what a given motif classifier looks like for your
+network
 }
