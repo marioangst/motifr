@@ -25,6 +25,7 @@ supported_signatures <- function() {
       )
     )
   }
+  result$n_levels <- nchar(gsub(",","",result$signature))
   return(result)
 }
 
@@ -54,11 +55,21 @@ supported_classes <- function(signature, directed) {
 #' @return Launches a shiny app where all available motifs can be displayed
 #' @export
 #'
-explore_motifs <- function() {
-  appDir <- system.file("shiny_examples", "explore_zoo", package = "motifr")
-  if (appDir == "") {
+explore_motifs <- function(net = NULL,
+                           lvl_attr = c("sesType")) {
+  file_path <- system.file("shiny_examples", "explore_zoo", "app.R", package = "motifr")
+  if (!nzchar(file_path)) {
     stop("Could not find example directory. Try re-installing `motifr`.", call. = FALSE)
   }
 
-  shiny::runApp(appDir, display.mode = "normal")
+  ui <- server <- NULL # avoid NOTE about undefined globals
+  source(file_path, local = TRUE)
+  server_env <- environment(server)
+
+  # Here you add any variables that your server can find
+  server_env$net <- net
+  server_env$lvl_attr <- lvl_attr
+
+  app <- shiny::shinyApp(ui, server)
+  shiny::runApp(app, display.mode = "normal")
 }
