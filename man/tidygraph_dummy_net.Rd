@@ -9,6 +9,7 @@ tidygraph network object
 }
 \source{
 Dummy data
+ \url{https://github.com/marioangst/motifr/blob/master/notes/tidygraph_dummy_net.R}
 }
 \usage{
 tidygraph_dummy_net
