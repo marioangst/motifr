@@ -260,6 +260,11 @@ plot_gaps_or_critical_dyads <- function(net,
                                         subset_graph = "none",
                                         ...) {
   edge_contribution <- edge_contribution[edge_contribution$contribution >= cutoff, ]
+  max_contribution <- max(edge_contribution$contribution)
+
+  if(cutoff > max_contribution){
+    stop("Cutoff is higher than maximal contribution found")
+  }
 
   gap_nodes <- unique(c(edge_contribution$vertex0, edge_contribution$vertex1))
 
@@ -323,14 +328,16 @@ plot_gaps_or_critical_dyads <- function(net,
     weight = edge_contribution$contribution
   )
 
+  netviz$layers <- c(ggplot2::geom_segment(
+    data = coord_gaps,
+    ggplot2::aes_(x = ~x1, y = ~y1, xend = ~x2, yend = ~y2, size = ~weight),
+    colour = colour, alpha = 0.7
+  ), netviz$layers)
+
+  break_range <- cutoff:max_contribution
+
   netviz +
-    ggplot2::geom_segment(
-      data = coord_gaps,
-      ggplot2::aes_(x = ~x1, y = ~y1, xend = ~x2, yend = ~y2, size = ~weight),
-      colour = colour, alpha = 0.7
-    ) +
     ggplot2::scale_size_continuous(sprintf("%s weight", title),
-      range = c(1, 2),
-      breaks = scales::pretty_breaks()
-    )
+                                   range = c(1, 4),
+                                   breaks = break_range)
 }

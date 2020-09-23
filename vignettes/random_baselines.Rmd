@@ -88,7 +88,7 @@ show_motif("2,2[I.C]", net = ml_net, label = TRUE, directed = FALSE)
 
 ## Exponential Random Graph Models (ERGM)
 
-ERGMs are a powerful tool when working with random networks. The R library ``ergm`` provides various so called terms for fitting models based on a multitude of network parameters. motifr can be used to analyse random networks sampled from a given ERGM.
+ERGMs are a powerful tool to create more advanced, parameterized baseline models. The R library ``ergm`` provides various facililties for fitting models based on a multitude of network parameters. motifr can be used to analyse random networks sampled from a given fitted ERGM. In the example below, we fit a basic ergm model to ``dummy_net`` including a triangle statistic, capturing a propensity for triangles to occur. We then use the fitted model in a generative way to simulate networks from it and collect to arrive at a baseline distribution based on this model.
 
 ```{r}
 model <- ergm(dummy_net ~ edges + triangle)

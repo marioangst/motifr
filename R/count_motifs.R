@@ -150,7 +150,6 @@ motif_summary <- function(net,
     "2,1[I.C]", "2,1[II.C]",
     "2,2[III.C]", "2,2[III.D]"
   )
-
   # count and compute distribution parameters
   counts <- motifr::count_motifs(net,
     lvl_attr,
@@ -270,7 +269,7 @@ show_motif <- function(motif,
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
 #'   used to find ideal counting function. defaults to TRUE.
 #' @param model baseline model to be used. Options are 'erdos_renyi',
-#'   'fixed_densities'. See \code{vignette("random_baselines")} for more
+#'   'fixed_densities', 'actors_choice' and 'ergm'. See \code{vignette("random_baselines")} for more
 #'   details. Defaults to 'erdos_renyi'.
 #' @param level lvl_attr of the variable level for the Actor's Choice model
 #' @param ergm_model ergm model as for example fitted by calling
@@ -359,7 +358,7 @@ simulate_baseline <- function(net,
 
 #' Compare empirical network to random baseline
 #'
-#' This function compares the motif counts in a given network with the motif
+#' This function plots a comparison of the motif counts in a given network with the motif
 #' counts in a random baseline of motifs.
 #'
 #' Note that when using the Actor's Choice model this function does not choose
@@ -376,7 +375,7 @@ simulate_baseline <- function(net,
 #'   information is stored in \code{net}.
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
 #'   used to find ideal counting function
-#' @param model baseline model to be used. Options are 'erdos_renyi' and
+#' @param model baseline model to be used. Options are 'erdos_renyi', 'actors_choice', 'ergm' and
 #'   'fixed_densities'. See \code{vignette("random_baselines")} for more details.
 #'   Defaults to 'erdos_renyi'.
 #' @param level lvl_attr of the variable level for the Actor's Choice model
@@ -429,8 +428,8 @@ compare_to_baseline <- function(net,
     ggplot2::geom_vline(data = count, ggplot2::aes_(xintercept = ~count)) +
     ggplot2::theme_minimal() +
     ggplot2::xlab(paste(
-      "Simulated (gray histogram) versus actual (solid line) motif counts,",
-      sprintf("n = %d iterations, model %s", n, model)
+      "Simulated (gray histogram) versus \n actual (solid line) motif counts \n",
+      sprintf("n = %d iterations, \n Model: %s", n, model)
     ))
 
   return(p)

@@ -40,6 +40,8 @@ You can explore all possible motifs interactively in a shiny app included in the
 explore_motifs()
 ```
 
+You can pass your own network to ``explore_motifs()`` to see what motifs mean exactly for your data. For example, if your network is stored in a object named ``my_net`` with a level attribute ``lvl`` you can explore motifs within it interactively using ``explore_motifs(net = my_net, lvl_attr = "lvl")``
+
 When in doubt about what a given identifier string implies for you specific network, you can let motifr show you the motif either in a dummy network or an example of the motif in a network you are analysing (the second will only work if the network you are analysing actually contains the motif) with ``show_motif(motif)``.
 
 The following code below uses show_motif to illustrate a "1,2[II.C]" motif as found in the wetland management network object ml_net. ml_net contains a level attribute (specifying which node belongs to which level) named "sesType".
@@ -48,7 +50,7 @@ The following code below uses show_motif to illustrate a "1,2[II.C]" motif as fo
 show_motif(motif = "1,2[II.C]", net = ml_net, label = TRUE, lvl_attr = "sesType")
 ```
 
-motifr supports both undirected and directed motifs, although the number of directed motifs currently supported is much more limited currently than the number of supported undirected motifs. If your favourite motif is not part of the zoo yet, reach out to us by [creating an issue on github](https://github.com/marioangst/motifr/issues) describing the motif you would like to have included.
+motifr supports both undirected and directed motifs, although the number of directed motifs currently supported is much more limited than the number of supported undirected motifs. If your favourite motif is not part of the zoo yet, reach out to us by [creating an issue on github](https://github.com/marioangst/motifr/issues) describing the motif you would like to have included and we will consider the request.
 
 A full list of all supported signatures and motif classes can also be found in the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false) in section *Appendix: The Motif Zoo*.
 
@@ -73,4 +75,4 @@ The position matching can be overwritten by providing the levels corresponding t
 
 See the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false), subsection *Position matching* for a detailed description of the procedure.
 
-In general, it is recommended to use ``show_motif(motif)`` to check whether the provided motif identifier string is interpreted as intended by the software.
+In general, it is recommended to always use ``show_motif(motif)`` to check whether the software interprets the provided motif identifier string as intended by the analyst.
