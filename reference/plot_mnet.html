@@ -153,7 +153,8 @@ separate ggraph calls for each network level in a circle.</p>
   layouts = <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"kk"</span>, <span class='kw'>n_levels</span>),
   label = <span class='fl'>FALSE</span>,
   directed = <span class='kw'>NULL</span>,
-  nodesize = <span class='fl'>3</span>
+  nodesize = <span class='fl'>3</span>,
+  edgewidth = <span class='fl'>0.5</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -184,7 +185,11 @@ network. Per default, <code><a href='is.directed.html'>motifr::is.directed</a></
     </tr>
     <tr>
       <th>nodesize</th>
-      <td><p>The size of nodes, if displayed as points (if label = false)</p></td>
+      <td><p>The size of node displays, if displayed as points (if label = false)</p></td>
+    </tr>
+    <tr>
+      <th>edgewidth</th>
+      <td><p>The width of lines illustrating edges</p></td>
     </tr>
     </table>
 
