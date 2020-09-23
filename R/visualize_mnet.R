@@ -17,7 +17,8 @@
 #' @param label logical - should nodes be labelled? (defaults to false)
 #' @param directed whether the network object shall be interpreted as directed
 #'   network. Per default, \code{motifr::is.directed} is used to determine that.
-#' @param nodesize The size of nodes, if displayed as points (if label = false)
+#' @param nodesize The size of node displays, if displayed as points (if label = false)
+#' @param edgewidth The width of lines illustrating edges
 #'
 #' @return A ggraph object
 #' @export
@@ -29,7 +30,8 @@ plot_mnet <- function(net,
                       layouts = rep("kk", n_levels),
                       label = FALSE,
                       directed = NULL,
-                      nodesize = 3) {
+                      nodesize = 3,
+                      edgewidth = 0.5) {
   if (network::is.network(net)) {
     net <- intergraph::asIgraph(net)
     net <-
@@ -53,12 +55,17 @@ plot_mnet <- function(net,
 
   edges$from_level <- nodes$lvl_n[edges$from]
 
-  edges$between <- ifelse(edges$from_level != edges$to_level, "within", "between")
+  edges$between <- ifelse(edges$from_level != edges$to_level, "between", "within")
 
   edges$level_pairs <- apply(data.frame(t(apply(cbind(edges$from_level, edges$to_level), 1, sort))),
     1, paste,
     collapse = "_"
   )
+
+  # set edge colors here already
+  edges$edgecol <- "gray"
+  within_cols <- RColorBrewer::brewer.pal(n_levels + 2, "Paired") #+2 to avoid R brewer warnings if n < 3
+  edges$edgecol[edges$between == "within"] <- within_cols[edges$from_level[edges$between == "within"]]
 
   t_g <- tidygraph::tbl_graph(nodes = nodes, edges = edges)
 
@@ -99,30 +106,7 @@ plot_mnet <- function(net,
       coord_offset[[level]][["y"]]
   }
 
-  # handle directed networks
-  if ((is.null(directed) && motifr::is.directed(net)) ||
-    (!is.null(directed) && directed == TRUE)) {
-    p_comb <- ggraph::ggraph(t_g, layout = "kk") +
-      ggraph::geom_edge_link(ggplot2::aes_(
-        colour = ~level_pairs
-      ),
-      end_cap = ggraph::circle(3, "mm"),
-      start_cap = ggraph::circle(3, "mm"),
-      arrow = grid::arrow(
-        angle = 30,
-        length = ggplot2::unit(.3, "cm"),
-        type = "closed"
-      )
-      ) +
-      ggraph::scale_edge_color_grey(guide = FALSE)
-  }
-  else {
-    p_comb <- ggraph::ggraph(t_g, layout = "kk") +
-      ggraph::geom_edge_link(ggplot2::aes_(
-        colour = ~level_pairs
-      )) +
-      ggraph::scale_edge_color_grey(guide = FALSE)
-  }
+  p_comb <- ggraph::ggraph(t_g, layout = "kk")
 
   for (level in 1:n_levels) {
     p_comb[["data"]][["x"]][
@@ -136,26 +120,64 @@ plot_mnet <- function(net,
       sub_g_list[[level]][["data"]][["y"]]
   }
 
-  p_comb <-
-    p_comb +
-    ggraph::geom_node_point(ggplot2::aes_(color = ~ factor(lvl)), size = nodesize) +
-    ggplot2::theme_void() +
-    ggplot2::scale_color_brewer("Level",
-      breaks = levels(factor(nodes$lvl)),
-      palette = "Paired"
-    ) +
-    ggplot2::theme(legend.position = "bottom")
+  # render edges (first, because of overplotting nodes later)
+
+  # handle directed networks
+  if ((is.null(directed) && motifr::is.directed(net)) ||
+      (!is.null(directed) && directed == TRUE)) {
+    p_comb <- p_comb +
+      ggraph::geom_edge_link(ggplot2::aes_(
+        colour = ~edgecol
+      ),
+      end_cap = ggraph::circle(3, "mm"),
+      start_cap = ggraph::circle(3, "mm"),
+      arrow = grid::arrow(
+        angle = 30,
+        length = ggplot2::unit(.3, "cm"),
+        type = "closed"
+      ),
+      width = edgewidth
+      )
+    # +
+    #   ggraph::scale_edge_color_grey(guide = FALSE)
+  }
+  else {
+    p_comb <- p_comb +
+      ggraph::geom_edge_link(ggplot2::aes_(
+        colour = ~edgecol
+      ),
+      width = edgewidth
+      )
+    # +
+    #   ggraph::scale_edge_color_grey(guide = FALSE)
+  }
+
+  # render nodes
+
+  if (label == FALSE){
+    p_comb <-
+      p_comb +
+      ggraph::geom_node_point(ggplot2::aes_(color = ~ factor(lvl)), size = nodesize) +
+      ggplot2::scale_color_brewer("Level",
+                                  breaks = levels(factor(nodes$lvl)),
+                                  palette = "Paired"
+      )
+  }
 
   if (label == TRUE) {
     p_comb <-
       p_comb + ggraph::geom_node_label(ggplot2::aes_(label = ~name, fill = ~ factor(lvl)),
-        alpha = 0.5
+                                       alpha = 0.5
       ) +
       ggplot2::scale_fill_brewer("Level",
-        breaks = levels(factor(nodes$lvl)),
-        palette = "Paired"
+                                 breaks = levels(factor(nodes$lvl)),
+                                 palette = "Paired"
       )
   }
+
+  p_comb <- p_comb +
+    ggplot2::theme_void() +
+    ggplot2::theme(legend.position = "bottom")
 
   return(p_comb + ggplot2::theme(plot.margin = ggplot2::unit(c(1, 1, 1, 1), "cm")))
 }

@@ -43,7 +43,8 @@ Imports:
     rlang,
     scales,
     tibble,
-    tidygraph
+    tidygraph,
+    RColorBrewer
 Suggests: 
     ergm,
     knitr,

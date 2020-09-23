@@ -10,7 +10,8 @@ plot_mnet(
   layouts = rep("kk", n_levels),
   label = FALSE,
   directed = NULL,
-  nodesize = 3
+  nodesize = 3,
+  edgewidth = 0.5
 )
 }
 \arguments{
@@ -27,7 +28,9 @@ e.g. for two levels \code{list("auto","circle")}}
 \item{directed}{whether the network object shall be interpreted as directed
 network. Per default, \code{motifr::is.directed} is used to determine that.}
 
-\item{nodesize}{The size of nodes, if displayed as points (if label = false)}
+\item{nodesize}{The size of node displays, if displayed as points (if label = false)}
+
+\item{edgewidth}{The width of lines illustrating edges}
 }
 \value{
 A ggraph object

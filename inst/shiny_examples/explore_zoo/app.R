@@ -109,7 +109,9 @@ server <- function(input, output) {
                        nodesize = 7,
                        net = net,
                        lvl_attr = lvl_attr,
-                       label = input$show_label)
+                       label = input$show_label,
+                       edgewidth = 1,
+                       directed = direction())
     })
 
     output$motif_text <- renderText({
