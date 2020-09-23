@@ -127,11 +127,11 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="../reference/simulate_baseline.html">simulate_baseline</a></span>(<span class="kw">ml_net</span>, motifs = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span>), n = <span class="fl">5</span>, directed = <span class="fl">FALSE</span>)
 <span class="co">#&gt;   1,2[I.C] 1,2[II.C]</span>
-<span class="co">#&gt; 1      130         9</span>
-<span class="co">#&gt; 2      251        20</span>
-<span class="co">#&gt; 3      193        15</span>
-<span class="co">#&gt; 4       99         7</span>
-<span class="co">#&gt; 5      141        11</span>
+<span class="co">#&gt; 1      140        21</span>
+<span class="co">#&gt; 2      149        11</span>
+<span class="co">#&gt; 3      177        10</span>
+<span class="co">#&gt; 4      221        20</span>
+<span class="co">#&gt; 5      150        17</span>
 </pre></div>
 </div>
 <div id="motif-distributions-without-simulation" class="section level2">
@@ -200,7 +200,7 @@
 <div id="exponential-random-graph-models-ergm" class="section level2">
 <h2 class="hasAnchor">
 <a href="#exponential-random-graph-models-ergm" class="anchor"></a>Exponential Random Graph Models (ERGM)</h2>
-<p>ERGMs are a powerful tool when working with random networks. The R library <code>ergm</code> provides various so called terms for fitting models based on a multitude of network parameters. motifr can be used to analyse random networks sampled from a given ERGM.</p>
+<p>ERGMs are a powerful tool to create more advanced, parameterized baseline models. The R library <code>ergm</code> provides various facililties for fitting models based on a multitude of network parameters. motifr can be used to analyse random networks sampled from a given fitted ERGM. In the example below, we fit a basic ergm model to <code>dummy_net</code> including a triangle statistic, capturing a propensity for triangles to occur. We then use the fitted model in a generative way to simulate networks from it and collect to arrive at a baseline distribution based on this model.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu">ergm</span>(<span class="kw">dummy_net</span> <span class="op">~</span> <span class="kw">edges</span> <span class="op">+</span> <span class="kw">triangle</span>)
 <span class="co">#&gt; Starting maximum pseudolikelihood estimation (MPLE):</span>
@@ -210,11 +210,11 @@
 <span class="co">#&gt; Starting Monte Carlo maximum likelihood estimation (MCMLE):</span>
 <span class="co">#&gt; Iteration 1 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.03734.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.0336.</span>
 <span class="co">#&gt; Step length converged once. Increasing MCMC sample size.</span>
 <span class="co">#&gt; Iteration 2 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.005074.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.0005651.</span>
 <span class="co">#&gt; Step length converged twice. Stopping.</span>
 <span class="co">#&gt; Finished MCMLE.</span>
 <span class="co">#&gt; Evaluating log-likelihood at the estimate. Using 20 bridges: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 .</span>

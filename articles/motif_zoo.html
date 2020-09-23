@@ -118,13 +118,14 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="../reference/explore_motifs.html">explore_motifs</a></span>()
 </pre></div>
+<p>You can pass your own network to <code><a href="../reference/explore_motifs.html">explore_motifs()</a></code> to see what motifs mean exactly for your data. For example, if your network is stored in a object named <code>my_net</code> with a level attribute <code>lvl</code> you can explore motifs within it interactively using <code><a href="../reference/explore_motifs.html">explore_motifs(net = my_net, lvl_attr = "lvl")</a></code></p>
 <p>When in doubt about what a given identifier string implies for you specific network, you can let motifr show you the motif either in a dummy network or an example of the motif in a network you are analysing (the second will only work if the network you are analysing actually contains the motif) with <code><a href="../reference/show_motif.html">show_motif(motif)</a></code>.</p>
 <p>The following code below uses show_motif to illustrate a “1,2[II.C]” motif as found in the wetland management network object ml_net. ml_net contains a level attribute (specifying which node belongs to which level) named “sesType”.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="fu"><a href="../reference/show_motif.html">show_motif</a></span>(motif = <span class="st">"1,2[II.C]"</span>, net = <span class="kw">ml_net</span>, label = <span class="fl">TRUE</span>, lvl_attr = <span class="st">"sesType"</span>)
 </pre></div>
 <p><img src="motif_zoo_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
-<p>motifr supports both undirected and directed motifs, although the number of directed motifs currently supported is much more limited currently than the number of supported undirected motifs. If your favourite motif is not part of the zoo yet, reach out to us by <a href="https://github.com/marioangst/motifr/issues">creating an issue on github</a> describing the motif you would like to have included.</p>
+<p>motifr supports both undirected and directed motifs, although the number of directed motifs currently supported is much more limited than the number of supported undirected motifs. If your favourite motif is not part of the zoo yet, reach out to us by <a href="https://github.com/marioangst/motifr/issues">creating an issue on github</a> describing the motif you would like to have included and we will consider the request.</p>
 <p>A full list of all supported signatures and motif classes can also be found in the <a href="https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false">documentation of the Python sma package</a> in section <em>Appendix: The Motif Zoo</em>.</p>
 </div>
 <div id="a-word-of-caution-on-counting-position-matching" class="section level2">
@@ -143,7 +144,7 @@
 <p><img src="motif_zoo_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
 <p>The position matching can be overwritten by providing the levels corresponding to the entries in the motif signature, e.g. the head <code>2:1,2:0</code> signalises that the first level containing two nodes is level 1 (“2:1”) while the second level containing two nodes is level 0 (“2:0”).</p>
 <p>See the <a href="https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false">documentation of the Python sma package</a>, subsection <em>Position matching</em> for a detailed description of the procedure.</p>
-<p>In general, it is recommended to use <code><a href="../reference/show_motif.html">show_motif(motif)</a></code> to check whether the provided motif identifier string is interpreted as intended by the software.</p>
+<p>In general, it is recommended to always use <code><a href="../reference/show_motif.html">show_motif(motif)</a></code> to check whether the software interprets the provided motif identifier string as intended by the analyst.</p>
 </div>
   </div>
 
