@@ -43,7 +43,8 @@
 #'
 #' @format igraph network object
 #' @source Dummy data
-#'  \url{https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data}
+#'  \url{https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data},
+#'  \url{https://github.com/marioangst/motifr/blob/master/notes/directed_dummy_net.R}
 #' @examples
 #' plot_mnet(directed_dummy_net)
 "directed_dummy_net"
@@ -54,6 +55,7 @@
 #'
 #' @format tidygraph network object
 #' @source Dummy data
+#'  \url{https://github.com/marioangst/motifr/blob/master/notes/tidygraph_dummy_net.R}
 #' @examples
 #' plot_mnet(tidygraph_dummy_net)
 "tidygraph_dummy_net"

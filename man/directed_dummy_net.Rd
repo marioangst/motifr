@@ -9,7 +9,8 @@ igraph network object
 }
 \source{
 Dummy data
- \url{https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data}
+ \url{https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data},
+ \url{https://github.com/marioangst/motifr/blob/master/notes/directed_dummy_net.R}
 }
 \usage{
 directed_dummy_net
