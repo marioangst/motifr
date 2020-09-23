@@ -47,7 +47,9 @@
 
 
 <meta property="og:title" content="Explore the motif zoo interactively in a shiny app — explore_motifs" />
-<meta property="og:description" content="Explore the motif zoo interactively in a shiny app" />
+<meta property="og:description" content="Without any arguments, this launches a shiny app, where all available motifs
+in motifr can be graphically displayed by selecting signature-class combinations
+from a dropdown list." />
 <meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg" />
 
 
@@ -140,15 +142,37 @@
     </div>
 
     <div class="ref-description">
-    <p>Explore the motif zoo interactively in a shiny app</p>
+    <p>Without any arguments, this launches a shiny app, where all available motifs
+in motifr can be graphically displayed by selecting signature-class combinations
+from a dropdown list.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>explore_motifs</span>()</pre>
+    <pre class="usage"><span class='fu'>explore_motifs</span>(net = <span class='kw'>NULL</span>, lvl_attr = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>))</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>net</th>
+      <td><p>optional: you may supply your own network object here
+(must be loaded as an R object in the global environment)</p></td>
+    </tr>
+    <tr>
+      <th>lvl_attr</th>
+      <td><p>if you supply your own network object, indicate the name of
+the network attribute where level information is stored for each node</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Launches a shiny app where all available motifs can be displayed</p>
+    <p>Launches a shiny app where all available motifs can be displayed or, alternatively,
+all available motifs for a user-supplied network</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>If arguments net and lvl_attr are provided, you can load you own network into
+the shiny app to explore what a given motif classifier looks like for your
+network</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
