@@ -4,6 +4,10 @@
 #' The function \code{motifr::is.directed} is used to determine whether the
 #' provided network is directed (if \code{directed = FALSE}).
 #'
+#' The nodal attribute specified by \code{lvl_attr} indicates the levels of the
+#' nodes. Values are automatically converted to integers. Levels must be
+#' numbered starting with 0, 1, ….
+#'
 #' @param g statnet or igraph network object
 #' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in \code{net}.

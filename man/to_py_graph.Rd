@@ -27,6 +27,11 @@ Python networkx graph object
 The function \code{motifr::is.directed} is used to determine whether the
 provided network is directed (if \code{directed = FALSE}).
 }
+\details{
+The nodal attribute specified by \code{lvl_attr} indicates the levels of the
+nodes. Values are automatically converted to integers. Levels must be
+numbered starting with 0, 1, ….
+}
 \examples{
 to_py_graph(motifr::dummy_net, lvl_attr = "sesType")
 }

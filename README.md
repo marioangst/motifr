@@ -43,10 +43,6 @@ Package features include:
 
 ## Installation
 
-The package is currently at an early stage of development. Explore at
-your own risk and please report any issues using the [issue tracker on
-github](https://github.com/marioangst/motifr/issues).
-
 Due to the package’s tight integration with the Python framework
 SESMotifAnalyser, we recommend explicitly installing the associated sma
 module through reticulate.
@@ -61,20 +57,22 @@ You can then install motifr from github, using devtools:
 devtools::install_github("marioangst/motifr")
 ```
 
+Please report any issues that occur when using the package by creating
+an issue in the [issue tracker on
+github](https://github.com/marioangst/motifr/issues).
+
 ## Input
 
 motifr currently can handle unweighted directed and undirected networks.
-There is in principle no restriction on the number of levels of a
-network to count motifs in, but typical use cases for which the package
-was designed will likely involve two- or three-level networks. Support
-for undirected networks has only been introduced recently. Hence, most
-supported motifs are undirected.
+The package supports motifs distributed across a maximum of three levels
+currently, while the total number of levels in the network is
+theoretically unrestricted.
 
-Network data should currently be prepared as statnet network objects
-with a numeric vertex attribute to specify a level for each node (named
-e.g. “lvl”) for best results.
+Network data should be prepared as statnet network objects or igraph/
+tidygraph graph objects with a numeric vertex attribute to specify a
+level for each node (named e.g. “lvl”) for best results.
 
-## Examples
+## Introduction and key functionality
 
 ``` r
 library(motifr)
@@ -104,16 +102,46 @@ plot_mnet(
 
 <img src="man/figures/README-unnamed-chunk-5-1.svg" width="100%" />
 
+motifr provides a reliable starting point for multi-level network
+visualization but is focused on motif analyis at its core. For advanced
+visualization of multi-level motifs we recommend pairing
+[ggraph](https://cran.r-project.org/web/packages/ggraph/index.html) and
+[graphlayouts](https://cran.r-project.org/web/packages/graphlayouts/index.html).
+[This blog
+post](http://blog.schochastics.net/post/visualizing-multilevel-networks-with-graphlayouts/)
+provides an excellent introduction.
+
+### Selecting motifs
+
+See the `vignette("motif_zoo")` for details on nomenclature for motifs
+(motif identifier strings). We highly recommend the use of two helper
+functions implemented in motifr to ensure that the software interprets
+the motif identifier provided as intended by the analyst.
+
+  - use `explore_motifs()` to launch a shiny app where all motifs
+    implemented for analysis with motifr can be displayed. You can pass
+    your own network to `explore_motifs()` to see what motifs mean
+    exactly for your data. For example, if your network is stored in a
+    object named `my_net` with a level attribute `lvl` you can explore
+    motifs within it interactively using `explore_motifs(net = my_net,
+    lvl_attr = "lvl")`
+
+  - check a specific motif of interest using `show_motif()`, which will
+    either illustrate the motif in a dummy example network or, if you
+    pass a network object to the function, in your network.
+    `show_motif()` is specifically helpful to explore the impact of
+    position matching (see `vignette("motif_zoo")` for more details).
+
 ### Count motifs
 
 Motifs can be counted using the versatile function `count_motifs()`. It
-takes as parameters a statnet network object (use `ml_net` or
-`dummy_net` provided by this package as example) and a list of motif
-identifiers (see below) specifying the motifs. See the
-`vignette("motif_zoo")` for details on nomenclature for motifs (motif
-identifier strings). Let’s quickly check out two classic examples of
-three-node, two-level motifs (open and closed triangles) in the wetlands
-management network introduced above:
+takes as parameters a statnet network or igraph graph object (use
+`ml_net` or `dummy_net` provided by this package as examples) and a list
+of motif identifiers (see below) specifying the motifs.
+
+Let’s quickly check out two classic examples of three-node, two-level
+motifs (open and closed triangles) in the wetlands management network
+introduced above:
 
 ``` r
 show_motif(motif = "1,2[I.C]", net = ml_net, label = TRUE, directed = FALSE) # open ('1,2[I.C]') triangle
@@ -139,9 +167,9 @@ count_motifs(ml_net, motifs, directed = FALSE)
 ```
 
 An exploratory approach can be taken by calling `motif_summary()`. This
-function counts the occurrences of a couple of interesting motifs.
-Furthermore it computes expectations and variances for the occurrence of
-these motifs in a modified Erdős-Rényi model. See the package
+function counts the occurrences of a couple of basic motifs. Furthermore
+it computes expectations and variances for the occurrence of these
+motifs in a modified Erdős-Rényi model. See the package
 `vignette("random_baselines")` for details.
 
 ``` r
@@ -182,7 +210,7 @@ head(gaps)
 #> 6 actor18 actor31            4
 ```
 
-We can also plot these gaps in our network, including option to only
+We can also plot these gaps in our network, including the option to only
 look at gaps above a certain weight (contribution) and different levels
 of focus to only show nodes involved in such gaps. Here again for the
 wetlands management network, only showing gaps with a weight above 5.
@@ -200,7 +228,7 @@ plot_gaps(ml_net,
 
 `identify_gaps` has a sibling in `critical_dyads`. Critical\_dyads works
 in reverse to identifying gaps - it analyses for every existing edge how
-many instances of a given motif would disappear if the edge would be
+many instances of a given motif would disappear if the edge was to be
 removed.
 
 ### Comparing motif occurrence to a random baseline

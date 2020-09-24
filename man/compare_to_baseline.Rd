@@ -29,7 +29,7 @@ information is stored in \code{net}.}
 \item{assume_sparse}{whether the random graphs shall be assumed to be sparse.
 used to find ideal counting function}
 
-\item{model}{baseline model to be used. Options are 'erdos_renyi' and
+\item{model}{baseline model to be used. Options are 'erdos_renyi', 'actors_choice', 'ergm' and
 'fixed_densities'. See \code{vignette("random_baselines")} for more details.
 Defaults to 'erdos_renyi'.}
 
@@ -47,7 +47,7 @@ data frame with one row for each motif identifier string and one row
   for every computed random graph
 }
 \description{
-This function compares the motif counts in a given network with the motif
+This function plots a comparison of the motif counts in a given network with the motif
 counts in a random baseline of motifs.
 }
 \details{

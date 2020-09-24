@@ -30,7 +30,7 @@ information is stored in \code{net}.}
 used to find ideal counting function. defaults to TRUE.}
 
 \item{model}{baseline model to be used. Options are 'erdos_renyi',
-'fixed_densities'. See \code{vignette("random_baselines")} for more
+'fixed_densities', 'actors_choice' and 'ergm'. See \code{vignette("random_baselines")} for more
 details. Defaults to 'erdos_renyi'.}
 
 \item{level}{lvl_attr of the variable level for the Actor's Choice model}

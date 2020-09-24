@@ -19,6 +19,34 @@ test_that("io_undirected_dummy_net", {
   testthat::expect_equal(nodes_count$`1`, types[[2]])
   testthat::expect_equal(nodes_count$`2`, types[[3]])
 })
+test_that("io_undirected_dummy_net_issue#27", {
+  # this checks that the workaround for
+  # the issue https://github.com/marioangst/motifr/issues/27
+  # works correctly
+  dummy_net27 <- network::set.vertex.attribute(motifr::dummy_net,
+                                               "lvl",
+                                               as.character(network::get.vertex.attribute(motifr::dummy_net,"sesType")))
+
+  # suppressing UserWarning issued by sma.translateGraph()
+  py_g <- suppressMessages(to_py_graph(dummy_net27, "lvl"))
+  testthat::expect_false(nx$is_directed(py_g))
+
+  # dummy_net27 should have the same structure as dummy_net
+  testthat::expect_equal(
+    network::network.size(dummy_net),
+    nx$number_of_nodes(py_g)
+  )
+  testthat::expect_equal(
+    network::network.edgecount(dummy_net),
+    nx$number_of_edges(py_g)
+  )
+  nodes_count <- sma$nodesCount(py_g)
+  types <- table(network::get.vertex.attribute(dummy_net, "sesType"))
+  testthat::expect_equal(length(nodes_count), length(types))
+  testthat::expect_equal(nodes_count$`0`, types[[1]])
+  testthat::expect_equal(nodes_count$`1`, types[[2]])
+  testthat::expect_equal(nodes_count$`2`, types[[3]])
+})
 test_that("io_directed_ml_net", {
   py_g <- to_py_graph(motifr::ml_net, "sesType")
   testthat::expect_false(nx$is_directed(py_g))
