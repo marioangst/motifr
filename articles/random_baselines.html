@@ -116,7 +116,9 @@
 <li>
 <em>Actor’s Choice Model</em> (<code>actors_choice</code>) In this model all edges but the edges on one specific level are fixed. This is motivated by theoretical considerations about the application of multi-level network models in situations where one level is composed of actors, which are more readily able to change their connections, and other levels considered more stable, e.g. specific instances of ecological networks. The edges on this non-fixed “actor level” are chosen independently with fixed probability as in Erdős-Rényi.</li>
 <li>
-<em>Exponential Random Graph Model</em> (<code>ergm</code>) Sophisticated model which accounts for various network parameters. Please consult the documentation of the <code>ergm</code> for details.</li>
+<em>Exponential Random Graph Model</em> (<code>ergm</code>) Sophisticated model which accounts for various network parameters. Please consult the documentation of <code><a href="https://rdrr.io/pkg/ergm/man/ergm.html">ergm::ergm()</a></code> for details.</li>
+<li>
+<em>Partial Exponential Random Graph Model</em> (<code>partial_ergm</code>) It tends to be hard fit an ERGM to a multi-level network. However, this can be often avoided by using ERGM only for modelling the behaviour of one level while keeping the other levels fixed.</li>
 </ul>
 <p>For further details see the <a href="https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false">documentation of the Python sma package</a>.</p>
 </div>
@@ -127,11 +129,11 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="../reference/simulate_baseline.html">simulate_baseline</a></span>(<span class="kw">ml_net</span>, motifs = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span>), n = <span class="fl">5</span>, directed = <span class="fl">FALSE</span>)
 <span class="co">#&gt;   1,2[I.C] 1,2[II.C]</span>
-<span class="co">#&gt; 1      151         5</span>
-<span class="co">#&gt; 2      152        14</span>
-<span class="co">#&gt; 3      200        16</span>
-<span class="co">#&gt; 4      157        14</span>
-<span class="co">#&gt; 5      202        22</span>
+<span class="co">#&gt; 1      159        13</span>
+<span class="co">#&gt; 2      186        20</span>
+<span class="co">#&gt; 3      220        23</span>
+<span class="co">#&gt; 4      161        13</span>
+<span class="co">#&gt; 5      103        13</span>
 </pre></div>
 </div>
 <div id="motif-distributions-without-simulation" class="section level2">
@@ -210,11 +212,11 @@
 <span class="co">#&gt; Starting Monte Carlo maximum likelihood estimation (MCMLE):</span>
 <span class="co">#&gt; Iteration 1 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.04496.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.03505.</span>
 <span class="co">#&gt; Step length converged once. Increasing MCMC sample size.</span>
 <span class="co">#&gt; Iteration 2 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.00027.</span>
+<span class="co">#&gt; The log-likelihood improved by &lt; 0.0001.</span>
 <span class="co">#&gt; Step length converged twice. Stopping.</span>
 <span class="co">#&gt; Finished MCMLE.</span>
 <span class="co">#&gt; Evaluating log-likelihood at the estimate. Using 20 bridges: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 .</span>
@@ -223,6 +225,35 @@
 <span class="fu"><a href="../reference/compare_to_baseline.html">compare_to_baseline</a></span>(<span class="kw">dummy_net</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"1,2[I.A]"</span>, <span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span>), n = <span class="fl">50</span>, directed = <span class="fl">FALSE</span>, model = <span class="st">"ergm"</span>, ergm_model = <span class="kw">model</span>)
 </pre></div>
 <p><img src="random_baselines_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
+</div>
+<div id="workflow-for-partial-ergm" class="section level2">
+<h2 class="hasAnchor">
+<a href="#workflow-for-partial-ergm" class="anchor"></a>Workflow for Partial ERGM</h2>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="kw">net</span> <span class="op">&lt;-</span> <span class="kw">motifr</span>::<span class="kw"><a href="../reference/ml_net.html">ml_net</a></span>
+<span class="kw">actors</span> <span class="op">&lt;-</span> <span class="kw">motifr</span>::<span class="fu"><a href="../reference/induced_level_subgraph.html">induced_level_subgraph</a></span>(<span class="kw">net</span>, level = <span class="fl">1</span>)
+<span class="co"># very simple model to keep testing costs low</span>
+<span class="kw">ergm_model</span> <span class="op">&lt;-</span> <span class="fu">ergm</span>(<span class="kw">actors</span> <span class="op">~</span> <span class="kw">density</span>)
+<span class="co">#&gt; Starting maximum pseudolikelihood estimation (MPLE):</span>
+<span class="co">#&gt; Evaluating the predictor and response matrix.</span>
+<span class="co">#&gt; Maximizing the pseudolikelihood.</span>
+<span class="co">#&gt; Finished MPLE.</span>
+<span class="co">#&gt; Stopping at the initial estimate.</span>
+<span class="co">#&gt; Evaluating log-likelihood at the estimate.</span>
+
+<span class="kw">n</span> <span class="op">&lt;-</span> <span class="fl">10</span>
+<span class="fu"><a href="../reference/compare_to_baseline.html">compare_to_baseline</a></span>(<span class="kw">net</span>,
+                    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"1[1]"</span>, <span class="st">"0,1[1]"</span>,
+                         <span class="st">"2[1]"</span>, <span class="st">"1,1[1]"</span>, <span class="co"># "0,2[1]", is variable</span>
+                         <span class="st">"1,2[I.A]"</span>, <span class="st">"1,2[II.A]"</span>,
+                         <span class="st">"1,2[I.B]"</span>, <span class="st">"1,2[II.B]"</span>,
+                         <span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span>),
+                    model = <span class="st">"partial_ergm"</span>,
+                    ergm_model = <span class="kw">ergm_model</span>,
+                    n = <span class="kw">n</span>,
+                    level = <span class="fl">1</span>)
+</pre></div>
+<p><img src="random_baselines_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
 </div>
   </div>
 
