@@ -27,7 +27,7 @@ plot
 }
 \description{
 If no network is provided, a motif in a dummy network
-(\code{motifr::dummy_net} or \code{motifr::directed_dummy_net}) will be
+(\code{motifr::dummy_net} or \code{motifr::large_directed_dummy_net}) will be
 shown.
 }
 \examples{

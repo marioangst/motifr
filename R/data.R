@@ -36,7 +36,6 @@
 #' plot_mnet(dummy_net)
 "dummy_net"
 
-
 #' Two-level directed network dummy example
 #'
 #' Simple igraph network object based on dummy data
@@ -59,3 +58,13 @@
 #' @examples
 #' plot_mnet(tidygraph_dummy_net)
 "tidygraph_dummy_net"
+
+#' Large two-level directed network dummy example
+#'
+#'
+#' @format network network object
+#' @source Dummy data
+#'  \url{https://gitlab.com/t.seppelt/sesmotifanalyser/-/tree/master/test/data}
+#' @examples
+#' plot_mnet(large_directed_dummy_net)
+"large_directed_dummy_net"

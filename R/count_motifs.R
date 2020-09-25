@@ -199,7 +199,7 @@ exemplify_motif <- function(net,
 #' the given graph.
 #'
 #' If no network is provided, a motif in a dummy network
-#' (\code{motifr::dummy_net} or \code{motifr::directed_dummy_net}) will be
+#' (\code{motifr::dummy_net} or \code{motifr::large_directed_dummy_net}) will be
 #' shown.
 #'
 #' @param motif motif identifier string for the motif
@@ -226,7 +226,7 @@ show_motif <- function(motif,
     if (is.null(directed) || directed == FALSE) {
       net <- motifr::dummy_net
     } else {
-      net <- motifr::directed_dummy_net
+      net <- motifr::large_directed_dummy_net
     }
   }
   if (igraph::is.igraph(net)) {
@@ -330,9 +330,9 @@ simulate_baseline <- function(net,
       levels <- network::get.vertex.attribute(truncated_net, lvl_attr)
       indices <- which(levels == level)
       for(i in indices) {
-        dyads <- get.dyads.eids(truncated_net,
-                                replicate(length(indices), i),
-                                indices)
+        dyads <- network::get.dyads.eids(truncated_net,
+                                         replicate(length(indices), i),
+                                         indices)
         ids <- dyads[lapply(dyads > 0, is.na) == FALSE]
         network::delete.edges(truncated_net, unlist(ids))
       }
@@ -344,10 +344,10 @@ simulate_baseline <- function(net,
       if (model == "partial_ergm") {
         # partial model provided: we'll copy the sample back into truncated_met
         total_sample <- network::network.copy(truncated_net)
-        translations <- match(get.vertex.attribute(sample, 'vertex.names'),
-                              get.vertex.attribute(total_sample, 'vertex.names'))
-        edge_list_head <- as.edgelist(sample)[,1]
-        edge_list_tail <- as.edgelist(sample)[,2]
+        translations <- match(network::get.vertex.attribute(sample, 'vertex.names'),
+                              network::get.vertex.attribute(total_sample, 'vertex.names'))
+        edge_list_head <- network::as.edgelist(sample)[,1]
+        edge_list_tail <- network::as.edgelist(sample)[,2]
         t_edge_list_head <- lapply(edge_list_head, function(x) translations[x])
         t_edge_list_tail <- lapply(edge_list_tail, function(x) translations[x])
         network::add.edges(total_sample, t_edge_list_head, t_edge_list_tail)
