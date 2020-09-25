@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Compute statistical properties (expectation and variance) of the distribution
-of motifs in a random baseline — motifs_distribution • motifr</title>
+of motifs in a baseline model — motifs_distribution • motifr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,7 +48,7 @@ of motifs in a random baseline — motifs_distribution • motifr</title>
 
 
 <meta property="og:title" content="Compute statistical properties (expectation and variance) of the distribution
-of motifs in a random baseline — motifs_distribution" />
+of motifs in a baseline model — motifs_distribution" />
 <meta property="og:description" content="This function supports the Erdős-Rényi Model (erdos_renyi) and the the
 Actor’s Choice Model (actors_choice). The model can be specified using
 the model parameter. The Erdős-Rényi Model can be used without
@@ -117,7 +117,7 @@ manually." />
       <a href="../articles/motif_zoo.html">The motif zoo</a>
     </li>
     <li>
-      <a href="../articles/random_baselines.html">Random baselines</a>
+      <a href="../articles/random_baselines.html">Baseline model comparisons</a>
     </li>
   </ul>
 </li>
@@ -146,7 +146,7 @@ manually." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Compute statistical properties (expectation and variance) of the distribution
-of motifs in a random baseline</h1>
+of motifs in a baseline model</h1>
     <small class="dont-index">Source: <a href='https://github.com/marioangst/motifr/blob/master/R/count_motifs.R'><code>R/count_motifs.R</code></a></small>
     <div class="hidden name"><code>motifs_distribution.Rd</code></div>
     </div>
@@ -193,7 +193,8 @@ information is stored in <code>net</code>.</p></td>
     </tr>
     <tr>
       <th>model</th>
-      <td><p>model to be used</p></td>
+      <td><p>baseline model to be used. options are "erdos_renyi" and "actors_choice".
+Defaults to "erdos_renyi".</p></td>
     </tr>
     <tr>
       <th>level</th>

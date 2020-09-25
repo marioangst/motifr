@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Random baselines • motifr</title>
+<title>Baseline model comparisons • motifr</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Random baselines">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Baseline model comparisons">
 <meta property="og:description" content="motifr">
 <meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -64,7 +64,7 @@
       <a href="../articles/motif_zoo.html">The motif zoo</a>
     </li>
     <li>
-      <a href="../articles/random_baselines.html">Random baselines</a>
+      <a href="../articles/random_baselines.html">Baseline model comparisons</a>
     </li>
   </ul>
 </li>
@@ -92,7 +92,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Random baselines</h1>
+      <h1 data-toc-skip>Baseline model comparisons</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/marioangst/motifr/blob/master/vignettes/random_baselines.Rmd"><code>vignettes/random_baselines.Rmd</code></a></small>
@@ -103,7 +103,7 @@
     
     
 <p><a href="https://marioangst.github.io/motifr/"><img src="../man/figures/logo.svg" align="right" height="139"></a></p>
-<p>This vignette describes the models used for random baselines in motifr. Baseline models have to be specified when requesting random networks to compare empirically observed networks against (e.g. using <code><a href="../reference/compare_to_baseline.html">compare_to_baseline()</a></code>), and when computing properties of motif distributions analytically (e.g, <code><a href="../reference/motifs_distribution.html">motifs_distribution()</a></code>).</p>
+<p>This vignette describes the models used to specify baseline motif distributions to compare empirically observed networks against in motifr. Baseline models have to be specified when requesting random networks to compare empirically observed networks against (e.g. using <code><a href="../reference/compare_to_baseline.html">compare_to_baseline()</a></code>), and when computing properties of motif distributions analytically (e.g, <code><a href="../reference/motifs_distribution.html">motifs_distribution()</a></code>).</p>
 <div id="baseline-models" class="section level2">
 <h2 class="hasAnchor">
 <a href="#baseline-models" class="anchor"></a>Baseline models</h2>
@@ -118,7 +118,7 @@
 <li>
 <em>Exponential Random Graph Model</em> (<code>ergm</code>) Sophisticated model which accounts for various network parameters. Please consult the documentation of <code><a href="https://rdrr.io/pkg/ergm/man/ergm.html">ergm::ergm()</a></code> for details.</li>
 <li>
-<em>Partial Exponential Random Graph Model</em> (<code>partial_ergm</code>) It tends to be hard fit an ERGM to a multi-level network. However, this can be often avoided by using ERGM only for modelling the behaviour of one level while keeping the other levels fixed.</li>
+<em>Partial Exponential Random Graph Model</em> (<code>partial_ergm</code>) It tends to be hard to fit an ERGM to a multi-level network. However, this can be often avoided by using ERGM only for modelling the behaviour of one level while keeping the other levels fixed, motivated by the same theoretical considerations as for the Actor’s choice model.</li>
 </ul>
 <p>For further details see the <a href="https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false">documentation of the Python sma package</a>.</p>
 </div>
@@ -129,11 +129,11 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="../reference/simulate_baseline.html">simulate_baseline</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">5</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt;   1,2[I.C] 1,2[II.C]</span>
-<span class="co">#&gt; 1      175        21</span>
-<span class="co">#&gt; 2      163        13</span>
-<span class="co">#&gt; 3      206        20</span>
-<span class="co">#&gt; 4      194        16</span>
-<span class="co">#&gt; 5      200        19</span></pre></div>
+<span class="co">#&gt; 1      233        13</span>
+<span class="co">#&gt; 2      158        24</span>
+<span class="co">#&gt; 3      175        22</span>
+<span class="co">#&gt; 4      133        12</span>
+<span class="co">#&gt; 5      144        16</span></pre></div>
 </div>
 <div id="motif-distributions-without-simulation" class="section level2">
 <h2 class="hasAnchor">
@@ -203,11 +203,11 @@
 <span class="co">#&gt; Starting Monte Carlo maximum likelihood estimation (MCMLE):</span>
 <span class="co">#&gt; Iteration 1 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.03565.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.04797.</span>
 <span class="co">#&gt; Step length converged once. Increasing MCMC sample size.</span>
 <span class="co">#&gt; Iteration 2 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.01248.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.003353.</span>
 <span class="co">#&gt; Step length converged twice. Stopping.</span>
 <span class="co">#&gt; Finished MCMLE.</span>
 <span class="co">#&gt; Evaluating log-likelihood at the estimate. Using 20 bridges: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 .</span>
@@ -219,11 +219,16 @@
 <div id="workflow-for-partial-ergm" class="section level2">
 <h2 class="hasAnchor">
 <a href="#workflow-for-partial-ergm" class="anchor"></a>Workflow for Partial ERGM</h2>
+<p>The example below illustrates the use of a partial ergm model fit on one level of the network to be used as a baseline model. In this way, all ties except ties on one level of interest are kept fixed. On the level of interest, networks are simulated from an ergm fit to this level and used to create a baseline motif distribution in the multi-level network.</p>
+<p>To do this, the subgraph containing only one level of the network is first extracted using <code><a href="../reference/induced_level_subgraph.html">induced_level_subgraph()</a></code>, setting the level to extract (here the actor network on level <code>1</code>). This yields a network object only containing this level to fit an ergm to.</p>
+<p>As this example is illustrative, we only fit the most basic ergm model possible, using only a density term. As such, what we do amounts to fitting a Erdős-Rényi model on one level of the multi-level network to be used to simulate a baseline from. But the actual power of using an ERGM lies in the fact that it allows the analyst to account for more subtle processes such as clustering, centralization or homophily.</p>
+<p>The resulting model fit (here captured in the object named <code>actor_ergm_model</code>) is then used in <code><a href="../reference/compare_to_baseline.html">compare_to_baseline()</a></code> by passing it to the parameter ergm_model and setting model to partial_ergm. The level parameter further needs to be set to the correct level where the ergm fit is to be used (here <code>1</code> again).</p>
 <div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="va">net</span> <span class="op">&lt;-</span> <span class="fu">motifr</span><span class="fu">::</span><span class="va"><a href="../reference/ml_net.html">ml_net</a></span>
-<span class="va">actors</span> <span class="op">&lt;-</span> <span class="fu">motifr</span><span class="fu">::</span><span class="fu"><a href="../reference/induced_level_subgraph.html">induced_level_subgraph</a></span><span class="op">(</span><span class="va">net</span>, level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co"># very simple model to keep testing costs low</span>
-<span class="va">ergm_model</span> <span class="op">&lt;-</span> <span class="fu">ergm</span><span class="op">(</span><span class="va">actors</span> <span class="op">~</span> <span class="va">density</span><span class="op">)</span>
+<span class="va">actor_net</span> <span class="op">&lt;-</span> <span class="fu">motifr</span><span class="fu">::</span><span class="fu"><a href="../reference/induced_level_subgraph.html">induced_level_subgraph</a></span><span class="op">(</span><span class="va">net</span>, level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+
+<span class="co"># very simple ergm model</span>
+<span class="va">actor_ergm_model</span> <span class="op">&lt;-</span> <span class="fu">ergm</span><span class="op">(</span><span class="va">actor_net</span> <span class="op">~</span> <span class="va">density</span><span class="op">)</span>
 <span class="co">#&gt; Starting maximum pseudolikelihood estimation (MPLE):</span>
 <span class="co">#&gt; Evaluating the predictor and response matrix.</span>
 <span class="co">#&gt; Maximizing the pseudolikelihood.</span>
@@ -239,7 +244,7 @@
                          <span class="st">"1,2[I.B]"</span>, <span class="st">"1,2[II.B]"</span>,
                          <span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span><span class="op">)</span>,
                     model <span class="op">=</span> <span class="st">"partial_ergm"</span>,
-                    ergm_model <span class="op">=</span> <span class="va">ergm_model</span>,
+                    ergm_model <span class="op">=</span> <span class="va">actor_ergm_model</span>,
                     n <span class="op">=</span> <span class="va">n</span>,
                     level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
 <p><img src="random_baselines_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
