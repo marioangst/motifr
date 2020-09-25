@@ -2,7 +2,7 @@
 % Please edit documentation in R/count_motifs.R
 \name{simulate_baseline}
 \alias{simulate_baseline}
-\title{Simulate a random baseline}
+\title{Simulate a baseline baseline model}
 \usage{
 simulate_baseline(
   net,
@@ -50,10 +50,13 @@ data frame with one column for each motif identifier string and one
   row for every computed random graph
 }
 \description{
-A specified number of random networks using a modified Erdős-Rényi model is
-computed. In each of the random networks motifs are counted. A dataframe with
-these counts is returned. Optionally, other models than the modified
-Erdős-Rényi model can be used.
+A baseline distribution of motif counts from a specified number of networks
+using a specified baseline model is computed. Options for the baseline model are
+- Erdős–Rényi
+- Actor's choice
+- Fixed density
+- Providing an ERGM fit for the whole network
+- Providing a partial ERGM fit (for only one level)
 }
 \details{
 Note that when using the Actor's Choice model this function does not choose

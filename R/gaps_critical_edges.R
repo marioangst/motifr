@@ -328,11 +328,14 @@ plot_gaps_or_critical_dyads <- function(net,
     weight = edge_contribution$contribution
   )
 
-  netviz$layers <- c(ggplot2::geom_segment(
-    data = coord_gaps,
-    ggplot2::aes_(x = ~x1, y = ~y1, xend = ~x2, yend = ~y2, size = ~weight),
-    colour = colour, alpha = 0.7
-  ), netviz$layers)
+  netviz <- netviz +
+    ggplot2::geom_segment(
+      data = coord_gaps,
+      ggplot2::aes_(x = ~x1, y = ~y1, xend = ~x2, yend = ~y2, size = ~weight),
+      colour = colour, alpha = 0.7
+    )
+
+  netviz$layers <- c(netviz$layers[[1]],netviz$layers[[3]],netviz$layers[[2]])
 
   break_range <- cutoff:max_contribution
 

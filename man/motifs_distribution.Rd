@@ -3,7 +3,7 @@
 \name{motifs_distribution}
 \alias{motifs_distribution}
 \title{Compute statistical properties (expectation and variance) of the distribution
-of motifs in a random baseline}
+of motifs in a baseline model}
 \usage{
 motifs_distribution(
   net,
@@ -24,7 +24,8 @@ distribution shall be analysed}
 \item{lvl_attr}{character vector specifying the attribute name where level
 information is stored in \code{net}.}
 
-\item{model}{model to be used}
+\item{model}{baseline model to be used. options are "erdos_renyi" and "actors_choice".
+Defaults to "erdos_renyi".}
 
 \item{level}{Additional parameter to set the level to vary for the
 actors_choice model manually. All other levels are held fixed.}

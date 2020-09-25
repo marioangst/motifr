@@ -25,5 +25,7 @@ from a dropdown list.
 \details{
 If arguments net and lvl_attr are provided, you can load you own network into
 the shiny app to explore what a given motif classifier looks like for your
-network
+network. Be aware that if your network does not contain a specific motif, an
+example of the motif can also not be shown, because motifr illustrates motifs
+by actually finding an example within a given network.
 }

@@ -89,13 +89,13 @@ plot_mnet(
 )
 ```
 
-motifr provides a reliable starting point for multi-level network visualization but is focused on motif analyis at its core. For advanced visualization of multi-level motifs we recommend pairing [ggraph](https://cran.r-project.org/web/packages/ggraph/index.html) and [graphlayouts](https://cran.r-project.org/web/packages/graphlayouts/index.html). [This blog post](http://blog.schochastics.net/post/visualizing-multilevel-networks-with-graphlayouts/) provides an excellent introduction.
+motifr provides a reliable starting point for multi-level network visualization but is focused on motif analyis at its core. For advanced visualization of multi-level networks we recommend pairing [ggraph](https://cran.r-project.org/web/packages/ggraph/index.html) and [graphlayouts](https://cran.r-project.org/web/packages/graphlayouts/index.html). [This blog post](http://blog.schochastics.net/post/visualizing-multilevel-networks-with-graphlayouts/) provides an excellent introduction.
 
 ### Selecting motifs
 
-See the ``vignette("motif_zoo")`` for details on nomenclature for motifs (motif identifier strings). We highly recommend the use of two helper functions implemented in motifr to ensure that the software interprets the motif identifier provided as intended by the analyst.
+See the vignette on the motif zoo (``vignette("motif_zoo")``) for details on nomenclature for motifs (motif identifier strings). We highly recommend the use of two helper functions implemented in motifr to ensure that the software interprets the motif identifier provided as intended by the analyst.
 
-- use ``explore_motifs()`` to launch a shiny app where all motifs implemented for analysis with motifr can be displayed. You can pass your own network to ``explore_motifs()`` to see what motifs mean exactly for your data. For example, if your network is stored in a object named ``my_net`` with a level attribute ``lvl`` you can explore motifs within it interactively using ``explore_motifs(net = my_net, lvl_attr = "lvl")``
+- use ``explore_motifs()`` to launch a shiny app where all motifs implemented for analysis with motifr can be displayed. You can pass your own network to ``explore_motifs()`` to see what motifs mean exactly for your data. For example, if your network is stored in a object named ``my_net`` with a level attribute ``lvl`` you can explore motifs within it interactively using ``explore_motifs(net = my_net, lvl_attr = "lvl")``. Be aware that if your network does not contain a specific motif, it cannot be displayed.
 
 - check a specific motif of interest using ``show_motif()``, which will either illustrate the motif in a dummy example network or, if you pass a network object to the function, in your network. ``show_motif()`` is specifically helpful to explore the impact of position matching (see ``vignette("motif_zoo")`` for more details).
 
@@ -119,7 +119,7 @@ motifs <- list("1,2[I.C]", "1,2[II.C]") # open and closed triangle
 count_motifs(ml_net, motifs, directed = FALSE)
 ```
 
-An exploratory approach can be taken by calling ``motif_summary()``. This function counts the occurrences of a couple of basic motifs. Furthermore it computes expectations and variances for the occurrence of these motifs in a modified Erdős-Rényi model. See the package ``vignette("random_baselines")`` for details.
+An exploratory approach can be taken by calling ``motif_summary()``. This function counts the occurrences of a couple of basic motifs. Furthermore it computes expectations and variances for the occurrence of these motifs in a modified Erdős-Rényi or so-called "Actor's choice" model. See the package ``vignette("random_baselines")`` for details.
 
 ```{r}
 motif_summary(ml_net)
@@ -147,25 +147,34 @@ plot_gaps(ml_net,
 )
 ```
 
-``identify_gaps`` has a sibling in ``critical_dyads``. Critical_dyads works in reverse to identifying gaps - it analyses for every existing edge how many instances of a given motif would disappear if the edge was to be removed. Below an example showing critical dyads in the full wetlands management example network.
+``identify_gaps`` has a sibling in ``critical_dyads``. Critical_dyads works in reverse to identifying gaps - it analyses for every existing edge how many instances of a given motif would disappear if the edge was to be removed. Below an example showing critical dyads in a plot of the full wetlands management example network.
 
 ```{r}
 plot_critical_dyads(ml_net,
-  "1,2[II.C]",
+  "1,2[I.C]",
   level = -1,
   subset_graph = "none",
   cutoff = 3, label = FALSE
 )
 ```
 
-### Comparing motif occurrence to a random baseline
+### Comparing motif occurrence to a baseline model
 
-Motifr can be used to simulate a random baseline of networks. Motif counts in an empirical network can then be compared to the distribution of motif counts in the random networks. Four different ways of specifying models for baseline distributions are implemented in motifr, from a basic Erdős–Rényi model to the possiblity of supplying an exponential random graph model (ERGM) fit to draw simulations from. See the ``vignette("random_baselines")`` for details.
+Motifr can be used to simulate a baseline of networks to compare against. Motif counts in an empirical network can then be compared to the distribution of motif counts in the networks simulated from the baseline model. Four different ways of specifying models for baseline distributions are implemented in motifr, from a basic Erdős–Rényi model to the possiblity of supplying an exponential random graph model (ERGM) fit to draw simulations from. See the ``vignette("random_baselines")`` for details.
 
-As an illustration, we simulate a basic Erdős–Rényi baseline model here as a baseline to compare counts of open and closed triangles in the wetland management network against. Unsurprisingly, given the fact that the activity of organizations involved in wetlands management can hardly be captured by a Erdős–Rényi model, we find that both of these motifs occur much more often in the empirically observed network than in the random baseline. 
+As an illustration, we simulate networks from a "Actor's choice" baseline model here as a baseline to compare counts of open and closed triangles in the wetland management network against. This model keeps all ties fixed except ties on a specifc level. On this level (here set by setting level to 1, which is the actor level in this network), ties are allowed to vary based on a fixed probability (Erdős-Rényi) model.
+
+We find that open triangles occur much less frequently and closed triangles much more often than in the baseline model. 
+
+This is an unsurprising result - everything else would have been concerning. It indicates that actors tend to close triangles across levels to other actors working on the same wetland management tasks much more often compared to what would be expected if they just chose random collaboration partners. We would expect such "fit to task" in a network of professional organizations working in wetland management. We highlight this interpretation because we want to stress that baseline models need to be judged very carefully for what they represent substantially. This is why motifr allows for a variety of baseline model configurations, (including fitted ergm objects).
 
 ```{r}
 motifs <- list("1,2[I.C]", "1,2[II.C]") # open ('1,2[I.C]') and closed ('1,2[II.C]') triangles
 
-compare_to_baseline(ml_net, motifs = motifs, n = 50, directed = FALSE)
+compare_to_baseline(ml_net,
+                    model = "actors_choice",
+                    level = 1,
+                    motifs = motifs, 
+                    n = 50, 
+                    directed = FALSE)
 ```

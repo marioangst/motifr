@@ -2,7 +2,7 @@
 % Please edit documentation in R/count_motifs.R
 \name{compare_to_baseline}
 \alias{compare_to_baseline}
-\title{Compare empirical network to random baseline}
+\title{Compare motif occurence in empirical network to occurence in a baseline model}
 \usage{
 compare_to_baseline(
   net,
@@ -21,7 +21,7 @@ compare_to_baseline(
 
 \item{motifs}{list of motif identifier strings}
 
-\item{n}{number of random graphs}
+\item{n}{number of random graphs used in baseline model}
 
 \item{lvl_attr}{character vector specifying the attribute name where level
 information is stored in \code{net}.}
@@ -29,14 +29,16 @@ information is stored in \code{net}.}
 \item{assume_sparse}{whether the random graphs shall be assumed to be sparse.
 used to find ideal counting function}
 
-\item{model}{baseline model to be used. Options are 'erdos_renyi', 'actors_choice', 'ergm' and
-'fixed_densities'. See \code{vignette("random_baselines")} for more details.
-Defaults to 'erdos_renyi'.}
+\item{model}{baseline model to be used. Options are 'erdos_renyi', 'actors_choice',
+'ergm', 'partial_ergm' and fixed_densities'.
+See \code{vignette("random_baselines")} for more details.
+  Defaults to 'erdos_renyi'.}
 
 \item{level}{lvl_attr of the variable level for the Actor's Choice model}
 
 \item{ergm_model}{ergm model as for example fitted by calling
-\code{ergm::ergm()}. Used when model is set to ergm to sample random network}
+\code{ergm::ergm()} on the empirically observed network.
+Needs to be supplied when model is set to ergm.}
 
 \item{directed}{whether the graph shall be treated as a directed graph. Per
 default (\code{NULL}), this is determined automatically using the structure
@@ -48,15 +50,15 @@ data frame with one row for each motif identifier string and one row
 }
 \description{
 This function plots a comparison of the motif counts in a given network with the motif
-counts in a random baseline of motifs.
+counts in a baseline model.
 }
 \details{
 Note that when using the Actor's Choice model this function does not choose
 the variable level automatically. Use the \code{level} parameter to provide a
 valid level.
 
-When using ERGM the parameter \code{net} is not used. Random networks are sampled
-in R using the \code{ergm_model} parameter.
+When using ERGM the parameter \code{net} is not used. Networks to create the
+baseline from are sampled in R using the \code{ergm_model} parameter.
 }
 \examples{
 compare_to_baseline(ml_net, list("1,2[I.C]", "1,2[II.C]"), directed = FALSE)

@@ -50,7 +50,7 @@ count_motifs <- function(net,
 }
 
 #' Compute statistical properties (expectation and variance) of the distribution
-#' of motifs in a random baseline
+#' of motifs in a baseline model
 #'
 #' This function supports the Erdős-Rényi Model (\code{erdos_renyi}) and the the
 #' Actor’s Choice Model (\code{actors_choice}). The model can be specified using
@@ -68,7 +68,8 @@ count_motifs <- function(net,
 #'   information is stored in \code{net}.
 #' @param motifs list of motif identifiers describing the motifs whose
 #'   distribution shall be analysed
-#' @param model model to be used
+#' @param model baseline model to be used. options are "erdos_renyi" and "actors_choice".
+#' Defaults to "erdos_renyi".
 #' @param level Additional parameter to set the level to vary for the
 #'   actors_choice model manually. All other levels are held fixed.
 #' @param omit_total_result whether total results shall be omitted
@@ -247,12 +248,15 @@ show_motif <- function(motif,
   return(p)
 }
 
-#' Simulate a random baseline
+#' Simulate a baseline baseline model
 #'
-#' A specified number of random networks using a modified Erdős-Rényi model is
-#' computed. In each of the random networks motifs are counted. A dataframe with
-#' these counts is returned. Optionally, other models than the modified
-#' Erdős-Rényi model can be used.
+#' A baseline distribution of motif counts from a specified number of networks
+#' using a specified baseline model is computed. Options for the baseline model are
+#' - Erdős–Rényi
+#' - Actor's choice
+#' - Fixed density
+#' - Providing an ERGM fit for the whole network
+#' - Providing a partial ERGM fit (for only one level)
 #'
 #' Note that when using the Actor's Choice model this function does not choose
 #' the variable level automatically. Use the \code{level} parameter to provide a
@@ -390,31 +394,33 @@ simulate_baseline <- function(net,
   }
 }
 
-#' Compare empirical network to random baseline
+#' Compare motif occurence in empirical network to occurence in a baseline model
 #'
 #' This function plots a comparison of the motif counts in a given network with the motif
-#' counts in a random baseline of motifs.
+#' counts in a baseline model.
 #'
 #' Note that when using the Actor's Choice model this function does not choose
 #' the variable level automatically. Use the \code{level} parameter to provide a
 #' valid level.
 #'
-#' When using ERGM the parameter \code{net} is not used. Random networks are sampled
-#' in R using the \code{ergm_model} parameter.
+#' When using ERGM the parameter \code{net} is not used. Networks to create the
+#' baseline from are sampled in R using the \code{ergm_model} parameter.
 #'
 #' @param net network object
 #' @param motifs list of motif identifier strings
-#' @param n number of random graphs
+#' @param n number of random graphs used in baseline model
 #' @param lvl_attr character vector specifying the attribute name where level
 #'   information is stored in \code{net}.
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
 #'   used to find ideal counting function
-#' @param model baseline model to be used. Options are 'erdos_renyi', 'actors_choice', 'ergm' and
-#'   'fixed_densities'. See \code{vignette("random_baselines")} for more details.
+#' @param model baseline model to be used. Options are 'erdos_renyi', 'actors_choice',
+#' 'ergm', 'partial_ergm' and fixed_densities'.
+#' See \code{vignette("random_baselines")} for more details.
 #'   Defaults to 'erdos_renyi'.
 #' @param level lvl_attr of the variable level for the Actor's Choice model
 #' @param ergm_model ergm model as for example fitted by calling
-#'   \code{ergm::ergm()}. Used when model is set to ergm to sample random network
+#'   \code{ergm::ergm()} on the empirically observed network.
+#'   Needs to be supplied when model is set to ergm.
 #' @param directed whether the graph shall be treated as a directed graph. Per
 #'   default (\code{NULL}), this is determined automatically using the structure
 #'   of the provided network object
@@ -463,7 +469,7 @@ compare_to_baseline <- function(net,
     ggplot2::theme_minimal() +
     ggplot2::xlab(paste(
       "Simulated (gray histogram) versus \n actual (solid line) motif counts \n",
-      sprintf("n = %d iterations, \n Model: %s", n, model)
+      sprintf("n = %d iterations, \n Baseline model: %s", n, model)
     ))
 
   return(p)

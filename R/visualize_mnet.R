@@ -177,6 +177,7 @@ plot_mnet <- function(net,
 
   p_comb <- p_comb +
     ggplot2::theme_void() +
+    ggplot2::coord_cartesian(clip = "off") +
     ggplot2::theme(legend.position = "bottom")
 
   return(p_comb + ggplot2::theme(plot.margin = ggplot2::unit(c(1, 1, 1, 1), "cm")))

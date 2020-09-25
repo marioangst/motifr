@@ -1,8 +1,8 @@
 ---
-title: Random baselines
+title: Baseline model comparisons
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Random baselines}
+  %\VignetteIndexEntry{Baseline model comparisons}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -22,7 +22,7 @@ library(motifr)
 library(ergm)
 ```
 
-This vignette describes the models used for random baselines in motifr. Baseline models have to be specified when requesting random networks to compare empirically observed networks against (e.g. using ``compare_to_baseline()``), and when computing properties of motif distributions analytically (e.g, ``motifs_distribution()``).
+This vignette describes the models used to specify baseline motif distributions to compare empirically observed networks against in motifr. Baseline models have to be specified when requesting random networks to compare empirically observed networks against (e.g. using ``compare_to_baseline()``), and when computing properties of motif distributions analytically (e.g, ``motifs_distribution()``).
 
 ## Baseline models
 
@@ -30,13 +30,12 @@ Currently, four baseline models are implemented. The parameters of the models ar
 
 - *Fixed Densities Model* (``fixed_densities``) Given two levels A and B, in this model it is assumed that the number of edges between level A and level B is fixed for all A-B ties.
 The specific number of edges is drawn randomly from the set of all possible edges.
-- *Erdős-Rényi Model* (``erdos_renyi``) In this model edges _between_ the various levels are drawn
-independently at random with respect to a fixed probability depending on the levels.
+- *Erdős-Rényi Model* (``erdos_renyi``) In this model edges _between_ the various levels are drawn independently at random with respect to a fixed probability depending on the levels.
 The (refined) Erdős-Rényi model accounts for the various levels by allowing
 to specify different probabilities ties occurring _within_ different levels.
 - *Actor's Choice Model* (``actors_choice``) In this model all edges but the edges on one specific level are fixed. This is motivated by theoretical considerations about the application of multi-level network models in situations where one level is composed of actors, which are more readily able to change their connections, and other levels considered more stable, e.g. specific instances of ecological networks. The edges on this non-fixed "actor level" are chosen independently with fixed probability as in Erdős-Rényi.
 - *Exponential Random Graph Model* (``ergm``) Sophisticated model which accounts for various network parameters. Please consult the documentation of ``ergm::ergm()`` for details.
-- *Partial Exponential Random Graph Model* (``partial_ergm``) It tends to be hard fit an ERGM to a multi-level network. However, this can be often avoided by using ERGM only for modelling the behaviour of one level while keeping the other levels fixed.
+- *Partial Exponential Random Graph Model* (``partial_ergm``) It tends to be hard to fit an ERGM to a multi-level network. However, this can be often avoided by using ERGM only for modelling the behaviour of one level while keeping the other levels fixed, motivated by the same theoretical considerations as for the Actor's choice model.
 
 For further details see the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false).
 
@@ -72,10 +71,13 @@ compare_to_baseline(ml_net, motifs = list("1,1[1]"), model = "fixed_densities", 
 In the Actor's Choice Model all levels in the network except for one are assumed to be fixed. The edges in the remaining variable (or actor's) level are drawn randomly according to the Erdős-Rényi Model. The variable level can be selected using the ``level`` parameter, e.g. in ``motifs_distribution()``, or determined automatically. The default level is the first level providing exactly two nodes in the motif. Note that ``simulate_baseline()`` and ``compare_to_baseline()`` do not support automatic level selection.
 
 Let's consider an example. Assume that the variable level is level zero. The edges in the other levels are fixed. The expected number of closed triangles with two nodes on the variable level can be computed as follows. Here ``level`` is automatically determined to be 0.
+
 ```{r}
 motifs_distribution(ml_net, motifs = list("2,1[II.C]"), model = "actors_choice", directed = FALSE)
 ```
+
 More interesting is the case of motifs with signature ``2,2``, i.e. with two nodes on two levels. Per default, the variable level is the first level providing two nodes, so level 0 in the first line. Manually, level 1 can be selected as variable level, see second line.
+
 ```{r}
 motifs_distribution(ml_net, motifs = list("2,2[I.A]", "2,2[I.B]", "2,2[I.C]", "2,2[I.D]"), model = "actors_choice", directed = FALSE)
 motifs_distribution(ml_net, motifs = list("2,2[I.A]", "2,2[I.B]", "2,2[I.C]", "2,2[I.D]"), model = "actors_choice", level = 1, directed = FALSE)
@@ -97,11 +99,21 @@ compare_to_baseline(dummy_net, list("1,2[I.A]", "1,2[I.C]", "1,2[II.C]"), n = 50
 ```
 
 ## Workflow for Partial ERGM
+
+The example below illustrates the use of a partial ergm model fit on one level of the network to be used as a baseline model. In this way, all ties except ties on one level of interest are kept fixed. On the level of interest, networks are simulated from an ergm fit to this level and used to create a baseline motif distribution in the multi-level network.
+
+To do this, the subgraph containing only one level of the network is first extracted using ``induced_level_subgraph()``, setting the level to extract (here the actor network on level ``1``). This yields a network object only containing this level to fit an ergm to. 
+
+As this example is illustrative, we only fit the most basic ergm model possible, using only a density term. As such, what we do amounts to fitting a Erdős-Rényi model on one level of the multi-level network to be used to simulate a baseline from. But the actual power of using an ERGM lies in the fact that it allows the analyst to account for more subtle processes such as clustering, centralization or homophily.
+
+The resulting model fit (here captured in the object named ``actor_ergm_model``) is then used in ``compare_to_baseline()`` by passing it to the parameter ergm_model and setting model to partial_ergm. The level parameter further needs to be set to the correct level where the ergm fit is to be used (here ``1`` again).
+
 ```{r}
 net <- motifr::ml_net
-actors <- motifr::induced_level_subgraph(net, level = 1)
-# very simple model to keep testing costs low
-ergm_model <- ergm(actors ~ density)
+actor_net <- motifr::induced_level_subgraph(net, level = 1)
+
+# very simple ergm model
+actor_ergm_model <- ergm(actor_net ~ density)
 
 n <- 10
 compare_to_baseline(net,
@@ -111,7 +123,7 @@ compare_to_baseline(net,
                          "1,2[I.B]", "1,2[II.B]",
                          "1,2[I.C]", "1,2[II.C]"),
                     model = "partial_ergm",
-                    ergm_model = ergm_model,
+                    ergm_model = actor_ergm_model,
                     n = n,
                     level = 1)
 ```

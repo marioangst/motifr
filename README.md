@@ -61,6 +61,29 @@ Please report any issues that occur when using the package by creating
 an issue in the [issue tracker on
 github](https://github.com/marioangst/motifr/issues).
 
+If you use motifr, please cite it when publishing results. To check how,
+use:
+
+``` r
+citation("motifr")
+#> 
+#> To cite package 'motifr' in publications use:
+#> 
+#>   Mario Angst and Tim Seppelt (2020). motifr: Motif Analysis in
+#>   Multi-Level Networks. R package version 0.2.0.
+#>   https://marioangst.github.io/motifr/
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {motifr: Motif Analysis in Multi-Level Networks},
+#>     author = {Mario Angst and Tim Seppelt},
+#>     year = {2020},
+#>     note = {R package version 0.2.0},
+#>     url = {https://marioangst.github.io/motifr/},
+#>   }
+```
+
 ## Input
 
 motifr currently can handle unweighted directed and undirected networks.
@@ -73,6 +96,8 @@ tidygraph graph objects with a numeric vertex attribute to specify a
 level for each node (named e.g. “lvl”) for best results.
 
 ## Introduction and key functionality
+
+First, we load the package.
 
 ``` r
 library(motifr)
@@ -100,11 +125,11 @@ plot_mnet(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-6-1.svg" width="100%" />
 
 motifr provides a reliable starting point for multi-level network
 visualization but is focused on motif analyis at its core. For advanced
-visualization of multi-level motifs we recommend pairing
+visualization of multi-level networks we recommend pairing
 [ggraph](https://cran.r-project.org/web/packages/ggraph/index.html) and
 [graphlayouts](https://cran.r-project.org/web/packages/graphlayouts/index.html).
 [This blog
@@ -113,10 +138,11 @@ provides an excellent introduction.
 
 ### Selecting motifs
 
-See the `vignette("motif_zoo")` for details on nomenclature for motifs
-(motif identifier strings). We highly recommend the use of two helper
-functions implemented in motifr to ensure that the software interprets
-the motif identifier provided as intended by the analyst.
+See the vignette on the motif zoo (`vignette("motif_zoo")`) for details
+on nomenclature for motifs (motif identifier strings). We highly
+recommend the use of two helper functions implemented in motifr to
+ensure that the software interprets the motif identifier provided as
+intended by the analyst.
 
   - use `explore_motifs()` to launch a shiny app where all motifs
     implemented for analysis with motifr can be displayed. You can pass
@@ -124,7 +150,8 @@ the motif identifier provided as intended by the analyst.
     exactly for your data. For example, if your network is stored in a
     object named `my_net` with a level attribute `lvl` you can explore
     motifs within it interactively using `explore_motifs(net = my_net,
-    lvl_attr = "lvl")`
+    lvl_attr = "lvl")`. Be aware that if your network does not contain a
+    specific motif, it cannot be displayed.
 
   - check a specific motif of interest using `show_motif()`, which will
     either illustrate the motif in a dummy example network or, if you
@@ -147,13 +174,13 @@ introduced above:
 show_motif(motif = "1,2[I.C]", net = ml_net, label = TRUE, directed = FALSE) # open ('1,2[I.C]') triangle
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.svg" width="300px" />
+<img src="man/figures/README-unnamed-chunk-7-1.svg" width="300px" />
 
 ``` r
 show_motif(motif = "1,2[II.C]", net = ml_net, label = TRUE, directed = FALSE) # closed ('1,2[II.C]') triangle
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-2.svg" width="300px" />
+<img src="man/figures/README-unnamed-chunk-7-2.svg" width="300px" />
 
 Let’s count the number of of these motifs in the entire network.
 
@@ -169,8 +196,8 @@ count_motifs(ml_net, motifs, directed = FALSE)
 An exploratory approach can be taken by calling `motif_summary()`. This
 function counts the occurrences of a couple of basic motifs. Furthermore
 it computes expectations and variances for the occurrence of these
-motifs in a modified Erdős-Rényi model. See the package
-`vignette("random_baselines")` for details.
+motifs in a modified Erdős-Rényi or so-called “Actor’s choice” model.
+See the package `vignette("random_baselines")` for details.
 
 ``` r
 motif_summary(ml_net)
@@ -210,10 +237,12 @@ head(gaps)
 #> 6 actor18 actor31            4
 ```
 
-We can also plot these gaps in our network, including the option to only
-look at gaps above a certain weight (contribution) and different levels
-of focus to only show nodes involved in such gaps. Here again for the
-wetlands management network, only showing gaps with a weight above 5.
+We can also plot these gaps in various ways in our network, including
+the option to only look at gaps above a certain weight (contribution)
+and different levels of focus to only show nodes involved in such gaps.
+Here again for the wetlands management network, only showing gaps with a
+weight above 5 and subsetting the level where we analyze gaps to only
+contain nodes involved in gaps.
 
 ``` r
 plot_gaps(ml_net,
@@ -224,27 +253,66 @@ plot_gaps(ml_net,
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-11-1.svg" width="100%" />
 
 `identify_gaps` has a sibling in `critical_dyads`. Critical\_dyads works
 in reverse to identifying gaps - it analyses for every existing edge how
 many instances of a given motif would disappear if the edge was to be
-removed.
+removed. Below an example showing critical dyads in a plot of the full
+wetlands management example network.
 
-### Comparing motif occurrence to a random baseline
+``` r
+plot_critical_dyads(ml_net,
+  "1,2[I.C]",
+  level = -1,
+  subset_graph = "none",
+  cutoff = 3, label = FALSE
+)
+```
 
-Motifr can be used to simulate a random baseline of networks. Motif
-counts in an empirical network can then be compared to the distribution
-of motif counts in the random networks. We do so again here for open and
-closed triangles in the wetland management network. Unsurprisingly, we
-find that both of these motifs occur much more often in the empirically
-observed network than in the random baseline. See the package
-`vignette("random_baselines")` for details.
+<img src="man/figures/README-unnamed-chunk-12-1.svg" width="100%" />
+
+### Comparing motif occurrence to a baseline model
+
+Motifr can be used to simulate a baseline of networks to compare
+against. Motif counts in an empirical network can then be compared to
+the distribution of motif counts in the networks simulated from the
+baseline model. Four different ways of specifying models for baseline
+distributions are implemented in motifr, from a basic Erdős–Rényi model
+to the possiblity of supplying an exponential random graph model (ERGM)
+fit to draw simulations from. See the `vignette("random_baselines")` for
+details.
+
+As an illustration, we simulate networks from a “Actor’s choice”
+baseline model here as a baseline to compare counts of open and closed
+triangles in the wetland management network against. This model keeps
+all ties fixed except ties on a specifc level. On this level (here set
+by setting level to 1, which is the actor level in this network), ties
+are allowed to vary based on a fixed probability (Erdős-Rényi) model.
+
+We find that open triangles occur much less frequently and closed
+triangles much more often than in the baseline model.
+
+This is an unsurprising result - everything else would have been
+concerning. It indicates that actors tend to close triangles across
+levels to other actors working on the same wetland management tasks much
+more often compared to what would be expected if they just chose random
+collaboration partners. We would expect such “fit to task” in a network
+of professional organizations working in wetland management. We
+highlight this interpretation because we want to stress that baseline
+models need to be judged very carefully for what they represent
+substantially. This is why motifr allows for a variety of baseline model
+configurations, (including fitted ergm objects).
 
 ``` r
 motifs <- list("1,2[I.C]", "1,2[II.C]") # open ('1,2[I.C]') and closed ('1,2[II.C]') triangles
 
-compare_to_baseline(ml_net, motifs = motifs, n = 50, directed = FALSE)
+compare_to_baseline(ml_net,
+                    model = "actors_choice",
+                    level = 1,
+                    motifs = motifs, 
+                    n = 50, 
+                    directed = FALSE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-13-1.svg" width="100%" />
