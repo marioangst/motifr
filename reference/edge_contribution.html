@@ -149,7 +149,7 @@ flipped. This is a generalisation of <code><a href='identify_gaps.html'>motifr::
 <code>motifr::criticial_dyads()</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>edge_contribution</span>(<span class='kw'>net</span>, <span class='kw'>motif</span>, lvl_attr = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sesType"</span>), level = <span class='op'>-</span><span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>edge_contribution</span><span class='op'>(</span><span class='va'>net</span>, <span class='va'>motif</span>, lvl_attr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"sesType"</span><span class='op'>)</span>, level <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,7 +189,7 @@ level is the same as for the Actor's Choice Model, cf. vignette.</p>
 input graph is directed it is treated as undirected graph.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>edge_contribution</span>(<span class='kw'>ml_net</span>, <span class='st'>"1,2[I.C]"</span>)
+    <pre class="examples"><div class='input'><span class='fu'>edge_contribution</span><span class='op'>(</span><span class='va'>ml_net</span>, <span class='st'>"1,2[I.C]"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;     vertex0 vertex1 contribution
 #&gt; 1   actor16 actor24            4
 #&gt; 2    actor6  actor7            3

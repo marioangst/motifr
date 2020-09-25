@@ -147,7 +147,7 @@ for partial ERGM models. Currently, only <code>network</code> objects are suppor
 as input.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>induced_level_subgraph</span>(<span class='kw'>net</span>, <span class='kw'>level</span>, lvl_attr = <span class='st'>"sesType"</span>)</pre>
+    <pre class="usage"><span class='fu'>induced_level_subgraph</span><span class='op'>(</span><span class='va'>net</span>, <span class='va'>level</span>, lvl_attr <span class='op'>=</span> <span class='st'>"sesType"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,8 +172,8 @@ as input.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>subgraph_actors</span> <span class='op'>&lt;-</span> <span class='fu'>induced_level_subgraph</span>(<span class='kw'>motifr</span>::<span class='kw'><a href='ml_net.html'>ml_net</a></span>, <span class='fl'>1</span>)
-<span class='fu'><a href='plot_mnet.html'>plot_mnet</a></span>(<span class='kw'>subgraph_actors</span>, label = <span class='fl'>TRUE</span>)
+<span class='va'>subgraph_actors</span> <span class='op'>&lt;-</span> <span class='fu'>induced_level_subgraph</span><span class='op'>(</span><span class='fu'>motifr</span><span class='fu'>::</span><span class='va'><a href='ml_net.html'>ml_net</a></span>, <span class='fl'>1</span><span class='op'>)</span>
+<span class='fu'><a href='plot_mnet.html'>plot_mnet</a></span><span class='op'>(</span><span class='va'>subgraph_actors</span>, label <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='img'><img src='induced_level_subgraph-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
