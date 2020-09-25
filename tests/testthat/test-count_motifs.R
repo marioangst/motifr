@@ -84,7 +84,7 @@ test_that("exemplify_motif", {
     motifr::exemplify_motif(motifr::tidygraph_dummy_net, "1,2[I.C]"),
     c(1, 5, 6)
   )
-  testthat::expect_error(motifr::exemplify_motif(motifr::tidygraph_dummy_net, "1,2[I.B]"))
+  testthat::expect_null(motifr::exemplify_motif(motifr::tidygraph_dummy_net, "1,2[I.B]"))
 })
 test_that("simulate_ergm", {
   library(ergm)

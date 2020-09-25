@@ -238,6 +238,9 @@ show_motif <- function(motif,
     lvl_attr = lvl_attr,
     directed = directed
   )
+  if(is.null(motif_names)){
+    stop(paste("The chosen motif ",motif, " does not exist in the supplied network"))
+  }
   vertices <- network::get.vertex.attribute(net, "vertex.names")
   indices <- match(motif_names, vertices)
   subgraph <- network::get.inducedSubgraph(net, indices)
