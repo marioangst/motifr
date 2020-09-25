@@ -99,3 +99,20 @@ test_that("is_directed", {
   testthat::expect_equal(motifr::is.directed(tidygraph_dummy_net), FALSE)
   testthat::expect_equal(motifr::is.directed(ml_net), FALSE)
 })
+
+test_that("induced_level_subgraph", {
+  net <- motifr::dummy_net
+  py_g <- motifr::to_py_graph(net, "sesType")
+  nodes_count <- sma$nodesCount(py_g)
+  edges_count <- sma$edgesCountMatrix(py_g)
+  for (level in 1:3) {
+    # on every level
+    subgraph <- motifr::induced_level_subgraph(net, level - 1)
+    testthat::expect_equal(nodes_count[[level]], network::network.size(subgraph))
+    py_subgraph <- motifr::to_py_graph(subgraph, "sesType")
+    edges_count_subgraph <- sma$edgesCountMatrix(py_subgraph, nTypes = 3L)
+    testthat::expect_equal(sum(edges_count_subgraph > 0), 1)
+    testthat::expect_equal(edges_count_subgraph[level, level],
+                           edges_count[level, level])
+  }
+})

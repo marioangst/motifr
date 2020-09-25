@@ -102,3 +102,29 @@ is.directed <- function(net) {
     stop(paste("Provided network object is of unsupported format:", class(net)))
   }
 }
+
+#' Returns subgraph induced by one level of the network
+#'
+#' This function is intended to be used together with \code{simulate_baseline()}
+#' for partial ERGM models. Currently, only \code{network} objects are supported
+#' as input.
+#'
+#' @param net the network
+#' @param level the (number of the) level
+#' @param lvl_attr name of the nodal attribute specifying the level
+#' @return induced subgraph as \code{network} object.
+#' @export
+#' @examples
+#'
+#' subgraph_actors <- induced_level_subgraph(motifr::ml_net, 1)
+#' plot_mnet(subgraph_actors, label = TRUE)
+induced_level_subgraph <- function(net, level, lvl_attr = "sesType") {
+  if (! network::is.network(net)) {
+    stop(paste("motifr::induced_level_subgraph is only implemented for graph",
+               "objects stemming from the network package."))
+  }
+  levels <- network::get.vertex.attribute(net, lvl_attr)
+  indices <- which(levels == level)
+  subgraph <- network::get.inducedSubgraph(net, indices)
+  return(subgraph)
+}

@@ -35,7 +35,8 @@ independently at random with respect to a fixed probability depending on the lev
 The (refined) Erdős-Rényi model accounts for the various levels by allowing
 to specify different probabilities ties occurring _within_ different levels.
 - *Actor's Choice Model* (``actors_choice``) In this model all edges but the edges on one specific level are fixed. This is motivated by theoretical considerations about the application of multi-level network models in situations where one level is composed of actors, which are more readily able to change their connections, and other levels considered more stable, e.g. specific instances of ecological networks. The edges on this non-fixed "actor level" are chosen independently with fixed probability as in Erdős-Rényi.
-- *Exponential Random Graph Model* (``ergm``) Sophisticated model which accounts for various network parameters. Please consult the documentation of the ``ergm`` for details.
+- *Exponential Random Graph Model* (``ergm``) Sophisticated model which accounts for various network parameters. Please consult the documentation of ``ergm::ergm()`` for details.
+- *Partial Exponential Random Graph Model* (``partial_ergm``) It tends to be hard fit an ERGM to a multi-level network. However, this can be often avoided by using ERGM only for modelling the behaviour of one level while keeping the other levels fixed.
 
 For further details see the [documentation of the Python sma package](https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false).
 
@@ -93,4 +94,24 @@ ERGMs are a powerful tool to create more advanced, parameterized baseline models
 ```{r}
 model <- ergm(dummy_net ~ edges + triangle)
 compare_to_baseline(dummy_net, list("1,2[I.A]", "1,2[I.C]", "1,2[II.C]"), n = 50, directed = FALSE, model = "ergm", ergm_model = model)
+```
+
+## Workflow for Partial ERGM
+```{r}
+net <- motifr::ml_net
+actors <- motifr::induced_level_subgraph(net, level = 1)
+# very simple model to keep testing costs low
+ergm_model <- ergm(actors ~ density)
+
+n <- 10
+compare_to_baseline(net,
+                    list("1[1]", "0,1[1]",
+                         "2[1]", "1,1[1]", # "0,2[1]", is variable
+                         "1,2[I.A]", "1,2[II.A]",
+                         "1,2[I.B]", "1,2[II.B]",
+                         "1,2[I.C]", "1,2[II.C]"),
+                    model = "partial_ergm",
+                    ergm_model = ergm_model,
+                    n = n,
+                    level = 1)
 ```

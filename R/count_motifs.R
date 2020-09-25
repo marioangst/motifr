@@ -258,8 +258,8 @@ show_motif <- function(motif,
 #' the variable level automatically. Use the \code{level} parameter to provide a
 #' valid level.
 #'
-#' When using ERGM the parameter \code{net} is not used. Random networks are
-#' sampled in R using the \code{ergm_model} parameter.
+#' When using (partial) ERGM the parameter \code{net} is not used. Random
+#' networks are sampled in R using the \code{ergm_model} parameter.
 #'
 #' @param net network object
 #' @param motifs list of motif identifier strings
@@ -269,12 +269,14 @@ show_motif <- function(motif,
 #' @param assume_sparse whether the random graphs shall be assumed to be sparse.
 #'   used to find ideal counting function. defaults to TRUE.
 #' @param model baseline model to be used. Options are 'erdos_renyi',
-#'   'fixed_densities', 'actors_choice' and 'ergm'. See \code{vignette("random_baselines")} for more
-#'   details. Defaults to 'erdos_renyi'.
-#' @param level lvl_attr of the variable level for the Actor's Choice model
+#'   'fixed_densities', 'actors_choice', 'ergm' and 'partial_ergm'. See
+#'   \code{vignette("random_baselines")} for more details. Defaults to
+#'   'erdos_renyi'.
+#' @param level lvl_attr of the variable level for the Actor's Choice model and
+#'   for partial ERGM
 #' @param ergm_model ergm model as for example fitted by calling
-#'   \code{ergm::ergm()}. Used when model is set to ergm to sample random
-#'   networks.
+#'   \code{ergm::ergm()}. Used when model is set to 'ergm' or 'partial_ergm' to
+#'   sample random networks.
 #' @param directed whether the graph shall be treated as a directed graph. Per
 #'   default (\code{NULL}), this is determined automatically using the structure
 #'   of the provided network object
@@ -299,7 +301,7 @@ simulate_baseline <- function(net,
 
   supported_models <- c(
     "erdos_renyi", "fixed_densities", "actors_choice",
-    "ergm"
+    "ergm", "partial_ergm"
   )
   if (!(model %in% supported_models)) {
     stop(paste(
@@ -307,19 +309,51 @@ simulate_baseline <- function(net,
       paste(supported_models, collapse = ", ")
     ))
   }
-  if (model == "ergm") {
+  if (model == "ergm" || model == "partial_ergm") {
     if (!requireNamespace("ergm", quietly = TRUE)) {
       stop("Package \"ergm\" needed for this function to work. Please install it with install.packages(ergm).",
         call. = FALSE
       )
     }
     if (!ergm::is.ergm(ergm_model)) {
-      stop("Please provde a valid ergm model when using ERGM.")
+      stop("Please provde a valid ergm model when using (partial) ERGM.")
+    }
+    if (model == "partial_ergm") {
+      if (level < 0) {
+        stop("Please provde a valid level when using partial ERGM.")
+      }
+      if(! network::is.network(net)) {
+        stop("Partial ERGM model needs valid network parameter.")
+      }
+      # preparing partially truncated network for re-adding edges from simulation
+      truncated_net <- network::network.copy(net)
+      levels <- network::get.vertex.attribute(truncated_net, lvl_attr)
+      indices <- which(levels == level)
+      for(i in indices) {
+        dyads <- get.dyads.eids(truncated_net,
+                                replicate(length(indices), i),
+                                indices)
+        ids <- dyads[lapply(dyads > 0, is.na) == FALSE]
+        network::delete.edges(truncated_net, unlist(ids))
+      }
     }
     # let's do the job ourselves
     result <- data.frame()
     for (i in 1:n) {
       sample <- stats::simulate(ergm_model)
+      if (model == "partial_ergm") {
+        # partial model provided: we'll copy the sample back into truncated_met
+        total_sample <- network::network.copy(truncated_net)
+        translations <- match(get.vertex.attribute(sample, 'vertex.names'),
+                              get.vertex.attribute(total_sample, 'vertex.names'))
+        edge_list_head <- as.edgelist(sample)[,1]
+        edge_list_tail <- as.edgelist(sample)[,2]
+        t_edge_list_head <- lapply(edge_list_head, function(x) translations[x])
+        t_edge_list_tail <- lapply(edge_list_tail, function(x) translations[x])
+        network::add.edges(total_sample, t_edge_list_head, t_edge_list_tail)
+
+        sample <- total_sample
+      }
       counts <- motifr::count_motifs(sample,
         motifs = motifs,
         lvl_attr = lvl_attr,
