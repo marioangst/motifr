@@ -239,7 +239,8 @@ show_motif <- function(motif,
     directed = directed
   )
   if(is.null(motif_names)){
-    stop(paste("The chosen motif ",motif, " does not exist in the supplied network"))
+    stop(paste("The chosen motif", motif,
+               "does not exist in the supplied network."))
   }
   vertices <- network::get.vertex.attribute(net, "vertex.names")
   indices <- match(motif_names, vertices)
