@@ -25,7 +25,7 @@ Package features include:
 
   - Visualization: The package provides functions to visualize
     multi-level networks, based on
-    [ggraph](https://github.com/thomasp85/ggraph).
+    [ggraph](https://CRAN.R-project.org/package=ggraph).
 
   - Motif counts: The package is in many parts a R wrapper for the
     excellent
@@ -130,9 +130,9 @@ plot_mnet(
 motifr provides a reliable starting point for multi-level network
 visualization but is focused on motif analyis at its core. For advanced
 visualization of multi-level networks we recommend pairing
-[ggraph](https://cran.r-project.org/web/packages/ggraph/index.html) and
-[graphlayouts](https://cran.r-project.org/web/packages/graphlayouts/index.html).
-[This blog
+[ggraph](https://CRAN.R-project.org/package=ggraph) and
+[graphlayouts](https://CRAN.R-project.org/package=graphlayouts). [This
+blog
 post](http://blog.schochastics.net/post/visualizing-multilevel-networks-with-graphlayouts/)
 provides an excellent introduction.
 
