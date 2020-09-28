@@ -18,14 +18,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Motif Analysis in Multi-Level Networks">
-<meta property="og:description" content="This package provides tools for motif analysis
-    in multi-level networks. Multi-level networks combine multiple
-    networks in one, e.g. social-ecological networks. Motifs are small
-    configurations of nodes and edges (subgraphs) occurring in networks.
-    motifr can visualize multi-level networks, count multi-level network
-    motifs and compare motif occurences to baseline models. It also identifies contributions
-    of existing or potential edges to motifs to find critical or missing edges.  The
-    package is in many parts a R wrapper for the excellent
+<meta property="og:description" content="Tools for motif analysis in multi-level networks.
+    Multi-level networks combine multiple networks in one, e.g.
+    social-ecological networks. Motifs are small configurations of nodes
+    and edges (subgraphs) occurring in networks.  motifr can visualize
+    multi-level networks, count multi-level network motifs and compare
+    motif occurences to baseline models. It also identifies contributions
+    of existing or potential edges to motifs to find critical or missing
+    edges.  The package is in many parts a R wrapper for the excellent
     SESMotifAnalyser Python package written by Tim Seppelt.">
 <meta property="og:image" content="https://marioangst.github.io/motifr/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -111,7 +111,7 @@
 <p><a href="https://en.wikipedia.org/wiki/Network_motif">Motifs</a> are small configurations of nodes and edges (subgraphs) within an overall network.</p>
 <p>Package features include:</p>
 <ul>
-<li><p>Visualization: The package provides functions to visualize multi-level networks, based on <a href="https://github.com/thomasp85/ggraph">ggraph</a>.</p></li>
+<li><p>Visualization: The package provides functions to visualize multi-level networks, based on <a href="https://CRAN.R-project.org/package=ggraph">ggraph</a>.</p></li>
 <li><p>Motif counts: The package is in many parts a R wrapper for the excellent <a href="https://gitlab.com/t.seppelt/sesmotifanalyser">SESMotifAnalyser</a> Python framework written by Tim Seppelt to count multi-level network motifs, compare them to a baseline and much more. Only parts of of SESMotifAnalyser are yet wrapped, so consult the python framework for additional functionality.</p></li>
 <li><p>Contributions of edges to motifs: motifr further identifies and visualizes functional gaps and critical edges in multi-level networks based on contributions of existing or potential edges to given motifs (this is theoretically motivated by network theories of functional fit and misfit).</p></li>
 </ul>
@@ -170,7 +170,7 @@
   directed <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
-<p>motifr provides a reliable starting point for multi-level network visualization but is focused on motif analyis at its core. For advanced visualization of multi-level networks we recommend pairing <a href="https://cran.r-project.org/web/packages/ggraph/index.html">ggraph</a> and <a href="https://cran.r-project.org/web/packages/graphlayouts/index.html">graphlayouts</a>. <a href="http://blog.schochastics.net/post/visualizing-multilevel-networks-with-graphlayouts/">This blog post</a> provides an excellent introduction.</p>
+<p>motifr provides a reliable starting point for multi-level network visualization but is focused on motif analyis at its core. For advanced visualization of multi-level networks we recommend pairing <a href="https://CRAN.R-project.org/package=ggraph">ggraph</a> and <a href="https://CRAN.R-project.org/package=graphlayouts">graphlayouts</a>. <a href="http://blog.schochastics.net/post/visualizing-multilevel-networks-with-graphlayouts/">This blog post</a> provides an excellent introduction.</p>
 </div>
 <div id="selecting-motifs" class="section level3">
 <h3 class="hasAnchor">
