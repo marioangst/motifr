@@ -1,9 +1,20 @@
 ## Test environments
+- local machines
+  - Ubuntu 20.04.1 LTS R 3.6.3
+  - Windows 10 R 4.0.1
+- travis-ci as configured in https://github.com/marioangst/motifr/blob/master/.travis.yml
 - R-hub windows-x86_64-devel (r-devel)
 - R-hub ubuntu-gcc-release (r-release)
 - R-hub fedora-clang-devel (r-devel)
 
 ## R CMD check results
+
+Please note that we encountered warnings and errors on all platforms tested with
+R-hub due to a lack or misconfiguration of Python (or of the Python sma package).
+However, we followed the guidelines outlined in the [reticulate vignette on package development](https://rstudio.github.io/reticulate/articles/package.html) and 
+believe that our package is in keeping with existing good practices for integrating Python in R packages.
+
+
 > On windows-x86_64-devel (r-devel), ubuntu-gcc-release (r-release), fedora-clang-devel (r-devel)
   checking examples ... ERROR
   Running examples in 'motifr-Ex.R' failed
