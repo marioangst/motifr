@@ -125,7 +125,7 @@ plot_mnet(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
 motifr provides a reliable starting point for multi-level network
 visualization but is focused on motif analyis at its core. For advanced
@@ -174,13 +174,13 @@ introduced above:
 show_motif(motif = "1,2[I.C]", net = ml_net, label = TRUE, directed = FALSE) # open ('1,2[I.C]') triangle
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.svg" width="300px" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="300px" />
 
 ``` r
 show_motif(motif = "1,2[II.C]", net = ml_net, label = TRUE, directed = FALSE) # closed ('1,2[II.C]') triangle
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-2.svg" width="300px" />
+<img src="man/figures/README-unnamed-chunk-7-2.png" width="300px" />
 
 Let’s count the number of of these motifs in the entire network.
 
@@ -253,7 +253,7 @@ plot_gaps(ml_net,
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
 
 `identify_gaps` has a sibling in `critical_dyads`. Critical\_dyads works
 in reverse to identifying gaps - it analyses for every existing edge how
@@ -270,7 +270,7 @@ plot_critical_dyads(ml_net,
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
 ### Comparing motif occurrence to a baseline model
 
@@ -315,4 +315,4 @@ compare_to_baseline(ml_net,
                     directed = FALSE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-13-1.svg" width="100%" />
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
