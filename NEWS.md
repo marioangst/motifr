@@ -1,4 +1,4 @@
-# motifr 0.3.0 _2020-10-01_
+# motifr 1.0.0 _2020-10-01_
 
 * First release on CRAN
 

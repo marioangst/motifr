@@ -70,7 +70,7 @@ citation("motifr")
 #> To cite package 'motifr' in publications use:
 #> 
 #>   Mario Angst and Tim Seppelt (2020). motifr: Motif Analysis in
-#>   Multi-Level Networks. R package version 0.2.0.
+#>   Multi-Level Networks. R package version 1.0.0.
 #>   https://marioangst.github.io/motifr/
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -79,7 +79,7 @@ citation("motifr")
 #>     title = {motifr: Motif Analysis in Multi-Level Networks},
 #>     author = {Mario Angst and Tim Seppelt},
 #>     year = {2020},
-#>     note = {R package version 0.2.0},
+#>     note = {R package version 1.0.0},
 #>     url = {https://marioangst.github.io/motifr/},
 #>   }
 ```
