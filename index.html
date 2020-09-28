@@ -169,7 +169,7 @@
   layouts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"kk"</span>, <span class="st">"circle"</span><span class="op">)</span>,
   directed <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-6-1.svg" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
 <p>motifr provides a reliable starting point for multi-level network visualization but is focused on motif analyis at its core. For advanced visualization of multi-level networks we recommend pairing <a href="https://cran.r-project.org/web/packages/ggraph/index.html">ggraph</a> and <a href="https://cran.r-project.org/web/packages/graphlayouts/index.html">graphlayouts</a>. <a href="http://blog.schochastics.net/post/visualizing-multilevel-networks-with-graphlayouts/">This blog post</a> provides an excellent introduction.</p>
 </div>
 <div id="selecting-motifs" class="section level3">
@@ -188,10 +188,10 @@
 <p>Let’s quickly check out two classic examples of three-node, two-level motifs (open and closed triangles) in the wetlands management network introduced above:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="fu"><a href="reference/show_motif.html">show_motif</a></span><span class="op">(</span>motif <span class="op">=</span> <span class="st">"1,2[I.C]"</span>, net <span class="op">=</span> <span class="va">ml_net</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># open ('1,2[I.C]') triangle</span></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-7-1.svg" width="300px"></p>
+<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="300px"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="fu"><a href="reference/show_motif.html">show_motif</a></span><span class="op">(</span>motif <span class="op">=</span> <span class="st">"1,2[II.C]"</span>, net <span class="op">=</span> <span class="va">ml_net</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># closed ('1,2[II.C]') triangle</span></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-7-2.svg" width="300px"></p>
+<p><img src="reference/figures/README-unnamed-chunk-7-2.png" width="300px"></p>
 <p>Let’s count the number of of these motifs in the entire network.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="va">motifs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span><span class="op">)</span> <span class="co"># open and closed triangle</span>
@@ -234,7 +234,7 @@
   subset_graph <span class="op">=</span> <span class="st">"partial"</span>,
   cutoff <span class="op">=</span> <span class="fl">5</span>, label <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-11-1.svg" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-11-1.png" width="100%"></p>
 <p><code>identify_gaps</code> has a sibling in <code>critical_dyads</code>. Critical_dyads works in reverse to identifying gaps - it analyses for every existing edge how many instances of a given motif would disappear if the edge was to be removed. Below an example showing critical dyads in a plot of the full wetlands management example network.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
 <span class="fu"><a href="reference/plot_critical_dyads.html">plot_critical_dyads</a></span><span class="op">(</span><span class="va">ml_net</span>,
@@ -243,7 +243,7 @@
   subset_graph <span class="op">=</span> <span class="st">"none"</span>,
   cutoff <span class="op">=</span> <span class="fl">3</span>, label <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-12-1.svg" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="100%"></p>
 </div>
 <div id="comparing-motif-occurrence-to-a-baseline-model" class="section level3">
 <h3 class="hasAnchor">
@@ -261,7 +261,7 @@
                     motifs <span class="op">=</span> <span class="va">motifs</span>, 
                     n <span class="op">=</span> <span class="fl">50</span>, 
                     directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-13-1.svg" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-13-1.png" width="100%"></p>
 </div>
 </div>
 </div>
