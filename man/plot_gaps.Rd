@@ -41,7 +41,6 @@ Note that this only works for undirected graphs. Regardless of whether the
 input graph is directed it is treated as undirected graph.
 }
 \examples{
-plot_gaps(ml_net, "1,2[II.C]", level = -1)
 plot_gaps(ml_net, "1,2[II.C]",
   level = -1,
   subset_graph = "focal", cutoff = 4, label = TRUE

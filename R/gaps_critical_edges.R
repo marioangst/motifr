@@ -139,7 +139,6 @@ edge_contribution <- function(net,
 #' @export
 #'
 #' @examples
-#' plot_gaps(ml_net, "1,2[II.C]", level = -1)
 #' plot_gaps(ml_net, "1,2[II.C]",
 #'   level = -1,
 #'   subset_graph = "focal", cutoff = 4, label = TRUE
