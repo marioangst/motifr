@@ -41,7 +41,7 @@ Note that this only works for undirected graphs. Regardless of whether the
 input graph is directed it is treated as undirected graph.
 }
 \examples{
-plot_critical_dyads(ml_net, "1,2[I.C]", level = -1)
+\dontrun{plot_critical_dyads(ml_net, "1,2[I.C]", level = -1)}
 plot_critical_dyads(ml_net, "1,2[I.C]",
   level = -1,
   subset_graph = "focal", cutoff = 4, label = TRUE

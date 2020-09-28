@@ -139,6 +139,7 @@ edge_contribution <- function(net,
 #' @export
 #'
 #' @examples
+#' \dontrun{plot_gaps(ml_net, "1,2[I.C]", level = -1)}
 #' plot_gaps(ml_net, "1,2[II.C]",
 #'   level = -1,
 #'   subset_graph = "focal", cutoff = 4, label = TRUE
@@ -193,7 +194,7 @@ plot_gaps <- function(net,
 #' @export
 #'
 #' @examples
-#' plot_critical_dyads(ml_net, "1,2[I.C]", level = -1)
+#' \dontrun{plot_critical_dyads(ml_net, "1,2[I.C]", level = -1)}
 #' plot_critical_dyads(ml_net, "1,2[I.C]",
 #'   level = -1,
 #'   subset_graph = "focal", cutoff = 4, label = TRUE

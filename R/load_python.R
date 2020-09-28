@@ -13,7 +13,7 @@ nx <- NULL
 sma <- NULL
 
 .onLoad <- function(libname, pkgname) {
-  # delay load nx module (will only be loaded whlen accessed via $)
+  # delay load Python modules (will only be loaded when accessed via $)
   nx <<- reticulate::import("networkx", delay_load = TRUE)
   itertools <<- reticulate::import("itertools", delay_load = TRUE)
   sma <<- reticulate::import("sma", delay_load = TRUE)
