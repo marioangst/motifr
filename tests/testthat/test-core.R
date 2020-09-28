@@ -23,13 +23,17 @@ test_that("io_undirected_dummy_net_issue#27", {
   # this checks that the workaround for
   # the issue https://github.com/marioangst/motifr/issues/27
   # works correctly
-  ml_net27 <- network::set.vertex.attribute(ml_net,
-                                            "lvl",
-                                            as.character(network::get.vertex.attribute(ml_net,"sesType")))
+  ml_net27 <- network::set.vertex.attribute(
+    ml_net,
+    "lvl",
+    as.character(network::get.vertex.attribute(ml_net, "sesType"))
+  )
   # suppress UserWarning issued by sma.translateGraph()
   ms <- reticulate::py_suppress_warnings(motif_summary(ml_net27, lvl_attr = "lvl"))
-  testthat::expect_equal(ms$count,
-                         c(543, 167, 217, 7, 73, 1))
+  testthat::expect_equal(
+    ms$count,
+    c(543, 167, 217, 7, 73, 1)
+  )
 })
 test_that("io_directed_ml_net", {
   py_g <- to_py_graph(motifr::ml_net, "sesType")
@@ -112,7 +116,9 @@ test_that("induced_level_subgraph", {
     py_subgraph <- motifr::to_py_graph(subgraph, "sesType")
     edges_count_subgraph <- sma$edgesCountMatrix(py_subgraph, nTypes = 3L)
     testthat::expect_equal(sum(edges_count_subgraph > 0), 1)
-    testthat::expect_equal(edges_count_subgraph[level, level],
-                           edges_count[level, level])
+    testthat::expect_equal(
+      edges_count_subgraph[level, level],
+      edges_count[level, level]
+    )
   }
 })

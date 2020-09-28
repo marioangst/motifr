@@ -119,9 +119,11 @@ is.directed <- function(net) {
 #' subgraph_actors <- induced_level_subgraph(motifr::ml_net, 1)
 #' plot_mnet(subgraph_actors, label = TRUE)
 induced_level_subgraph <- function(net, level, lvl_attr = "sesType") {
-  if (! network::is.network(net)) {
-    stop(paste("motifr::induced_level_subgraph is only implemented for graph",
-               "objects stemming from the network package."))
+  if (!network::is.network(net)) {
+    stop(paste(
+      "motifr::induced_level_subgraph is only implemented for graph",
+      "objects stemming from the network package."
+    ))
   }
   levels <- network::get.vertex.attribute(net, lvl_attr)
   indices <- which(levels == level)

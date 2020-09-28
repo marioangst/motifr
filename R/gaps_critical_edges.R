@@ -261,7 +261,7 @@ plot_gaps_or_critical_dyads <- function(net,
   edge_contribution <- edge_contribution[edge_contribution$contribution >= cutoff, ]
   max_contribution <- max(edge_contribution$contribution)
 
-  if(cutoff > max_contribution){
+  if (cutoff > max_contribution) {
     stop("Cutoff is higher than maximal contribution found")
   }
 
@@ -334,12 +334,13 @@ plot_gaps_or_critical_dyads <- function(net,
       colour = colour, alpha = 0.7
     )
 
-  netviz$layers <- c(netviz$layers[[1]],netviz$layers[[3]],netviz$layers[[2]])
+  netviz$layers <- c(netviz$layers[[1]], netviz$layers[[3]], netviz$layers[[2]])
 
   break_range <- cutoff:max_contribution
 
   netviz +
     ggplot2::scale_size_continuous(sprintf("%s weight", title),
-                                   range = c(1, 4),
-                                   breaks = break_range)
+      range = c(1, 4),
+      breaks = break_range
+    )
 }

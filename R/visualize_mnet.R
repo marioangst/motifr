@@ -124,7 +124,7 @@ plot_mnet <- function(net,
 
   # handle directed networks
   if ((is.null(directed) && motifr::is.directed(net)) ||
-      (!is.null(directed) && directed == TRUE)) {
+    (!is.null(directed) && directed == TRUE)) {
     p_comb <- p_comb +
       ggraph::geom_edge_link(ggplot2::aes_(
         colour = ~edgecol
@@ -154,24 +154,24 @@ plot_mnet <- function(net,
 
   # render nodes
 
-  if (label == FALSE){
+  if (label == FALSE) {
     p_comb <-
       p_comb +
       ggraph::geom_node_point(ggplot2::aes_(color = ~ factor(lvl)), size = nodesize) +
       ggplot2::scale_color_brewer("Level",
-                                  breaks = levels(factor(nodes$lvl)),
-                                  palette = "Paired"
+        breaks = levels(factor(nodes$lvl)),
+        palette = "Paired"
       )
   }
 
   if (label == TRUE) {
     p_comb <-
       p_comb + ggraph::geom_node_label(ggplot2::aes_(label = ~name, fill = ~ factor(lvl)),
-                                       alpha = 0.5
+        alpha = 0.5
       ) +
       ggplot2::scale_fill_brewer("Level",
-                                 breaks = levels(factor(nodes$lvl)),
-                                 palette = "Paired"
+        breaks = levels(factor(nodes$lvl)),
+        palette = "Paired"
       )
   }
 

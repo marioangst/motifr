@@ -105,15 +105,18 @@ test_that("simulate_partial_ergm_level1", {
 
   n <- 10
   df <- simulate_baseline(net,
-                          list("1[1]", "0,1[1]",
-                               "2[1]", "1,1[1]", # "0,2[1]", is variable
-                               "1,2[I.A]", "1,2[II.A]",
-                               "1,2[I.B]", "1,2[II.B]",
-                               "1,2[I.C]", "1,2[II.C]"),
-                          model = "partial_ergm",
-                          ergm_model = ergm_model,
-                          n = n,
-                          level = 1)
+    list(
+      "1[1]", "0,1[1]",
+      "2[1]", "1,1[1]", # "0,2[1]", is variable
+      "1,2[I.A]", "1,2[II.A]",
+      "1,2[I.B]", "1,2[II.B]",
+      "1,2[I.C]", "1,2[II.C]"
+    ),
+    model = "partial_ergm",
+    ergm_model = ergm_model,
+    n = n,
+    level = 1
+  )
   testthat::expect_equal(dim(df)[[1]], n)
   # test node counts
   testthat::expect_true(all(df$`1[1]` == 52))
@@ -135,15 +138,18 @@ test_that("simulate_partial_ergm_level0", {
 
   n <- 10
   df <- simulate_baseline(net,
-                          list("1[1]", "0,1[1]",
-                               "0,2[1]", "1,1[1]", # "2[1]", is variable
-                               "2,1[I.A]", "2,1[II.A]",
-                               "2,1[I.B]", "2,1[II.B]",
-                               "2,1[I.C]", "2,1[II.C]"),
-                          model = "partial_ergm",
-                          ergm_model = ergm_model,
-                          n = n,
-                          level = 0)
+    list(
+      "1[1]", "0,1[1]",
+      "0,2[1]", "1,1[1]", # "2[1]", is variable
+      "2,1[I.A]", "2,1[II.A]",
+      "2,1[I.B]", "2,1[II.B]",
+      "2,1[I.C]", "2,1[II.C]"
+    ),
+    model = "partial_ergm",
+    ergm_model = ergm_model,
+    n = n,
+    level = 0
+  )
   testthat::expect_equal(dim(df)[[1]], n)
   # test node counts
   testthat::expect_true(all(df$`1[1]` == 52))

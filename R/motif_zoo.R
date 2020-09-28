@@ -82,7 +82,7 @@ explore_motifs <- function(net = NULL,
   source(file_path, local = TRUE)
   server_env <- environment(server)
 
-  #add user supplied net variables for shiny server to find
+  # add user supplied net variables for shiny server to find
   server_env$net <- net
   server_env$lvl_attr <- lvl_attr
 

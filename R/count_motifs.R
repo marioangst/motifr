@@ -238,9 +238,11 @@ show_motif <- function(motif,
     lvl_attr = lvl_attr,
     directed = directed
   )
-  if(is.null(motif_names)){
-    stop(paste("The chosen motif", motif,
-               "does not exist in the supplied network."))
+  if (is.null(motif_names)) {
+    stop(paste(
+      "The chosen motif", motif,
+      "does not exist in the supplied network."
+    ))
   }
   vertices <- network::get.vertex.attribute(net, "vertex.names")
   indices <- match(motif_names, vertices)
@@ -330,17 +332,19 @@ simulate_baseline <- function(net,
       if (level < 0) {
         stop("Please provde a valid level when using partial ERGM.")
       }
-      if(! network::is.network(net)) {
+      if (!network::is.network(net)) {
         stop("Partial ERGM model needs valid network parameter.")
       }
       # preparing partially truncated network for re-adding edges from simulation
       truncated_net <- network::network.copy(net)
       levels <- network::get.vertex.attribute(truncated_net, lvl_attr)
       indices <- which(levels == level)
-      for(i in indices) {
-        dyads <- network::get.dyads.eids(truncated_net,
-                                         replicate(length(indices), i),
-                                         indices)
+      for (i in indices) {
+        dyads <- network::get.dyads.eids(
+          truncated_net,
+          replicate(length(indices), i),
+          indices
+        )
         ids <- dyads[lapply(dyads > 0, is.na) == FALSE]
         network::delete.edges(truncated_net, unlist(ids))
       }
@@ -352,10 +356,12 @@ simulate_baseline <- function(net,
       if (model == "partial_ergm") {
         # partial model provided: we'll copy the sample back into truncated_met
         total_sample <- network::network.copy(truncated_net)
-        translations <- match(network::get.vertex.attribute(sample, 'vertex.names'),
-                              network::get.vertex.attribute(total_sample, 'vertex.names'))
-        edge_list_head <- network::as.edgelist(sample)[,1]
-        edge_list_tail <- network::as.edgelist(sample)[,2]
+        translations <- match(
+          network::get.vertex.attribute(sample, "vertex.names"),
+          network::get.vertex.attribute(total_sample, "vertex.names")
+        )
+        edge_list_head <- network::as.edgelist(sample)[, 1]
+        edge_list_tail <- network::as.edgelist(sample)[, 2]
         t_edge_list_head <- lapply(edge_list_head, function(x) translations[x])
         t_edge_list_tail <- lapply(edge_list_tail, function(x) translations[x])
         network::add.edges(total_sample, t_edge_list_head, t_edge_list_tail)
