@@ -108,6 +108,7 @@ test_that("io_tidygraph", {
 
 
 test_that("is_directed", {
+  skip_if_no_sma()
   testthat::expect_equal(motifr::is.directed(dummy_net), FALSE)
   testthat::expect_equal(motifr::is.directed(directed_dummy_net), TRUE)
   testthat::expect_equal(motifr::is.directed(tidygraph_dummy_net), FALSE)
