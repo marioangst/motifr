@@ -1,4 +1,10 @@
+skip_if_no_sma <- function() {
+  if (! reticulate::py_module_available("sma")) {
+    skip("sma not available for testing")
+  }
+}
 test_that("count_directed_motifs_2", {
+  skip_if_no_sma()
   # see https://gitlab.com/t.seppelt/sesmotifanalyser/-/blob/master/test/sma_test.py
   df <- motifr::count_motifs(directed_dummy_net,
     motifs = "2[1]",
@@ -12,6 +18,7 @@ test_that("count_directed_motifs_2", {
   testthat::expect_identical(df, expected)
 })
 test_that("count_directed_motifs_0_2", {
+  skip_if_no_sma()
   # see https://gitlab.com/t.seppelt/sesmotifanalyser/-/blob/master/test/sma_test.py
   df <- motifr::count_motifs(directed_dummy_net,
     motifs = "0,2[1]",
@@ -25,6 +32,7 @@ test_that("count_directed_motifs_0_2", {
   testthat::expect_identical(df, expected)
 })
 test_that("count_directed_motifs_1_1", {
+  skip_if_no_sma()
   # see https://gitlab.com/t.seppelt/sesmotifanalyser/-/blob/master/test/sma_test.py
   df <- motifr::count_motifs(directed_dummy_net,
     motifs = "1,1[1]",
@@ -40,6 +48,7 @@ test_that("count_directed_motifs_1_1", {
 
 
 test_that("count_motifs_1_2", {
+  skip_if_no_sma()
   # see https://gitlab.com/t.seppelt/sesmotifanalyser/-/blob/master/test/sma_test.py
   df <- motifr::count_motifs(dummy_net,
     motifs = list("1:0,2:2[I.A]"),
@@ -54,6 +63,7 @@ test_that("count_motifs_1_2", {
   testthat::expect_identical(df, expected)
 })
 test_that("count_motifs_multiple", {
+  skip_if_no_sma()
   # see https://gitlab.com/t.seppelt/sesmotifanalyser/-/blob/master/test/sma_test.py
   motifs <- c("2:1,2:2[I.A]", "2:1,2:2[IV.D]", "2:2,2:0[V.B]", "2:2,2:0[VI.A]")
   df <- motifr::count_motifs(dummy_net, motifs = motifs)
@@ -62,6 +72,7 @@ test_that("count_motifs_multiple", {
   testthat::expect_identical(df, expected)
 })
 test_that("count_motifs_tidygraph_dummy", {
+  skip_if_no_sma()
   motifs <- c("1,2[I.A]", "1,2[I.B]", "1,2[I.C]", "1,2[II.A]", "1,2[II.B]", "1,2[II.C]")
   df <- motifr::count_motifs(motifr::tidygraph_dummy_net, motifs = motifs)
   counts <- c(2, 0, 1, 4, 0, 2)
@@ -69,6 +80,7 @@ test_that("count_motifs_tidygraph_dummy", {
   testthat::expect_identical(df, expected)
 })
 test_that("simulate_ergm", {
+  skip_if_no_sma()
   library(ergm)
   ergm_model <- ergm(dummy_net ~ density)
   n <- 10
@@ -79,6 +91,7 @@ test_that("simulate_ergm", {
   testthat::expect_true(all(df$`0,0,1[1]` == 15))
 })
 test_that("exemplify_motif", {
+  skip_if_no_sma()
   # use small networks that have only one motif of a certain type (or none)
   testthat::expect_equal(
     motifr::exemplify_motif(motifr::tidygraph_dummy_net, "1,2[I.C]"),
@@ -88,6 +101,7 @@ test_that("exemplify_motif", {
   testthat::expect_null(motifr::exemplify_motif(motifr::tidygraph_dummy_net, "1,2[I.B]"))
 })
 test_that("simulate_ergm", {
+  skip_if_no_sma()
   library(ergm)
   ergm_model <- ergm(dummy_net ~ density)
   n <- 10
@@ -98,6 +112,7 @@ test_that("simulate_ergm", {
   testthat::expect_true(all(df$`0,0,1[1]` == 15))
 })
 test_that("simulate_partial_ergm_level1", {
+  skip_if_no_sma()
   library(ergm)
   net <- motifr::ml_net
   actors <- motifr::induced_level_subgraph(net, level = 1)
@@ -131,6 +146,7 @@ test_that("simulate_partial_ergm_level1", {
   testthat::expect_true(all(df$`1,2[I.C]` + df$`1,2[II.C]` == 710))
 })
 test_that("simulate_partial_ergm_level0", {
+  skip_if_no_sma()
   library(ergm)
   net <- motifr::ml_net
   actors <- motifr::induced_level_subgraph(net, level = 0)

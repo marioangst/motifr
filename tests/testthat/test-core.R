@@ -1,4 +1,10 @@
+skip_if_no_sma <- function() {
+  if (! reticulate::py_module_available("sma")) {
+    skip("sma not available for testing")
+  }
+}
 test_that("io_undirected_dummy_net", {
+  skip_if_no_sma()
   testthat::expect_warning(motifr::to_py_graph(motifr::dummy_net, "sesType", directed = TRUE))
 
   py_g <- to_py_graph(motifr::dummy_net, "sesType")
@@ -20,6 +26,7 @@ test_that("io_undirected_dummy_net", {
   testthat::expect_equal(nodes_count$`2`, types[[3]])
 })
 test_that("io_undirected_dummy_net_issue#27", {
+  skip_if_no_sma()
   # this checks that the workaround for
   # the issue https://github.com/marioangst/motifr/issues/27
   # works correctly
@@ -36,6 +43,7 @@ test_that("io_undirected_dummy_net_issue#27", {
   )
 })
 test_that("io_directed_ml_net", {
+  skip_if_no_sma()
   py_g <- to_py_graph(motifr::ml_net, "sesType")
   testthat::expect_false(nx$is_directed(py_g))
 
@@ -55,6 +63,7 @@ test_that("io_directed_ml_net", {
 })
 
 test_that("io_directed_igraph", {
+  skip_if_no_sma()
   # https://gitlab.com/t.seppelt/sesmotifanalyser/-/blob/master/test/data/digraph.py
   py_g <- to_py_graph(motifr::directed_dummy_net, "sesType")
   testthat::expect_true(nx$is_directed(py_g))
@@ -75,6 +84,7 @@ test_that("io_directed_igraph", {
 })
 
 test_that("io_tidygraph", {
+  skip_if_no_sma()
   # tidygraph wraps around igraph so use igraph's functions here. Perhaps change
   # to tidygraph's network properties at a later stage.
 
@@ -105,6 +115,7 @@ test_that("is_directed", {
 })
 
 test_that("induced_level_subgraph", {
+  skip_if_no_sma()
   net <- motifr::dummy_net
   py_g <- motifr::to_py_graph(net, "sesType")
   nodes_count <- sma$nodesCount(py_g)

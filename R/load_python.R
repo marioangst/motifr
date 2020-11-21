@@ -8,14 +8,12 @@
 # https://mran.microsoft.com/snapshot/2017-08-06/web/packages/reticulate/vignettes/package.html
 
 # global reference in order to prevent Python modules in user data space
-itertools <- NULL
 nx <- NULL
 sma <- NULL
 
 .onLoad <- function(libname, pkgname) {
   # delay load Python modules (will only be loaded when accessed via $)
   nx <<- reticulate::import("networkx", delay_load = TRUE)
-  itertools <<- reticulate::import("itertools", delay_load = TRUE)
   sma <<- reticulate::import("sma", delay_load = TRUE)
 }
 
