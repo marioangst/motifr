@@ -18,11 +18,11 @@ before_install:
 #       paste(getRversion(), R.version['platform'], R.version['arch'], R.version['os']),
 #       ')'))" >> ~/.Rprofile.site
 
-before_script:
-  # pre-build vignettes
-  - Rscript vignettes/precompile.R
-
 after_success:
+  # re-build pre-build vignettes since they have not been build properly yet
+  - Rscript vignettes/precompile.R
+  - Rscript -e 'devtools::build_vignettes()'
+  # build website
   - Rscript -e 'pkgdown::build_site(run_dont_run = TRUE)'
 
 deploy:

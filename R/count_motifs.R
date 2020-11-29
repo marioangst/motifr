@@ -191,7 +191,9 @@ motif_summary <- function(net,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' exemplify_motif(ml_net, motif = "1,2[I.C]", directed = FALSE)
+#' }
 exemplify_motif <- function(net,
                             motif,
                             lvl_attr = "sesType",
