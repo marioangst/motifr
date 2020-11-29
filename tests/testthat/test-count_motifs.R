@@ -1,5 +1,5 @@
 skip_if_no_sma <- function() {
-  if (! reticulate::py_module_available("sma")) {
+  if (!reticulate::py_module_available("sma")) {
     skip("sma not available for testing")
   }
 }

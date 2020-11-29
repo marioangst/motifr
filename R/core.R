@@ -21,7 +21,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' to_py_graph(motifr::dummy_net, lvl_attr = "sesType")
+#' }
 to_py_graph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
   if (network::is.network(g)) {
     # function for translating a statnet network object into a Python compatible
@@ -92,7 +94,7 @@ to_py_graph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
 #' @export
 #'
 #' @examples
-#' is.directed(ml_net)
+#' is.directed(motifr::ml_net)
 is.directed <- function(net) {
   if (network::is.network(net)) {
     return(network::is.directed(net))
