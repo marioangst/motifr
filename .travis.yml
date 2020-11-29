@@ -21,7 +21,7 @@ before_install:
 
 after_success:
   # re-build pre-build vignettes since they have not been build properly yet
-  - R CMD install motifr_*.tar.gz
+  - R CMD install motifr_*.tar.gz "$R_LIBS_USER"
   - Rscript vignettes/precompile.R
   - Rscript -e 'devtools::build_vignettes()'
   # build website
