@@ -18,7 +18,7 @@ before_install:
 #       ')'))" >> ~/.Rprofile.site
 
 after_success:
-  - Rscript -e 'pkgdown::build_site()'
+  - Rscript -e 'pkgdown::build_site(run_dont_run = TRUE)'
 
 deploy:
   provider: pages

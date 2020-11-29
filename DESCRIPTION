@@ -1,12 +1,12 @@
 Package: motifr
 Title: Motif Analysis in Multi-Level Networks
 Version: 1.0.0
-Date: 2020-10-01
+Date: 2020-12-01
 Authors@R: 
     c(person(given = "Mario",
              family = "Angst",
              role = c("aut", "cre"),
-             email = "mario.angst@gmail.ch",
+             email = "mario.angst@gmail.com",
              comment = c(ORCID = "0000-0002-8297-9827")),
       person(given = "Tim",
              family = "Seppelt",
