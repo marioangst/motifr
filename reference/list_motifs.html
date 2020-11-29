@@ -194,14 +194,16 @@ of the provided network object</p></td>
     <p>data frame with one row for each motif</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>list_motifs</span><span class='op'>(</span><span class='va'>ml_net</span>, <span class='st'>"1,2[I.C]"</span>, directed <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>list_motifs</span><span class='op'>(</span><span class='va'>ml_net</span>, <span class='st'>"1,2[I.C]"</span>, directed <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   level0_node0 level1_node0 level1_node1
 #&gt; 1    SpatPlanA       actor4       actor8
 #&gt; 2    SpatPlanA       actor4      actor18
 #&gt; 3    SpatPlanA       actor4      actor31
 #&gt; 4    SpatPlanA       actor4      actor41
 #&gt; 5    SpatPlanA       actor4      actor46
-#&gt; 6    SpatPlanA       actor8      actor18</div></pre>
+#&gt; 6    SpatPlanA       actor8      actor18</div><div class='input'><span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
