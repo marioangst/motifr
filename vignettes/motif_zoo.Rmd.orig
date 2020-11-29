@@ -7,11 +7,21 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  dev = "svg",
+  fig.path = "./"
+)
+```
 
 <a href='https://marioangst.github.io/motifr/'><img src='../man/figures/logo.svg' align="right" height="139" /></a>
 
-
+```{r setup, include=FALSE}
+library(motifr)
+```
 
 This vignette introduces the nomenclature used for labeling motifs in multi-level networks as used in motifr.
 
@@ -28,8 +38,7 @@ Let's consider an example in a two-level network with levels 0 and 1. motifr gen
 
 You can explore all possible motifs interactively in a shiny app included in the package by running (after installing and loading the package):
 
-
-```r
+```{r, eval=FALSE}
 explore_motifs()
 ```
 
@@ -39,12 +48,9 @@ When in doubt about what a given identifier string implies for you specific netw
 
 The following code below uses show_motif to illustrate a "1,2[II.C]" motif as found in the wetland management network object ml_net. ml_net contains a level attribute (specifying which node belongs to which level) named "sesType".
 
-
-```r
+```{r motif_zoo_show_motif_IIC}
 show_motif(motif = "1,2[II.C]", net = ml_net, label = TRUE, lvl_attr = "sesType")
 ```
-
-![plot of chunk motif_zoo_show_motif_IIC](./motif_zoo_show_motif_IIC-1.svg)
 
 motifr supports both undirected and directed motifs, although the number of directed motifs currently supported is much more limited than the number of supported undirected motifs. If your favourite motif is not part of the zoo yet, reach out to us by [creating an issue on github](https://github.com/marioangst/motifr/issues) describing the motif you would like to have included and we will consider the request.
 
@@ -56,22 +62,16 @@ Motifr uses an internal mechanism called *position matching* for translating the
 
 An example for this is the motif ``2,2[II.D]``. It contains two nodes on level 0 and two nodes on level 1. The two nodes on level 0 and the two nodes on level 1 are respectively adjacent. Furthermore the two nodes on level 0 are linked to one of the nodes on level 1.
 
-
-```r
+```{r motif_zoo_show_motif_22IID}
 show_motif(motif = "2,2[II.D]", label = TRUE)
 ```
-
-![plot of chunk motif_zoo_show_motif_22IID](./motif_zoo_show_motif_22IID-1.svg)
 
 
 This motif differs from the motif ``2:1,2:0[II.D]`` which contains the same number of nodes from the different levels. However, here the roles of the levels are swapped, i.e. in this motif, the two nodes on level 1 are adjacent to the two nodes on level 0.
 
-
-```r
+```{r motif_zoo_show_motif2120IID}
 show_motif(motif = "2:1,2:0[II.D]", label = TRUE)
 ```
-
-![plot of chunk motif_zoo_show_motif2120IID](./motif_zoo_show_motif2120IID-1.svg)
 
 The position matching can be overwritten by providing the levels corresponding to the entries in the motif signature, e.g. the head ``2:1,2:0`` signalises that the first level containing two nodes is level 1 ("2:1") while the second level containing two nodes is level 0 ("2:0").
 

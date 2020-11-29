@@ -65,7 +65,7 @@ identify_gaps <- function(net,
 #'
 #' @examples
 #' \dontrun{
-#' critical_dyads(ml_net, motif = "1,2[I.C]")
+#' head(critical_dyads(ml_net, motif = "1,2[I.C]"))
 #' }
 critical_dyads <- function(net,
                            motif,
@@ -106,7 +106,7 @@ critical_dyads <- function(net,
 #'
 #' @examples
 #' \dontrun{
-#' edge_contribution(ml_net, "1,2[I.C]")
+#' head(edge_contribution(ml_net, "1,2[I.C]"))
 #' }
 edge_contribution <- function(net,
                               motif,

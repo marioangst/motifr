@@ -39,6 +39,6 @@ input graph is directed it is treated as undirected graph.
 }
 \examples{
 \dontrun{
-edge_contribution(ml_net, "1,2[I.C]")
+head(edge_contribution(ml_net, "1,2[I.C]"))
 }
 }

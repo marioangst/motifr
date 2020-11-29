@@ -37,6 +37,6 @@ input graph is directed it is treated as undirected graph.
 }
 \examples{
 \dontrun{
-critical_dyads(ml_net, motif = "1,2[I.C]")
+head(critical_dyads(ml_net, motif = "1,2[I.C]"))
 }
 }
