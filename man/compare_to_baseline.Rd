@@ -61,5 +61,7 @@ When using ERGM the parameter \code{net} is not used. Networks to create the
 baseline from are sampled in R using the \code{ergm_model} parameter.
 }
 \examples{
+\dontrun{
 compare_to_baseline(ml_net, list("1,2[I.C]", "1,2[II.C]"), directed = FALSE)
+}
 }

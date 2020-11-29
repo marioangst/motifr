@@ -41,9 +41,11 @@ data frame with a column containing motif identifier strings and one
 Count multi-level motifs
 }
 \examples{
+\dontrun{
 count_motifs(ml_net,
   lvl_attr = c("sesType"),
   motifs = list("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]"),
   directed = FALSE
 )
+}
 }

@@ -19,5 +19,5 @@ network formats. For example, this function calls
 \code{igraph::is.directed()} on \code{igraph} objects.
 }
 \examples{
-is.directed(ml_net)
+is.directed(motifr::ml_net)
 }

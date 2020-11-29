@@ -25,7 +25,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' head(identify_gaps(ml_net, motif = "1,2[II.C]"))
+#' }
 identify_gaps <- function(net,
                           motif,
                           lvl_attr = c("sesType"),
@@ -62,7 +64,9 @@ identify_gaps <- function(net,
 #' @export
 #'
 #' @examples
-#' identify_gaps(ml_net, motif = "1,2[II.C]")
+#' \dontrun{
+#' critical_dyads(ml_net, motif = "1,2[I.C]")
+#' }
 critical_dyads <- function(net,
                            motif,
                            lvl_attr = c("sesType"),

@@ -35,5 +35,7 @@ index stems from the internal order of the nodes and does not carry any
 specific meaning.
 }
 \examples{
+\dontrun{
 head(list_motifs(ml_net, "1,2[I.C]", directed = FALSE))
+}
 }

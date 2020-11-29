@@ -36,5 +36,7 @@ Note that this only works for undirected graphs. Regardless of whether the
 input graph is directed it is treated as undirected graph.
 }
 \examples{
-identify_gaps(ml_net, motif = "1,2[II.C]")
+\dontrun{
+critical_dyads(ml_net, motif = "1,2[I.C]")
+}
 }

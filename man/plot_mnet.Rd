@@ -46,5 +46,5 @@ For more extensive visualization options, it is recommended to explore the
 the package graphlayouts.
 }
 \examples{
-plot_mnet(net = ml_net, lvl_attr = "sesType", layouts = list("kk", "circle"))
+plot_mnet(net = motifr::ml_net, lvl_attr = "sesType", layouts = list("kk", "circle"))
 }

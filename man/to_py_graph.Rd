@@ -33,5 +33,7 @@ nodes. Values are automatically converted to integers. Levels must be
 numbered starting with 0, 1, ….
 }
 \examples{
+\dontrun{
 to_py_graph(motifr::dummy_net, lvl_attr = "sesType")
+}
 }

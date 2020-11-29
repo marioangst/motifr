@@ -15,7 +15,9 @@ indicating whether the motifs are directed, the number of levels which the
 motif spans across
 }
 \examples{
+\dontrun{
 supported_signatures()
+}
 }
 \seealso{
 \code{supported_classes()}
