@@ -89,7 +89,8 @@
 
       
 
-      </header><div class="row">
+      </header><link href="motif_zoo_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="motif_zoo_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>The motif zoo</h1>
@@ -115,13 +116,13 @@
 <p>A motif identifier string contains these two pieces of information. It consists of a <em>head</em> and <em>class</em>, and is of the form <code>HEAD[CLASS]</code>, e.g. <code>1,2[II.C]</code>. The head specifies the signature and the positions of the motif while the class represents the motif class.</p>
 <p>Let’s consider an example in a two-level network with levels 0 and 1. motifr generally counts levels starting at 0, due to its Python roots. The motif identifier string <code>1,2[II.C]</code> represents the closed triangle with one node on level 0 and two nodes on level 1. <code>1,2</code> signifies that the first level (0) provides one node and the second (1) two nodes. The expression <code>II.C</code> in brackets stands for closed triangle. Alternatively, <code>1,2[I.C]</code> represents the open triangle with the same number of nodes taken from the levels.</p>
 <p>You can explore all possible motifs interactively in a shiny app included in the package by running (after installing and loading the package):</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="../reference/explore_motifs.html">explore_motifs</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/explore_motifs.html">explore_motifs</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>You can pass your own network to <code><a href="../reference/explore_motifs.html">explore_motifs()</a></code> to see what motifs mean exactly for your data. For example, if your network is stored in a object named <code>my_net</code> with a level attribute <code>lvl</code> you can explore motifs within it interactively using <code><a href="../reference/explore_motifs.html">explore_motifs(net = my_net, lvl_attr = "lvl")</a></code></p>
 <p>When in doubt about what a given identifier string implies for you specific network, you can let motifr show you the motif either in a dummy network or an example of the motif in a network you are analysing (the second will only work if the network you are analysing actually contains the motif) with <code><a href="../reference/show_motif.html">show_motif(motif)</a></code>.</p>
 <p>The following code below uses show_motif to illustrate a “1,2[II.C]” motif as found in the wetland management network object ml_net. ml_net contains a level attribute (specifying which node belongs to which level) named “sesType”.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="../reference/show_motif.html">show_motif</a></span><span class="op">(</span>motif <span class="op">=</span> <span class="st">"1,2[II.C]"</span>, net <span class="op">=</span> <span class="va">ml_net</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, lvl_attr <span class="op">=</span> <span class="st">"sesType"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/show_motif.html">show_motif</a></span><span class="op">(</span>motif <span class="op">=</span> <span class="st">"1,2[II.C]"</span>, net <span class="op">=</span> <span class="va">ml_net</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, lvl_attr <span class="op">=</span> <span class="st">"sesType"</span><span class="op">)</span></code></pre></div>
 <p><img src="motif_zoo_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 <p>motifr supports both undirected and directed motifs, although the number of directed motifs currently supported is much more limited than the number of supported undirected motifs. If your favourite motif is not part of the zoo yet, reach out to us by <a href="https://github.com/marioangst/motifr/issues">creating an issue on github</a> describing the motif you would like to have included and we will consider the request.</p>
 <p>A full list of all supported signatures and motif classes can also be found in the <a href="https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false">documentation of the Python sma package</a> in section <em>Appendix: The Motif Zoo</em>.</p>
@@ -131,12 +132,12 @@
 <a href="#a-word-of-caution-on-counting-position-matching" class="anchor"></a>A word of caution on counting: Position matching</h2>
 <p>Motifr uses an internal mechanism called <em>position matching</em> for translating the head of a motif identifier string, e.g. <code>1,2</code>, to a sequence of levels corresponding to the signature of the motif. Usually, this procedure yields the desired matching and is of no interest to the user. However, sometimes it might be necessary two overwrite the position matching by providing custom positions.</p>
 <p>An example for this is the motif <code>2,2[II.D]</code>. It contains two nodes on level 0 and two nodes on level 1. The two nodes on level 0 and the two nodes on level 1 are respectively adjacent. Furthermore the two nodes on level 0 are linked to one of the nodes on level 1.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="../reference/show_motif.html">show_motif</a></span><span class="op">(</span>motif <span class="op">=</span> <span class="st">"2,2[II.D]"</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/show_motif.html">show_motif</a></span><span class="op">(</span>motif <span class="op">=</span> <span class="st">"2,2[II.D]"</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="motif_zoo_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <p>This motif differs from the motif <code>2:1,2:0[II.D]</code> which contains the same number of nodes from the different levels. However, here the roles of the levels are swapped, i.e. in this motif, the two nodes on level 1 are adjacent to the two nodes on level 0.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="../reference/show_motif.html">show_motif</a></span><span class="op">(</span>motif <span class="op">=</span> <span class="st">"2:1,2:0[II.D]"</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/show_motif.html">show_motif</a></span><span class="op">(</span>motif <span class="op">=</span> <span class="st">"2:1,2:0[II.D]"</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="motif_zoo_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
 <p>The position matching can be overwritten by providing the levels corresponding to the entries in the motif signature, e.g. the head <code>2:1,2:0</code> signalises that the first level containing two nodes is level 1 (“2:1”) while the second level containing two nodes is level 0 (“2:0”).</p>
 <p>See the <a href="https://gitlab.com/t.seppelt/sesmotifanalyser/raw/master/doc/_build/latex/SESMotifAnalyser.pdf?inline=false">documentation of the Python sma package</a>, subsection <em>Position matching</em> for a detailed description of the procedure.</p>

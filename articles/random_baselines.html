@@ -89,7 +89,8 @@
 
       
 
-      </header><div class="row">
+      </header><link href="random_baselines_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="random_baselines_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Baseline model comparisons</h1>
@@ -126,34 +127,34 @@
 <h2 class="hasAnchor">
 <a href="#motifs-in-networks-simulated-based-on-a-baseline-model" class="anchor"></a>Motifs in networks simulated based on a baseline model</h2>
 <p>Motifs in random networks can be counted using <code><a href="../reference/simulate_baseline.html">simulate_baseline()</a></code>. The supported models are <code>erdos_renyi</code>, <code>fixed_densities</code>, <code>actors_choice</code> and <code>ergm</code>. The function <code><a href="../reference/compare_to_baseline.html">compare_to_baseline()</a></code> can be used for plotting the results:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="../reference/simulate_baseline.html">simulate_baseline</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">5</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/simulate_baseline.html">simulate_baseline</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">5</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt;   1,2[I.C] 1,2[II.C]</span>
-<span class="co">#&gt; 1      178        25</span>
-<span class="co">#&gt; 2      225        23</span>
-<span class="co">#&gt; 3      206        16</span>
-<span class="co">#&gt; 4      203        23</span>
-<span class="co">#&gt; 5      194        15</span></pre></div>
+<span class="co">#&gt; 1      150        13</span>
+<span class="co">#&gt; 2      148        10</span>
+<span class="co">#&gt; 3      165        15</span>
+<span class="co">#&gt; 4      183        32</span>
+<span class="co">#&gt; 5      153        18</span></code></pre></div>
 </div>
 <div id="motif-distributions-without-simulation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#motif-distributions-without-simulation" class="anchor"></a>Motif distributions without simulation</h2>
 <p>Expectations and variances in <code>erdos_renyi</code> and <code>actors_choice</code> can be computed analytically, i.e. without simulating hundreds of random networks. Until now variances can only be computed for 1,2-motifs.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="../reference/motifs_distribution.html">motifs_distribution</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,2[I.C]"</span>, <span class="st">"2,2[II.D]"</span><span class="op">)</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/motifs_distribution.html">motifs_distribution</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,2[I.C]"</span>, <span class="st">"2,2[II.D]"</span><span class="op">)</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt;               motif expectation variance</span>
 <span class="co">#&gt; 1,2[I.C]   1,2[I.C]   169.14423 949.7743</span>
-<span class="co">#&gt; 2,2[II.D] 2,2[II.D]    68.83919 968.5823</span></pre></div>
+<span class="co">#&gt; 2,2[II.D] 2,2[II.D]    68.83919 968.5823</span></code></pre></div>
 </div>
 <div id="difference-between-erdős-rényi-and-fixed-densities" class="section level2">
 <h2 class="hasAnchor">
 <a href="#difference-between-erd%C5%91s-r%C3%A9nyi-and-fixed-densities" class="anchor"></a>Difference between Erdős-Rényi and Fixed Densities</h2>
 <p>There is a crucial difference between the Erdős-Rényi model and Fixed Densities model. In the former, the expected number of edges on each level equals the number of edges in the empirical network, while in the latter the exact number in each random network equals this number. This difference becomes obvious when counting edges in random networks. For a network with two levels A and B <code>1,1[1]</code> is the motif consisting of one node from level A and one from level B, linked by an edge.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="../reference/compare_to_baseline.html">compare_to_baseline</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,1[1]"</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"erdos_renyi"</span>, n <span class="op">=</span> <span class="fl">50</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/compare_to_baseline.html">compare_to_baseline</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,1[1]"</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"erdos_renyi"</span>, n <span class="op">=</span> <span class="fl">50</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p><img src="random_baselines_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="../reference/compare_to_baseline.html">compare_to_baseline</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,1[1]"</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"fixed_densities"</span>, n <span class="op">=</span> <span class="fl">50</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/compare_to_baseline.html">compare_to_baseline</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,1[1]"</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"fixed_densities"</span>, n <span class="op">=</span> <span class="fl">50</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p><img src="random_baselines_files/figure-html/unnamed-chunk-4-2.png" width="672"></p>
 </div>
 <div id="level-selection-in-actors-choice-model" class="section level2">
@@ -161,13 +162,13 @@
 <a href="#level-selection-in-actors-choice-model" class="anchor"></a>Level selection in Actor’s Choice Model</h2>
 <p>In the Actor’s Choice Model all levels in the network except for one are assumed to be fixed. The edges in the remaining variable (or actor’s) level are drawn randomly according to the Erdős-Rényi Model. The variable level can be selected using the <code>level</code> parameter, e.g. in <code><a href="../reference/motifs_distribution.html">motifs_distribution()</a></code>, or determined automatically. The default level is the first level providing exactly two nodes in the motif. Note that <code><a href="../reference/simulate_baseline.html">simulate_baseline()</a></code> and <code><a href="../reference/compare_to_baseline.html">compare_to_baseline()</a></code> do not support automatic level selection.</p>
 <p>Let’s consider an example. Assume that the variable level is level zero. The edges in the other levels are fixed. The expected number of closed triangles with two nodes on the variable level can be computed as follows. Here <code>level</code> is automatically determined to be 0.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="../reference/motifs_distribution.html">motifs_distribution</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"2,1[II.C]"</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"actors_choice"</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/motifs_distribution.html">motifs_distribution</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"2,1[II.C]"</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"actors_choice"</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt;       motif expectation variance</span>
-<span class="co">#&gt; 1 2,1[II.C]    19.08899 64.54796</span></pre></div>
+<span class="co">#&gt; 1 2,1[II.C]    19.08899 64.54796</span></code></pre></div>
 <p>More interesting is the case of motifs with signature <code>2,2</code>, i.e. with two nodes on two levels. Per default, the variable level is the first level providing two nodes, so level 0 in the first line. Manually, level 1 can be selected as variable level, see second line.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="../reference/motifs_distribution.html">motifs_distribution</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"2,2[I.A]"</span>, <span class="st">"2,2[I.B]"</span>, <span class="st">"2,2[I.C]"</span>, <span class="st">"2,2[I.D]"</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"actors_choice"</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/motifs_distribution.html">motifs_distribution</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"2,2[I.A]"</span>, <span class="st">"2,2[I.B]"</span>, <span class="st">"2,2[I.C]"</span>, <span class="st">"2,2[I.D]"</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"actors_choice"</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt;             motif expectation   variance</span>
 <span class="co">#&gt; 2,2[I.A] 2,2[I.A]  3988.44646 20908.0827</span>
 <span class="co">#&gt; 2,2[I.B] 2,2[I.B]   371.55354 20908.0827</span>
@@ -178,24 +179,24 @@
 <span class="co">#&gt; 2,2[I.A] 2,2[I.A]  4506.13165 4146.282609</span>
 <span class="co">#&gt; 2,2[I.B] 2,2[I.B]   100.88354    9.525781</span>
 <span class="co">#&gt; 2,2[I.C] 2,2[I.C]   451.86835 4146.282609</span>
-<span class="co">#&gt; 2,2[I.D] 2,2[I.D]    10.11646    9.525781</span></pre></div>
+<span class="co">#&gt; 2,2[I.D] 2,2[I.D]    10.11646    9.525781</span></code></pre></div>
 <p>Note that in the first line, when level 0 is the variable level, motifs I.A and I.B have the same variance. This is because they only differ in the dyad on the variable level. Similarly, in the second line motifs I.A and I.C have the same variance as they only differ in the dyad on the variable level.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="../reference/show_motif.html">show_motif</a></span><span class="op">(</span><span class="st">"2,2[I.A]"</span>, net <span class="op">=</span> <span class="va">ml_net</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/show_motif.html">show_motif</a></span><span class="op">(</span><span class="st">"2,2[I.A]"</span>, net <span class="op">=</span> <span class="va">ml_net</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p><img src="random_baselines_files/figure-html/unnamed-chunk-7-1.png" width="300px"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu"><a href="../reference/show_motif.html">show_motif</a></span><span class="op">(</span><span class="st">"2,2[I.B]"</span>, net <span class="op">=</span> <span class="va">ml_net</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/show_motif.html">show_motif</a></span><span class="op">(</span><span class="st">"2,2[I.B]"</span>, net <span class="op">=</span> <span class="va">ml_net</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p><img src="random_baselines_files/figure-html/unnamed-chunk-7-2.png" width="300px"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="../reference/show_motif.html">show_motif</a></span><span class="op">(</span><span class="st">"2,2[I.C]"</span>, net <span class="op">=</span> <span class="va">ml_net</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/show_motif.html">show_motif</a></span><span class="op">(</span><span class="st">"2,2[I.C]"</span>, net <span class="op">=</span> <span class="va">ml_net</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p><img src="random_baselines_files/figure-html/unnamed-chunk-7-3.png" width="300px"></p>
 </div>
 <div id="exponential-random-graph-models-ergm" class="section level2">
 <h2 class="hasAnchor">
 <a href="#exponential-random-graph-models-ergm" class="anchor"></a>Exponential Random Graph Models (ERGM)</h2>
 <p>ERGMs are a powerful tool to create more advanced, parameterized baseline models. The R library <code>ergm</code> provides various facililties for fitting models based on a multitude of network parameters. motifr can be used to analyse random networks sampled from a given fitted ERGM. In the example below, we fit a basic ergm model to <code>dummy_net</code> including a triangle statistic, capturing a propensity for triangles to occur. We then use the fitted model in a generative way to simulate networks from it and collect to arrive at a baseline distribution based on this model.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">ergm</span><span class="op">(</span><span class="va">dummy_net</span> <span class="op">~</span> <span class="va">edges</span> <span class="op">+</span> <span class="va">triangle</span><span class="op">)</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">ergm</span><span class="op">(</span><span class="va">dummy_net</span> <span class="op">~</span> <span class="va">edges</span> <span class="op">+</span> <span class="va">triangle</span><span class="op">)</span>
 <span class="co">#&gt; Starting maximum pseudolikelihood estimation (MPLE):</span>
 <span class="co">#&gt; Evaluating the predictor and response matrix.</span>
 <span class="co">#&gt; Maximizing the pseudolikelihood.</span>
@@ -203,17 +204,17 @@
 <span class="co">#&gt; Starting Monte Carlo maximum likelihood estimation (MCMLE):</span>
 <span class="co">#&gt; Iteration 1 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.04357.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.02634.</span>
 <span class="co">#&gt; Step length converged once. Increasing MCMC sample size.</span>
 <span class="co">#&gt; Iteration 2 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.000148.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.009603.</span>
 <span class="co">#&gt; Step length converged twice. Stopping.</span>
 <span class="co">#&gt; Finished MCMLE.</span>
 <span class="co">#&gt; Evaluating log-likelihood at the estimate. Using 20 bridges: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 .</span>
 <span class="co">#&gt; This model was fit using MCMC.  To examine model diagnostics and check</span>
 <span class="co">#&gt; for degeneracy, use the mcmc.diagnostics() function.</span>
-<span class="fu"><a href="../reference/compare_to_baseline.html">compare_to_baseline</a></span><span class="op">(</span><span class="va">dummy_net</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,2[I.A]"</span>, <span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">50</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, model <span class="op">=</span> <span class="st">"ergm"</span>, ergm_model <span class="op">=</span> <span class="va">model</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/compare_to_baseline.html">compare_to_baseline</a></span><span class="op">(</span><span class="va">dummy_net</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,2[I.A]"</span>, <span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">50</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, model <span class="op">=</span> <span class="st">"ergm"</span>, ergm_model <span class="op">=</span> <span class="va">model</span><span class="op">)</span></code></pre></div>
 <p><img src="random_baselines_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 </div>
 <div id="workflow-for-partial-ergm" class="section level2">
@@ -223,8 +224,8 @@
 <p>To do this, the subgraph containing only one level of the network is first extracted using <code><a href="../reference/induced_level_subgraph.html">induced_level_subgraph()</a></code>, setting the level to extract (here the actor network on level <code>1</code>). This yields a network object only containing this level to fit an ergm to.</p>
 <p>As this example is illustrative, we only fit the most basic ergm model possible, using only a density term. As such, what we do amounts to fitting a Erdős-Rényi model on one level of the multi-level network to be used to simulate a baseline from. But the actual power of using an ERGM lies in the fact that it allows the analyst to account for more subtle processes such as clustering, centralization or homophily.</p>
 <p>The resulting model fit (here captured in the object named <code>actor_ergm_model</code>) is then used in <code><a href="../reference/compare_to_baseline.html">compare_to_baseline()</a></code> by passing it to the parameter ergm_model and setting model to partial_ergm. The level parameter further needs to be set to the correct level where the ergm fit is to be used (here <code>1</code> again).</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="va">net</span> <span class="op">&lt;-</span> <span class="fu">motifr</span><span class="fu">::</span><span class="va"><a href="../reference/ml_net.html">ml_net</a></span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu">motifr</span><span class="fu">::</span><span class="va"><a href="../reference/ml_net.html">ml_net</a></span>
 <span class="va">actor_net</span> <span class="op">&lt;-</span> <span class="fu">motifr</span><span class="fu">::</span><span class="fu"><a href="../reference/induced_level_subgraph.html">induced_level_subgraph</a></span><span class="op">(</span><span class="va">net</span>, level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 
 <span class="co"># very simple ergm model</span>
@@ -246,7 +247,7 @@
                     model <span class="op">=</span> <span class="st">"partial_ergm"</span>,
                     ergm_model <span class="op">=</span> <span class="va">actor_ergm_model</span>,
                     n <span class="op">=</span> <span class="va">n</span>,
-                    level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
+                    level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="random_baselines_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
 </div>
   </div>
