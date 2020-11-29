@@ -130,11 +130,11 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/simulate_baseline.html">simulate_baseline</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">5</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt;   1,2[I.C] 1,2[II.C]</span>
-<span class="co">#&gt; 1      127        18</span>
-<span class="co">#&gt; 2      173        19</span>
-<span class="co">#&gt; 3      145        16</span>
-<span class="co">#&gt; 4      239        19</span>
-<span class="co">#&gt; 5      224        23</span></code></pre></div>
+<span class="co">#&gt; 1      179        19</span>
+<span class="co">#&gt; 2      183        21</span>
+<span class="co">#&gt; 3      247        22</span>
+<span class="co">#&gt; 4      147        19</span>
+<span class="co">#&gt; 5      122        12</span></code></pre></div>
 </div>
 <div id="motif-distributions-without-simulation" class="section level2">
 <h2 class="hasAnchor">
@@ -152,10 +152,14 @@
 <p>There is a crucial difference between the Erdős-Rényi model and Fixed Densities model. In the former, the expected number of edges on each level equals the number of edges in the empirical network, while in the latter the exact number in each random network equals this number. This difference becomes obvious when counting edges in random networks. For a network with two levels A and B <code>1,1[1]</code> is the motif consisting of one node from level A and one from level B, linked by an edge.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/compare_to_baseline.html">compare_to_baseline</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,1[1]"</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"erdos_renyi"</span>, n <span class="op">=</span> <span class="fl">50</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<p><img src="random_baselines_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<div class="figure">
+<img src="random_baselines_chunk3-1.svg" alt="plot of chunk random_baselines_chunk3"><p class="caption">plot of chunk random_baselines_chunk3</p>
+</div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/compare_to_baseline.html">compare_to_baseline</a></span><span class="op">(</span><span class="va">ml_net</span>, motifs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,1[1]"</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"fixed_densities"</span>, n <span class="op">=</span> <span class="fl">50</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<p><img src="random_baselines_files/figure-html/unnamed-chunk-4-2.png" width="672"></p>
+<div class="figure">
+<img src="random_baselines_chunk3-2.svg" alt="plot of chunk random_baselines_chunk3"><p class="caption">plot of chunk random_baselines_chunk3</p>
+</div>
 </div>
 <div id="level-selection-in-actors-choice-model" class="section level2">
 <h2 class="hasAnchor">
@@ -183,13 +187,13 @@
 <p>Note that in the first line, when level 0 is the variable level, motifs I.A and I.B have the same variance. This is because they only differ in the dyad on the variable level. Similarly, in the second line motifs I.A and I.C have the same variance as they only differ in the dyad on the variable level.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/show_motif.html">show_motif</a></span><span class="op">(</span><span class="st">"2,2[I.A]"</span>, net <span class="op">=</span> <span class="va">ml_net</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<p><img src="random_baselines_files/figure-html/unnamed-chunk-7-1.png" width="300px"></p>
+<p><img src="random_baselines_chunk6-1.svg" title="plot of chunk random_baselines_chunk6" alt="plot of chunk random_baselines_chunk6" width="300px"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/show_motif.html">show_motif</a></span><span class="op">(</span><span class="st">"2,2[I.B]"</span>, net <span class="op">=</span> <span class="va">ml_net</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<p><img src="random_baselines_files/figure-html/unnamed-chunk-7-2.png" width="300px"></p>
+<p><img src="random_baselines_chunk6-2.svg" title="plot of chunk random_baselines_chunk6" alt="plot of chunk random_baselines_chunk6" width="300px"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/show_motif.html">show_motif</a></span><span class="op">(</span><span class="st">"2,2[I.C]"</span>, net <span class="op">=</span> <span class="va">ml_net</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<p><img src="random_baselines_files/figure-html/unnamed-chunk-7-3.png" width="300px"></p>
+<p><img src="random_baselines_chunk6-3.svg" title="plot of chunk random_baselines_chunk6" alt="plot of chunk random_baselines_chunk6" width="300px"></p>
 </div>
 <div id="exponential-random-graph-models-ergm" class="section level2">
 <h2 class="hasAnchor">
@@ -204,18 +208,19 @@
 <span class="co">#&gt; Starting Monte Carlo maximum likelihood estimation (MCMLE):</span>
 <span class="co">#&gt; Iteration 1 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.01711.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.02841.</span>
 <span class="co">#&gt; Step length converged once. Increasing MCMC sample size.</span>
 <span class="co">#&gt; Iteration 2 of at most 20:</span>
 <span class="co">#&gt; Optimizing with step length 1.</span>
-<span class="co">#&gt; The log-likelihood improved by 0.006515.</span>
+<span class="co">#&gt; The log-likelihood improved by 0.001053.</span>
 <span class="co">#&gt; Step length converged twice. Stopping.</span>
 <span class="co">#&gt; Finished MCMLE.</span>
 <span class="co">#&gt; Evaluating log-likelihood at the estimate. Using 20 bridges: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 .</span>
-<span class="co">#&gt; This model was fit using MCMC.  To examine model diagnostics and check</span>
-<span class="co">#&gt; for degeneracy, use the mcmc.diagnostics() function.</span>
+<span class="co">#&gt; This model was fit using MCMC.  To examine model diagnostics and check for degeneracy, use the mcmc.diagnostics() function.</span>
 <span class="fu"><a href="../reference/compare_to_baseline.html">compare_to_baseline</a></span><span class="op">(</span><span class="va">dummy_net</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"1,2[I.A]"</span>, <span class="st">"1,2[I.C]"</span>, <span class="st">"1,2[II.C]"</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">50</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, model <span class="op">=</span> <span class="st">"ergm"</span>, ergm_model <span class="op">=</span> <span class="va">model</span><span class="op">)</span></code></pre></div>
-<p><img src="random_baselines_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
+<div class="figure">
+<img src="random_baselines_chunk7-1.svg" alt="plot of chunk random_baselines_chunk7"><p class="caption">plot of chunk random_baselines_chunk7</p>
+</div>
 </div>
 <div id="workflow-for-partial-ergm" class="section level2">
 <h2 class="hasAnchor">
@@ -248,7 +253,9 @@
                     ergm_model <span class="op">=</span> <span class="va">actor_ergm_model</span>,
                     n <span class="op">=</span> <span class="va">n</span>,
                     level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p><img src="random_baselines_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+<div class="figure">
+<img src="random_baselines_chunk8-1.svg" alt="plot of chunk random_baselines_chunk8"><p class="caption">plot of chunk random_baselines_chunk8</p>
+</div>
 </div>
   </div>
 
