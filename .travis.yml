@@ -9,6 +9,7 @@ r_packages:
    - reticulate
    - pkgdown
    - knitr
+   - devtools
 
 # https://www.jumpingrivers.com/blog/r-packages-travis-github-actions-rstudio/
 before_install:
@@ -20,6 +21,7 @@ before_install:
 
 after_success:
   # re-build pre-build vignettes since they have not been build properly yet
+  - R CMD install motifr_*.tar.gz
   - Rscript vignettes/precompile.R
   - Rscript -e 'devtools::build_vignettes()'
   # build website
