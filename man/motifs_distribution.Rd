@@ -54,5 +54,7 @@ the \code{lvl_attr} of the nodes in the desired level to specify the level
 manually.
 }
 \examples{
+\dontrun{
 motifs_distribution(ml_net, motif = list("1,2[I.C]"), directed = FALSE)
+}
 }

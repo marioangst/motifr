@@ -37,5 +37,7 @@ Note that this only works for undirected graphs. Regardless of whether the
 input graph is directed it is treated as undirected graph.
 }
 \examples{
+\dontrun{
 head(identify_gaps(ml_net, motif = "1,2[II.C]"))
+}
 }

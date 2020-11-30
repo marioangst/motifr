@@ -25,7 +25,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' head(identify_gaps(ml_net, motif = "1,2[II.C]"))
+#' }
 identify_gaps <- function(net,
                           motif,
                           lvl_attr = c("sesType"),
@@ -62,7 +64,9 @@ identify_gaps <- function(net,
 #' @export
 #'
 #' @examples
-#' identify_gaps(ml_net, motif = "1,2[II.C]")
+#' \dontrun{
+#' head(critical_dyads(ml_net, motif = "1,2[I.C]"))
+#' }
 critical_dyads <- function(net,
                            motif,
                            lvl_attr = c("sesType"),
@@ -101,7 +105,9 @@ critical_dyads <- function(net,
 #' @export
 #'
 #' @examples
-#' edge_contribution(ml_net, "1,2[I.C]")
+#' \dontrun{
+#' head(edge_contribution(ml_net, "1,2[I.C]"))
+#' }
 edge_contribution <- function(net,
                               motif,
                               lvl_attr = c("sesType"),
@@ -139,7 +145,8 @@ edge_contribution <- function(net,
 #' @export
 #'
 #' @examples
-#' \dontrun{plot_gaps(ml_net, "1,2[I.C]", level = -1)}
+#' \dontrun{
+#' plot_gaps(ml_net, "1,2[II.C]", level = -1)
 #' plot_gaps(ml_net, "1,2[II.C]",
 #'   level = -1,
 #'   subset_graph = "focal", cutoff = 4, label = TRUE
@@ -148,6 +155,7 @@ edge_contribution <- function(net,
 #'   level = -1,
 #'   subset_graph = "partial", cutoff = 4, label = TRUE
 #' )
+#' }
 plot_gaps <- function(net,
                       motif,
                       lvl_attr = c("sesType"),
@@ -194,7 +202,8 @@ plot_gaps <- function(net,
 #' @export
 #'
 #' @examples
-#' \dontrun{plot_critical_dyads(ml_net, "1,2[I.C]", level = -1)}
+#' \dontrun{
+#' plot_critical_dyads(ml_net, "1,2[I.C]", level = -1)
 #' plot_critical_dyads(ml_net, "1,2[I.C]",
 #'   level = -1,
 #'   subset_graph = "focal", cutoff = 4, label = TRUE
@@ -203,6 +212,7 @@ plot_gaps <- function(net,
 #'   level = -1,
 #'   subset_graph = "partial", cutoff = 4, label = TRUE
 #' )
+#' }
 plot_critical_dyads <- function(net,
                                 motif,
                                 lvl_attr = c("sesType"),

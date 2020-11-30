@@ -20,8 +20,10 @@ Returns a list with all supported motif classes for the given signature.
 Raises an error if the given signature is not supported.
 }
 \examples{
+\dontrun{
 supported_classes("1,2", FALSE)
 supported_classes("1,1", TRUE)
+}
 }
 \seealso{
 \code{supported_signatures()}

@@ -24,7 +24,7 @@
 #' @export
 #'
 #' @examples
-#' plot_mnet(net = ml_net, lvl_attr = "sesType", layouts = list("kk", "circle"))
+#' plot_mnet(net = motifr::ml_net, lvl_attr = "sesType", layouts = list("kk", "circle"))
 plot_mnet <- function(net,
                       lvl_attr = c("sesType"),
                       layouts = rep("kk", n_levels),

@@ -67,5 +67,7 @@ When using (partial) ERGM the parameter \code{net} is not used. Random
 networks are sampled in R using the \code{ergm_model} parameter.
 }
 \examples{
+\dontrun{
 simulate_baseline(ml_net, list("1,2[I.C]"), n = 10, directed = FALSE)
+}
 }

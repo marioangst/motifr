@@ -19,11 +19,13 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' count_motifs(ml_net,
 #'   lvl_attr = c("sesType"),
 #'   motifs = list("1,2[I.C]", "1,2[II.C]", "2,1[I.C]", "2,1[II.C]"),
 #'   directed = FALSE
 #' )
+#' }
 count_motifs <- function(net,
                          motifs,
                          lvl_attr = c("sesType"),
@@ -83,7 +85,9 @@ count_motifs <- function(net,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' motifs_distribution(ml_net, motif = list("1,2[I.C]"), directed = FALSE)
+#' }
 motifs_distribution <- function(net,
                                 motifs,
                                 lvl_attr = "sesType",
@@ -140,7 +144,9 @@ motifs_distribution <- function(net,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' motif_summary(ml_net)
+#' }
 motif_summary <- function(net,
                           lvl_attr = c("sesType")) {
   # exquisite selection of motifs
@@ -185,7 +191,9 @@ motif_summary <- function(net,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' exemplify_motif(ml_net, motif = "1,2[I.C]", directed = FALSE)
+#' }
 exemplify_motif <- function(net,
                             motif,
                             lvl_attr = "sesType",
@@ -217,7 +225,9 @@ exemplify_motif <- function(net,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' show_motif("1,2[I.C]", net = ml_net, directed = FALSE, label = TRUE)
+#' }
 show_motif <- function(motif,
                        net = NULL,
                        lvl_attr = c("sesType"),
@@ -296,7 +306,9 @@ show_motif <- function(motif,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' simulate_baseline(ml_net, list("1,2[I.C]"), n = 10, directed = FALSE)
+#' }
 simulate_baseline <- function(net,
                               motifs,
                               n = 10,
@@ -440,7 +452,9 @@ simulate_baseline <- function(net,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' compare_to_baseline(ml_net, list("1,2[I.C]", "1,2[II.C]"), directed = FALSE)
+#' }
 compare_to_baseline <- function(net,
                                 motifs,
                                 n = 10,
@@ -512,7 +526,9 @@ compare_to_baseline <- function(net,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' head(list_motifs(ml_net, "1,2[I.C]", directed = FALSE))
+#' }
 list_motifs <- function(net,
                         identifier,
                         lvl_attr = "sesType",

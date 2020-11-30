@@ -23,5 +23,7 @@ function implicitly assumes that the network is undirected, cf.
 \code{motifr::to_py_graph}.
 }
 \examples{
+\dontrun{
 motif_summary(ml_net)
+}
 }

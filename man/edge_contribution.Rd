@@ -38,5 +38,7 @@ Note that this only works for undirected graphs. Regardless of whether the
 input graph is directed it is treated as undirected graph.
 }
 \examples{
-edge_contribution(ml_net, "1,2[I.C]")
+\dontrun{
+head(edge_contribution(ml_net, "1,2[I.C]"))
+}
 }

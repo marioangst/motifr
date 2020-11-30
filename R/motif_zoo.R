@@ -6,7 +6,9 @@
 #'
 #' @return data frame with all supported signatures
 #' @examples
+#' \dontrun{
 #' supported_signatures()
+#' }
 #' @seealso \code{supported_classes()}
 #' @export
 #'
@@ -42,8 +44,10 @@ supported_signatures <- function() {
 #' @export
 #' @seealso \code{supported_signatures()}
 #' @examples
+#' \dontrun{
 #' supported_classes("1,2", FALSE)
 #' supported_classes("1,1", TRUE)
+#' }
 supported_classes <- function(signature, directed) {
   ls <- strsplit(signature, ",")
   lsi <- as.list(lapply(ls, as.integer)[[1]])
