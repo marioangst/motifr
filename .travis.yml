@@ -21,8 +21,8 @@ before_install:
 
 after_success:
   # re-build pre-build vignettes since they have not been build properly yet
-  - echo "Pre-building vignette from ${PKG_TARBALL} (install in ${R_LIBS_USER})"
-  - R CMD INSTALL "${PKG_TARBALL}" "${R_LIBS_USER}"
+  - echo "Pre-building vignette from ${PKG_TARBALL}"
+  - R CMD INSTALL "${PKG_TARBALL}" 
   - Rscript vignettes/precompile.R
   - Rscript -e 'devtools::build_vignettes()'
   # build website
