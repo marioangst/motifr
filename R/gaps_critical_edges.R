@@ -32,7 +32,7 @@ identify_gaps <- function(net,
                           motif,
                           lvl_attr = c("sesType"),
                           level = -1) {
-  if (sma$isClosedMotifR(motif, level) == FALSE) {
+  if (pkg.env$sma$isClosedMotifR(motif, level) == FALSE) {
     stop("The specified motif is not closed. Look for critical_dyads instead.")
   }
   return(edge_contribution(net = net, motif = motif, lvl_attr = lvl_attr, level = level))
@@ -71,7 +71,7 @@ critical_dyads <- function(net,
                            motif,
                            lvl_attr = c("sesType"),
                            level = -1) {
-  if (sma$isClosedMotifR(motif, level) == TRUE) {
+  if (pkg.env$sma$isClosedMotifR(motif, level) == TRUE) {
     stop("The specified motif is not open. Look for identify_gaps instead.")
   }
   return(edge_contribution(net = net, motif = motif, lvl_attr = lvl_attr, level = level))
@@ -119,7 +119,7 @@ edge_contribution <- function(net,
     ))
   }
   py_g <- motifr::to_py_graph(g = net, lvl_attr = lvl_attr, directed = FALSE)
-  result <- sma$identifyGapsR(py_g, motif, level = level)
+  result <- pkg.env$sma$identifyGapsR(py_g, motif, level = level)
   df <- data.frame(result)
   return(df)
 }

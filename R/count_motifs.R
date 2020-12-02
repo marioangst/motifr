@@ -42,7 +42,7 @@ count_motifs <- function(net,
   motifs <- as.list(motifs)
 
   # call counter
-  counted <- sma$countMotifsAutoR(py_g,
+  counted <- pkg.env$sma$countMotifsAutoR(py_g,
     motifs,
     assume_sparse = assume_sparse,
     omit_total_result = omit_total_result
@@ -114,7 +114,7 @@ motifs_distribution <- function(net,
   motifs <- as.list(motifs)
 
   # call counter
-  result <- sma$distributionMotifsAutoR(py_g,
+  result <- pkg.env$sma$distributionMotifsAutoR(py_g,
     motifs,
     model = model,
     level = level,
@@ -200,7 +200,7 @@ exemplify_motif <- function(net,
                             directed = NULL) {
   # convert net to python object
   py_g <- motifr::to_py_graph(net, lvl_attr = lvl_attr, directed = directed)
-  motif <- sma$exemplifyMotif(py_g, motif)
+  motif <- pkg.env$sma$exemplifyMotif(py_g, motif)
   return(purrr::simplify(motif))
 }
 
@@ -404,7 +404,7 @@ simulate_baseline <- function(net,
       directed = directed
     )
 
-    result <- sma$simulateBaselineAutoR(py_g,
+    result <- pkg.env$sma$simulateBaselineAutoR(py_g,
       motifs,
       n = n,
       assume_sparse = assume_sparse,
@@ -534,6 +534,6 @@ list_motifs <- function(net,
                         lvl_attr = "sesType",
                         directed = NULL) {
   py_g <- to_py_graph(net, lvl_attr = lvl_attr, directed = directed)
-  df <- sma$motifTable(py_g, identifier)
+  df <- pkg.env$sma$motifTable(py_g, identifier)
   return(df)
 }

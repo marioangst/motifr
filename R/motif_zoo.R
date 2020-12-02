@@ -14,7 +14,7 @@
 #'
 supported_signatures <- function() {
   result <- data.frame()
-  iter <- sma$supportedSignatures()
+  iter <- pkg.env$sma$supportedSignatures()
   while (TRUE) {
     item <- reticulate::iter_next(iter)
     if (is.null(item)) {
@@ -51,7 +51,7 @@ supported_signatures <- function() {
 supported_classes <- function(signature, directed) {
   ls <- strsplit(signature, ",")
   lsi <- as.list(lapply(ls, as.integer)[[1]])
-  motif_info <- sma$motifInfo(lsi, directed)
+  motif_info <- pkg.env$sma$motifInfo(lsi, directed)
   return(motif_info$classes)
 }
 

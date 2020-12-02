@@ -5,15 +5,16 @@
 # https://mran.microsoft.com/snapshot/2017-08-06/web/packages/reticulate/vignettes/package.html
 
 # global reference in order to prevent Python modules in user data space
-nx <- NULL
-sma <- NULL
+pkg.env <- new.env(parent = emptyenv())
+pkg.env$nx <- NULL
+pkg.env$sma <- NULL
 
 .onLoad <- function(libname, pkgname) {
   # https://rstudio.github.io/reticulate/articles/python_dependencies.html#onload-configuration
   reticulate::configure_environment(pkgname)
   # delay load Python modules (will only be loaded when accessed via $)
-  nx <<- reticulate::import("networkx", delay_load = TRUE)
-  sma <<- reticulate::import("sma", delay_load = TRUE)
+  pkg.env$nx <- reticulate::import("networkx", delay_load = TRUE)
+  pkg.env$sma <- reticulate::import("sma", delay_load = TRUE)
 }
 
 #' Checks for updates for motifr's Python core, the sma package
