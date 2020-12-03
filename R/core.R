@@ -62,7 +62,7 @@ to_py_graph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
     ))
   }
 
-  py_g <- sma$translateGraph(adjacency_matrix,
+  py_g <- pkg.env$sma$translateGraph(adjacency_matrix,
     attribute_names,
     attribute_values,
     lvl_attr,
@@ -77,7 +77,7 @@ to_py_graph <- function(g, lvl_attr, relabel = TRUE, directed = NULL) {
         keys = as.integer(0:(py_g$number_of_nodes() - 1)),
         values = vertex_names
       )
-    py_g <- nx$relabel_nodes(py_g, mapping = node_names)
+    py_g <- pkg.env$nx$relabel_nodes(py_g, mapping = node_names)
   }
   return(py_g)
 }
