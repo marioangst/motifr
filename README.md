@@ -51,7 +51,13 @@ module through reticulate.
 reticulate::py_install("sma", pip = TRUE)
 ```
 
-You can then install motifr from github, using devtools:
+You can then install motifr from CRAN:
+
+``` r
+install.packages("motifr")
+```
+
+To install the development version from github, using devtools:
 
 ``` r
 devtools::install_github("marioangst/motifr")
@@ -71,7 +77,7 @@ citation("motifr")
 #> 
 #>   Mario Angst and Tim Seppelt (2020). motifr: Motif Analysis in
 #>   Multi-Level Networks. R package version 1.0.0.
-#>   https://marioangst.github.io/motifr/
+#>   https://CRAN.R-project.org/package=motifr
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -80,7 +86,7 @@ citation("motifr")
 #>     author = {Mario Angst and Tim Seppelt},
 #>     year = {2020},
 #>     note = {R package version 1.0.0},
-#>     url = {https://marioangst.github.io/motifr/},
+#>     url = {https://CRAN.R-project.org/package=motifr},
 #>   }
 ```
 
@@ -125,7 +131,7 @@ plot_mnet(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
 
 motifr provides a reliable starting point for multi-level network
 visualization but is focused on motif analyis at its core. For advanced
@@ -174,13 +180,13 @@ introduced above:
 show_motif(motif = "1,2[I.C]", net = ml_net, label = TRUE, directed = FALSE) # open ('1,2[I.C]') triangle
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="300px" />
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="300px" />
 
 ``` r
 show_motif(motif = "1,2[II.C]", net = ml_net, label = TRUE, directed = FALSE) # closed ('1,2[II.C]') triangle
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-2.png" width="300px" />
+<img src="man/figures/README-unnamed-chunk-8-2.png" width="300px" />
 
 Let’s count the number of of these motifs in the entire network.
 
@@ -253,7 +259,7 @@ plot_gaps(ml_net,
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
 `identify_gaps` has a sibling in `critical_dyads`. Critical\_dyads works
 in reverse to identifying gaps - it analyses for every existing edge how
@@ -270,7 +276,7 @@ plot_critical_dyads(ml_net,
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
 
 ### Comparing motif occurrence to a baseline model
 
@@ -315,4 +321,4 @@ compare_to_baseline(ml_net,
                     directed = FALSE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
