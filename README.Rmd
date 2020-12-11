@@ -45,7 +45,13 @@ Due to the package’s tight integration with the Python framework SESMotifAnaly
 reticulate::py_install("sma", pip = TRUE)
 ```
 
-You can then install motifr from github, using devtools:
+You can then install motifr from CRAN:
+
+```{r eval=FALSE}
+install.packages("motifr")
+```
+
+To install the development version from github, using devtools:
 
 ```{r eval=FALSE}
 devtools::install_github("marioangst/motifr")
