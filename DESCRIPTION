@@ -41,13 +41,13 @@ Imports:
     rlang,
     scales,
     tibble,
-    tidygraph
+    tidygraph,
+    shiny
 Suggests: 
     ergm,
     knitr,
     pkgdown,
     rmarkdown,
-    shiny,
     testthat (>= 2.1.0)
 VignetteBuilder: 
     knitr
