@@ -20,6 +20,8 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Build Status](https://travis-ci.org/marioangst/motifr.svg?branch=master)](https://travis-ci.org/marioangst/motifr)
+[![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/motifr)](https://CRAN.R-project.org/package=motifr)
+[![Total downloads badge](https://cranlogs.r-pkg.org/badges/grand-total/motifr?color=blue)](https://CRAN.R-project.org/package=motifr)
 <!-- badges: end -->
 
 This package provides tools to analyse multi-level networks in terms of _motifs_. 

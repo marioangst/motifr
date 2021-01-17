@@ -7,6 +7,9 @@
 
 [![Build
 Status](https://travis-ci.org/marioangst/motifr.svg?branch=master)](https://travis-ci.org/marioangst/motifr)
+[![CRAN\_Release\_Badge](https://www.r-pkg.org/badges/version-ago/motifr)](https://CRAN.R-project.org/package=motifr)
+[![Total downloads
+badge](https://cranlogs.r-pkg.org/badges/grand-total/motifr?color=blue)](https://CRAN.R-project.org/package=motifr)
 <!-- badges: end -->
 
 This package provides tools to analyse multi-level networks in terms of
@@ -77,7 +80,7 @@ citation("motifr")
 #> 
 #>   Mario Angst and Tim Seppelt (2020). motifr: Motif Analysis in
 #>   Multi-Level Networks. R package version 1.0.0.
-#>   https://CRAN.R-project.org/package=motifr
+#>   https://marioangst.github.io/motifr/
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -86,7 +89,7 @@ citation("motifr")
 #>     author = {Mario Angst and Tim Seppelt},
 #>     year = {2020},
 #>     note = {R package version 1.0.0},
-#>     url = {https://CRAN.R-project.org/package=motifr},
+#>     url = {https://marioangst.github.io/motifr/},
 #>   }
 ```
 
