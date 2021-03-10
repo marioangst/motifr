@@ -21,7 +21,9 @@ pkg.env$sma <- NULL
 #'
 #' It might be necessary to restart your R session after updating the sma package.
 #'
+#' @param method parameter for \code{reticulate::py_install}
+#' @param conda parameter for \code{reticulate::py_install}
 #' @export
-update_motifr <- function() {
-  reticulate::py_install("sma", pip = TRUE)
+update_motifr <- function(method = "auto", conda = "auto") {
+  reticulate::py_install("sma", pip = TRUE, method = method, conda = conda)
 }

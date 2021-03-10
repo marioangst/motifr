@@ -4,7 +4,12 @@
 \alias{update_motifr}
 \title{Checks for updates for motifr's Python core, the sma package}
 \usage{
-update_motifr()
+update_motifr(method = "auto", conda = "auto")
+}
+\arguments{
+\item{method}{parameter for \code{reticulate::py_install}}
+
+\item{conda}{parameter for \code{reticulate::py_install}}
 }
 \description{
 It might be necessary to restart your R session after updating the sma package.
