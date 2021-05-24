@@ -137,7 +137,7 @@ motif_summary(ml_net)
 
 motifr makes it possible to identify gaps and critical edges in multi-level networks. This is motivated by theories of functional fit and misfit in networks, which posit that certain motifs are especially valuable for network outcomes (depending on the context). 
 
-In relation to gaps, we can therefore try to identify potential edges that would create a large number of a given motif if they were to exist ("activated" or "flipped"). The number of such motifs created by an edge is their contribution. For example, we can get all edges that would create closed triangles (``"1,2[II.C]"``), including the information about how many such triangles they would create for the wetlands case study network:
+In relation to gaps, we can therefore try to identify potential edges that would create a large number of a given closed motif if they were to exist ("activated" or "flipped"). The number of such motifs created by an edge is their contribution. For example, we can get all edges that would create closed triangles (``"1,2[II.C]"``), including the information about how many such triangles they would create for the wetlands case study network:
 
 ```{r}
 gaps <- identify_gaps(ml_net, motif = "1,2[II.C]")
@@ -155,7 +155,7 @@ plot_gaps(ml_net,
 )
 ```
 
-``identify_gaps`` has a sibling in ``critical_dyads``. Critical_dyads works in reverse to identifying gaps - it analyses for every existing edge how many instances of a given motif would disappear if the edge was to be removed. Below an example showing critical dyads in a plot of the full wetlands management example network.
+``identify_gaps`` has a sibling in ``critical_dyads``. Critical_dyads works in reverse to identifying gaps - it analyses for every existing edge how many instances of a given open motif would appear if the edge was to be removed. Below an example showing critical dyads in a plot of the full wetlands management example network.
 
 ```{r}
 plot_critical_dyads(ml_net,
